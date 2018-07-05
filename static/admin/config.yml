@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: static/img
+public_folder: /img
+
+# media_folder: src/pages/blog
+
+collections:
+  - name: "item"
+    label: "Art Items"
+    folder: "src/pages/art-items"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+     # - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Price", name: "price", widget: "number"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - label: "FeaturedImage"
+        name: "featuredImage"
+        widget: "custompathimage"
+        customMediaPath: "../img/"
+        rawMediaPath: "https://github.com/Dwaxy/my-blog/tree/master/src/pages/img"
+      
+  - name: "bio"
+    label: "Bio"
+    folder: "src/pages/bio"
+    create: true
+    slug: "{{slug}}"
+    fields:
+    #  - {label: "Template Key", name: "templateKey", widget: "hidden", default: "bio"}
+      - {label: "About", name: "about", widget: "text"}
+      - {label: "Profile Image", name: "profileImage", widget: "image"}
