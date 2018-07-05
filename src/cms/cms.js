@@ -1,7 +1,5 @@
 import CMS from 'netlify-cms'
 
-import BlogPostPreview from './preview-templates/BlogPostPreview'
-
 // import my homemade widget
 import { CustomPathImageControl, CustomPathImagePreview } from "./customPathImage.js";
 
@@ -9,4 +7,3 @@ import { CustomPathImageControl, CustomPathImagePreview } from "./customPathImag
 CMS.registerWidget("custompathimage", CustomPathImageControl, CustomPathImagePreview);
 
 CMS.registerPreviewStyle('/styles.css')
-CMS.registerPreviewTemplate('blog', BlogPostPreview)

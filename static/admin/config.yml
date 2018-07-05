@@ -25,12 +25,3 @@ collections:
         customMediaPath: "../img/"
         rawMediaPath: "https://github.com/Dwaxy/art-site/tree/master/src/pages/img"
       
-  - name: "bio"
-    label: "Bio"
-    folder: "src/pages/bio"
-    create: true
-    slug: "{{slug}}"
-    fields:
-    #  - {label: "Template Key", name: "templateKey", widget: "hidden", default: "bio"}
-      - {label: "About", name: "about", widget: "text"}
-      - {label: "Profile Image", name: "profileImage", widget: "image"}
