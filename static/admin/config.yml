@@ -24,7 +24,7 @@ collections:
         name: "featuredImage"
         widget: "custompathimage"
         customMediaPath: "../img/"
-        rawMediaPath: "https://github.com/Dwaxy/my-blog/tree/master/src/pages/img"
+        rawMediaPath: "https://github.com/Dwaxy/art-site/tree/master/src/pages/img"
       
   - name: "bio"
     label: "Bio"
