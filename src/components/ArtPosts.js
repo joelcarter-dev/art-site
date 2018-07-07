@@ -5,43 +5,49 @@ import Img from 'gatsby-image'
 
 const ArtItem = (props) => {
   let post = props.data.itemData.node.frontmatter
+  let imageData = post.featuredImage.childImageSharp.resolutions
+  
+  const open = {width: "100%", height: imageData.height + 60}
+  
+  const closed = {width: imageData.width, height: imageData.height}
+  
   return (
     <div 
       className={props.data.viewOpen ? "item-view-open" : "item-view-closed"} key={post.id}
       onClick={props.selectItem}
-      //style={{backgroundImage: `url(${post.featuredImage.childImageSharp.src})` }}
+      style={props.data.viewOpen ? open : closed}
     >
       
-      <Img sizes={post.featuredImage.childImageSharp.sizes} className="thum"/>
+      {/*<Img sizes={post.featuredImage.childImageSharp.sizes} className="thum"/>
+      <Img resolutions={imageData} className={"thumb"}/> */}
       
-      <div className="item-view">
-      
-        <div className="sidebar">
-          <h2 className="title">
-            {post.title}
-          </h2>
-          
-          <h3>{post.price}</h3>
-          
-          <p className="desc">
-            {post.description}
-          </p>
-          
-          <small>{post.info}</small>
-          
-          <ul>
-            {post.tags.map( (tag, idx) => (
-              <li key={idx}>{tag}</li>
-            ))}
-          </ul>
-        </div>
-        
-        <div className="image-holder">
-          <Img sizes={post.featuredImage.childImageSharp.sizes} />
-        </div>
-
+      <div className="image-holder">
+        {/*<Img sizes={post.featuredImage.childImageSharp.sizes} />*/}
+        <Img 
+          resolutions={post.featuredImage.childImageSharp.resolutions}
+        />
       </div>
-      <div className="overlay"></div>
+          
+      <div className="sidebar">
+        <h2 className="title">
+          {post.title}
+        </h2>
+        
+        <h3>{post.price}</h3>
+        
+        <p className="desc">
+          {post.description}
+        </p>
+        
+        <small>{post.info}</small>
+        
+        <ul>
+          {post.tags.map( (tag, idx) => (
+            <li key={idx}>{tag}</li>
+          ))}
+        </ul>
+      </div>
+      
     </div>
   );
 }
@@ -77,11 +83,6 @@ export class ArtPosts extends Component {
   render() {
     return (
       <section id="art-feed">
-        
-        <div className="feed-title">
-          <h1>Latest Posts</h1>
-        </div>
-        
         {this.state.items
           .map((post, idx) => (
             <ArtItem 

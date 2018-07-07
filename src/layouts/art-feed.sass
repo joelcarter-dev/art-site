@@ -4,28 +4,39 @@
   
   .item-view-open,
   .item-view-closed
-    position: relative
-    margin: 30px 0 30px 0 !important
-  
+    box-sizing: border-box
+    margin: 0 auto
+
   .item-view-open 
     height: 60vh
-    .thum
-      display: none
-    .item-view
-      display: block
+    width: 100%
+    background-color: grey
+    overflow: hidden
+    .image-holder
+      width: 80%
+      height: 100%
+      float: right 
+      position: relative
+      .gatsby-image-outer-wrapper
+        margin: 0 auto
+        margin-top: 30px
+        height: max-content
+        width: max-content
+    .sidebar
+      background-color: black
+      color: white
+      height: 100%
+      width: 20%
+      min-width: 150px
+      float: left
       
   .item-view-closed
-    margin: 0 auto
-    height: auto
-    width: 100%
-    // max-height: 500px
-    // max-width: 1000px
     background-color: grey
     .gatsby-image-outer-wrapper
       margin: 0 auto
       height: auto
       width: 100%
-      max-height: 500px
-      max-width: 1000px
-    .item-view
+      // max-height: 500px
+      // max-width: 1000px
+    .sidebar
       display: none

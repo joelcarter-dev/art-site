@@ -37,12 +37,11 @@ query IndexQuery {
           tags
           featuredImage {
             childImageSharp {
-              sizes(maxWidth: 1000 maxHeight: 500) {
-                base64
-                aspectRatio
+              resolutions(width: 400) {
+                width
+                height
                 src
                 srcSet
-                sizes
               }
             }
           }
@@ -52,3 +51,33 @@ query IndexQuery {
   }
 }
 `
+
+// export const pageQuery = graphql`
+// query IndexQuery {
+//   allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+//     edges {
+//       node {
+//         id
+//         frontmatter {
+//           title
+//           description
+//           price
+//           info
+//           tags
+//           featuredImage {
+//             childImageSharp {
+//               sizes(maxWidth: 1000 maxHeight: 500) {
+//                 base64
+//                 aspectRatio
+//                 src
+//                 srcSet
+//                 sizes
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// `
