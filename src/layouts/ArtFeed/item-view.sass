@@ -1,0 +1,40 @@
+.artItem-holder-open,
+.artItem-holder-closed
+  transition: all .3s linear
+
+.artItem-holder-open
+  height: 90vh !important
+  width: 100%
+  margin: 0 auto
+  .itemData
+    height: 100%
+    display: block
+    background-color: black
+    .sidebar
+      color: white
+      height: 100%
+      width: 20%
+      min-width: 150px
+      float: left
+      h2, h3, p, small
+        text-align: center
+        margin: 20px
+  .image-holder
+    width: 80%
+    height: 100%
+    float: right 
+    position: relative
+    display: flex
+    align-items: center
+    .gatsby-image-outer-wrapper
+      width: max-content
+      margin: 0 auto
+.artItem-holder-closed
+  margin: 30px
+  .itemData
+    display: none
+  .image-holder
+    width: max-content
+    margin: 0 auto
+    height: 100%
+    position: relative

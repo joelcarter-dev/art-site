@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<svg width="100%" height="0" viewBox="0 0 1391 340" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Art-Shop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo" transform="translate(0.000000, -561.000000)">
+            <g id="logo" transform="translate(-4.000000, 561.000000)">
+                <g id="main-shape" transform="translate(4.000000, 0.091094)">
+                    <rect id="Rectangle-10" stroke="#0B101B" stroke-width="1.6" transform="translate(706.000000, 73.254181) rotate(-45.000000) translate(-706.000000, -73.254181) " x="655.18025" y="22.3640012" width="101.639501" height="101.780359"></rect>
+                    <path d="M633.653375,84 L0,84 L0,339.089996 L1392,339.089996 L1392,84 L778.446227,84 L706.049801,156.396426 L633.653375,84 Z" id="Combined-Shape" fill="#121011"></path>
+                </g>
+                <path d="M0.5,73.0281568 L637.162316,73.0281568" id="Line" stroke="#121011" stroke-width="1.6" stroke-linecap="square"></path>
+                <path d="M782.837684,73.0281568 L1400.5,73.0281568" id="Line" stroke="#121011" stroke-width="1.6" stroke-linecap="square"></path>
+                <rect id="top" stroke="#121011" stroke-width="1.6" transform="translate(709.839258, 28.709762) rotate(-315.000000) translate(-709.839258, -28.709762) " x="690.430376" y="9.27330763" width="38.8177632" height="38.8729085"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

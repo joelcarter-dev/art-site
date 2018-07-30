@@ -1,5 +1,5 @@
 ---
-title: An art pice
+title: An art pice with a very long name
 description: 'This pice is very art and you should buy it'
 price: '100'
 info: 'comes with frame, keep out of sun'

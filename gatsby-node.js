@@ -2,6 +2,16 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
+exports.modifyWebpackConfig = ({ config, stage }) => {
+  return config.merge({
+    resolve: {
+      alias: {
+        'react': __dirname + '/node_modules/gatsby/node_modules/react',
+      }
+    }
+  })
+};
+
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
 

@@ -1,10 +1,36 @@
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
+    siteUrl: `https://jciartsite.netlify.com/`,
   },
   plugins: [
+  
+    `gatsby-plugin-sitemap`,
+    'gatsby-plugin-robots-txt',
+    
+     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-100204166-2",
+        // Puts tracking script in the head instead of the body
+        head: true,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        // exclude: ["/preview/**", "/do-not-track/me/too/"],
+      },
+    },
+    
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
+    { 
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+          include: /img/
+      }
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
