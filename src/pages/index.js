@@ -1,24 +1,36 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import { graphql } from 'gatsby'
 
-import Header from '../components/Landing/Header'
+import ArtFeed from '../components/ArtFeed/ArtPosts.js'
+
+import './main.sass'
+import st from './index.module.sass'
+
+import Indented from '../img/indented.svg'
+import Logo from '../img/logo.svg'
 
 export default class IndexPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-  
   render() {
     return (
-      <section id="landing">
-        <Header />
-
+      <section id={st.landing }>
+        <div className={st.heroHolder}>
+          <Logo className={st.logoSvg} />
+        </div>
+        
+        <div id={st.section2}>
+          <div className={st.indentedHolder}>
+            <Indented className={st.indentedSvg} />
+          </div>
+          
+          <ArtFeed postData={this.props.data.allMarkdownRemark}/>
+          
+        </div>
       </section>
     )
   }
   
 }
-
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
@@ -34,9 +46,12 @@ query IndexQuery {
     edges {
       node {
         id
+        fields {
+          slug
+        }
         frontmatter {
           title
-          description
+          about
           price
           info
           tags

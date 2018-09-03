@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import ArtPosts from '../components/ArtFeed/ArtPosts.js'
 
@@ -31,7 +32,7 @@ query ArtFeedQuery {
         id
         frontmatter {
           title
-          description
+          about
           price
           info
           tags

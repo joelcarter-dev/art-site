@@ -1,3 +1,9 @@
+const postcssPresetEnv = require(`postcss-preset-env`)
+const rucksack = require(`rucksack-css`)
+const center = require(`postcss-center`)
+const alias = require(`postcss-alias`)
+const short = require(`postcss-short`)
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
@@ -8,7 +14,25 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     'gatsby-plugin-robots-txt',
     
-     {
+    //'gatsby-plugin-sass',
+    
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        postCssPlugins: [
+          rucksack(),
+          center(),
+          alias(),
+          short(),
+          postcssPresetEnv({
+            stage: 0,
+          }),
+        ]
+        // precision: 8,
+      }
+    },
+    
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-100204166-2",
@@ -24,7 +48,7 @@ module.exports = {
     },
     
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
+    
     { 
       resolve: 'gatsby-plugin-react-svg',
       options: {

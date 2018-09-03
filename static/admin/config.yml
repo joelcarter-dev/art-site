@@ -9,10 +9,11 @@ collections:
     label: "Art Items"
     folder: "src/pages/art-items"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "About", name: "about", widget: "text"}
+      - {label: "Artist Notes", name: "artistNotes", widget: "text"}
       - {label: "Price", name: "price", widget: "number"}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Publish Date", name: "date", widget: "datetime"}

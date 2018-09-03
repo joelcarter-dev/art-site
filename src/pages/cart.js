@@ -1,6 +1,7 @@
 import React from 'react';
+import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
-import ArtPosts from '../components/ArtFeed/ArtPosts'
+// import ArtPosts from '../components/ArtFeed/ArtPosts'
 
 const CartPage = (props) => {
   console.log(props)
@@ -38,7 +39,7 @@ query CartQuery {
         id
         frontmatter {
           title
-          description
+          about
           price
           info
           tags
