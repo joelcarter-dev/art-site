@@ -30,6 +30,9 @@ query ArtFeedQuery {
     edges {
       node {
         id
+        fields {
+          slug
+        }
         frontmatter {
           title
           about
