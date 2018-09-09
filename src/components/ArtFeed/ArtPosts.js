@@ -4,13 +4,15 @@ import Link from 'gatsby-link'
 const ArtPosts = (props) => {
     return (
       <section id="art-feed">
-        
+        <ul>
         {props.postData.edges.map((post, idx) => (
-          <Link to={post.node.fields.slug} key={idx}>
-            {post.node.frontmatter.title}
-          </Link>
+          <li key={idx}>
+            <Link to={post.node.fields.slug}>
+              {post.node.frontmatter.title}
+            </Link>
+          </li>
         ))}
-        
+        </ul>
       </section>
     );
 };

@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import ArtFeed from '../components/ArtFeed/ArtPosts.js'
-
 import './main.sass'
 import st from './index.module.sass'
 
@@ -22,8 +20,6 @@ export default class IndexPage extends Component {
           <div className={st.indentedHolder}>
             <Indented className={st.indentedSvg} />
           </div>
-          
-          <ArtFeed postData={this.props.data.allMarkdownRemark}/>
           
         </div>
       </section>

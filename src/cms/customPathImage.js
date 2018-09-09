@@ -29,7 +29,7 @@ export class CustomPathImageControl extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { mediaPaths, value, onRemoveInsertedMedia, onChange } = nextProps;
+    const { mediaPaths, value, /*onRemoveInsertedMedia,*/ onChange } = nextProps;
     const mediaPath = mediaPaths.get(this.imageWidget.controlID);
     if (mediaPath && this.customMediaPath) {
       const pathArray = mediaPath.split('/');
