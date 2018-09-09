@@ -16,8 +16,20 @@ collections:
       - {label: "Artist Notes", name: "artistNotes", widget: "text"}
       - {label: "Price", name: "price", widget: "number"}
       - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Info", name: "info", widget: "string", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - label: "FeaturedImage"
+        
+      - label: "Type"
+        name: "type" 
+        widget: "list" 
+        required: false
+        feild:  
+          - label: "Type Name" 
+            name: "typeName" 
+            widget: "string" 
+            required: false
+
+      - label: "Featured Image"
         name: "featuredImage"
         widget: "custompathimage"
         customMediaPath: "../img/"
