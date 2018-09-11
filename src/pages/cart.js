@@ -31,6 +31,11 @@ CartPage.propTypes = {
 
 export default CartPage
 
+/*images of the saved cart items need to get to this page somehow. I can:
+  Pass them through local storage
+  Cache them with a service workiner
+  Query every art item image in the site with graphql
+*/
 export const pageQuery = graphql`
 query CartQuery {
   allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {

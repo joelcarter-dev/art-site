@@ -9,6 +9,7 @@ import S from './art-pice.module.sass'
 export default class ArtPice extends Component {
   render() {
     const itemData = this.props.pageContext.node.frontmatter
+    console.table(itemData)
     return (
       <section className={S.artItemHolder}>
         <h1 id={S.title}>{itemData.title}</h1>
