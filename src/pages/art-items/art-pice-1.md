@@ -10,6 +10,6 @@ tags:
 type: 
   - type-one
 original: true
-featuredImage: ../img/DSC06288.jpg
+featuredImage: ../img/9bcc02870880a7a57ff4eb2dcdbe78e3.jpg
 templateKey: art-pice
 ---

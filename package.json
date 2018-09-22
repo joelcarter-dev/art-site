@@ -26,6 +26,7 @@
     "lodash-webpack-plugin": "^0.11.4",
     "netlify-cms": "^2.1.1",
     "node-sass": "^4.9.3",
+    "paypal-checkout": "^4.0.218",
     "postcss-alias": "^2.0.0",
     "postcss-aspect-ratio": "^1.0.2",
     "postcss-center": "^1.1.0",
@@ -33,9 +34,15 @@
     "postcss-short": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
+    "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.5.0",
     "react-helmet": "^5.2.0",
     "rucksack-css": "^1.0.2",
+    "typeface-alegreya-sans-sc": "0.0.54",
+    "typeface-cinzel-decorative": "0.0.54",
+    "typeface-hind": "0.0.54",
+    "typeface-italianno": "0.0.54",
+    "typeface-sorts-mill-goudy": "0.0.54",
     "uuid": "^3.3.2"
   },
   "keywords": [

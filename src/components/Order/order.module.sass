@@ -1,0 +1,142 @@
+@import "../../pages/main.sass"
+
+#OrderHidden
+  display: none
+#OrderDisplay
+  size: 100%
+  top: center
+  left: center
+  overflow: hidden
+  z-index: 999
+  .orderHolder
+    size: 80%
+    max-width: 1000px
+    top: center
+    left: center
+    z-index: 9999
+    overflow: hidden
+    
+    background-color: #0B101B
+    padding: 30px
+    
+    display: grid
+    grid-template-areas: "left right"
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 100%
+    
+    @media screen and (max-width: $m) 
+      grid-template-areas: "left" "right"
+      grid-template-columns: 100%
+      grid-template-rows: 65vh 100vh
+      overflow-y: scroll
+      padding: 0
+    @media screen and (max-width: $s)
+      size: 100%
+      overflow-Y: scroll
+      .left
+        position: fixed
+        width: 100%
+        left: 0
+        top: 0
+    .right
+      z-index: 2
+      // margin-top: -30%
+      min-width: 100%
+      background-color: #F0E3DE
+  .left
+    grid-area: left
+    //image overview 
+    #Overview
+      * 
+        color: $red-white
+      h3
+        text-align: center
+      .amounts
+        display: flex
+        justify-content: center
+        max-width: 300px
+        margin: 0 auto
+        span
+          margin: 0 auto
+          text-align: center
+      .itemImages
+        max-width: 50vh
+        margin: 0 auto
+  .right
+    grid-area: right
+    #paypalHolder
+        width: 150px
+        margin: 0 auto  
+    #close
+      float: right
+      @extend %form-button-styles
+      text-align: center
+    #OrderForm
+      padding: 30px
+      max-width: 300px
+      p
+        color: $red-black
+        margin-left: 20px
+      form
+        input
+          background-color: transparent
+          color: $red-black
+          //padding: 6px
+          margin: 20px
+          border: none
+          border-bottom: 2px solid $red-black
+          font-size: 16px
+          width: 80%
+          max-width: 300px
+          line-height: 40px
+          outline: none
+          transition: all 0.3s ease-in-out
+          &:focus
+            outline: none
+            padding: 15px
+            margin-left: 35px
+            max-width: 335px
+          &:invalid 
+            box-shadow: none
+          p
+            font-size: 16px
+        #submit
+          @extend %form-button-styles
+          text-align: left
+        
+  .overlay
+    size: 100%
+    top: center
+    left: center
+    background-color: $main-black
+    opacity: 0.8
+
+%form-button-styles
+  padding: 10px
+  width: 100px
+  color: $red-black
+  background-color: transparent
+  margin: 10px
+  cursor: pointer
+  font-size: 16px
+  letter-spacing: 2px
+  position: relative
+  border: none
+  &:before 
+    content: ''
+    display: block
+    width: 50%
+    position: absolute 
+    bottom: 0
+    border: none
+    border-bottom: 2px solid $red-black
+  &:hover
+    &:before 
+      content: ''
+      display: block
+      position: absolute 
+      bottom: 0
+      border: none
+      width: 80%
+      border-bottom: 2px solid $red-black
+      transition: all 0.1s ease-in-out

@@ -1,13 +1,22 @@
-import React from 'react';
-
-export default const AddToCart = (props) => {
+import React, {Component} from 'react'
   
-  StoreCartItem() {
-    const cartData = props.data
-    localStorage.removeItem('todoData');
-    localStorage.setItem('todoData', JSON.stringify(todoData));
+
+export class AddToCart extends Component {
+  
+  storeCartItem = () => {
+    const cartData = this.props.itemData
+    localStorage.removeItem('cartItems');
+    localStorage.setItem('cartItems', JSON.stringify(cartData));
   }
-  return (
-    
-  );
+  
+  render() {
+    return (
+      <button id="AddToCart" className={this.props.className} onClick={this.storeCartItem}>
+        Add To Cart
+      </button>
+    )
+  }
 }
+
+
+export default AddToCart

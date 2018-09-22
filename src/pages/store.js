@@ -14,7 +14,7 @@ const CategoryList = (props) => {
     <ul>
       {props.data.items.map( (item, i)=> (
         <li key={i}>
-          <Link to={item.fields.slug}>
+          <Link to={item.fields.slug} style={{"color": "black"}}>
             {item.frontmatter.title}
           </Link>
         </li>

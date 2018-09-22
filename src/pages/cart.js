@@ -35,6 +35,9 @@ export default CartPage
   Pass them through local storage
   Cache them with a service workiner
   Query every art item image in the site with graphql
+  
+  
+  I can store the item's ID in local and match them to queryed data on the cart page
 */
 export const pageQuery = graphql`
 query CartQuery {
@@ -42,12 +45,12 @@ query CartQuery {
     edges {
       node {
         id
+        fields {
+          slug
+        }
         frontmatter {
           title
-          about
           price
-          info
-          tags
           featuredImage {
             childImageSharp {
               resolutions(width: 400) {

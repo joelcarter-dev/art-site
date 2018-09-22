@@ -2,6 +2,21 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /paypal-checkout/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -21,20 +36,24 @@ exports.createPages = ({ actions, graphql }) => {
               price
               info
               tags
+              original
+              type
               templateKey
               
               featuredImage {
+                
                 childImageSharp {
-                  sizes(maxWidth: 1000 maxHeight: 500) {
-                    base64
-                    aspectRatio
+                  fluid(maxHeight: 1000) {
                     src
                     srcSet
                     sizes
-                    srcWebp
-                    srcSetWebp
+                    base64
+                    aspectRatio
+                    
                   }
+                  
                 }
+                
               }
         
             }

@@ -1,5 +1,203 @@
+@import "../pages/main.sass"
+
 .art-item-holder
-  background-color: tomato
-  size: 100vw
+  background-color: $main-black
+  width: 100%
+  min-height: 100vh
+  
+  display: grid
+  grid-template-areas: "header header header" "title title title" "left-sidebar main sidebar" "footer footer footer"
+
+  grid-template-columns: minmax(100px, 1fr) 3fr minmax(100px, 1fr)
+  grid-template-rows: 100px 60px 0.8fr 100px
+  max-height: 100vh
+  overflow: hidden
+    
+  #Header
+    grid-row: 1
+    grid-column: 2
+    grid-area: header
   #title
-    color: blue
+    color: $red-white
+    text-align: center
+    font-weight: 100
+    font-family: 'cinzel decorative', sans-serif
+    grid-area: title
+    text-transform: capitalize
+    font-size: responsive
+    max-font-size: 30px
+    min-font-size: 25px
+  .left, .right
+    grid-row: 3
+  .left
+    grid-area: left-sidebar
+    @extend %Sidebar
+  .right
+    grid-area: sidebar
+  .imageHolder
+    grid-area: main
+    position: relative
+    padding-top: 3vw
+    width: auto
+    width: calc(100% - 100px)
+    margin: 0 auto
+    @media screen and (max-width: $m) 
+      padding-top: 10vw
+      width: 100vw !important
+    .innerImage
+      display: grid
+      height: 100%
+      @media screen and (max-width: 40em) 
+        padding-top: 10vw
+        max-width: 100vw !important
+      .gatsby-image-outer-wrapper
+        width: 100%
+        height: 100%
+          
+  %Sidebar
+    #Sidebar
+      float: right
+      width: 80%
+      margin: 0 auto
+      padding-top: 3vw
+      font-family: 'hind', sans-serif
+      font-weight: 100
+      #infoMenu
+        width: 100%
+        height: 60px
+        display: flex
+        margin-bottom: 30px
+        span
+          width: 50%
+          height: 43px
+          color: $red-white
+          font-size: 20px
+          text-align: center
+          cursor: pointer
+          border: none
+          transition: all 0.1s ease-in-out
+          &:hover
+            border-bottom: 3px solid $red-white     
+      .infoHolder
+        .priceHolder
+          animation: fadein 0.4s
+          transition: all 0.4s ease-in-out
+          min-width: 150px
+          width: 50%
+          display: flex
+          position: relative
+          .price
+            color: $main-black
+            background-color: $red-white  
+            font-size: 25px
+            padding: 8px
+            margin: 0 auto
+            width: 100%
+            display: flex
+            max-width: 250px
+            justify-content: center
+            h3
+              margin: 0
+              font-weight: 100
+            span
+              font-size: 16px
+        .dataList
+          list-style: none
+          padding: 0
+          margin-bottom: 30px
+          li
+            color: $red-white
+            font-size: responsive
+            max-font-size: 18px
+            padding: 10px
+            text-transform: capitalize
+            letter-spacing: 1px
+        .buttonHolder
+          position: relative
+          width: 100%
+          max-width: 200px
+      .notesHolder
+        color: $red-white
+        text-align: left
+        animation: fadein 1s
+        transition: all 0.4s ease-in-out
+        h3
+          font-weight: 100
+          font-size: 20px
+          &:before 
+            content: ''
+            display: block
+            width: 40%
+            position: relative
+            top: 40px
+            border: none
+            border-bottom: 2px solid $red-white
+            
+  @keyframes fadein 
+    from 
+      opacity: 0
+      margin-bottom: 0px
+      margin-left: -20px
+    to 
+      opacity: 1
+      margin-bottom: 30px
+      margin-left: 0px
+          
+        
+  //order and cart button styles
+  .artItemButton
+    padding: 20px
+    width: 100%
+    border: 1px solid $red-white
+    color: $red-white
+    background-color: transparent
+    margin-bottom: 30px
+    cursor: pointer
+    font-size: 18px
+    letter-spacing: 2px
+    
+  @media screen and (max-width: 100em)
+    //overflow: scroll
+    grid-template-columns: minmax(200px, 300px) 3fr
+    .imageHolder, #title
+      grid-column: 2 / span 3
+  
+  @media screen and (max-width: $m) 
+    grid-template-areas: "top" "bottom"
+    grid-template-columns: 100%
+    grid-template-rows: 93vh auto
+    overflow-y: scroll
+    #Header, #title
+      grid-area: top
+      grid-column: -2
+      position: fixed
+      left: center
+    .overlay
+      width: 100%
+      height: 100%
+      position: relative
+      grid-area: top
+      z-index: 2
+    .imageHolder
+      width: 100vw
+      padding-top: 30vw
+      //margin-left: 50%
+      left: center
+      margin: 0 auto
+      grid-area: top
+      grid-column: -2
+      .gatsby-image-outer-wrapper
+        top: center
+    .left
+      z-index: 2
+      background-color: #0B101B
+      grid-area: bottom
+      #Sidebar
+        width: 100%
+        padding-top: 2vw
+        ul, .artItemButton
+          margin-left: 30px
+        .priceHolder
+          .price
+            float: left
+            margin-left: -1vw

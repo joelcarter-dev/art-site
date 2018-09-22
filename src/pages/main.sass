@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:100|Roboto+Mono:300')
+//@import url('https://fonts.googleapis.com/css?family=Raleway:100|Roboto+Mono:300')
 
+$xs: 24em // extra small
+$s: 35em  // small
+$m: 55em  // middle
+$l: 62em   // large
+        
 =full-image()
   background-repeat: no-repeat
   background-position: center
@@ -12,7 +17,11 @@
   left: $left
   position: absolute
   
-$main-black: #121011
+$red-black: #121011 
+
+$main-black: #0B101B
+
+$red-white: #F0E3DE
   
 html, body, .root
   margin: 0 auto
@@ -20,12 +29,19 @@ html, body, .root
   width: 100%
   min-height: 100%
   box-sizing: border-box
-  font-family: 'Roboto Mono', monospace
+  font-family: 'Alegreya Sans SC', sans-serif
+  letter-spacing: 2px
   *
     box-sizing: border-box
+    transition: all 0.1s ease-in-out
+  a
+    color: white
 
 // --- MINNAMIM REQ --- //
 
+//TODO
+//write global selectors for responsive
+//title sizes and spacing, ect
 
 // PAGES
 //   -LANDING
@@ -52,5 +68,8 @@ html, body, .root
 //       - artists notes
 //     - has order and add to cart button
 //     - has product key (???)
-
-//       
+//   -ORDER (comp)
+//     - used on art item page and cart page
+//     - display order items and price
+//     - display total price
+//     - email feild for mailchimp
