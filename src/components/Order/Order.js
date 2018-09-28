@@ -23,28 +23,53 @@ import PayPalCheckout from './PaypalButton.js'
 //order data like item number / name will be place in a hidden form input programaticly and sent to netlify 
 
 
-const OrderForm = (props) => (
-  <section id={S.OrderForm}>
-  
-    <form id="orderForm" action="" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-      <input type="hidden" name="bot-field" value="contact" /> 
-      
-      <p>Order Form</p>
-    
-        <input placeholder="Your name" type="text" tabIndex="1" required autoFocus />
+class OrderForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      ph: '',
+      orderData: this.props.orderData,
+    }
+  }
 
-        <input placeholder="Your Email Address" type="email" tabIndex="2" required /> 
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value})
+  }
+
+
+  //should display some feedback to the user on sbmit and make sure all feileds are vallidated
+  handleSubmit = (event) => {
+    event.preventDefault()
+  }
+  
+  render() {
+    return (
+      <section id={S.OrderForm}>
       
-        <input placeholder="Your Phone Number" type="tel" tabIndex="3" required /> 
-      
-        <div data-netlify-recaptcha></div>
-     
-        <button name="submit" type="submit" id={S.submit} data-submit="...Sending">Submit</button>
-   
-        <p>Details will be used to ship the items to you.</p>
-    </form>
-  </section>
-)
+        <form id="orderForm" action="" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+          <input type="hidden" name="bot-field" value="contact" /> 
+          
+          <textarea  type="hidden" name="order data" form="orderForm" value={this.state.orderData} id={S.orderData}></textarea>
+          <p>Order Form</p>
+        
+            <input placeholder="Your name" type="text" tabIndex="1" value={this.state.name} onChange={this.handleChange} name="name" required autoFocus />
+
+            <input placeholder="Your Email Address" type="email" tabIndex="2" value={this.state.email} onChange={this.handleChange} name="email" required /> 
+          
+            <input placeholder="Your Phone Number" type="tel" tabIndex="3" value={this.state.ph}   onChange={this.handleChange} name="ph" required /> 
+          
+            <div data-netlify-recaptcha></div>
+         
+            <button name="submit" type="submit" id={S.submit} data-submit="...Sending">Submit</button>
+       
+            <p>Details will be used to ship the items to you.</p>
+        </form>
+      </section>
+    )
+  }
+}
 
 const ImageList = (props) => (
   
@@ -75,12 +100,17 @@ export class Overview extends Component {
       <section id={S.Overview}>
         <h3>Overview</h3>
         <div className={S.amounts}>
-          <span>Items: {this.props.data.length}</span>
-          <span>Total: ${}</span>
+          <span>Items: {this.props.data.length} 1</span>
+          <span>Total: ${this.props.data.price}</span>
         </div>
         
         <div className={S.itemImages}>
           {/*<Img fluid={this.props.data.image.fluid} />*/}
+        </div>
+        
+        <div className={S.myInfo}>
+          <p>General Support</p>
+          <span>jcicode@gmail.com</span>
         </div>
         
       </section>
@@ -91,30 +121,33 @@ export class Overview extends Component {
 const CLIENT = {
   sandbox: 'xxxXXX',
   production: 'xxxXXX',
-};
+}
 
 const ENV = process.env.NODE_ENV === 'production'
   ? 'production'
-  : 'sandbox';
-
+  : 'sandbox'
+  
 export default class Order extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      hidden: this.props.hidden
+      msg: ""
     }
   }
   
   render() {
-    const onSuccess = (payment) =>
-      console.log('Successful payment!', payment);
-
-    const onError = (error) =>
-      console.log('Erroneous payment OR failed to load script!', error);
-
-    const onCancel = (data) =>
-      console.log('Cancelled payment!', data);
-      
+    const onSuccess = (payment) => {
+      console.log('Successful payment', payment)
+      this.setState({msg: "Payment Successful. Your item(s) are on there way"})
+    }
+    const onError = (error) => {
+      this.setState({msg: "Payment Error. Please try again or contact for support."})
+      console.log('Erroneous payment OR failed to load script', error)
+    }
+    const onCancel = (data) => {
+      this.setState({msg: "Payment Cancelled"})
+      console.log('Cancelled payment', data)
+    }
     return (
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
         <div className={S.orderHolder}>
@@ -124,18 +157,19 @@ export default class Order extends Component {
           <div className={S.right}>
             <button onClick={this.props.toggleForm} id={S.close}>Close</button>
             
-            <OrderForm />
+            <OrderForm orderData={this.props.orderData}/>
             
             <div id={S.paypalHolder}>
               <PayPalCheckout 
                 client={CLIENT}
                 env={ENV}
                 commit={true}
-                currency={'USD'}
+                currency={'NZD'}
                 total={100}
                 onSuccess={onSuccess}
                 onError={onError}
                 onCancel={onCancel}
+                orderData={this.props.orderData}
               />
             </div>
             
@@ -146,4 +180,3 @@ export default class Order extends Component {
     )
   }
 }
-

@@ -1,0 +1,72 @@
+@import "../pages/main.sass"
+
+@keyframes listDropdown 
+  0%
+    margin-bottom: 0
+    opacity: 0
+  50%
+    opacity: 1
+  100% 
+    margin-bottom: 20px
+
+
+    
+#Tags
+  background-color: $red-black
+  height: 100vh
+  width: 100%
+  overflow: hidden
+  #title
+    font-weight: 300
+    margin-left: 60px
+  *
+    color: $red-white
+  .tagHolder
+    size: 100%
+    position: relative
+    overflow-Y: scroll
+    ul
+      list-style: none
+      size: 90%
+      //margin: 0 auto
+      //padding-left: 20%
+      .tagItem
+        min-width: 320px
+        width: 100%
+        height: 230px
+        margin-left: -40%
+        transition: all 0.3s ease-in-out
+        animation: listDropdown 0.6s forwards
+        &:hover
+          margin-left: -30%
+        *
+          float: right
+        a
+          text-decoration: none
+          width: 350px
+          display: flex
+          flex-wrap: wrap
+          align-items: center
+        h2
+          font-weight: 300
+          position: relative
+          padding-bottom: 15px
+          width: 100%
+          &::before 
+            content: ''
+            display: block
+            width: 30%
+            max-width: 200px
+            position: absolute 
+            bottom: 0
+            border: none
+            border-bottom: 2px solid $red-white
+        .content
+          width: 200px
+          height: 120px
+          ul
+            li
+              float: left
+              opacity: 0.5
+              width: 100%
+              animation: listDropdown 0.4s forwards

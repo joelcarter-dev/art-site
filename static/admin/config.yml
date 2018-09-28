@@ -18,6 +18,7 @@ collections:
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Info", name: "info", widget: "string", required: false}
       - {label: "Original", name: "original", widget: "boolean", default: true}
+      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "art-pice"}
 

@@ -1,5 +1,13 @@
 @import "../pages/main.sass"
 
+@keyframes fadein 
+  from 
+    opacity: 0
+    margin-left: -20px
+  to 
+    opacity: 1
+    margin-left: 0px
+      
 .art-item-holder
   background-color: $main-black
   width: 100%
@@ -31,6 +39,9 @@
     grid-row: 3
   .left
     grid-area: left-sidebar
+    *
+      animation: fadein 0.5s
+      transition: all 0.4s cubic-bezier(.77,0,.18,1)
     @extend %Sidebar
   .right
     grid-area: sidebar
@@ -58,8 +69,10 @@
     #Sidebar
       float: right
       width: 80%
+      height: 100%
       margin: 0 auto
       padding-top: 3vw
+      position: relative
       font-family: 'hind', sans-serif
       font-weight: 100
       #infoMenu
@@ -80,8 +93,6 @@
             border-bottom: 3px solid $red-white     
       .infoHolder
         .priceHolder
-          animation: fadein 0.4s
-          transition: all 0.4s ease-in-out
           min-width: 150px
           width: 50%
           display: flex
@@ -105,10 +116,12 @@
           list-style: none
           padding: 0
           margin-bottom: 30px
+          width: 240px
           li
             color: $red-white
             font-size: responsive
             max-font-size: 18px
+            min-font-size: 16px
             padding: 10px
             text-transform: capitalize
             letter-spacing: 1px
@@ -116,33 +129,29 @@
           position: relative
           width: 100%
           max-width: 200px
+          transition: all 0.5s cubic-bezier(.77,0,.18,1)
       .notesHolder
         color: $red-white
         text-align: left
-        animation: fadein 1s
-        transition: all 0.4s ease-in-out
         h3
           font-weight: 100
           font-size: 20px
+          @keyframes grow
+            from 
+              width: 30%
+            to 
+              width: 40%
           &:before 
             content: ''
             display: block
-            width: 40%
+            width: 30%
             position: relative
             top: 40px
             border: none
             border-bottom: 2px solid $red-white
-            
-  @keyframes fadein 
-    from 
-      opacity: 0
-      margin-bottom: 0px
-      margin-left: -20px
-    to 
-      opacity: 1
-      margin-bottom: 30px
-      margin-left: 0px
-          
+            animation: grow 1s forwards
+            transition: all 1s linear 
+                      
         
   //order and cart button styles
   .artItemButton
@@ -194,10 +203,18 @@
       grid-area: bottom
       #Sidebar
         width: 100%
+        height: 600px
         padding-top: 2vw
         ul, .artItemButton
           margin-left: 30px
+        ul
+          padding-top: 60px
+        .buttonHolder
+          position: absolute
+          bottom: 0
         .priceHolder
+          height: 60px
           .price
-            float: left
-            margin-left: -1vw
+            position: absolute
+            top: 0
+            left: 0

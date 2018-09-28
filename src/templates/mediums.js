@@ -3,75 +3,68 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import S from './tags.module.sass'
+import S from './mediums.module.sass'
 
-class TagRoute extends Component {
+class mediumsRoute extends Component {
   render() {
+    console.log(this.props.data)
     const posts = this.props.data.allMarkdownRemark.edges
-
+    
     const postLinks = posts.map( post => (
-      <li key={post.node.fields.slug} className={S.tagItem}>
+      <li key={post.node.fields.slug}>
         <Link to={post.node.fields.slug}>
           <h2>{post.node.frontmatter.title}</h2>
           <Img
             fixed={post.node.frontmatter.featuredImage.childImageSharp.fixed} 
           />
-          <div className={S.content}>
-            <ul>
-              {post.node.frontmatter.tags.slice(0, 3)
-                .map((tag, i)=> {
-                   if (tag === this.props.pageContext.tag) {
-                    return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
-                  } else {
-                    return (
-                      <li key={tag}>{tag}</li>
-                    )
-                  }
-                })}
-            </ul>
-          </div>
         </Link>
       </li>
     ))
-
+    
     //there is no type passed to types only tag through context
-    const tag = this.props.pageContext.tag
+    const tag = this.props.pageContext.type
     
     const title = this.props.data.site.siteMetadata.title
     
     const totalCount = this.props.data.allMarkdownRemark.totalCount
-  
+    
+    const tagHeader = `${totalCount} post${
+      totalCount === 1 ? '' : 's'
+    } tagged with “${tag}”`
+
     return (
       <section id={S.Tags}>
         <Helmet title={`${tag} | ${title}`} />
-        <h1 id={S.title}>Art tagged with {tag}</h1>
-        
-        <div className={S.tagHolder}>
-            
-          <ul>{postLinks}</ul>
-          
+        <div>
+          <div>
+            <div>
+              <h3 >{tagHeader}</h3>
+              <ul >{postLinks}</ul>
+              <p>
+                
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     )
   }
 }
 
-export default TagRoute
+export default mediumsRoute
 
 //can pass tag data through context in node.js
 //but I'm not goinf to bc I want fixed images for thumbnails
 //and the node query gets fluid images
 export const tagPageQuery = graphql`
-query TagPage($tag: String) {
+query mediumsPage {
   site {
     siteMetadata {
       title
     }
   }
   allMarkdownRemark(
-    sort: {
-      fields: [frontmatter___date], order: DESC}, 
-      filter: {frontmatter: {tags: {in: [$tag]}}}
+    sort: {fields: [frontmatter___date], order: DESC}, 
     ) {
     totalCount
     edges {
@@ -81,11 +74,9 @@ query TagPage($tag: String) {
         }
         frontmatter {
           title
-          tags
-          type
           featuredImage {
             childImageSharp {
-              fixed(width: 150, height: 150, cropFocus: CENTER) {
+              fixed(width: 125, height: 125) {
                 src
                 width
                 base64

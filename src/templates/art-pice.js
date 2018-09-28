@@ -126,19 +126,14 @@ export default class ArtPice extends Component {
   render() {
     const itemData = this.props.pageContext.node.frontmatter
     const itemId = this.props.pageContext.id
-    const orderData = {
-      price: itemData.price,
-      title: itemData.title,
-      image: itemData.featuredImage.childImageSharp
-    }
-
+    
     return (
       <section className={S.artItemHolder}>
         
         <Order 
           hidden={this.state.orderFormHidden} 
           toggleForm={this.toggleForm}
-          orderData={orderData}
+          orderData={itemData}
         />
         
         <Header currentPage="store" id={S.Header}/>

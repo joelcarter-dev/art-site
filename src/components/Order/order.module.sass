@@ -1,5 +1,11 @@
 @import "../../pages/main.sass"
 
+@keyframes fadein 
+  from 
+    opacity: 0
+  to 
+    opacity: 1
+    
 #OrderHidden
   display: none
 #OrderDisplay
@@ -8,6 +14,9 @@
   left: center
   overflow: hidden
   z-index: 999
+  *
+    animation: fadein 0.2s
+    transition: all 0.2s cubic-bezier(.77,0,.18,1)
   .orderHolder
     size: 80%
     max-width: 1000px
@@ -47,6 +56,7 @@
     grid-area: left
     //image overview 
     #Overview
+      position: relative
       * 
         color: $red-white
       h3
@@ -62,6 +72,17 @@
       .itemImages
         max-width: 50vh
         margin: 0 auto
+      .myInfo
+        width: 100%
+        position: absolute
+        top: 100%
+        p, span
+          text-align: center
+          width: 100%
+        span
+          color: green
+          display: block
+          font-family: sans-serif
   .right
     grid-area: right
     #paypalHolder
@@ -78,6 +99,8 @@
         color: $red-black
         margin-left: 20px
       form
+        #orderData
+          display: none
         input
           background-color: transparent
           color: $red-black
@@ -110,6 +133,7 @@
     left: center
     background-color: $main-black
     opacity: 0.8
+    animation: none
 
 %form-button-styles
   padding: 10px

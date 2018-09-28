@@ -2,6 +2,8 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
+
+//for SSR load a dud module on build html for paypal module as it uses window  
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
@@ -22,7 +24,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark {
         edges {
           node {
             id
@@ -69,6 +71,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     const posts = result.data.allMarkdownRemark.edges
 
+    //create page for each art item
     posts.forEach(edge => {
       const id = edge.node.id
       const node = edge.node
@@ -109,6 +112,31 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
+  
+  
+   // Tag pages:
+    let types = []
+    // Iterate through each post, putting all found tags into `tags`
+    posts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.type`)) {
+        types = types.concat(edge.node.frontmatter.type)
+      }
+    })
+    // Eliminate duplicate tags
+    types = _.uniq(types)
+    // Make tag pages
+    types.forEach(type => {
+      const typePath = `/types/${_.kebabCase(type)}/`
+
+      createPage({
+        path: typePath,
+        component: path.resolve(`src/templates/mediums.js`),
+        context: {
+          type,
+        },
+      })
+    })
+    
   })
 }
 

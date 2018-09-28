@@ -1,102 +1,145 @@
 import React, {Component} from 'react'
 import { graphql } from 'gatsby'
-import PropTypes from 'prop-types'
 import { uniqBy } from 'lodash'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
+import { kebabCase } from 'lodash'
+import S from './store.module.sass'
 //get all tags and display five items under that tag. Clicking on the tag shows all items
 
 //group all links under their tag and type
 
-const CategoryList = (props) => {
+const Selected = (props) => {
   return (
-  <div className="categoryList">
-    <h3 className="title">{props.data.type}</h3>
-    <ul>
-      {props.data.items.map( (item, i)=> (
-        <li key={i}>
-          <Link to={item.fields.slug} style={{"color": "black"}}>
-            {item.frontmatter.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>  
+    <div id={S.selected}>
+    {props.data.map( ({node: item}, i) => (
+
+      <div className={S.selectedItem} key={i}>
+        <Link to={item.fields.slug}>
+          <Img
+            fluid={item.frontmatter.featuredImage.childImageSharp.fluid} 
+          />  
+        </Link>
+      </div>
+      
+    ))}
+    </div>
   )
 }
 
-export default class Store extends Component {
-  constructor(props) {
-   super(props)
-   this.state = {
-     itemCategorys: this.setData(),
-   } 
-  }
+const ItemList = (props) => {
+  // maybe this just links to the tag
+  // index page that acts as a item feed for items with that
+  // tag
+  return (
+    props.items
+      .map( item => (
+        <li key={item.fieldValue}>
+        
+          <Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
+            {item.fieldValue} ({item.totalCount})
+          </Link>
+          
+        </li>
+      ))  
+  )
   
-  setData = () => {
-    let items = []
-    this.props.data.allMarkdownRemark.edges
-      .map( ({node: item }) => {
-        let category = item.frontmatter.type
-        items.push({
-          type: category,
-          items: []
-        })
-      })
-      
-    let categorys = uniqBy(items, (i) => (i.type))
+}
 
-    categorys.map( (i) => {
-      let posts = this.props.data.allMarkdownRemark.edges
-      let item = i 
-      posts.forEach( (i) => {
-        if (i.node.frontmatter.type === item.type) {
-          item.items.push(i.node)
-        }
-      })
-      
-    })
 
-    return categorys
-  }
-    
+export default class Store extends Component {
   render() {
+
+    const itemData = this.props.data.posts
+      console.log(itemData)
     return (
-      <section id="catergories-holder">
+      <section id={S.store}>
       
-        {this.state.itemCategorys.map( (item, i) => (
-          <CategoryList data={item} key={i}/>
-        ))}
-    
+        <h3>Categories</h3>
+        <ul>
+          <ItemList items={itemData.tags} folder="tags"/>
+        </ul>
+        
+        <h3>Mediums</h3>
+        <ul>
+          <ItemList items={itemData.types} folder="types"/>
+        </ul>
+        
+        <Selected data={this.props.data.selected.edges}/>
+        
       </section>
     )
   }
 }
 
-Store.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
-}
-
-//maybe we only want the links and names of the arts here. It is just a link hub thus far
-
 export const pageQuery = graphql`
-query ArtFeedQuery {
-  allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
-    edges {
-      node {
-        fields {
-          slug
+  query ArtFeedQuery {
+    posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+      types: group(
+        field: frontmatter___type
+      ) {
+          fieldValue
+          totalCount 
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+              }
+            }
+          }
         }
-        frontmatter {
-          title
-          tags
-          type
+      
+      tags: group(
+        field: frontmatter___tags
+      ) {
+          fieldValue
+          totalCount 
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+
+    }
+    
+    selected: allMarkdownRemark(
+      filter: {
+        frontmatter: { storeHighlight: { ne: false } }
+      }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            tags
+            type
+            storeHighlight
+            featuredImage {
+              childImageSharp {
+                fluid(maxHeight: 500) {
+                  src
+                  srcSet
+                  sizes
+                  base64
+                  aspectRatio
+                }
+              }
+            }
+          }
         }
       }
     }
   }
-}
 `

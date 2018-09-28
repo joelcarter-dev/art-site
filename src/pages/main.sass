@@ -4,6 +4,12 @@ $xs: 24em // extra small
 $s: 35em  // small
 $m: 55em  // middle
 $l: 62em   // large
+
+@keyframes fadein 
+  from 
+    opacity: 0
+  to 
+    opacity: 1
         
 =full-image()
   background-repeat: no-repeat
@@ -36,12 +42,17 @@ html, body, .root
     transition: all 0.1s ease-in-out
   a
     color: white
+  
+
 
 // --- MINNAMIM REQ --- //
 
 //TODO
-//write global selectors for responsive
-//title sizes and spacing, ect
+//set up paypal and mailchimp. Look at form vaildation 
+
+//REMEMBER to redirect url to /sore on /tags as it does not exist
+
+//TODO update site metadata
 
 // PAGES
 //   -LANDING
