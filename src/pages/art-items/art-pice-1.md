@@ -10,7 +10,7 @@ tags:
 type: 
   - type one test
 original: true
-storeHighlight: false 
+storeHighlight: true 
 featuredImage: ../img/9bcc02870880a7a57ff4eb2dcdbe78e3.jpg
 templateKey: art-pice
 ---

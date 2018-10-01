@@ -8,6 +8,9 @@ import st from './index.module.sass'
 import Indented from '../img/indented.svg'
 import Logo from '../img/logo.svg'
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+
 export default class IndexPage extends Component {
   render() {
     return (

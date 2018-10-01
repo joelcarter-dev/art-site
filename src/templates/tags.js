@@ -44,7 +44,7 @@ class TagRoute extends Component {
     return (
       <section id={S.Tags}>
         <Helmet title={`${tag} | ${title}`} />
-        <h1 id={S.title}>Art tagged with {tag}</h1>
+        <h1 id={S.title}>Art in the {tag} category</h1>
         
         <div className={S.tagHolder}>
             

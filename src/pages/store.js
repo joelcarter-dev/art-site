@@ -9,61 +9,56 @@ import S from './store.module.sass'
 
 //group all links under their tag and type
 
-const Selected = (props) => {
-  return (
-    <div id={S.selected}>
-    {props.data.map( ({node: item}, i) => (
 
-      <div className={S.selectedItem} key={i}>
-        <Link to={item.fields.slug}>
-          <Img
-            fluid={item.frontmatter.featuredImage.childImageSharp.fluid} 
-          />  
-        </Link>
-      </div>
-      
-    ))}
-    </div>
-  )
-}
-
-const ItemList = (props) => {
-  // maybe this just links to the tag
-  // index page that acts as a item feed for items with that
-  // tag
-  return (
-    props.items
+const ItemList = (props) => (
+  <div className={S.itemList}>
+    <span>Sort By</span>
+    <h3>{props.title}</h3>
+    <ul>
+    {props.items
       .map( item => (
         <li key={item.fieldValue}>
         
           <Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
-            {item.fieldValue} ({item.totalCount})
+            {item.fieldValue} : {item.totalCount}
           </Link>
           
         </li>
-      ))  
-  )
-  
-}
+      ))}
+    </ul>
+  </div>
+)
 
+const Selected = (props) => (
+  <div id={S.selectedHolder}>
+    <h2 id={S.selectedTitle}>Personally Selected</h2>
+    <div className={S.items}>
+      {props.data
+        .map( ({node: item}, i) => (
+          <div className={S.selectedItem} key={i}>
+            <Link to={item.fields.slug}>
+              <h3>{item.frontmatter.title}</h3>
+              <Img
+                fixed={item.frontmatter.featuredImage.childImageSharp.fixed} 
+              />  
+            </Link>
+          </div> 
+        ))}
+      </div>
+  </div>
+)
 
 export default class Store extends Component {
   render() {
 
     const itemData = this.props.data.posts
-      console.log(itemData)
     return (
       <section id={S.store}>
-      
-        <h3>Categories</h3>
-        <ul>
-          <ItemList items={itemData.tags} folder="tags"/>
-        </ul>
+        <div className={S.listHolder}>
+          <ItemList items={itemData.tags} folder="tags" title="Categories"/>
         
-        <h3>Mediums</h3>
-        <ul>
-          <ItemList items={itemData.types} folder="types"/>
-        </ul>
+          <ItemList items={itemData.types} folder="types" title="Mediums"/>
+        </div>
         
         <Selected data={this.props.data.selected.edges}/>
         
@@ -128,11 +123,12 @@ export const pageQuery = graphql`
             storeHighlight
             featuredImage {
               childImageSharp {
-                fluid(maxHeight: 500) {
+                fixed(width: 320, height: 320, cropFocus: CENTER) {
                   src
-                  srcSet
-                  sizes
+                  width
                   base64
+                  height
+                  srcSet
                   aspectRatio
                 }
               }

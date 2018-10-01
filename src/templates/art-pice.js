@@ -8,12 +8,6 @@ import Order from '../components/Order/Order.js'
 import Img from 'gatsby-image'
 import S from './art-pice.module.sass'
 
-import 'typeface-alegreya-sans-sc'
-import 'typeface-sorts-mill-goudy'
-import 'typeface-italianno'
-import 'typeface-hind'
-import 'typeface-cinzel-decorative'
-
 //trying to pass art item data through context in node.js instead of 
 //another graphql query. It is in the pageContext prop
 
@@ -54,7 +48,7 @@ const Notes = (props) => (
   </div>  
 )
 
-export class Sidebar extends Component {
+class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = { 

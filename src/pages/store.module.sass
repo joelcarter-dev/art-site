@@ -1,10 +1,101 @@
+@import "./main.sass"
+
 #store
   size: 100%
+  background-color: $red-white
+  min-height: 100%
+  width: 100%
+  padding: 0
+  margin: 0
+  position: absolute
+  overflow-X: hidden
   *
-    color: black
-  #catergories
-    background-color: red
-  #selected
-    background-color: pink
-    .selectedItem
-      size: 500px
+    color: $red-black
+  .listHolder
+    width: 100%
+    display: flex
+    justify-content: center
+    margin-bottom: 150px
+    @media screen and (max-width: $s) 
+      display: block
+    .itemList
+      min-width: 320px
+      max-width: 400px
+      min-height: 200px
+      position: relative
+      padding: 30px
+      span
+        float: left
+        font-weight: 300
+        opacity: 0.8
+      h3
+        width: 100%
+        float: left
+        margin-top: 10px
+        font-weight: 400
+      ul
+        list-style: none
+        border-left: 2px solid $red-black
+        padding-left: 20px
+        float: right
+        width: 200px
+        height: min-content
+        li
+          a
+            text-decoration: none
+  #selectedHolder
+    width: 100%
+    background-color: $main-black
+    padding-bottom: 60px
+    #selectedTitle
+      color: $red-white
+      width: 100%
+      font-weight: 300
+      font-size: responsive
+      min-font-size: 30px
+      max-font-size: 50px
+      text-align: center
+      padding: 60px
+      margin: 0 auto
+      letter-spacing: 2px
+    .items
+      display: flex
+      flex-wrap: wrap
+      justify-content: center
+      width: 100%
+      position: relative
+      @media screen and (max-width: $s)
+        display: block
+      .selectedItem
+        margin: 60px
+        padding-top: 0
+        position: relative
+        @media screen and (max-width: $xs) 
+          margin: 0 auto
+          h3
+            text-align: center
+        //   // .gatsby-image-wrapper
+        //   //   margin: 0 auto
+        h3
+          color: $red-white
+          font-weight: 300
+          position: relative
+          padding-bottom: 20px
+          font-family: 'cinzel decorative'
+          text-transform: uppercase
+          //font-family: 'alegreya sans sc'
+          @keyframes grow
+            from 
+              width: 10%
+            to 
+              width: 40%
+          &::before 
+            content: ''
+            display: block
+            max-width: 200px
+            position: absolute 
+            bottom: 4px
+            border: none
+            border-bottom: 1px solid $red-white
+            animation: grow 1s forwards
+            transition: all 1s linear 

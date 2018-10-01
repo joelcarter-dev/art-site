@@ -56,7 +56,7 @@ export default mediumsRoute
 //can pass tag data through context in node.js
 //but I'm not goinf to bc I want fixed images for thumbnails
 //and the node query gets fluid images
-export const tagPageQuery = graphql`
+export const mediumsPageQuery = graphql`
 query mediumsPage {
   site {
     siteMetadata {
