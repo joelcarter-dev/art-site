@@ -55,9 +55,9 @@ export default class Store extends Component {
     return (
       <section id={S.store}>
         <div className={S.listHolder}>
-          <ItemList items={itemData.tags} folder="tags" title="Categories"/>
+          <ItemList items={itemData.tags} folder="cat" title="Categories"/>
         
-          <ItemList items={itemData.types} folder="types" title="Mediums"/>
+          <ItemList items={itemData.types} folder="mediums" title="Mediums"/>
         </div>
         
         <Selected data={this.props.data.selected.edges}/>
@@ -123,7 +123,7 @@ export const pageQuery = graphql`
             storeHighlight
             featuredImage {
               childImageSharp {
-                fixed(width: 320, height: 320, cropFocus: CENTER) {
+                fixed(width: 320, height: 230, cropFocus: CENTER) {
                   src
                   width
                   base64

@@ -81,7 +81,6 @@ export default class ArtPice extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      imageWidth: 0,
       maxWidth: this.updateWindowDimensions(),
       orderFormHidden: true
     }
@@ -97,20 +96,12 @@ export default class ArtPice extends Component {
   }
   
   updateWindowDimensions = () => { 
-    //console.log("called")
-    if (typeof window !== `undefined` && window ) {
-      
-      let maxWidth = this.props.pageContext.node.frontmatter.featuredImage.childImageSharp.fluid.sizes.split(" ")
-      maxWidth = maxWidth[3].replace(/\D/g,'')
-      if (maxWidth / 2 < window.innerHeight - 150 ) {
-        //console.log("pass " + maxWidth + " vs " + window.innerHeight)
-        return maxWidth
-      } else {
-        let smallerMaxWidth = maxWidth / 2
-        //console.log("fuck " + maxWidth + " vs " + window.innerHeight)
-        return smallerMaxWidth
-      }
-    } else {return}
+    if (typeof window !== 'undefined' && window ) {
+      let maxWidth = window.innerHeight 
+      return maxWidth
+    } else {
+      return
+    }
   }
   
   toggleForm = () => {
@@ -141,9 +132,7 @@ export default class ArtPice extends Component {
         <div className={S.overlay}></div>
         <div 
           className={S.imageHolder} 
-          style={{
-             "maxWidth": `calc(${this.state.maxWidth}px - 200px)`
-            }}>
+          style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}>
           <Img
             fluid={itemData.featuredImage.childImageSharp.fluid} 
             alt={`${itemData.type} ${itemData.original ? "original work" : "print"} ${itemData.title}`}

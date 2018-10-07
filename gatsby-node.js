@@ -102,7 +102,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     // Make tag pages
     tags.forEach(tag => {
-      const tagPath = `/tags/${_.kebabCase(tag)}/`
+      const tagPath = `/cat/${_.kebabCase(tag)}/`
 
       createPage({
         path: tagPath,
@@ -126,7 +126,7 @@ exports.createPages = ({ actions, graphql }) => {
     types = _.uniq(types)
     // Make tag pages
     types.forEach(type => {
-      const typePath = `/types/${_.kebabCase(type)}/`
+      const typePath = `/mediums/${_.kebabCase(type)}/`
 
       createPage({
         path: typePath,

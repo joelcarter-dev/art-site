@@ -20,7 +20,7 @@ export class PayPalCheckout extends Component {
       
     } = this.props
     
-    console.table(this.props.orderData)
+    //console.table(this.props.orderData)
 
     const payment = () => {
   

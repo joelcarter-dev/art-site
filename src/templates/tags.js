@@ -86,12 +86,7 @@ query TagPage($tag: String) {
           featuredImage {
             childImageSharp {
               fixed(width: 150, height: 150, cropFocus: CENTER) {
-                src
-                width
-                base64
-                height
-                srcSet
-                aspectRatio
+                ...GatsbyImageSharpFixed_withWebp
               }
             }
           }
@@ -101,3 +96,9 @@ query TagPage($tag: String) {
   }
 }
 `
+// src
+// width
+// base64
+// height
+// srcSet
+// aspectRatio

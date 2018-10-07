@@ -3,49 +3,50 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import Gallery from 'react-grid-gallery'
 import S from './mediums.module.sass'
 
 class mediumsRoute extends Component {
   render() {
-    console.log(this.props.data)
     const posts = this.props.data.allMarkdownRemark.edges
     
     const postLinks = posts.map( post => (
-      <li key={post.node.fields.slug}>
+      <div key={post.node.fields.slug} className={S.imageItem}>
         <Link to={post.node.fields.slug}>
           <h2>{post.node.frontmatter.title}</h2>
           <Img
-            fixed={post.node.frontmatter.featuredImage.childImageSharp.fixed} 
+            fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
           />
+          <div className={S.content}>
+            <ul>
+              {post.node.frontmatter.tags.slice(0, 3)
+                .map((tag, i)=> {
+                   if (tag === this.props.pageContext.tag) {
+                    return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
+                  } else {
+                    return (
+                      <li key={tag}>{tag}</li>
+                    )
+                  }
+                })}
+            </ul>
+          </div>
         </Link>
-      </li>
+      </div>
     ))
     
     //there is no type passed to types only tag through context
-    const tag = this.props.pageContext.type
-    
-    const title = this.props.data.site.siteMetadata.title
+    const type = this.props.pageContext.type
     
     const totalCount = this.props.data.allMarkdownRemark.totalCount
     
-    const tagHeader = `${totalCount} post${
-      totalCount === 1 ? '' : 's'
-    } tagged with “${tag}”`
-
     return (
-      <section id={S.Tags}>
-        <Helmet title={`${tag} | ${title}`} />
-        <div>
-          <div>
-            <div>
-              <h3 >{tagHeader}</h3>
-              <ul >{postLinks}</ul>
-              <p>
-                
-              </p>
-            </div>
-          </div>
+      <section id={S.Medium}>
+        <h1 id id={S.mediumTitle}>{type}</h1>
+        <div className={S.imageGrid}>
+          {postLinks}
         </div>
+      
       </section>
     )
   }
@@ -58,11 +59,6 @@ export default mediumsRoute
 //and the node query gets fluid images
 export const mediumsPageQuery = graphql`
 query mediumsPage {
-  site {
-    siteMetadata {
-      title
-    }
-  }
   allMarkdownRemark(
     sort: {fields: [frontmatter___date], order: DESC}, 
     ) {
@@ -74,15 +70,11 @@ query mediumsPage {
         }
         frontmatter {
           title
+          tags
           featuredImage {
             childImageSharp {
-              fixed(width: 125, height: 125) {
-                src
-                width
-                base64
-                height
-                srcSet
-                aspectRatio
+              fluid(maxHeight: 300){
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -92,3 +84,7 @@ query mediumsPage {
   }
 }
 `
+// sizes
+// base64
+// srcSet
+// aspectRatio

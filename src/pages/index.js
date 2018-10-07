@@ -10,6 +10,10 @@ import Logo from '../img/logo.svg'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
+import 'typeface-cormorant-infant'
+import 'typeface-bellefair'
+import 'typeface-cormorant-unicase'
 
 export default class IndexPage extends Component {
   render() {

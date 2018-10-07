@@ -1,0 +1,39 @@
+$xs: 24em // extra small
+$s: 35em  // small
+$m: 55em  // middle
+$l: 62em   // large
+
+#Medium
+  size: 100%
+  #mediumTitle
+    font-size: responsive
+    color: white
+  .imageGrid
+    width: 100%
+    max-width: 1250px
+    margin: 0 auto
+    padding: 40px
+    column-count: 4
+    column-gap: 60px
+    line-height: 0
+    .imageItem
+      width: 100% !important
+      height: auto !important
+      min-width: 200px
+      margin-bottom: 60px
+      *
+        .content, h2
+          display: none
+  @media screen and (max-width: $l)
+    .imageGrid
+      column-count: 3
+  @media screen and (max-width: $m) 
+    .imageGrid
+      column-count: 2
+  @media screen and (max-width: 50em) 
+    .imageGrid
+      column-count: 1
+      max-width: 400px
+  // @media screen and (max-width: 480px) 
+  //   .imageGrid
+  //     column-count: 1
