@@ -3,7 +3,6 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import Gallery from 'react-grid-gallery'
 import S from './mediums.module.sass'
 
 class mediumsRoute extends Component {
