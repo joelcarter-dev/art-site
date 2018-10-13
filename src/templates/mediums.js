@@ -5,6 +5,8 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import S from './mediums.module.sass'
 
+//IS IT WATERCOLOR WITH A "U" IN NZ?
+
 class mediumsRoute extends Component {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges
@@ -16,20 +18,6 @@ class mediumsRoute extends Component {
           <Img
             fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
           />
-          <div className={S.content}>
-            <ul>
-              {post.node.frontmatter.tags.slice(0, 3)
-                .map((tag, i)=> {
-                   if (tag === this.props.pageContext.tag) {
-                    return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
-                  } else {
-                    return (
-                      <li key={tag}>{tag}</li>
-                    )
-                  }
-                })}
-            </ul>
-          </div>
         </Link>
       </div>
     ))
@@ -57,9 +45,10 @@ export default mediumsRoute
 //but I'm not goinf to bc I want fixed images for thumbnails
 //and the node query gets fluid images
 export const mediumsPageQuery = graphql`
-query mediumsPage {
+query mediumsPage($type: String) {
   allMarkdownRemark(
     sort: {fields: [frontmatter___date], order: DESC}, 
+    filter: {frontmatter: {type: {in: [$type]}}}
     ) {
     totalCount
     edges {
@@ -69,7 +58,6 @@ query mediumsPage {
         }
         frontmatter {
           title
-          tags
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 300){

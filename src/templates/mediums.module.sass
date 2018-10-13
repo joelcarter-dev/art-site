@@ -3,30 +3,89 @@ $s: 35em  // small
 $m: 55em  // middle
 $l: 62em   // large
 
+@keyframes grow 
+  from 
+    opacity: 0
+    width: 0
+  to 
+    opacity: 1
+    width: 200px
+
 #Medium
   size: 100%
   #mediumTitle
     font-size: responsive
+    max-font-size: 50px
+    min-font-size: 30px
     color: white
+    font-family: 'cinzel decorative', 'cinzel', sans-serif
+    text-transform: capitalize
+    font-weight: 100
+    letter-spacing: 3px
+    margin-left: 5vw
   .imageGrid
     width: 100%
-    max-width: 1250px
+    height: 100%
+    min-height: 80vh 
+    max-width: 1600px
     margin: 0 auto
     padding: 40px
+    padding-left: 100px
     column-count: 4
     column-gap: 60px
     line-height: 0
     .imageItem
-      width: 100% !important
-      height: auto !important
+      //height: auto
+      //min-height: 300px
+      width: 100%
       min-width: 200px
-      margin-bottom: 60px
-      *
-        .content, h2
-          display: none
+      margin: 0
+      padding-top: 10px
+      margin-bottom: 25px
+      transition: all 0.5s ease-in-out
+      break-inside: avoid
+      position: relative
+      &:hover
+        transform: scale(1.05)
+        //height: calc(auto + 200px)
+        //padding-bottom: 90px
+        //the content makes it hard for siblings to poition
+        //on conlimns, removing them for now.
+        //removed them from data query too
+        // .content 
+        //   display: block
+        //   animation: grow 1s forwards
+      div
+        min-width: max-content
+      a
+        text-decoration: none
+      h2
+        font-family: 'alegreya sans sc', sans-serif
+        font-size: 20px
+        font-weight: 300
+        margin-bottom: 30px
+      // .content
+      //   max-height: 180px
+      //   position: absolute
+      //   bottom: 0
+      //   left: 0
+      //   display: none
+      //   break-inside: avoid
+      //   ul
+      //     padding: 0  
+      //     list-style: none
+      //     opacity: 0.4
+      //     li:nth-child(-n+3)
+      //       display: block
+      //       margin: 25px
+      //       margin-left: 10px
+      //     li
+      //       display: none
+      
   @media screen and (max-width: $l)
     .imageGrid
       column-count: 3
+      padding: 40px
   @media screen and (max-width: $m) 
     .imageGrid
       column-count: 2
@@ -34,6 +93,4 @@ $l: 62em   // large
     .imageGrid
       column-count: 1
       max-width: 400px
-  // @media screen and (max-width: 480px) 
-  //   .imageGrid
-  //     column-count: 1
+

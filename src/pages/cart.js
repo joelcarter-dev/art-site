@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 // import ArtPosts from '../components/ArtFeed/ArtPosts'
 
 const CartPage = (props) => {
-  console.log(props)
   return (
     <section id="cart">
       {/*!props.data &&

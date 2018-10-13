@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { graphql } from 'gatsby'
-import { uniqBy } from 'lodash'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { kebabCase } from 'lodash'

@@ -1,137 +1,185 @@
 @import "./main.sass"
 
+@import "./_mixins.scss"
+
+@include parallax-init
+
+$headerHeight: 90vh
+
+=bgImage($url)
+  background-image: url($url)
+  background-size: cover
+  background-position: top
+  background-repeat: no-repeat
+  
+body
+  overflow-x: hidden
+
 #landing
-  .heroHolder
-    background-color: grey
-    display: block
+  background-color: white
+  height: 200vh
+  max-width: 100vw
+  div
+    width: 100vw
+    min-height: 300px
+    position: absolute
+    left: 0
+    right: 0
+    
+  .header
+    height: 100vh
+    width: 100%
+    +bgImage("../img/testHero.jpg")
+    position: fixed 
+    top: 0
+    // +parallax(.10)
+    // top: 0
+  .title
+    top: 60vh
+    +parallax(.2)
+    text-align: center
+    
+  .mainLogo
+    top: 70vh
+    +parallax(.4)
+    svg
+      left: center
+      margin: 0 auto
+      
+  .content
+    top: 70vh
+    +parallax(.1)
+    .tagLine
+      position: relative
+      width: 100%
+      height: 100px
+      width: 100%
+      text-align: center
+      background-color: $red-black
+      h2
+        color: $red-white
+        top: center
+        left: center
+    .menu
+      top: 100%
+      max-width: 24em
+      margin: 0 auto
+      
+  .about
+    z-index: 1
     width: 100%
     height: 100vh
-    overflow: hidden
     position: fixed
-    top: 0
-    z-index: -1
-    .logoSvg
-      width: calc(100% / 3)
-      min-width: 80px
-      margin: 0 auto
-      display: block
-      left: center
-      top: 30%
-  #section2
-    height: 85vh
-    width: 100%
-    background-color: $main-black
-    margin-top: 100vh
-    position: relative
-    .indentedHolder
-      width: 100%
-      max-height: 300px
-      min-height: 200px
-      overflow: hidden
-      position: relative
-      top: -33%
-      .indentedSvg
-        max-height: 400px
-        min-height: 500px
-        height: 100%
-        min-width: calc(100% * 3)
-        left: center
-        top: calc(-50% + 30px)
+    bottom: 0
+    +bgImage("../img/DSC05916.jpg")
 
-  //     #landing
-  // height: auto
-  // width: 100%
-  // background-color: pink
-  // .red
-  //   width: 50px
-  //   height: 100px
-  //   background-color: red
-  // #landing-header
+// body
+//   background-color: white
+
+// $headerHeight: 90vh
+
+// #landing
+//   //
+//   height: 100vh
+//   overflow-x: hidden
+//   overflow-y: auto
+//   perspective: 2px
+//   .header
+//     // height: $headerHeight
+//     // min-height: 500px
+//     height: 500px
+//     width: 100%
+//     position: relative
+//     +bgImage("../img/testHero.jpg")
+    
+//     // position: fixed
+//     // top: 0
+//     position: relative
+ 
+//   .content
+//     position: relative
+//     //margin-top: 50%
+//     //padding-top: 30%
+//     width: 100%
+//     height: 50% //TEMP
+//     display: grid
+//     grid-template-columns: 100vw
+//     grid-template-rows: 300px 100px 100px 30vh
+//     //overflow-x: hidden
+//     div
+//       grid-column: 1
+//       position: relative
+//     .mainLogo
+//       grid-row: 1
+//       width: 100%
+//       height: 100px
+//       z-index: 0
+//       //padding-top: 100%
+//       //padding-bottom: 100px
+//       svg
+//         left: center
+//         top: 227%
+//         margin: 0 auto
+//     .tagLine
+//       grid-row: 2
+//       // position: absolute
+//       // bottom: 0
+//       width: 100%
+//       height: 100px
+//       width: 100%
+//       text-align: center
+//       background-color: $red-black
+//       h2
+//         color: $red-white
+//         top: center
+//         left: center
+//     .menu
+//       left: center
+//       z-index: 2
+//       grid-row: 3
+    
+    // .about
+    //   z-index: 1
+    //   width: 100%
+    //   height: 100%
+    //   grid-row: 3 / span 4
+    //   +bgImage("../img/DSC05916.jpg")
+    
+    
+    
+  // .heroHolder
+  //   background-color: grey
+  //   display: block
   //   width: 100%
-  //   height: auto
-  //   .top
-  //     .theme-buttons
-  //       z-index: 1
-  //       width: 80px
-  //       margin: 25px
-  //       position: fixed
-  //       right: 0
-  //       display: inline-flex
-  //       justify-content: center
-  //       span
-  //         display: block
-  //         width: 20px
-  //         height: 20px
-  //         margin: 10px
-  //         border-radius: 50px
-  //         &:hover
-  //           cursor: pointer
-  //       #black
-  //         border: 1px solid white
-  //         background-color: $main-black
-  //       #white
-  //         border: 1px solid black
-  //         background-color: white
-  //   .header-image-holder
-  //     display: block
-  //     width: 100%
-  //     height: 100vh
-  //     overflow: hidden
-  //     position: fixed
-  //     top: 0
-  //     #hero-image
-  //       position: relative
-  //       min-width: 100%
-  //       min-height: 100%
-  //       top: 50%
-  //       left: 50%
-  //       transform: translate3d(-50%, -50%, 0)
-  //   .overlay
-  //     width: 100%
-  //     height: calc(100vh + 1000px)
-  //     //height: 100%
-  //     min-height: 500px
+  //   height: 100vh
+  //   overflow: hidden
+  //   position: fixed
+  //   top: 0
+  //   z-index: -1
+  //   .logoSvg
+  //     width: calc(100% / 3)
+  //     min-width: 80px
   //     margin: 0 auto
+  //     display: block
+  //     left: center
+  //     top: 30%
+  // #section2
+  //   height: 85vh
+  //   width: 100%
+  //   background-color: $main-black
+  //   margin-top: 100vh
+  //   position: relative
+  //   .indentedHolder
+  //     width: 100%
+  //     max-height: 300px
+  //     min-height: 200px
   //     overflow: hidden
   //     position: relative
-  //     .about
-  //       +rel-pos(95vh)
-  //       width: 100%
-  //       margin: 0 auto
-  //       height: 200px
-  //       margin-bottom: 500px
-  //       svg
-  //         width: 100%
-  //         min-width: 800px
-  //         height: 100vw
-  //         max-height: 500px
-  //         +abs-pos(0, 0, 0, 50%)
-  //         transform: translate3d(-50%, -50%, 0)
-  //       .about-holder
-  //         width: 100%
-  //         height: 300px
-  //         +abs-pos(30%)
-  //         background-color: $main-black
-  //         .about-content
-  //           min-width: 300px
-  //           max-width: 600px
-  //           margin: 0 auto
-  //           height: 200px
-  //           border-top: 1px solid white
-  //           border-bottom: 1px solid white
-  //         .bottom
-  //           width: 100%
-  //           height: 200px
-  //           span
-  //             width: 50%
-  //             display: inline-block
-  //             //background-color: $main-black
-  //             background-color: pink
-  //             height: 150px
-  //             border: 1px solid red
-  //   // .gallery
-  //   //   width: 100%
-      //   height: 600px
-      //   padding: 30px
-      //   background-color: $main-black
-      //   +rel-pos(100%)
+  //     top: -33%
+  //     .indentedSvg
+  //       max-height: 400px
+  //       min-height: 500px
+  //       height: 100%
+  //       min-width: calc(100% * 3)
+  //       left: center
+  //       top: calc(-50% + 30px)

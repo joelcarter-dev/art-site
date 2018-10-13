@@ -6,8 +6,9 @@ const short = require(`postcss-short`)
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
+    title: 'Eliron Arts',
     siteUrl: `https://jciartsite.netlify.com/`,
+    tagLine: 'Here we deal in the Wonderfull '
   },
   plugins: [
   

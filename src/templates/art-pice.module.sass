@@ -9,6 +9,7 @@
     margin-left: 0px
 body
   background-color: $main-black
+  //overflow: hidden
 .art-item-holder
   background-color: $main-black
   width: 100%
@@ -18,13 +19,16 @@ body
   grid-template-areas: "header header header" "title title title" "left-sidebar main sidebar" "footer footer footer"
 
   grid-template-columns: minmax(100px, 1fr) 3fr minmax(100px, 1fr)
-  grid-template-rows: 100px 60px 0.7fr 60px
+  grid-template-rows: 160px 60px 0.7fr 60px
   max-height: 100vh
   //overflow: hidden
+  //overflow-x: hidden
+  margin-right: -50px /* maximum width of scrollbar */
+  padding-right: 50px /* maximum width of scrollbar */
     
-  #Header
+  .artPiceHeader
     grid-row: 1
-    grid-column: 2
+    grid-column: 1
     grid-area: header
   #title
     color: $red-white
@@ -82,6 +86,18 @@ body
         height: 60px
         display: flex
         margin-bottom: 30px
+        .selected
+          opacity: 1
+          &:before 
+            content: ''
+            display: block
+            width: auto
+            position: relative
+            top: 40px
+            border: none
+            border-bottom: 3px solid $red-white
+            animation: grow 1s forwards
+            transition: all 1s linear 
         span
           width: 50%
           height: 43px
@@ -90,9 +106,10 @@ body
           text-align: center
           cursor: pointer
           border: none
-          transition: all 0.1s ease-in-out
+          opacity: 0.5
+          transition: all 0.5s ease-in-out
           &:hover
-            border-bottom: 3px solid $red-white     
+            opacity: 1
       .infoHolder
         .priceHolder
           min-width: 150px
@@ -120,6 +137,7 @@ body
           margin-bottom: 30px
           width: 240px
           li
+            width: 240px
             color: $red-white
             font-size: responsive
             max-font-size: 18px
@@ -138,6 +156,7 @@ body
         h3
           font-weight: 100
           font-size: 20px
+          margin-bottom: 40px
           @keyframes grow
             from 
               width: 30%
@@ -168,7 +187,6 @@ body
     letter-spacing: 2px
     
   @media screen and (max-width: 100em)
-    //overflow: scroll
     grid-template-columns: minmax(200px, 300px) 3fr
     .imageHolder, #title
       grid-column: 2 / span 3
@@ -177,8 +195,9 @@ body
     grid-template-areas: "top" "bottom"
     grid-template-columns: 100%
     grid-template-rows: 93vh auto
-    overflow-y: scroll
-    #Header, #title
+    #title
+      margin-top: 100px
+    .artPiceHeader, #title
       grid-area: top
       grid-column: -2
       position: fixed
@@ -190,13 +209,14 @@ body
       grid-area: top
       z-index: 2
     .imageHolder
-      width: 100vw
+      max-width: max-content
       padding-top: 30vw
       //margin-left: 50%
       left: center
       margin: 0 auto
       grid-area: top
       grid-column: -2
+      margin-top: 100px
       .gatsby-image-outer-wrapper
         top: center
     .left

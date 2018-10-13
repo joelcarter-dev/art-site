@@ -71,15 +71,15 @@ class OrderForm extends Component {
   }
 }
 
-const ImageList = (props) => (
+// const ImageList = (props) => (
   
-  // if(Array.isArray(props.imageData)) {
-  //   return <Img fluid={props.imageData.childImageSharp.fluid} />
-  // } else {    
-  //     //image list display
-  // }
-  <Img fluid={props.imageData.fluid} />
-)
+//   // if(Array.isArray(props.imageData)) {
+//   //   return <Img fluid={props.imageData.childImageSharp.fluid} />
+//   // } else {    
+//   //     //image list display
+//   // }
+//   <Img fluid={props.imageData.fluid} />
+// )
 
 export class Overview extends Component {
   render() {

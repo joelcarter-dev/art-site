@@ -65,11 +65,11 @@ class Sidebar extends Component {
     return (
       <div id={S.Sidebar}>
         <div id={S.infoMenu}>
-          <span onClick={this.toggleView.bind(this, "info")}>Info</span>
-          <span onClick={this.toggleView.bind(this, "notes")}>Notes</span>
+          <span onClick={this.toggleView.bind(this, "info")} className={this.state.view === "info" ? S.selected : ""}>Info</span>
+          <span onClick={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
         </div>
         
-        {this.state.view === "info" && <Info data={this.props.data} toggleForm={this.props.toggleForm}/>}
+        {this.state.view === "info" && <Info data={this.props.data} />}
         {this.state.view === "notes" && <Notes data={this.props.data.artistNotes}/>}
         
       </div>  
@@ -121,7 +121,11 @@ export default class ArtPice extends Component {
           orderData={itemData}
         />
         
-        <Header currentPage="store" id={S.Header}/>
+        <Header 
+          id={S.artPiceHeader}
+          to={["home", "cart"]}
+          white={true}
+        />
         
         <h1 id={S.title}>{itemData.title}</h1>
         

@@ -36,14 +36,10 @@ class TagRoute extends Component {
 
     //there is no type passed to types only tag through context
     const tag = this.props.pageContext.tag
-    
-    const title = this.props.data.site.siteMetadata.title
-    
-    const totalCount = this.props.data.allMarkdownRemark.totalCount
-  
+
     return (
       <section id={S.Tags}>
-        <Helmet title={`${tag} | ${title}`} />
+
         <h1 id={S.title}>Art in the {tag} category</h1>
         
         <div className={S.tagHolder}>
@@ -63,17 +59,11 @@ export default TagRoute
 //and the node query gets fluid images
 export const tagPageQuery = graphql`
 query TagPage($tag: String) {
-  site {
-    siteMetadata {
-      title
-    }
-  }
   allMarkdownRemark(
     sort: {
       fields: [frontmatter___date], order: DESC}, 
       filter: {frontmatter: {tags: {in: [$tag]}}}
     ) {
-    totalCount
     edges {
       node {
         fields {

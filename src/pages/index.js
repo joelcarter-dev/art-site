@@ -1,76 +1,98 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-
-import './main.sass'
-import st from './index.module.sass'
-
-import Indented from '../img/indented.svg'
+import propTypes from 'prop-types'
+import Header from '../components/Header/Header.js'
 import Logo from '../img/logo.svg'
+
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
-import 'typeface-cormorant-infant'
-import 'typeface-bellefair'
-import 'typeface-cormorant-unicase'
 
-export default class IndexPage extends Component {
+import './main.sass'
+import S from './index.module.sass'
+
+export class IndexPage extends Component {
   render() {
+    const metaData = this.props.data.site.siteMetadata
     return (
-      <section id={st.landing }>
-        <div className={st.heroHolder}>
-          <Logo className={st.logoSvg} />
+      <section id={S.landing }>
+      
+        <div className={S.header}>
+        
         </div>
         
-        <div id={st.section2}>
-          <div className={st.indentedHolder}>
-            <Indented className={st.indentedSvg} />
+        <div className={S.title}>
+          <h1>{metaData.title}</h1>
+        </div>
+        
+        <div className={S.mainLogo}>
+          <Logo />
+        </div>
+        
+        <div className={S.content}>
+        
+          <div className={S.tagLine}>
+            <h2>{metaData.tagLine}</h2>    
+          </div>
+          
+          <div className={S.menu}>
+            <Header to={["store", "cart"]} white={false}/>
           </div>
           
         </div>
+        
+        <div className={S.about}>
+          
+        </div>
+        
+       
       </section>
     )
+    
   }
   
 }
 
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
-}
+export default IndexPage
 
-export const pageQuery = graphql`
-query IndexQuery {
-  allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
-    edges {
-      node {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          about
-          price
-          info
-          tags
-          featuredImage {
-            childImageSharp {
-              resolutions(width: 400) {
-                width
-                height
-                src
-                srcSet
-              }
-            }
-          }
-        }
+// // IndexPage.propTypes = {
+// //   data: PropTypes.shape({
+// //     site: PropTypes.shape({
+// //       title: PropTypes.string,
+// //       tagLine: PropTypes.string,
+// //     }),
+// //   }),
+// // }
+{/*
+ <div className={S.content}>
+        
+          <div className={S.mainLogo}>
+            <Logo />
+          </div>
+          
+          <div className={S.tagLine}>
+            <h2>{metaData.tagLine}</h2>    
+          </div>
+        
+          <div className={S.menu}>
+            <Header to={["store", "cart"]} white={false}/>
+          </div>
+          
+          <div className={S.about}>
+          
+          </div>
+          
+        </div>
+*/}
+
+export const indexQuery = graphql`
+  query indexPage {
+    site {
+      siteMetadata {
+        title
+        tagLine
       }
     }
   }
-}
 `
