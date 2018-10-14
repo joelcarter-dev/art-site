@@ -9,6 +9,7 @@ $parallax-ios         : true !default;
   $element      : $parallax-element,
   $parallax-ios : $parallax-ios
   ) {
+  @warn $element;
   @if $element == "body" {
     html, body {
       width: 100%;
@@ -27,7 +28,7 @@ $parallax-ios         : true !default;
       -webkit-overflow-scrolling: touch;
     }
     // Preserve 3D
-    &, * {
+    &, #___gatsby > div > * {
       transform-style: preserve-3d;
     }
   }

@@ -1,85 +1,85 @@
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:100);
-$primary: #1586D1;
+// @import url(https://fonts.googleapis.com/css?family=Roboto:100);
+// $primary: #1586D1;
 
-@include parallax-init;
+// @include parallax-init;
 
-.container {
-  :nth-child(1) {
-    @include parallax(-.4);
-    top: 200px;
-    left: 200px;
-  }
-  :nth-child(2) {
-    @include parallax(.2);
-    top: 200px;
-    left: 500px;
-  }
-  :nth-child(3) {
-    @include parallax(.3);
-    top: 400px;
-    left: 600px;
-  }
-  :nth-child(4) {
-    @include parallax(.1);
-    top: 500px;
-    left: 500px;
-  }
-  :nth-child(5) {
-    @include parallax(-2);
-    top: 2000px;
-    left: 2000px;
-  }
-  :nth-child(6) {
-    @include parallax(.4);
-    top: 600px;
-    left: 300px;
-  }
-  :nth-child(7) {
-    @include parallax(-1);
-    top: 400px;
-    left: 1000px;
-  }
-  :nth-child(8) {
-    @include parallax(-.4);
-    top: 100px;
-    left: 1400px;
-  }
-  :nth-child(9) {
-    @include parallax(.4);
-    top: 900px;
-    left: 500px;
-  }
-  :nth-child(10) {
-    @include parallax(-1);
-    top: 1600px;
-    left: 100px;
-  }
-  padding: 10%;
-  max-width: 40em;
-  margin: auto;
-  > * {
-    position: absolute;
-  }
-}
+// .container {
+//   :nth-child(1) {
+//     @include parallax(-.4);
+//     top: 200px;
+//     left: 200px;
+//   }
+//   :nth-child(2) {
+//     @include parallax(.2);
+//     top: 200px;
+//     left: 500px;
+//   }
+//   :nth-child(3) {
+//     @include parallax(.3);
+//     top: 400px;
+//     left: 600px;
+//   }
+//   :nth-child(4) {
+//     @include parallax(.1);
+//     top: 500px;
+//     left: 500px;
+//   }
+//   :nth-child(5) {
+//     @include parallax(-2);
+//     top: 2000px;
+//     left: 2000px;
+//   }
+//   :nth-child(6) {
+//     @include parallax(.4);
+//     top: 600px;
+//     left: 300px;
+//   }
+//   :nth-child(7) {
+//     @include parallax(-1);
+//     top: 400px;
+//     left: 1000px;
+//   }
+//   :nth-child(8) {
+//     @include parallax(-.4);
+//     top: 100px;
+//     left: 1400px;
+//   }
+//   :nth-child(9) {
+//     @include parallax(.4);
+//     top: 900px;
+//     left: 500px;
+//   }
+//   :nth-child(10) {
+//     @include parallax(-1);
+//     top: 1600px;
+//     left: 100px;
+//   }
+//   padding: 10%;
+//   max-width: 40em;
+//   margin: auto;
+//   > * {
+//     position: absolute;
+//   }
+// }
 
-body {
-  font-family: Roboto, sans-serif;
-  font-weight: 100;
-  background: #EEF1F3;
-  line-height: 1;
-}
+// body {
+//   font-family: Roboto, sans-serif;
+//   font-weight: 100;
+//   background: #EEF1F3;
+//   line-height: 1;
+// }
 
-h1, h2 {
-  font-weight: 100;
-  margin: 0;
-}
+// h1, h2 {
+//   font-weight: 100;
+//   margin: 0;
+// }
 
-h1 {
-  font-size: 5em;
-  color: $primary;
-}
-h2 {
-  font-size: 3em;
-  @include parallax(.2);
-}
+// h1 {
+//   font-size: 5em;
+//   color: $primary;
+// }
+// h2 {
+//   font-size: 3em;
+//   @include parallax(.2);
+// }

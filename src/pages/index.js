@@ -11,12 +11,13 @@ import 'typeface-cinzel'
 
 import './main.sass'
 import S from './index.module.sass'
+import './mixins.module.scss'
 
 export class IndexPage extends Component {
   render() {
     const metaData = this.props.data.site.siteMetadata
     return (
-      <section id={S.landing }>
+      <section id={S.landing} className="Index">
       
         <div className={S.header}>
         
