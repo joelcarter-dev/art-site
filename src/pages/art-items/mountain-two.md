@@ -3,8 +3,8 @@ title: Mountain Two
 about: >-
   This is my second mountain sketch. The form is a lot better but the shadows
   lack depth.
-artistNotes: I want to do more of these but bigger. Munch bigger
-price: '60'
+artistNotes: I want to do more of these but bigger. Munch bigger.
+price: '30'
 tags:
   - mountains
 info: 60x120 cm in size
