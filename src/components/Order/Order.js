@@ -156,7 +156,6 @@ export default class Order extends Component {
     
     const ENV = 'sandbox'
 
-            
     return (
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
         <div className={S.orderHolder}>
