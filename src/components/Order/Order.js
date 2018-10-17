@@ -2,26 +2,7 @@ import React, { Component } from 'react'
 import Img from 'gatsby-image'
 import S from './order.module.sass'
 
-//import { Form } from 'react-validify'
-
 import PayPalCheckout from './PaypalButton.js'
-
-//will need a list of items and their price, total price with mobile support
-//form for shipping details with validation
-
-// email should go to mail chimp for
-  // conferm order
-  // -- option asking to store email for these things? --
-  // conferm shipment (automated??)
-  // emails on new art (blog?)
-  
-//payment gateway??
-//paypal intergration
-
-//somehow make the emails display nice on netlify
-
-//order data like item number / name will be place in a hidden form input programaticly and sent to netlify 
-
 
 class OrderForm extends Component {
   constructor(props) {
@@ -96,7 +77,7 @@ class OrderForm extends Component {
 
 export class Overview extends Component {
   render() {
-  
+    //console.log("item info in overview ", this.props.itemInfo)
     return (
       <section id={S.Overview}>
         <h3>Overview</h3>
@@ -149,7 +130,8 @@ export default class Order extends Component {
       totalPrice.push(Number(i.frontmatter.price.replace(/[^0-9.-]+/g,"")))
       itemInfo.push({title: i.frontmatter.title, price: i.frontmatter.price})
     })
-
+    //console.log("item info ", itemInfo)
+    //console.log("orderData ",this.props.orderData)
     const onSuccess = (payment) => {
       console.log('Successful payment', payment)
       this.setState({msg: "Payment Successful. Your item(s) are on there way"})
@@ -179,7 +161,7 @@ export default class Order extends Component {
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
         <div className={S.orderHolder}>
           <div className={S.left}>
-            <Overview totalPrice={totalPrice} itemInfo={itemInfo} />
+            <Overview totalPrice={totalPrice.reduce((a, b) => a + b, 0)} itemInfo={itemInfo} />
           </div>
           <div className={S.right}>
             <button onClick={this.props.toggleForm} id={S.close}>Close</button>
@@ -193,7 +175,7 @@ export default class Order extends Component {
                   env={ENV}
                   commit={true}
                   currency={'NZD'}
-                  total={totalPrice[0]}
+                  total={totalPrice.reduce((a, b) => a + b, 0)}
                   onSuccess={onSuccess}
                   onError={onError}
                   onCancel={onCancel}

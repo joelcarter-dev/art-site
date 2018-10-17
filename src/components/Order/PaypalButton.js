@@ -28,60 +28,15 @@ export class PayPalCheckout extends Component {
     let items = []
     orderData.forEach( i => {
       items.push({
-        name: i.frontmatter.title,
-        description: i.frontmatter.about,
+        name: `${i.frontmatter.title} to send to ${formData.name}`,
+        description: `${orderData.original ? 'Original.' : 'Print.'} ${i.frontmatter.about}`,
         quantity: '1',
         price: i.frontmatter.price,
         currency: currency,
       })
     })
-    console.log("order Items ", items)
+    console.log(orderData)
     
-   
-   // let shipping_address = {
-   //    recipient_name: 'test',
-   //    line1: 'test',
-   //    line2: 'test',
-   //    city: 'test',
-   //    country_code: 'NZ',
-   //    postal_code: '1234',
-   //    phone: `+64 089 7778`,
-   //    state: `test`,
-   //  }
-    
-   //  const payment = () => {
-   //    paypal.rest.payment.create(env, client, {
-   //      transactions: [
-   //        {
-   //          amount: {
-   //            total,
-   //            currency,
-   //          }
-   //        },
-   //      ],
-   //    })
-   //  }
-   //  //console.log("payment data ", payment)
-   //  console.log(paypal)
-    
-
-   //  const onAuthorize = (data, actions) => {
-   //    actions.payment.execute()
-   //      .then(() => {
-   //        const payment = {
-   //          paid: true,
-   //          cancelled: false,
-   //          payerID: data.payerID,
-   //          paymentID: data.paymentID,
-   //          paymentToken: data.paymentToken,
-   //          returnUrl: data.returnUrl,
-   //        }
-   //        console.log(data)
-
-   //        onSuccess(payment)
-   //      })
-   //  }
-
     if (typeof window !== 'undefined' && window ) {
       return (
         <PaypalExpressBtn 
@@ -91,7 +46,7 @@ export class PayPalCheckout extends Component {
           onSuccess={onSuccess}
           onCancel={onCancel}
           onError={onError}
-          shipping={0}
+          shipping={1}
           
           style={{
             layout: 'vertical',  // horizontal | vertical

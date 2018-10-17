@@ -11,13 +11,13 @@ const ItemList = (props) => {
     <div className={S.cartItems}>
       {props.cartItems.map(item => {
         //  THIS IS REUSED CODE FROM MEDIUMS IT SHOULD BE ITS OWN COMP
-        const frontmatter = item.node.frontmatter
+        const frontmatter = item.frontmatter
         return (
-          <div className={S.cartItem} key={item.node.id}>
+          <div className={S.cartItem} key={item.id}>
           
             <div className={S.left}>
             
-              <Link to={item.node.fields.slug}>
+              <Link to={item.fields.slug}>
                 <Img
                   fluid={frontmatter.featuredImage.childImageSharp.fluid} 
                 />
@@ -70,26 +70,27 @@ export default class CartPage extends Component {
   }
   
 
-  componentDidMount() {
-    cartIds = JSON.parse(localStorage.getItem('cartItems'))
-  }
   render() {
   
-    const allItems = this.props.data.allMarkdownRemark.edges
-    //console.log(allItems)
     let cartItems = []
-    
-     cartIds.forEach(cartId => {
-        //console.log("cartId: ", cartId);
-        allItems.forEach((item, index) => {
-          //console.log(`allItems id-${index} :  ${item.node.id}`);
-          if (cartId === item.node.id) {
-          cartItems.push(item)
-        }
+    if (typeof window !== 'undefined' && window ) {
+      let cartIds = JSON.parse(localStorage.getItem('cartItems')) 
+      if (cartIds === null) {cartIds = []}
+      const allItems = this.props.data.allMarkdownRemark.edges
+      //console.log(allItems)
+      
+       cartIds.forEach(cartId => {
+          //console.log("cartId: ", cartId);
+          allItems.forEach((item, index) => {
+            //console.log(`allItems id-${index} :  ${item.node.id}`);
+            if (cartId === item.node.id) {
+            cartItems.push(item.node)
+          }
+        })
       })
-    })
+    }
      
-    console.log("cart items ", cartItems)
+    //console.log("cart items ", cartItems)
   
     return (
       <section id={S.Cart}>
@@ -131,6 +132,7 @@ query CartQuery {
           price
           type
           original
+          about
           featuredImage {
             childImageSharp {
               fluid(maxWidth: 300) {

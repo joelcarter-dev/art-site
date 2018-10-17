@@ -7,7 +7,7 @@ export class AddToCart extends Component {
       let cartData = [this.props.itemData]
     
       localStorage.setItem('cartItems', JSON.stringify(cartData));
-      //console.log(cartData)
+      console.log("added to cart ", cartData)
     } else {
       let oldCart = JSON.parse(localStorage.getItem('cartItems'))
       //console.log("old cart " + oldCart)
