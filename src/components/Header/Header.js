@@ -4,6 +4,10 @@ import LogoSides from '../../img/logo-side-left.svg'
 import LogoReverse from '../../img/logo-reverse.svg'
 import S from './header.module.sass'
 
+//takes a props that is an array of two "to" strings
+// these make up the two menu items
+//takes a white prop that is true of false
+
 const MenuItem = (props) => (
   <Link to={props.to === "home" ? "/" :`/${props.to}`} 
     key={props.to} 

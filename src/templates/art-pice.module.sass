@@ -21,15 +21,17 @@ body
   grid-template-columns: minmax(100px, 1fr) 3fr minmax(100px, 1fr)
   grid-template-rows: 160px 60px 0.7fr 60px
   max-height: 100vh
-  //overflow: hidden
-  //overflow-x: hidden
-  margin-right: -50px /* maximum width of scrollbar */
-  padding-right: 50px /* maximum width of scrollbar */
+  overflow: hidden
+  overflow-y: scroll
+  // margin-right: -50px /* maximum width of scrollbar */
+  // padding-right: 50px /* maximum width of scrollbar */
     
   .artPiceHeader
     grid-row: 1
     grid-column: 1
     grid-area: header
+    max-width: 24em
+    margin: 0 auto
   #title
     color: $red-white
     text-align: center

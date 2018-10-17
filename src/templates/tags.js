@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Helmet from 'react-helmet'
+import HeaderMeta from '../components/Helmet/Helmet.js'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -9,36 +9,43 @@ class TagRoute extends Component {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges
 
-    const postLinks = posts.map( post => (
-      <li key={post.node.fields.slug} className={S.tagItem}>
-        <Link to={post.node.fields.slug}>
-          <h2>{post.node.frontmatter.title}</h2>
-          <Img
-            fixed={post.node.frontmatter.featuredImage.childImageSharp.fixed} 
-          />
-          <div className={S.content}>
-            <ul>
-              {post.node.frontmatter.tags.slice(0, 3)
-                .map((tag, i)=> {
-                   if (tag === this.props.pageContext.tag) {
-                    return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
-                  } else {
-                    return (
-                      <li key={tag}>{tag}</li>
-                    )
-                  }
-                })}
-            </ul>
-          </div>
-        </Link>
-      </li>
-    ))
+    const allTitles = []
+
+    const postLinks = posts.map( post => {
+      allTitles.push(post.node.frontmatter.title)
+      return (
+        <li key={post.node.fields.slug} className={S.tagItem}>
+          <Link to={post.node.fields.slug}>
+            <h2>{post.node.frontmatter.title}</h2>
+            <Img
+              fixed={post.node.frontmatter.featuredImage.childImageSharp.fixed} 
+            />
+            <div className={S.content}>
+              <ul>
+                {post.node.frontmatter.tags.slice(0, 3)
+                  .map((tag, i)=> {
+                     if (tag === this.props.pageContext.tag) {
+                      return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
+                    } else {
+                      return (
+                        <li key={tag}>{tag}</li>
+                      )
+                    }
+                  })}
+              </ul>
+            </div>
+          </Link>
+        </li>
+      )
+    })
 
     //there is no type passed to types only tag through context
     const tag = this.props.pageContext.tag
 
     return (
       <section id={S.Tags}>
+      
+        <HeaderMeta pageTitle={tag} itemGroup={allTitles}/>
 
         <h1 id={S.title}>Art in the {tag} category</h1>
         

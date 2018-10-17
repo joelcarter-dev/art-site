@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { kebabCase } from 'lodash'
+import HeaderMeta from '../components/Helmet/Helmet.js'
+import Header from '../components/Header/Header.js'
 import S from './store.module.sass'
 //get all tags and display five items under that tag. Clicking on the tag shows all items
 
@@ -53,6 +55,12 @@ export default class Store extends Component {
     const itemData = this.props.data.posts
     return (
       <section id={S.store}>
+        <HeaderMeta pageTitle="Store"/>
+        
+        <div className={S.menu}>
+          <Header to={["home", "cart"]} white={false}/>
+        </div>
+      
         <div className={S.listHolder}>
           <ItemList items={itemData.tags} folder="cat" title="Categories"/>
         

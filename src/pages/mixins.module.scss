@@ -9,7 +9,6 @@ $parallax-ios         : true !default;
   $element      : $parallax-element,
   $parallax-ios : $parallax-ios
   ) {
-  @warn $element;
   @if $element == "body" {
     html, body {
       width: 100%;
@@ -17,6 +16,7 @@ $parallax-ios         : true !default;
       margin: 0;
       padding: 0;
       overflow: hidden;
+      overflow-y: scroll;
     }
   }
   #{$element} {

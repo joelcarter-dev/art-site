@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Helmet from 'react-helmet'
+import HeaderMeta from '../components/Helmet/Helmet.js'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -11,16 +11,21 @@ class mediumsRoute extends Component {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges
     
-    const postLinks = posts.map( post => (
-      <div key={post.node.fields.slug} className={S.imageItem}>
-        <Link to={post.node.fields.slug}>
-          <h2>{post.node.frontmatter.title}</h2>
-          <Img
-            fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
-          />
-        </Link>
-      </div>
-    ))
+    const allTitles = []
+    
+    const postLinks = posts.map( post => {
+      allTitles.push(post.node.frontmatter.title)
+      return (
+        <div key={post.node.fields.slug} className={S.imageItem}>
+          <Link to={post.node.fields.slug}>
+            <h2>{post.node.frontmatter.title}</h2>
+            <Img
+              fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
+            />
+          </Link>
+        </div>
+      )
+    })
     
     //there is no type passed to types only tag through context
     const type = this.props.pageContext.type
@@ -29,6 +34,9 @@ class mediumsRoute extends Component {
     
     return (
       <section id={S.Medium}>
+      
+        <HeaderMeta pageTitle={type} itemGroup={allTitles}/>
+        
         <h1 id id={S.mediumTitle}>{type}</h1>
         <div className={S.imageGrid}>
           {postLinks}

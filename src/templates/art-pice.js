@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import HeaderMeta from '../components/Helmet/Helmet.js'
 
 import Header from '../components/Header/Header.js'
 
@@ -33,7 +34,7 @@ const Info = (props) => (
         Order Now
       </button> 
 
-      <AddToCart itemData={props.id} className={S.artItemButton}/>
+      <AddToCart itemData={props.itemId} className={S.artItemButton}/>
     </div>  
   </div>
 )
@@ -69,7 +70,7 @@ class Sidebar extends Component {
           <span onClick={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
         </div>
         
-        {this.state.view === "info" && <Info data={this.props.data} />}
+        {this.state.view === "info" && <Info data={this.props.data} itemId={this.props.itemId} toggleForm={this.props.toggleForm}/>}
         {this.state.view === "notes" && <Notes data={this.props.data.artistNotes}/>}
         
       </div>  
@@ -79,7 +80,7 @@ class Sidebar extends Component {
 
 export default class ArtPice extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { 
       maxWidth: this.updateWindowDimensions(),
       orderFormHidden: true
@@ -114,23 +115,23 @@ export default class ArtPice extends Component {
     
     return (
       <section className={S.artItemHolder}>
+      
+        <HeaderMeta itemData={itemData}/>
         
         <Order 
           hidden={this.state.orderFormHidden} 
           toggleForm={this.toggleForm}
-          orderData={itemData}
+          orderData={[this.props.pageContext.node]}
         />
         
-        <Header 
-          id={S.artPiceHeader}
-          to={["home", "cart"]}
-          white={true}
-        />
+        <div className={S.artPiceHeader}>
+          <Header to={["home", "cart"]} white={true} />
+        </div>
         
         <h1 id={S.title}>{itemData.title}</h1>
         
         <div className={S.left}>
-          <Sidebar data={itemData} id={itemId} toggleForm={this.toggleForm}/>
+          <Sidebar data={itemData} itemId={itemId} toggleForm={this.toggleForm}/>
         </div>
         
         <div className={S.overlay}></div>

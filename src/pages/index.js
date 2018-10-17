@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { graphql } from 'gatsby'
 import propTypes from 'prop-types'
 import Header from '../components/Header/Header.js'
+import HeaderMeta from '../components/Helmet/Helmet.js'
 import Logo from '../img/logo.svg'
 
 
@@ -19,6 +20,9 @@ export class IndexPage extends Component {
     return (
       <section id={S.landing} className="Index">
       
+        <HeaderMeta />
+      
+    
         <div className={S.header}>
         
         </div>

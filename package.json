@@ -37,6 +37,8 @@
     "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.5.2",
     "react-helmet": "^5.2.0",
+    "react-paypal-express-checkout": "git+https://github.com/quangogage/react-paypal-express-checkout.git",
+    "react-validify": "^4.0.1",
     "rucksack-css": "^1.0.2",
     "typeface-alegreya-sans-sc": "0.0.54",
     "typeface-bellefair": "0.0.54",

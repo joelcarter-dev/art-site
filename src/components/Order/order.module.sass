@@ -26,7 +26,7 @@
     overflow: hidden
     
     background-color: #0B101B
-    padding: 30px
+    //padding: 30px
     
     display: grid
     grid-template-areas: "left right"
@@ -37,11 +37,13 @@
       grid-template-areas: "left" "right"
       grid-template-columns: 100%
       grid-template-rows: 65vh 100vh
-      overflow-y: scroll
+      //overflow-y: scroll
       padding: 0
+      body
+        overflow: hidden
     @media screen and (max-width: $s)
       size: 100%
-      overflow-Y: scroll
+      //overflow-Y: scroll
       .left
         position: fixed
         width: 100%
@@ -52,11 +54,15 @@
       // margin-top: -30%
       min-width: 100%
       background-color: #F0E3DE
+      overflow-y: scroll
+      
   .left
     grid-area: left
     //image overview 
     #Overview
       position: relative
+      height: 90%
+      margin: 30px
       * 
         color: $red-white
       h3
@@ -69,13 +75,22 @@
         span
           margin: 0 auto
           text-align: center
+      ul
+        padding: 0
+        padding-top: 30px
+        width: 90%
+        li
+          width: 100%
+          margin: 10px
+          display: flex
+          justify-content: space-between
       .itemImages
         max-width: 50vh
         margin: 0 auto
       .myInfo
         width: 100%
         position: absolute
-        top: 100%
+        bottom: 0
         p, span
           text-align: center
           width: 100%
@@ -83,13 +98,17 @@
           color: green
           display: block
           font-family: sans-serif
+          
   .right
     grid-area: right
     #paypalHolder
-        width: 150px
-        margin: 0 auto  
+      width: 300px
+      height: 60px
+      margin: 0 auto
+      div
+        padding-bottom: 60px
+        margin: 0 auto
     #close
-      float: right
       @extend %form-button-styles
       text-align: center
     #OrderForm
@@ -123,6 +142,8 @@
             box-shadow: none
           p
             font-size: 16px
+        hr
+          padding: 0 60px 0 60px
         #submit
           @extend %form-button-styles
           text-align: left
@@ -145,6 +166,7 @@
   font-size: 16px
   letter-spacing: 2px
   position: relative
+  float: right
   border: none
   &:before 
     content: ''

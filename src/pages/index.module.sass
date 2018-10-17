@@ -12,23 +12,13 @@ $headerHeight: 90vh
   background-position: top
   background-repeat: no-repeat
   
-body
-  overflow-x: hidden
-
 #landing
   background-color: white
-  height: 200vh
+  //height: 200vh
   min-width: 100vw
-  
-  // position: relative
-  // top: 50%
-  // left: 0
-  // right: 0
-  // bottom: 0
-  
+  overflow-y: scroll
   div
-    width: 100vw
-    min-height: 300px
+    width: 100%
     position: absolute
     left: 0
     right: 0
@@ -37,156 +27,66 @@ body
     height: 100vh
     width: 100%
     +bgImage("../img/testHero.jpg")
-    position: fixed 
+    +parallax(.08)
     top: 0
-    // +parallax(.10)
-    // top: 0
+
   .title
-    top: 60vh
-    +parallax(.2)
+    top: 40vh
+    +parallax(.1)
     text-align: center
+    h1
+      font-weight: 100
+      font-family: 'cinzel decorative', 'cinzel', serif
+      font-size: responsive
+      max-font-size: 100px
+      min-font-size: 30px
+      letter-spacing: 10px
+      font-weight: 100
     
   .mainLogo
-    top: 70vh
-    +parallax(.4)
+    top: 86vh
+    display: flex
+    +parallax(.2)
     svg
-      left: center
       margin: 0 auto
       
   .content
-    top: 70vh
-    +parallax(.1)
+    top: 94vh
+    z-index: 1000 !important
+    //padding-top: 130px
+    //+parallax(.1)
+    position: fixed
+    background-color: $red-black
     .tagLine
       position: relative
       width: 100%
       height: 100px
       width: 100%
       text-align: center
-      background-color: $red-black
+      top: center
       h2
         color: $red-white
         top: center
         left: center
+        font-family: 'cinzel decorative', 'cinzel', serif
+        font-size: responsive
+        max-font-size: 30px
+        min-font-size: 15px
+        letter-spacing: 10px
     .menu
       top: 100%
-      max-width: 24em
+      //width: max-content
+      //width: 100%
+      //width: 24em
+      width: 320px
       margin: 0 auto
+      margin-top: -0.5px
       
   .about
     z-index: 1
     width: 100%
     height: 100vh
-    position: fixed
+    //position: fixed
     top: 100%
     +bgImage("../img/DSC05916.jpg")
-
-// body
-//   background-color: white
-
-// $headerHeight: 90vh
-
-// #landing
-//   //
-//   height: 100vh
-//   overflow-x: hidden
-//   overflow-y: auto
-//   perspective: 2px
-//   .header
-//     // height: $headerHeight
-//     // min-height: 500px
-//     height: 500px
-//     width: 100%
-//     position: relative
-//     +bgImage("../img/testHero.jpg")
-    
-//     // position: fixed
-//     // top: 0
-//     position: relative
- 
-//   .content
-//     position: relative
-//     //margin-top: 50%
-//     //padding-top: 30%
-//     width: 100%
-//     height: 50% //TEMP
-//     display: grid
-//     grid-template-columns: 100vw
-//     grid-template-rows: 300px 100px 100px 30vh
-//     //overflow-x: hidden
-//     div
-//       grid-column: 1
-//       position: relative
-//     .mainLogo
-//       grid-row: 1
-//       width: 100%
-//       height: 100px
-//       z-index: 0
-//       //padding-top: 100%
-//       //padding-bottom: 100px
-//       svg
-//         left: center
-//         top: 227%
-//         margin: 0 auto
-//     .tagLine
-//       grid-row: 2
-//       // position: absolute
-//       // bottom: 0
-//       width: 100%
-//       height: 100px
-//       width: 100%
-//       text-align: center
-//       background-color: $red-black
-//       h2
-//         color: $red-white
-//         top: center
-//         left: center
-//     .menu
-//       left: center
-//       z-index: 2
-//       grid-row: 3
-    
-    // .about
-    //   z-index: 1
-    //   width: 100%
-    //   height: 100%
-    //   grid-row: 3 / span 4
-    //   +bgImage("../img/DSC05916.jpg")
-    
-    
-    
-  // .heroHolder
-  //   background-color: grey
-  //   display: block
-  //   width: 100%
-  //   height: 100vh
-  //   overflow: hidden
-  //   position: fixed
-  //   top: 0
-  //   z-index: -1
-  //   .logoSvg
-  //     width: calc(100% / 3)
-  //     min-width: 80px
-  //     margin: 0 auto
-  //     display: block
-  //     left: center
-  //     top: 30%
-  // #section2
-  //   height: 85vh
-  //   width: 100%
-  //   background-color: $main-black
-  //   margin-top: 100vh
-  //   position: relative
-  //   .indentedHolder
-  //     width: 100%
-  //     max-height: 300px
-  //     min-height: 200px
-  //     overflow: hidden
-  //     position: relative
-  //     top: -33%
-  //     .indentedSvg
-  //       max-height: 400px
-  //       min-height: 500px
-  //       height: 100%
-  //       min-width: calc(100% * 3)
-  //       left: center
-  //       top: calc(-50% + 30px)
+    +parallax(.04)

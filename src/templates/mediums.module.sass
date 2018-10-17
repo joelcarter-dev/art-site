@@ -1,7 +1,5 @@
-$xs: 24em // extra small
-$s: 35em  // small
-$m: 55em  // middle
-$l: 62em   // large
+
+@import "../pages/main.sass"
 
 @keyframes grow 
   from 
@@ -12,12 +10,15 @@ $l: 62em   // large
     width: 200px
 
 #Medium
-  size: 100%
+  width: 100%
+  height: 100vh
+  overflow-y: scroll
+  background-color: $red-black
   #mediumTitle
     font-size: responsive
     max-font-size: 50px
     min-font-size: 30px
-    color: white
+    color: $red-white
     font-family: 'cinzel decorative', 'cinzel', sans-serif
     text-transform: capitalize
     font-weight: 100
