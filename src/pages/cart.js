@@ -55,6 +55,8 @@ const CartHolder = (props) => (
   </div>  
 )
 
+
+let cartIds = []
 export default class CartPage extends Component {
   constructor(props) {
     super(props)
@@ -67,8 +69,12 @@ export default class CartPage extends Component {
     this.setState({orderFormHidden: !this.state.orderFormHidden})
   }
   
+
+  componentDidMount() {
+    cartIds = JSON.parse(localStorage.getItem('cartItems'))
+  }
   render() {
-    const cartIds = JSON.parse(localStorage.getItem('cartItems'))
+  
     const allItems = this.props.data.allMarkdownRemark.edges
     //console.log(allItems)
     let cartItems = []
