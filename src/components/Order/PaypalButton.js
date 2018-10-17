@@ -41,6 +41,7 @@ export class PayPalCheckout extends Component {
       return (
         <PaypalExpressBtn 
           client={client} 
+          env={env}
           currency={currency} 
           total={total} 
           onSuccess={onSuccess}
