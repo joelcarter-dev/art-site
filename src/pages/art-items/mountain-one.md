@@ -3,7 +3,7 @@ title: Mountain One
 about: This was my first mountain sketch that was any good
 artistNotes: >-
   The trick was deep shadows and strong forms. This goes for any watercolor
-  really, but for rocks this need to be emphasised.
+  really, but for rocks this need to be emphasized.
 price: '50'
 tags:
   - sketch
