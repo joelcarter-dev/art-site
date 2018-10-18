@@ -32,16 +32,16 @@ export class IndexPage extends Component {
         <div className={S.title}>
           <h1>{metaData.title}</h1>
         </div>
-        
-        <div className={S.mainLogo}>
-          <Logo />
-        </div>
-        
-        <div className={S.sidesHolder}>
-          <Sides />
-        </div>
-        
+          
         <div className={S.content}>
+        
+          <div className={S.mainLogo}>
+            <Logo />
+          </div>
+          
+          <div className={S.sidesHolder}>
+            <Sides />
+        </div>
                       
           <div className={S.tagLine}>
             <h2>{metaData.tagLine}</h2>    

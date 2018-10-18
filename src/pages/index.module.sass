@@ -32,7 +32,7 @@ $headerHeight: 90vh
     top: 0
 
   .title
-    top: 40vh
+    top: 30vh
     +parallax(.05)
     text-align: center
     z-index: 200
@@ -51,30 +51,6 @@ $headerHeight: 90vh
       h1
         font-weight: 400
         
-  .mainLogo
-    //top: 86vh
-    top: 73vh
-    z-index: 30
-    display: flex
-    //+parallax(.08)
-    z-index: 90000000
-    svg
-      margin: 0 auto
-      
-  .sidesHolder
-    width: 100%
-    position: fixed
-    top: 46vh
-    height: 200px
-    z-index: 30
-    grid-area: triHolder
-    z-index: 90000000
-    svg
-      width: 100%
-      min-width: 9000px
-      min-height: 300px
-      height: 500px
-      left: center
   .content
     top: 53vh
     z-index: 1000 !important
@@ -88,6 +64,38 @@ $headerHeight: 90vh
 
     grid-template-columns: 100vw
     grid-template-rows: 300px 100px 100px
+    $topPadding: 200px
+    .mainLogo
+      //top: 86vh
+      margin-top: $topPadding
+      //top: 602px
+      top: 20px
+      z-index: 30
+      display: flex
+      //+parallax(.08)
+      z-index: 90000000
+      svg
+        margin: 0 auto
+        padding-left: 5px
+        
+    .sidesHolder
+      margin-top: $topPadding
+      width: 100%
+      //position: fixed
+      position: absolute
+      //top: 300px
+      top: -499px
+      height: 200px
+      z-index: 30
+      grid-area: triHolder
+      +parallax(.0)
+      z-index: 90000000
+      svg
+        width: 100%
+        min-width: 9000px
+        min-height: 300px
+        height: 500px
+        left: center
     .tagLine
       grid-area: tagLine
       position: relative
@@ -116,6 +124,8 @@ $headerHeight: 90vh
       width: 320px
       margin: 0 auto
       margin-top: -101px
+      *
+        color: $red-white !important
       
   .about
     z-index: 1
@@ -125,5 +135,129 @@ $headerHeight: 90vh
     //overflow-x: hidden
     top: 90%
     +bgImage("../img/DSC05916.jpg")
-    +parallax(.05)
+    +parallax(.06)
     z-index: 990
+    
+    
+    
+    
+    
+    
+// #landing
+//   background-color: white
+//   height: 100vh
+//   min-width: 100vw
+//   //overflow-y: scroll
+//   //overflow-x: hidden
+//   div
+//     width: 100%
+//     position: absolute
+//     left: 0
+//     right: 0
+    
+//   .header
+//     height: 100vh
+//     width: 100%
+//     +bgImage("../img/testHero.jpg")
+//     +parallax(.08)
+//     top: 0
+
+//   .title
+//     top: 40vh
+//     +parallax(.05)
+//     text-align: center
+//     z-index: 200
+//     h1
+//       font-weight: 100
+//       font-family: 'cinzel decorative', 'cinzel', serif
+//       font-size: responsive
+//       max-font-size: 100px
+//       min-font-size: 60px
+//       letter-spacing: 10px
+//       font-weight: 100
+//     @media screen and (max-width: $m) 
+//       h1
+//         font-weight: 300
+//     @media screen and (max-width: $s) 
+//       h1
+//         font-weight: 400
+        
+//   .mainLogo
+//     //top: 86vh
+//     top: 74vh
+//     z-index: 30
+//     display: flex
+//     //+parallax(.08)
+//     z-index: 90000000
+//     svg
+//       margin: 0 auto
+//       padding-left: 5px
+      
+//   .sidesHolder
+//     width: 100%
+//     position: fixed
+//     top: 46vh
+//     height: 200px
+//     z-index: 30
+//     grid-area: triHolder
+//     z-index: 90000000
+//     svg
+//       width: 100%
+//       min-width: 9000px
+//       min-height: 300px
+//       height: 500px
+//       left: center
+//   .content
+//     top: 53vh
+//     z-index: 1000 !important
+//     padding-top: 20vh
+//     +parallax(.0)
+//     overflow: hidden
+    
+//     position: fixed
+//     display: grid
+//     grid-template-areas: "triHolder" "tagLine" "menu"
+
+//     grid-template-columns: 100vw
+//     grid-template-rows: 300px 100px 100px
+//     .tagLine
+//       grid-area: tagLine
+//       position: relative
+//       width: 100%
+//       height: 100px
+//       width: 100%
+//       text-align: center
+//       top: center
+//       top: -50px
+//       background-color: $red-black
+//       h2
+//         color: $red-white
+//         //top: center
+//         //left: center
+//         font-family: 'cinzel decorative', 'cinzel', serif
+//         font-size: responsive
+//         max-font-size: 30px
+//         min-font-size: 15px
+//         letter-spacing: 10px
+//     .menu
+//       grid-area: menu
+//       top: 0
+//       //width: max-content
+//       //width: 100%
+//       //width: 24em
+//       width: 320px
+//       margin: 0 auto
+//       margin-top: -101px
+//       *
+//         color: $red-white !important
+      
+//   .about
+//     z-index: 1
+//     width: 100%
+//     height: 100vh
+//     //position: fixed
+//     //overflow-x: hidden
+//     top: 90%
+//     +bgImage("../img/DSC05916.jpg")
+//     +parallax(.06)
+//     z-index: 990
