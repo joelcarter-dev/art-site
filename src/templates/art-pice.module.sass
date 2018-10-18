@@ -36,9 +36,11 @@ body
     color: $red-white
     text-align: center
     font-weight: 100
+    line-height: 0px
     //font-family: 'cinzel decorative', sans-serif
     font-family: 'cinzel', sans-serif
-    grid-area: title
+    //grid-area: title
+    grid-column: 1 / span 3
     text-transform: capitalize
     font-size: responsive
     max-font-size: 30px
@@ -190,7 +192,7 @@ body
     
   @media screen and (max-width: 100em)
     grid-template-columns: minmax(200px, 300px) 3fr
-    .imageHolder, #title
+    .imageHolder
       grid-column: 2 / span 3
   
   @media screen and (max-width: $m) 
