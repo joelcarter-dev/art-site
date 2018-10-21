@@ -20,7 +20,8 @@ $parallax-ios         : true !default;
     }
   }
   #{$element}{
-    overflow: auto !important;
+    //overflow: auto !important;
+    overflow-y: auto !important;
     perspective: $perspective * 1px;
     transform-style: preserve-3d;
     // Allows for smooth scrolling but disables parallax effects.

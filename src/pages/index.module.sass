@@ -4,7 +4,10 @@
 
 @include parallax-init
 
-$headerHeight: 90vh
+//speeds
+$about: .13
+$title: .01
+$header: .15
 
 =bgImage($url)
   background-image: url($url)
@@ -28,12 +31,12 @@ $headerHeight: 90vh
     height: 100vh
     width: 100%
     +bgImage("../img/testHero.jpg")
-    +parallax(.08)
+    +parallax($header)
     top: 0
 
   .title
     top: 30vh
-    +parallax(.02)
+    +parallax($title)
     text-align: center
     z-index: 200
     h1
@@ -136,14 +139,27 @@ $headerHeight: 90vh
     //overflow-x: hidden
     top: 90%
     +bgImage("../img/DSC05916.jpg")
-    +parallax(.06)
+    //+parallax(.06)
+    +parallax($about)
     z-index: 990
     
     
-    
-    
-    
-    
+  
+  
+// @import "./main.sass"
+
+// @import "./mixins.module.scss"
+
+// @include parallax-init
+
+// $headerHeight: 90vh
+
+// =bgImage($url)
+//   background-image: url($url)
+//   background-size: cover
+//   background-position: top
+//   background-repeat: no-repeat
+  
 // #landing
 //   background-color: white
 //   height: 100vh
@@ -164,8 +180,8 @@ $headerHeight: 90vh
 //     top: 0
 
 //   .title
-//     top: 40vh
-//     +parallax(.05)
+//     top: 30vh
+//     +parallax(.02)
 //     text-align: center
 //     z-index: 200
 //     h1
@@ -183,31 +199,6 @@ $headerHeight: 90vh
 //       h1
 //         font-weight: 400
         
-//   .mainLogo
-//     //top: 86vh
-//     top: 74vh
-//     z-index: 30
-//     display: flex
-//     //+parallax(.08)
-//     z-index: 90000000
-//     svg
-//       margin: 0 auto
-//       padding-left: 5px
-      
-//   .sidesHolder
-//     width: 100%
-//     position: fixed
-//     top: 46vh
-//     height: 200px
-//     z-index: 30
-//     grid-area: triHolder
-//     z-index: 90000000
-//     svg
-//       width: 100%
-//       min-width: 9000px
-//       min-height: 300px
-//       height: 500px
-//       left: center
 //   .content
 //     top: 53vh
 //     z-index: 1000 !important
@@ -221,6 +212,39 @@ $headerHeight: 90vh
 
 //     grid-template-columns: 100vw
 //     grid-template-rows: 300px 100px 100px
+//     $topPadding: 200px
+//     .mainLogo
+//       //top: 86vh
+//       //margin-top: $topPadding
+//       margin-top: 19vh
+//       //top: 602px
+//       top: 20px
+//       z-index: 30
+//       display: flex
+//       //+parallax(.08)
+//       z-index: 90000000
+//       svg
+//         margin: 0 auto
+//         padding-left: 5px
+        
+//     .sidesHolder
+//       margin-top: $topPadding
+//       width: 100%
+//       //position: fixed
+//       position: absolute
+//       //top: 300px
+//       top: -499px
+//       height: 200px
+//       z-index: 30
+//       grid-area: triHolder
+//       +parallax(.0)
+//       z-index: 90000000
+//       svg
+//         width: 100%
+//         min-width: 9000px
+//         min-height: 300px
+//         height: 500px
+//         left: center
 //     .tagLine
 //       grid-area: tagLine
 //       position: relative
@@ -235,7 +259,7 @@ $headerHeight: 90vh
 //         color: $red-white
 //         //top: center
 //         //left: center
-//         font-family: 'cinzel decorative', 'cinzel', serif
+//         font-family:  'cinzel', serif
 //         font-size: responsive
 //         max-font-size: 30px
 //         min-font-size: 15px
