@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { graphql } from 'gatsby'
-import propTypes from 'prop-types'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Logo from '../img/logo.svg'
@@ -30,12 +29,14 @@ export class IndexPage extends Component {
         <div className={S.title}>
           <h1>{metaData.title}</h1>
         </div>
+        
+        <div className={S.mainLogo}>
+          <Logo />
+        </div>
           
         <div className={S.content}>
         
-          <div className={S.mainLogo}>
-            <Logo />
-          </div>
+          
           
           <div className={S.sidesHolder}>
             <Sides />
