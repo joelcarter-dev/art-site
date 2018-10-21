@@ -6,7 +6,7 @@ const short = require(`postcss-short`)
 
 module.exports = {
   siteMetadata: {
-    title: 'Elaron Arts',
+    title: 'Elloron Arts',
     siteUrl: `https://elaron.art/`,
     tagLine: 'Here we deal in the Wonderfull '
   },
