@@ -7,7 +7,7 @@ const short = require(`postcss-short`)
 module.exports = {
   siteMetadata: {
     title: 'Elloron Arts',
-    siteUrl: `https://elaron.art/`,
+    siteUrl: `https://elloron.art/`,
     tagLine: 'Here we deal in the Wonderfull '
   },
   plugins: [
@@ -36,7 +36,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-100204166-3",
+        trackingId: "UA-100204166-5",
         // Puts tracking script in the head instead of the body
         head: true,
         // Setting this parameter is optional
