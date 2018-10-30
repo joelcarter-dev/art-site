@@ -146,7 +146,7 @@ export default class Order extends Component {
     }
     
     const CLIENT = {
-      sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2Ozr',
+      sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2OzrCRwGnR8CFAUvfP9RZE31h_',
       production: '',
     }
 
