@@ -146,8 +146,8 @@ export default class Order extends Component {
     }
     
     const CLIENT = {
-      sandbox: '',
-      production: 'AbF0XQYdlh-Nv-VASaK8vfvBwXHKb51bt47QuLhppvjZccGhDD6kXgVUsaDvm0fzffkokwl_5bwIzAJH',
+      sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2Ozr',
+      production: '',
     }
 
     // const ENV = process.env.NODE_ENV === 'production'
