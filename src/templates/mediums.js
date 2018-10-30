@@ -30,14 +30,14 @@ class mediumsRoute extends Component {
     //there is no type passed to types only tag through context
     const type = this.props.pageContext.type
     
-    const totalCount = this.props.data.allMarkdownRemark.totalCount
+    //const totalCount = this.props.data.allMarkdownRemark.totalCount not used
     
     return (
       <section id={S.Medium}>
       
         <HeaderMeta pageTitle={type} itemGroup={allTitles}/>
         
-        <h1 id id={S.mediumTitle}>{type}</h1>
+        <h1 id={S.mediumTitle}>{type}</h1>
         <div className={S.imageGrid}>
           {postLinks}
         </div>

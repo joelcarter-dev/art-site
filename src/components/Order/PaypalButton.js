@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-// import paypal from 'paypal-checkout'
+
 import PaypalExpressBtn from 'react-paypal-express-checkout'
 
 export class PayPalCheckout extends Component {
@@ -10,7 +9,7 @@ export class PayPalCheckout extends Component {
       total,
       currency,
       env,
-      commit,
+      //commit, not used. what does it do?
       client,
       onSuccess,
       onError,

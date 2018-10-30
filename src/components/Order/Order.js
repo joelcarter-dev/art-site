@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Img from 'gatsby-image'
 import S from './order.module.sass'
 
 import PayPalCheckout from './PaypalButton.js'
