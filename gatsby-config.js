@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: [
   
-    `gatsby-plugin-sitemap`,
+    'gatsby-plugin-sitemap',
     'gatsby-plugin-robots-txt',
     
     //'gatsby-plugin-sass',
@@ -78,9 +78,9 @@ module.exports = {
         plugins: [
         
            // go before gatsby-remark-images
-          {
-            resolve: `gatsby-remark-relative-images`,
-          },
+          
+          'gatsby-remark-relative-images', //change
+          
           {
             resolve: `gatsby-remark-images`,
             options: {
