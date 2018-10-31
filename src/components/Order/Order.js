@@ -31,7 +31,7 @@ class OrderForm extends Component {
   handleSubmit = (event) => {
     this.props.sendData(this.state)
 
-    event.preventDefault()
+    //event.preventDefault()
   }
   
   onSelectFlag = (country) => {
