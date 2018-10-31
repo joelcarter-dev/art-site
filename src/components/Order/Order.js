@@ -43,8 +43,8 @@ class OrderForm extends Component {
     return (
       <section id={S.OrderForm}>
       
-        <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-          <input type="hidden" name="bot-field" value="contact" /> 
+        <form action="#" id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+          <input type="hidden" name="bot-field" value="contact" />
           <input type="hidden" name="orderForm" value="contact" />
 
           {this.state.orderData.map( i => {
