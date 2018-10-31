@@ -9,14 +9,6 @@ class OrderForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      ph: '',
-      address_line_one: '',
-      address_line_two: '',
-      city: '',
-      state_region: '',
-      zip: '',
       country: 'NZ',
       orderData: this.props.orderData,
     }
@@ -28,24 +20,42 @@ class OrderForm extends Component {
 
 
   //should display some feedback to the user on sbmit and make sure all feileds are vallidated
-  handleSubmit = (event) => {
+  handleSubmit = (e) => {
     this.props.sendData(this.state)
 
     //event.preventDefault()
+    e.preventDefault();
+    const form = e.target;
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...this.state
+      })
+    })
+      .then(() => alert("working, it seems"))
+      .catch(error => alert(error));
+
   }
   
   onSelectFlag = (country) => {
     this.setState({country: country})
   }
   
+  encode = (data) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+  
   render() {
-    //console.log("forms order data", this.state.orderData)
     return (
       <section id={S.OrderForm}>
       
         <form action="#" id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-          <input type="hidden" name="bot-field" value="contact" />
-          <input type="hidden" name="orderForm" value="contact" />
+          <input type="hidden" name="bot-field" value="contact"  onChange={this.handleChange} />
+          <input type="hidden" name="form-name" value="contact" />
 
           {this.state.orderData.map( i => {
             return <input  type="hidden" name="orderData" form="orderForm" id={S.orderData} value={`
@@ -61,19 +71,19 @@ class OrderForm extends Component {
 
             <input placeholder="Your Email Address" type="email" tabIndex="2" value={this.state.email} onChange={this.handleChange} name="email" required /> 
             
-            <input placeholder="PH xxxx-xxx-xxxx" type="tel" pattern="^\d{4}-\d{3}-\d{4}$" value={this.state.ph} onChange={this.handleChange} name="ph" tabIndex="3"/>
+            <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph} onChange={this.handleChange} name="ph" tabIndex="3"/>
             
             <hr/>
             
-            <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one}   onChange={this.handleChange} name="address_line_one" required /> 
+            <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one} onChange={this.handleChange} name="address_line_one" required /> 
             
-            <input placeholder="Address Line Two" type="adress-line-two" tabIndex="5" value={this.state.address_line_two}   onChange={this.handleChange} name="address_line_two" /> 
+            <input placeholder="Address Line Two" type="adress-line-two" tabIndex="5" value={this.state.address_line_two} onChange={this.handleChange} name="address_line_two" /> 
           
             <input placeholder="City" type="city" value={this.state.city} tabIndex="6"  onChange={this.handleChange} name="city" required /> 
             
-            <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region}   onChange={this.handleChange} name="state_region" /> 
+            <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region} onChange={this.handleChange} name="state_region" /> 
 
-            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{5}" tabIndex="8" value={this.state.zip}   onChange={this.handleChange} name="zip" required/>
+            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{5}" tabIndex="8" value={this.state.zip} onChange={this.handleChange} name="zip" required/>
          
             <button type="submit" id={S.submit} >Submit</button>
        
