@@ -68,12 +68,6 @@ class OrderForm extends Component {
             
             <input placeholder="Address Line Two" type="adress-line-two" tabIndex="5" value={this.state.address_line_two}   onChange={this.handleChange} name="address_line_two" /> 
           
-            <ReactFlagsSelect
-              defaultCountry="NZ"
-              className={S.dropdown}
-              onSelect={this.onSelectFlag}
-            />
-          
             <input placeholder="City" type="city" value={this.state.city} tabIndex="6"  onChange={this.handleChange} name="city" required /> 
             
             <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region}   onChange={this.handleChange} name="state_region" /> 
@@ -82,7 +76,7 @@ class OrderForm extends Component {
             
             <div data-netlify-recaptcha></div>
          
-            <button id={S.submit} >Submit</button>
+            <button name="submit" type="submit" id={S.submit} >Submit</button>
        
             <p>Details will be used to ship the items to you.</p>
         </form>
