@@ -5,6 +5,13 @@ import 'react-flags-select/scss/react-flags-select.scss'
 
 import PayPalCheckout from './PaypalButton.js'
 
+
+function encode(data) {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+}
+
 class OrderForm extends Component {
   constructor(props) {
     super(props);
@@ -16,12 +23,6 @@ class OrderForm extends Component {
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
-  }
-
-  encode = (data) => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
   }
 
   //should display some feedback to the user on sbmit and make sure all feileds are vallidated
