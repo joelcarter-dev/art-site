@@ -18,6 +18,11 @@ class OrderForm extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  encode = (data) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
 
   //should display some feedback to the user on sbmit and make sure all feileds are vallidated
   handleSubmit = (e) => {
@@ -41,12 +46,6 @@ class OrderForm extends Component {
   
   onSelectFlag = (country) => {
     this.setState({country: country})
-  }
-  
-  encode = (data) => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
   }
   
   render() {
