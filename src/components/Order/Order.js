@@ -43,14 +43,9 @@ class OrderForm extends Component {
     return (
       <section id={S.OrderForm}>
       
-        <form id="orderForm" action="" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+        <form id="orderForm" action="" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" /> 
-          
-          {/*
-            <textarea  type="hidden" name="order data" form="orderForm" value={this.state.orderData.frontmatter.title} id={S.orderData}></textarea>
-            <textarea  type="hidden" name="order data" form="orderForm" value={this.state.orderData.frontmatter.price} id={S.orderData}></textarea>
-          */}
-          
+
           {this.state.orderData.map( i => {
             return <input  type="hidden" name="orderData" form="orderForm" id={S.orderData} value={`
               Name: ${i.frontmatter.title} 
@@ -87,7 +82,7 @@ class OrderForm extends Component {
             
             <div data-netlify-recaptcha></div>
          
-            <button name="submit" type="submit" id={S.submit} data-submit="...Sending">Submit</button>
+            <button name="submit" type="submit" id={S.submit} >Submit</button>
        
             <p>Details will be used to ship the items to you.</p>
         </form>
@@ -322,129 +317,3 @@ export default class Order extends Component {
         //   }
         // }],
         
-//         import React, { Component } from 'react'
-// import ReactDOM from 'react-dom'
-// //import paypal from 'paypal-checkout'
-
-// export class PayPalCheckout extends Component {
-//   render() {
-
-//     const {
-//       total,
-//       currency,
-//       env,
-//       commit,
-//       client,
-//       onSuccess,
-//       onError,
-//       onCancel,
-      
-//       orderData,
-//       formData,
-      
-//     } = this.props
-    
-//     delete formData.orderData
-    
-//     //handle form not bing filled on paypal useage
-    
-//     let item = {}
-//     console.log(formData, orderData)
-//     if (orderData.length === 1) {
-//       item = {
-//         name: orderData[0].frontmatter.title,
-//         description: orderData[0].frontmatter.about,
-//         quantity: '1',
-//         price: orderData[0].frontmatter.price,
-//         // tax: '0.01',
-//         // sku: '1',
-//         currency: currency
-//       }
-     
-//       //console.log(item, orderData[0])
-//     }
-    
-   
-//    let shipping_address = {
-//       recipient_name: 'test',
-//       line1: 'test',
-//       line2: 'test',
-//       city: 'test',
-//       country_code: 'NZ',
-//       postal_code: '1234',
-//       phone: `+64 089 7778`,
-//       state: `test`,
-//     }
-    
-//     const payment = () => {
-//       paypal.rest.payment.create(env, client, {
-//         transactions: [
-//           {
-//             amount: {
-//               total,
-//               currency,
-//             }
-//           },
-//         ],
-//       })
-//     }
-//     //console.log("payment data ", payment)
-//     console.log(paypal)
-    
-
-//     const onAuthorize = (data, actions) => {
-//       actions.payment.execute()
-//         .then(() => {
-//           const payment = {
-//             paid: true,
-//             cancelled: false,
-//             payerID: data.payerID,
-//             paymentID: data.paymentID,
-//             paymentToken: data.paymentToken,
-//             returnUrl: data.returnUrl,
-//           }
-//           console.log(data)
-
-//           onSuccess(payment)
-//         })
-//     }
-
-//     if (typeof window !== 'undefined' && window ) {
-      
-//       const PaypalButton = paypal.Button.driver('react', {React, ReactDOM})
-    
-//       return (
-//         <div>
-//           {<PaypalButton
-//             env={env}
-//             client={client}
-//             commit={commit}
-//             // payment={payment}
-//             payment={(data, actions) => this.payment(data, actions)}
-//             onAuthorize={onAuthorize}
-//             onCancel={onCancel}
-//             onError={onError}
-//             funding={{
-//               allowed: [
-//                 paypal.FUNDING.CARD,
-//                 paypal.FUNDING.CREDIT,
-//               ],
-//               disallowed: []
-//             }}
-//             style={{
-//               layout: 'vertical',  // horizontal | vertical
-//               size:   'responsive',    // medium | large | responsive
-//               shape:  'rect',      // pill | rect
-//               color:  'gold'       // gold | blue | silver | white | black
-//             }}
-//           />}
-//         </div>
-//       )   
-//     } else {
-//       return <div>Error loading paypal</div>  
-//     }
-    
-//   }
-// }
-// export default PayPalCheckout
-
