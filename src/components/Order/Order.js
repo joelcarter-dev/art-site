@@ -16,8 +16,9 @@ class OrderForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      country: 'NZ',
+      country: "NZ",
       orderData: this.props.orderData,
+      submitMsg: "Details will be used to ship the items to you.",
     }
   }
 
@@ -40,8 +41,8 @@ class OrderForm extends Component {
         ...this.state
       })
     })
-      .then(() => alert("working, it seems"))
-      .catch(error => alert(error));
+      .then(() => this.setState({submitMsg: "Thank you! Your items are on there way, hope you enjoy."}))
+      .catch(error => this.setState({submitMsg: `Something went wrong: ${error}`}));
 
   }
   
@@ -53,12 +54,12 @@ class OrderForm extends Component {
     return (
       <section id={S.OrderForm}>
       
-        <form action="#" id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+        <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact"  onChange={this.handleChange} />
           <input type="hidden" name="form-name" value="contact" />
 
           {this.state.orderData.map( i => {
-            return <input  type="hidden" name="orderData" form="orderForm" id={S.orderData} value={`
+            return <input key={i} type="hidden" name="orderData" form="orderForm" id={S.orderData} value={`
               Name: ${i.frontmatter.title} 
               Price: ${i.frontmatter.price}
               Slug: ${i.fields.slug}  
@@ -78,6 +79,13 @@ class OrderForm extends Component {
             <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one} onChange={this.handleChange} name="address_line_one" required /> 
             
             <input placeholder="Address Line Two" type="adress-line-two" tabIndex="5" value={this.state.address_line_two} onChange={this.handleChange} name="address_line_two" /> 
+            
+            <ReactFlagsSelect
+              defaultCountry="NZ"
+              //placeholder="Select Country"
+              onSelect={this.onSelectFlag}
+              className={S.dropdown}
+            />
           
             <input placeholder="City" type="city" value={this.state.city} tabIndex="6"  onChange={this.handleChange} name="city" required /> 
             
@@ -87,7 +95,7 @@ class OrderForm extends Component {
          
             <button type="submit" id={S.submit} >Submit</button>
        
-            <p>Details will be used to ship the items to you.</p>
+            <p>{this.state.submitMsg}</p>
         </form>
       </section>
     )
@@ -211,112 +219,3 @@ export default class Order extends Component {
     )
   }
 }
-
-    // let shipping_address = {
-    //   recipient_name: formData.name,
-    //   line1: formData.address_line_one,
-    //   line2: formData.address_line_two,
-    //   city: formData.city,
-    //   country_code: formData.country,
-    //   postal_code: formData.zip,
-    //   phone: formData.ph,
-    //   state: formData.state_region,
-    // }
-   
-       // payment = (data, actions) => {
-    //   return actions.payment.create({
-    //       transactions: [
-    //         {
-    //           amount: { 
-    //             total: total, 
-    //             currency: currency, 
-    //           }
-    //         }
-    //       ]
-    //   });
-    // }
-    
-    //console.table(this.props.orderData)
-    // const payment = () => {
-      
-    //   return paypal.rest.payment.create(env, client, {
-    //     transactions: [{
-    //       amount: {
-    //         total: total,
-    //         currency: currency,
-
-    //       },
-
-    //       item_list: {
-    //         items: [
-    //         //needs to come from orderData. Can do a one off for now but it needs to
-    //         // support multable objects from cart items
-    //           item,
-
-    //         ],
-            
-    //         //data comes from order form
-    //         shipping_address,
-    //       }
-    //     }],
-    //     note_to_payer: 'Contact me for any questions on your order.'
-    //   })
-    // }
-        
-        
-        
-         // transactions: [{
- //          amount: {
- //            total: total,
- //            currency: currency,
- //            // ??
- //            // details: {
- //            //   subtotal: '30.00',
- //            //   tax: '0.07',
- //            //   shipping: '0.03',
- //            //   handling_fee: '1.00',
- //            //   shipping_discount: '-1.00',
- //            //   insurance: '0.01'
- //            // }
- //          },
- //          // ??
- //          // description: 'The payment transaction description.',
- //          // custom: '90048630024435',
- //          // //invoice_number: '12345', Insert a unique invoice number
- //          // payment_options: {
- //          //   allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
- //          // },
-          
- //          //??
-          //soft_descriptor: 'ECHI5786786',
-        //   item_list: {
-        //     items: [
-        //     //needs to come from orderData. Can do a one off for now but it needs to
-        //     // support multable objects from cart items
-        //       {
-        //         name: orderData.name,
-        //         description: orderData.about,
-        //         quantity: '1',
-        //         price: orderData.price,
-        //         // tax: '0.01',
-        //         // sku: '1',
-        //         currency: currency
-        //       },
-
-        //     ],
-            
-        //     //data comes from order form
-            
-        //     // shipping_address: {
-        //       recipient_name: 'Brian Robinson',
-        //       line1: '4th Floor',
-        //       line2: 'Unit #34',
-        //       city: 'San Jose',
-        //       country_code: 'US',
-        //       postal_code: '95131',
-        //       phone: '011862212345678',
-        //       state: 'CA'
-        //     // }
-        //   }
-        // }],
-        

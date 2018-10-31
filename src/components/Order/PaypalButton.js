@@ -24,6 +24,8 @@ export class PayPalCheckout extends Component {
     
     //handle form not bing filled on paypal useage
     
+    //I hve data to pass shipping info to paypal side. But how?
+    
     let items = []
     orderData.forEach( i => {
       items.push({
