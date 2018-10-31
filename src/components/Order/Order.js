@@ -82,7 +82,7 @@ class OrderForm extends Component {
             
             <div data-netlify-recaptcha></div>
          
-            <button name="submit" type="submit" id={S.submit} >Submit</button>
+            <button id={S.submit} >Submit</button>
        
             <p>Details will be used to ship the items to you.</p>
         </form>
