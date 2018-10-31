@@ -73,8 +73,6 @@ class OrderForm extends Component {
             <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region}   onChange={this.handleChange} name="state_region" /> 
 
             <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{5}" tabIndex="8" value={this.state.zip}   onChange={this.handleChange} name="zip" required/>
-            
-            <div data-netlify-recaptcha></div>
          
             <button type="submit" id={S.submit} >Submit</button>
        
