@@ -43,7 +43,7 @@ class OrderForm extends Component {
     return (
       <section id={S.OrderForm}>
       
-        <form id="orderForm" action="" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+        <form id="orderForm" action="/no-cache=1" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" /> 
 
           {this.state.orderData.map( i => {
@@ -76,7 +76,7 @@ class OrderForm extends Component {
             
             <div data-netlify-recaptcha></div>
          
-            <button name="submit" type="submit" id={S.submit} >Submit</button>
+            <button type="submit" id={S.submit} >Submit</button>
        
             <p>Details will be used to ship the items to you.</p>
         </form>
