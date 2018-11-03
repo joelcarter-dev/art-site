@@ -22,6 +22,8 @@ export class PayPalCheckout extends Component {
     
     delete formData.orderData
     
+    const country = formData.country.value
+    
     //handle form not bing filled on paypal useage
     
     //I hve data to pass shipping info to paypal side. But how?
