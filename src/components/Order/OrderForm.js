@@ -48,7 +48,6 @@ export default class OrderForm extends Component {
   }
   
   onSelectCountry = (country) => {
-    console.log(country)
     this.setState({country: country})
   }
   
@@ -80,6 +79,7 @@ export default class OrderForm extends Component {
               name={this.state.country.lable}
               onChange={this.onSelectCountry}
               placeholder="Search Country"
+              className={S.dropdown}
             />
           
             <input placeholder="City" type="city" value={this.state.city} tabIndex="6"  onChange={this.handleChange} name="city" required /> 

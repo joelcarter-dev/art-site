@@ -38,7 +38,6 @@ export class PayPalCheckout extends Component {
         currency: currency,
       })
     })
-    console.log(orderData)
     
     if (typeof window !== 'undefined' && window ) {
       return (
