@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import HeaderMeta from '../components/Helmet/Helmet.js'
+import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -36,6 +37,12 @@ class mediumsRoute extends Component {
       <section id={S.Medium}>
       
         <HeaderMeta pageTitle={type} itemGroup={allTitles}/>
+        
+        <div className={S.headerHolder}>        
+          <div className={S.header}>
+            <Header to={["home", "cart"]} white={true} />
+          </div>
+        </div>
         
         <h1 id={S.mediumTitle}>{type}</h1>
         <div className={S.imageGrid}>

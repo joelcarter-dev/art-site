@@ -4,6 +4,7 @@ import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import S from './tags.module.sass'
+import Header from '../components/Header/Header.js'
 
 class TagRoute extends Component {
   render() {
@@ -46,8 +47,14 @@ class TagRoute extends Component {
       <section id={S.Tags}>
       
         <HeaderMeta pageTitle={tag} itemGroup={allTitles}/>
+        
+        <div className={S.headerHolder}>        
+          <div className={S.header}>
+            <Header to={["home", "cart"]} white={true} />
+          </div>
+        </div>
 
-        <h1 id={S.title}>Art in the {tag} category</h1>
+        <h1 id={S.title}>In the <b>{tag}</b> category</h1>
         
         <div className={S.tagHolder}>
             
