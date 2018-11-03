@@ -63,7 +63,7 @@ $mainLogo: .03
     z-index: 3
     svg
       margin: 0 auto
-      padding-left: 5px
+      padding-left: 10px
         
   .content
     top: 53vh
@@ -119,6 +119,11 @@ $mainLogo: .03
       margin-top: -101px
       *
         font-size: 35px !important
+      .left, .right
+        svg g path
+          stroke: $red-white !important
+      a
+        color: $red-white !important
 
   .about
     width: 100%
