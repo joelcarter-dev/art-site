@@ -53,12 +53,13 @@ module.exports = {
     
     'gatsby-plugin-react-helmet',
     
-    { 
-      resolve: 'gatsby-plugin-react-svg',
-      options: {
-          include: /img/
-      }
-    },
+    // the way this loads svgs does not work with what I'm using to animate them. Using an inline svg comp
+    // { 
+    //   resolve: 'gatsby-plugin-react-svg',
+    //   options: {
+    //       include: /img/
+    //   }
+    // },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

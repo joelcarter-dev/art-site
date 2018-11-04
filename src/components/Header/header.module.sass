@@ -17,8 +17,9 @@ $black: #0B101B
       .link
         color: $red-black
     .mainLogo
-      svg g path, svg g rect
-        fill: $red-black !important
+      i
+        svg g path, svg g rect
+          fill: $red-black !important
   #white
     .left, .right
       svg g path
@@ -27,52 +28,51 @@ $black: #0B101B
       .link
         color: $red-white
     .mainLogo
-      svg g path, svg g rect
-        fill: $white !important
+      i
+        svg g path, svg g rect
+          fill: $white !important
         
   .logoHolder
     height: 100px
     //display: flex
-    display: grid
+    //display: grid
     //grid-template-areas: "left" "mid" "right"
+    display: flex
+    justify-content: center
 
     grid-template-columns: 1fr 1fr 1fr
     grid-template-rows: 100px
     .mainLogo
-      //grid-area: mid
+      grid-area: mid
     .left, .right
       display: flex
       justify-content: center
       align-items: center
       //width: 150px
+      svg
+        display: block
 
       .link
         display: block
     .left
       //padding-left: 30px
-      //grid-area: left
-      svg
+      grid-area: left
+      #svgLeft
         position: absolute
         top: 5px
         right: -50px
       .link
-        position: absolute
-        left: -30px
-        float: left
+        margin: 0 auto
     .right
       //padding-right: 30px
-      //grid-area: right
-      svg
+      grid-area: right
+      #svgRight
         position: absolute
         top: 5px
         left: -50px
         transform: rotateY(180deg)
       .link
-        position: absolute
-        left: 30px
-        float: right
-        // left: 50%
-        //right: 50%
+        margin: 0 auto
     .left, .right, .mainLogo
       position: relative
     .left, .right

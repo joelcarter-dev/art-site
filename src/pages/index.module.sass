@@ -61,7 +61,8 @@ $mainLogo: .03
     display: flex
     +parallax($mainLogo)
     z-index: 3
-    svg
+    i
+      display: block
       margin: 0 auto
       padding-left: 10px
         
@@ -87,12 +88,13 @@ $mainLogo: .03
       height: 200px
       grid-area: triHolder
       z-index: 5
-      svg
-        width: 100%
-        min-width: 9000px
-        min-height: 300px
-        height: 500px
-        left: center
+      i
+        svg
+          width: 100%
+          min-width: 9000px
+          min-height: 300px
+          height: 500px
+          left: center
     .tagLine
       grid-area: tagLine
       position: relative
@@ -117,6 +119,7 @@ $mainLogo: .03
       width: 320px
       margin: 0 auto
       margin-top: -101px
+      //position: absolute
       *
         font-size: 35px !important
       .left, .right
@@ -124,6 +127,7 @@ $mainLogo: .03
           stroke: $red-white !important
       a
         color: $red-white !important
+        opacity: 1 !important
 
   .about
     width: 100%
