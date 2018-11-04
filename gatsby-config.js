@@ -15,9 +15,6 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-robots-txt',
     
-    `gatsby-plugin-feed`,
-
-    
     //'gatsby-plugin-sass',
     
     {
