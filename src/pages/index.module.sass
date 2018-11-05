@@ -58,14 +58,20 @@ $mainLogo: .03
     margin-top: 19vh
     top: 55vh
     //top: 560px
-    display: flex
+    //display: flex
+    position: absolute
+    left: 0
+    right: 0
     +parallax($mainLogo)
     z-index: 3
     i
-      padding-left: 15px
+      max-width: 450px
+      min-width: 300px
       display: block
       margin: 0 auto
-      
+      //padding: 15px
+      @media screen and ($m)
+        padding-left: 0
 
         
   .content

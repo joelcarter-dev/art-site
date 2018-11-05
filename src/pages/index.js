@@ -15,7 +15,7 @@ import './mixins.module.scss'
 export class IndexPage extends Component {
   render() {
     
-  const mainLogoSvg = `<svg width="350px" viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const mainLogoSvg = `<svg viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="Art-Shop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Tablet-Portrait" transform="translate(-312.000000, -139.000000)" fill="#121011">
             <g id="Group" transform="translate(309.000000, -3.000000)">
