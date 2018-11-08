@@ -47,9 +47,9 @@ const Header = (props) => (
   <section id={S.Header} className={props.id}>
     <div className={S.logoHolder} id={props.white ? S.white : S.black}>
     
-      <div className={S.left} id="global-left">
+      <div className={S.left}>
         <ReactVivus
-          id={S.svgLeft}
+          id={props.isIndexPage ? S.svgLeftAtIndex : S.svgLeft }
           option={{
             file: LogoSides,
             animTimingFunction: 'EASE_OUT',
