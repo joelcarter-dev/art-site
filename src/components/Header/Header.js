@@ -47,7 +47,7 @@ const Header = (props) => (
   <section id={S.Header} className={props.id}>
     <div className={S.logoHolder} id={props.white ? S.white : S.black}>
     
-      <div className={S.left}>
+      <div className={S.left} id="global-left">
         <ReactVivus
           id={S.svgLeft}
           option={{
