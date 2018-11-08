@@ -17,6 +17,8 @@ $black: #0B101B
         stroke: $red-black !important
       .link
         color: $red-black
+        &:before
+          border-bottom: 2px solid $red-black
     .mainLogo
       i
         svg g path, svg g rect
@@ -27,6 +29,8 @@ $black: #0B101B
         stroke: $white !important
       .link
         color: $red-white
+        &:before
+          border-bottom: 2px solid $red-white 
     .mainLogo
       i
         svg g path, svg g rect
@@ -63,6 +67,9 @@ $black: #0B101B
         right: -50px
       .link
         margin: 0 auto
+        text-align: right
+        &:before
+          float: right
     .right
       //padding-right: 30px
       grid-area: right
@@ -73,6 +80,7 @@ $black: #0B101B
         transform: rotateY(180deg)
       .link
         margin: 0 auto
+        text-align: left
     .left, .right, .mainLogo
       position: relative
     .left, .right
@@ -84,7 +92,7 @@ $black: #0B101B
         font-size: 25px
         text-decoration: none
         line-height: 120px
-        text-align: center
+        @extend %Underline
     @media screen and (max-width: $s)
       .left
         .link
@@ -92,4 +100,21 @@ $black: #0B101B
       .right
         .link
           left: 0
-          
+        
+
+%Underline
+  @keyframes grow
+    from 
+      width: 20%
+    to 
+      width: 50%
+  &:before 
+    content: ''
+    display: block
+    width: 30%
+    position: relative
+    top: 85px
+    border: none
+    //border-bottom: 2px solid $red-white
+    animation: grow 1s forwards
+    transition: all 1s linear 
