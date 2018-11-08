@@ -117,9 +117,13 @@ $mainLogo: .03
       top: 0
       width: 300px
       //width: 100%
-      //margin: 0 auto
       margin-top: -101px
       left: calc(50% - 165px)
+      @media screen and (max-width: $s) 
+        margin: 0 auto
+        margin-top: -101px
+        left: 0 !important
+        right: 0
       //padding-right: 20px
       //left: center
       //position: absolute
