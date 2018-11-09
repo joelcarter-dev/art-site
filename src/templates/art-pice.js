@@ -78,7 +78,7 @@ class Sidebar extends Component {
   }
 }
 
-export default class ArtPice extends Component {
+class ArtPice extends Component {
   constructor(props) {
     super(props)
     this.state = { 
@@ -133,8 +133,7 @@ export default class ArtPice extends Component {
         <div className={S.left}>
           <Sidebar data={itemData} itemId={itemId} toggleForm={this.toggleForm}/>
         </div>
-        
-        <div className={S.overlay}></div>
+      
         <div 
           className={S.imageHolder} 
           style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}>
@@ -151,3 +150,5 @@ export default class ArtPice extends Component {
     )
   }
 }
+
+export default ArtPice
