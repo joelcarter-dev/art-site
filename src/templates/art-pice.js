@@ -137,11 +137,15 @@ class ArtPice extends Component {
         <div 
           className={S.imageHolder} 
           style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}>
+         
           <Img
             fluid={itemData.featuredImage.childImageSharp.fluid} 
             alt={`${itemData.type} ${itemData.original ? "original work" : "print"} ${itemData.title}`}
             className={S.innerImage}
+            src=""
+            critical={true}
           />
+         
         </div>
         
         <div className={S.right}></div>
