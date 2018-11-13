@@ -55,6 +55,9 @@ body
   .imageHolder
     grid-area: main
     position: relative
+    padding: 0
+    @media screen and (max-width: 100em)
+      padding: 60px
     padding-top: 3vw
     width: 100%
     height: auto
@@ -86,10 +89,11 @@ body
     grid-template-columns: minmax(200px, 300px) 3fr
     .imageHolder
       grid-column: 2 / span 3
-      
+    
   @media screen and (max-width: $s)
     .imageHolder
       width: 100%
+      padding: 0
   
   @media screen and (max-width: $m) 
     grid-template-areas: "top" "bottom"
@@ -97,19 +101,17 @@ body
     grid-template-rows: auto auto
     #title
       margin-top: 130px
+    .artPiceHeader
+      padding-right: 13px
     .artPiceHeader, #title
       grid-area: top
       grid-column: -2
       position: fixed
       left: center
     .imageHolder
-      //max-width: max-content
-      //max-width: 50em
-      //padding-top: 30vw
-      //margin-left: 50%
-      padding-top: 65px
-      padding-bottom: 60px
-      // left: center
+      padding: 65px 0 0 0
+      // padding-top: 65px
+      // padding-bottom: 60px
       margin: 0 auto
       grid-area: top
       grid-column: -2
@@ -118,7 +120,7 @@ body
         top: center
     .left
       z-index: 2
-      background-color: #0B101B
+      background-color: $main-black
       grid-area: bottom
       height: 600px
       #Sidebar
@@ -157,6 +159,7 @@ body
       width: 100%
       height: 60px
       display: flex
+      justify-content: space-evenly
       margin-bottom: 30px
       .selected
         opacity: 1
@@ -172,6 +175,7 @@ body
           transition: all 1s linear 
       span
         width: 50%
+        max-width: 150px
         height: 43px
         color: $red-white
         font-size: 20px
@@ -235,7 +239,7 @@ body
           from 
             width: 20px
           to 
-            width: 100px
+            width: 50px
         &:before 
           content: ''
           display: block

@@ -82,16 +82,7 @@ export const pageQuery = graphql`
       ) {
           fieldValue
           totalCount 
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
-            }
-          }
+          
         }
       
       tags: group(
@@ -99,16 +90,7 @@ export const pageQuery = graphql`
       ) {
           fieldValue
           totalCount 
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
-            }
-          }
+       
         }
 
     }
@@ -130,7 +112,7 @@ export const pageQuery = graphql`
             storeHighlight
             featuredImage {
               childImageSharp {
-                fixed(width: 320, height: 230, cropFocus: CENTER) {
+                fixed(width: 320, height: 320, cropFocus: CENTER) {
                   src
                   width
                   base64
