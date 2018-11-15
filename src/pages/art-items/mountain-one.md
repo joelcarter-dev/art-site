@@ -9,7 +9,7 @@ tags:
   - sketch
 info: 60x120 cm in size. Keeop out of sun
 original: true
-storeHighlight: false
+storeHighlight: true
 date: 2018-10-07T05:30:20.573Z
 templateKey: art-pice
 type:
