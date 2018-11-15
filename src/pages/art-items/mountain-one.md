@@ -4,7 +4,7 @@ about: This was my first mountain sketch that was any good
 artistNotes: >-
   The trick was deep shadows and strong forms. This goes for any watercolor
   really, but for rocks this need to be emphasized.
-price: '50'
+price: '1'
 tags:
   - sketch
 info: 60x120 cm in size. Keeop out of sun
