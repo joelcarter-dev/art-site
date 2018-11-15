@@ -77,8 +77,8 @@ export default class Order extends Component {
     }
     
     const CLIENT = {
-      sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2OzrCRwGnR8CFAUvfP9RZE31h_',
-      production: '',
+      sandbox: '',
+      production: 'AT2N80Uan4dARyrWcKyBvj44TNxp2mfrCRlAFPjvpA9-J6TMpMeOgPGK_fb0GkQa9jziuv8Y_uiVzKc3',
     }
 
     // const ENV = process.env.NODE_ENV === 'production'
@@ -86,7 +86,7 @@ export default class Order extends Component {
     //   : 'sandbox'
     
     //will throw error as there is no sandbox key. But I don't want any orders right now
-    const ENV = 'sandbox'
+    const ENV = 'production'
 
     return (
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
