@@ -18,23 +18,24 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
-      details: this.setOrderDetails(),
+      item_title: this.props.orderData[0].frontmatter.title,
+      item_url: this.props.orderData[0].fields.slug,
       submitMsg: "Details will be used to ship the items to you.",
     }
     //this.setOrderDetails()
   }
   
-  setOrderDetails = () => {
-    var mapped = this.props.orderData.map(i => ( {"title": i.frontmatter.title, "url": i.fields.slug} ))
-    var details = Object.assign({}, ...mapped )
-    console.log(details )
-    return details
+  // setOrderDetails = () => {
+  //   var mapped = this.props.orderData.map(i => ( {"title": i.frontmatter.title, "url": i.fields.slug} ))
+  //   var details = Object.assign({}, ...mapped )
+  //   console.log(details )
+  //   return details
 
-  }
+  // }
   
   // setOrderDetails = () => {
   //   this.props.orderData.map(i => { this.setState({"title": i.frontmatter.title, "url": i.fields.slug}) })
-  //   console.log()
+  //   console.log(this.state)
   // }
 
   handleChange = (event) => {
@@ -73,11 +74,9 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
  
-          <input name="title" type="hidden" value={this.state.details.title} />
-          <input name="url" type="hidden" value={this.state.details.url} />
+          <input name="title" type="hidden" value={this.state.item_title} />
+          <input name="url" type="hidden" value={this.state.item_url} />
 
-          
-          
           <p>Order Form</p>
         
             <input placeholder="Your name" type="text" tabIndex="1" value={this.state.name ? this.state.name : ""} onChange={this.handleChange} name="name" required autoFocus />
