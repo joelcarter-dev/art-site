@@ -18,10 +18,11 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
-      item_title: this.props.orderData[1].frontmatter.title,
-      item_url: this.props.orderData[1].fields.slug,
+      item_title: this.props.orderData[0].frontmatter.title,
+      item_url: this.props.orderData[0].fields.slug,
       submitMsg: "Details will be used to ship the items to you.",
     }
+    console.log(this.props)
     //this.setOrderDetails()
   }
   
