@@ -55,6 +55,7 @@
     "typeface-hind": "0.0.54",
     "typeface-italianno": "0.0.54",
     "typeface-sorts-mill-goudy": "0.0.54",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "uuid": "^3.3.2",
     "vivus": "^0.4.4"
   },
