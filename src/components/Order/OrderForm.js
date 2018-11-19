@@ -18,9 +18,10 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
-      orderDetails: this.setOrderDetails(),
+      details: this.setOrderDetails(),
       submitMsg: "Details will be used to ship the items to you.",
     }
+    //this.setOrderDetails()
   }
   
   setOrderDetails = () => {
@@ -30,6 +31,11 @@ export default class OrderForm extends Component {
     return details
 
   }
+  
+  // setOrderDetails = () => {
+  //   this.props.orderData.map(i => { this.setState({"title": i.frontmatter.title, "url": i.fields.slug}) })
+  //   console.log()
+  // }
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
@@ -42,14 +48,14 @@ export default class OrderForm extends Component {
 
     e.preventDefault();
     const form = e.target;
-    
-    const orderDetails = {}
-    
+        
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
+        "title": this.state.details.title,
+        "url": this.state.details.url,
         ...this.state
       })
     })
