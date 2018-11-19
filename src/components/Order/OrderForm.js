@@ -18,8 +18,8 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
-      item_title: this.props.orderData[0].frontmatter.title,
-      item_url: this.props.orderData[0].fields.slug,
+      item_title: this.props.orderData[1].frontmatter.title,
+      item_url: this.props.orderData[1].fields.slug,
       submitMsg: "Details will be used to ship the items to you.",
     }
     //this.setOrderDetails()
@@ -93,7 +93,7 @@ export default class OrderForm extends Component {
             
              <Select
               options={countryList().getData()}
-              value={this.state.country.lable}
+              value={this.state.country.value}
               name={this.state.country.lable}
               onChange={this.onSelectCountry}
               placeholder="Search Country"
