@@ -54,8 +54,6 @@ export default class OrderForm extends Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        "title": this.state.details.title,
-        "url": this.state.details.url,
         ...this.state
       })
     })
@@ -74,6 +72,13 @@ export default class OrderForm extends Component {
       
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
+          {this.props.orderData.map((i, idx) => (
+            <div key={idx}>
+              <input name="title" type="hidden" value={i.frontmatter.title} />
+              <input name="url" type="hidden" value={i.fields.slug} />
+            </div>
+          ))}
+          
           
           <p>Order Form</p>
         
