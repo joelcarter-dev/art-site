@@ -22,7 +22,6 @@ export default class OrderForm extends Component {
       // item_url: this.props.orderData[0].fields.slug,
       submitMsg: "Details will be used to ship the items to you.",
     }
-    this.setOrderDetails()
   }
   
   // setOrderDetails = () => {
@@ -33,11 +32,20 @@ export default class OrderForm extends Component {
 
   // }
   
-  setOrderDetails = () => {
-    this.props.orderData.map(i => { this.setState({"title": i.frontmatter.title, "url": i.fields.slug}) })
-    console.log(this.state)
-  }
-
+ // componentDidMount() {
+ //    console.log(this.props)
+ //    const title = i.frontmatter.title
+ //    const slug = i.fields.slug
+ //    this.props.orderData.map(i => { 
+ //      this.setState({
+ //        "title": i.frontmatter.title, 
+ //        "url": i.fields.slug
+ //      }) 
+ //      //console.log(i.fields.slug) 
+ //    })
+ //  }
+    
+    
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
   }
@@ -49,12 +57,15 @@ export default class OrderForm extends Component {
 
     e.preventDefault();
     const form = e.target;
+    
+    
         
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
+        "test-item": this.props.orderData[0].frontmatter.title,
         ...this.state
       })
     })
@@ -74,8 +85,8 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
  
-          <input name="title" type="hidden" value={this.state.title} />
-          <input name="url" type="hidden" value={this.state.url} />
+          <input name="title" type="hidden" value={this.state.title || ""} />
+          <input name="url" type="hidden" value={this.state.url || ""} />
 
           <p>Order Form</p>
         

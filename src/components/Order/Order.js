@@ -63,6 +63,8 @@ export default class Order extends Component {
     })
     //console.log("item info ", itemInfo)
     //console.log("orderData ",this.props.orderData)
+    
+    
     const onSuccess = (payment) => {
       console.log('Successful payment', payment)
       this.setState({msg: "Payment Successful. Your item(s) are on there way"})
