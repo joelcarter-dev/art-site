@@ -72,12 +72,10 @@ export default class OrderForm extends Component {
       
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
-          {this.props.orderData.map((i, idx) => (
-            <div key={idx}>
-              <input name="title" type="hidden" value={i.frontmatter.title} />
-              <input name="url" type="hidden" value={i.fields.slug} />
-            </div>
-          ))}
+ 
+          <input name="title" type="hidden" value={this.state.details.title} />
+          <input name="url" type="hidden" value={this.state.details.url} />
+
           
           
           <p>Order Form</p>
