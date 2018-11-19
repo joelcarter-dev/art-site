@@ -5,7 +5,7 @@ import S from './header.module.sass'
 import ReactVivus from 'react-vivus'
 import InlineSVG from 'svg-inline-react'
 
-//takes a props that is an array of two "to" strings
+//takes a prop that is an array of two "to" strings
 // these make up the two menu items
 //takes a white prop that is true of false
 
@@ -17,20 +17,6 @@ const MenuItem = (props) => (
     {props.to === "/" ? "home" : props.to}
   </Link>  
 )
-
-// const side = <ReactVivus
-//           option={{
-//             file: LogoSides,
-//             animTimingFunction: 'EASE_OUT',
-//             type: 'delayed',
-//             duration: 400,
-//             onReady: console.log
-//           }}
-//           style={{width: "268px", height: "57px" }}
-//           callback={console.log}
-//         />
-
-//console.log(LogoSides)
 
 const logoSvg = `
 <svg width="147px" height="73px" viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -58,7 +44,7 @@ const Header = (props) => (
             forceRender: true,
           }}
           style={{width: "268px", height: "57px" }}
-          callback={console.log}
+          //callback={}
         />
         <MenuItem to={props.to[0]} />
       </div>
@@ -78,7 +64,7 @@ const Header = (props) => (
             forceRender: true,
           }}
           style={{width: "268px", height: "57px" }}
-          callback={console.log}
+          //callback={}
         />
         <MenuItem to={props.to[1]} />
       </div>
