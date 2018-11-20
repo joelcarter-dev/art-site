@@ -18,41 +18,16 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
-      // item_title: this.props.orderData[0].frontmatter.title,
-      // item_url: this.props.orderData[0].fields.slug,
-      item_two: "bla bla",
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
   
-  // setOrderDetails = () => {
-  //   var mapped = this.props.orderData.map(i => ( {"title": i.frontmatter.title, "url": i.fields.slug} ))
-  //   var details = Object.assign({}, ...mapped )
-  //   console.log(details )
-  //   return details
-
-  // }
-  
- // componentDidMount() {
- //    console.log(this.props)
- //    const title = i.frontmatter.title
- //    const slug = i.fields.slug
- //    this.props.orderData.map(i => { 
- //      this.setState({
- //        "title": i.frontmatter.title, 
- //        "url": i.fields.slug
- //      }) 
- //      //console.log(i.fields.slug) 
- //    })
- //  }
- 
- componentDidMount() {
-    this.setState({
-      title: this.props.orderData[0].frontmatter.title,
-      url: this.props.orderData[0].fields.slug
-    })
-    console.log(this.state)
- }
+   componentDidMount() {
+      this.setState({
+        title: this.props.orderData[0].frontmatter.title,
+        url: this.props.orderData[0].fields.slug
+      })
+   }
     
     
   handleChange = (event) => {
@@ -67,14 +42,11 @@ export default class OrderForm extends Component {
     e.preventDefault();
     const form = e.target;
     
-    
-        
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        "test_item": this.props.orderData[0].frontmatter.title,
         ...this.state
       })
     })
@@ -94,8 +66,8 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
  
-          <input readOnly name="title" value={this.state.title || ""} />
-          <input readOnly name="url" value={this.state.url || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.title || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
 
           <p>Order Form</p>
         
