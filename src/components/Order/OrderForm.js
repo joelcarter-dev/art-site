@@ -44,6 +44,11 @@ export default class OrderForm extends Component {
  //      //console.log(i.fields.slug) 
  //    })
  //  }
+ 
+ componentDidMount() {
+    this.setState({test_item: this.props.orderData[0].frontmatter.title})
+    console.log(this.state)
+ }
     
     
   handleChange = (event) => {
@@ -65,7 +70,7 @@ export default class OrderForm extends Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        "test-item": this.props.orderData[0].frontmatter.title,
+        "test_item": this.props.orderData[0].frontmatter.title,
         ...this.state
       })
     })
