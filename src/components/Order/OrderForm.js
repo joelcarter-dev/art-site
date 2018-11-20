@@ -20,6 +20,7 @@ export default class OrderForm extends Component {
       },
       // item_title: this.props.orderData[0].frontmatter.title,
       // item_url: this.props.orderData[0].fields.slug,
+      item_two: "bla bla"
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
