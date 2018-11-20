@@ -47,7 +47,10 @@ export default class OrderForm extends Component {
  //  }
  
  componentDidMount() {
-    this.setState({title: this.props.orderData[0].frontmatter.title})
+    this.setState({
+      title: this.props.orderData[0].frontmatter.title,
+      url: this.props.orderData[0].fields.slug
+    })
     console.log(this.state)
  }
     
