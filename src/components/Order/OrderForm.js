@@ -20,7 +20,7 @@ export default class OrderForm extends Component {
       },
       // item_title: this.props.orderData[0].frontmatter.title,
       // item_url: this.props.orderData[0].fields.slug,
-      item_two: "bla bla"
+      item_two: "bla bla",
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
@@ -47,7 +47,7 @@ export default class OrderForm extends Component {
  //  }
  
  componentDidMount() {
-    this.setState({test_item: this.props.orderData[0].frontmatter.title})
+    this.setState({title: this.props.orderData[0].frontmatter.title})
     console.log(this.state)
  }
     
@@ -91,8 +91,8 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="contact" />
  
-          <input name="title" type="hidden" value={this.state.title || ""} />
-          <input name="url" type="hidden" value={this.state.url || ""} />
+          <input readOnly name="title" value={this.state.title || ""} />
+          <input readOnly name="url" value={this.state.url || ""} />
 
           <p>Order Form</p>
         
