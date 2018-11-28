@@ -29,17 +29,21 @@ $l: 62em   // largez
     margin: 0 auto
   .listHolder
     width: 100%
+    min-height: 80vh
     display: flex
     justify-content: center
-    margin-bottom: 150px
+    //margin-bottom: 150px
     @media screen and (max-width: $s) 
       display: block
+      .itemList
+        margin-bottom: 60px
     .itemList
       min-width: 320px
       max-width: 400px
       min-height: 200px
       position: relative
       padding: 30px
+      margin-top: 30px
       span
         float: left
         font-weight: 300
@@ -59,6 +63,7 @@ $l: 62em   // largez
         width: 200px
         height: min-content
         li
+          padding: 5px
           a
             text-decoration: none
   #selectedHolder
@@ -103,6 +108,8 @@ $l: 62em   // largez
           padding-bottom: 20px
           font-family: 'cinzel'
           text-transform: uppercase
+          max-width: max-content
+          margin-left: 2em
           //font-family: 'alegreya sans sc'
           @keyframes grow
             from 
@@ -116,6 +123,6 @@ $l: 62em   // largez
             position: absolute 
             bottom: 4px
             border: none
-            border-bottom: 1px solid $red-white
+            border-bottom: 2px solid $red-white
             animation: grow 1s forwards
             transition: all 1s linear 
