@@ -11,7 +11,7 @@ storeHighlight: true
 date: '2018-06-25T15:34:51+12:00'
 templateKey: art-pice
 type:
-  - Watercolor
+  - watercolor
 featuredImage: ../img/DSC06288.jpg
 ---
 
