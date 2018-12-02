@@ -15,15 +15,21 @@ import S from './art-pice.module.sass'
 const Info = (props) => (
   <div className={S.infoHolder}>
     <div className={S.priceHolder}>
-      <div className={S.price}>
-        <h3>${props.data.price}</h3>
-        <span>NZD</span>
-      </div>
+      {props.data.price === "sold" || props.data.price === "SOLD" ?
+        <div className={S.price}>
+          <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",}}>{props.data.price}</h3> 
+        </div> 
+        :
+        <div className={S.price}>
+          <h3>${props.data.price}</h3>
+          <span>NZD</span>    
+        </div> 
+      }
     </div>
     <ul className={S.dataList}>
       <li>{props.data.original ? "original work" : "print"}</li>
       <li>{props.data.type}</li>
-      <li>{props.data.info}</li>
+      <li style={{textTransform: "none",}}>{props.data.info}</li>
     </ul>
     
     <div className={S.buttonHolder}>
