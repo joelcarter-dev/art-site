@@ -6,7 +6,7 @@ about: >-
   bursting from within.
 artistNotes: >-
   Inspired by a god ray I saw one morning. Storm is the result of a combination
-  of focus on techniques for clouds and light.
+  of techniques for clouds and light.
 price: '60'
 tags:
   - atmospheric
