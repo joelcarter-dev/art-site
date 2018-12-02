@@ -1,12 +1,14 @@
 ---
 title: rising phoenix
 about: >-
-  A depiction of the mythological creature representing rebirth. We are ever
-  changing, and so must let old parts of ourselves die.
+  A depiction of the mythological creature representing rebirth. We are
+  ever-changing, and so must let old parts of ourselves die.
 artistNotes: >-
-  A depiction of the mythological creature representing rebirth. We are ever
-  changing, and so must let old parts of ourselves die.
-price: '500'
+  This piece took the entire day. The family table was utterly covered in art
+  supplies of which few were actually used. Isn't it amazing; how a mythological
+  creature can represent such important parts of us. They are so old. They
+  should not be forgotten. 
+price: '100'
 tags:
   - symbolistic
   - dramatic
