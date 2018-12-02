@@ -12,7 +12,7 @@ price: '100'
 tags:
   - symbolistic
   - dramatic
-info: info info very informative
+info: '290 x 390 mm, frame not included '
 original: true
 storeHighlight: true
 date: 2018-09-09T04:30:07.754Z
