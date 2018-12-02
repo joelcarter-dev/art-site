@@ -6,7 +6,8 @@ about: >-
 artistNotes: I want to do more of these but bigger. Munch bigger.
 price: sold
 tags:
-  - sketch mountains
+  - sketch
+  - mountains
 info: 60x120 cm in size
 original: true
 storeHighlight: false
