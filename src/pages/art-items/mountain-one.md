@@ -7,6 +7,7 @@ artistNotes: >-
 price: '1'
 tags:
   - sketch
+  - mountains
 info: 60x120 cm in size. Keeop out of sun
 original: true
 storeHighlight: true
