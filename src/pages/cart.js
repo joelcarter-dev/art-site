@@ -6,6 +6,10 @@ import Link from 'gatsby-link'
 import Header from '../components/Header/Header.js'
 import Order from '../components/Order/Order.js'
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
+
 const ItemList = (props) => {   
   return (
     <div className={S.cartItems}>

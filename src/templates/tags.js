@@ -6,6 +6,10 @@ import Img from 'gatsby-image'
 import S from './tags.module.sass'
 import Header from '../components/Header/Header.js'
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
+
 class TagRoute extends Component {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges

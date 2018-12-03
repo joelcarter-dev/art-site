@@ -9,6 +9,10 @@ import Order from '../components/Order/Order.js'
 import Img from 'gatsby-image'
 import S from './art-pice.module.sass'
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
+
 //trying to pass art item data through context in node.js instead of 
 //another graphql query. It is in the pageContext prop
 

@@ -10,6 +10,9 @@ import S from './store.module.sass'
 
 //group all links under their tag and type
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
 
 const ItemList = (props) => (
   <div className={S.itemList}>

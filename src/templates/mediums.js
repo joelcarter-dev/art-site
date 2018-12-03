@@ -6,6 +6,10 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import S from './mediums.module.sass'
 
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
+
 //IS IT WATERCOLOR WITH A "U" IN NZ?
 
 class mediumsRoute extends Component {
