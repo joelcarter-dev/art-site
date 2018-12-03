@@ -116,12 +116,7 @@ export const pageQuery = graphql`
             featuredImage {
               childImageSharp {
                 fixed(width: 320, height: 320, cropFocus: CENTER) {
-                  src
-                  width
-                  base64
-                  height
-                  srcSet
-                  aspectRatio
+                  ...GatsbyImageSharpFixed_withWebp_noBase64 
                 }
               }
             }
