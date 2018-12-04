@@ -50,7 +50,7 @@ export default class OrderForm extends Component {
         ...this.state
       })
     })
-      .then(() => this.setState({submitMsg: "Thank you! Your items are on there way, I hope you enjoy."}))
+      .then(() => this.setState({submitMsg: "Thank you! Please fill out the shipping form to have the artwork shipped to you."}))
       .catch(error => this.setState({submitMsg: `Something went wrong: ${error}`}));
 
   }
