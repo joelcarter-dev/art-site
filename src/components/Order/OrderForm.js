@@ -77,6 +77,7 @@ export default class OrderForm extends Component {
             
             <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph ? this.state.ph : ""} onChange={this.handleChange} name="ph" tabIndex="3"/>
             
+            {/*
             <hr/>
             
             <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one ? this.state.address_line_one : ""} onChange={this.handleChange} name="address_line_one" required /> 
@@ -97,11 +98,17 @@ export default class OrderForm extends Component {
             <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region ? this.state.state_region : ""} onChange={this.handleChange} name="state_region" /> 
 
             <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{4}" tabIndex="8" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
-         
-            <button type="submit" id={S.submit} >Submit</button>
+            
+            */}
+            
+            <div id={S.submitHolder}>
+              <button type="submit" id={S.submit} >Submit</button>
+            </div>
        
             <p>{this.state.submitMsg}</p>
         </form>
+        
+        
       </section>
     )
   }
