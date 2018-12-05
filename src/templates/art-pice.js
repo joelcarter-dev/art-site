@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 
 import Header from '../components/Header/Header.js'
-
+import Link from 'gatsby-link'
 import AddToCart from '../components/Cart/AddToCart.js'
 import Order from '../components/Order/Order.js'
+import { arrowSvg } from '../img/svg-index.js'
+import InlineSVG from 'svg-inline-react'
 
 import Img from 'gatsby-image'
 import S from './art-pice.module.sass'
+
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -137,6 +140,10 @@ class ArtPice extends Component {
         <div className={S.artPiceHeader}>
           <Header to={["home", "cart"]} white={true} />
         </div>
+        
+        <Link to = "/store"  className={S.storeLink} >
+          <InlineSVG src={arrowSvg} />
+        </Link>  
         
         <h1 id={S.title}>{itemData.title}</h1>
         
