@@ -6,6 +6,8 @@ import { kebabCase } from 'lodash'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Header from '../components/Header/Header.js'
 import S from './store.module.sass'
+import InlineSVG from 'svg-inline-react'
+import { sidesSvg } from '../img/svg-index.js'
 //get all tags and display five items under that tag. Clicking on the tag shows all items
 
 //group all links under their tag and type
@@ -35,6 +37,9 @@ const ItemList = (props) => (
 
 const Selected = (props) => (
   <div id={S.selectedHolder}>
+    <div className={S.angleSvgHolder}> 
+      <InlineSVG src={sidesSvg} />
+    </div>
     <h2 id={S.selectedTitle}>Personally Selected</h2>
     <div className={S.items}>
       {props.data
