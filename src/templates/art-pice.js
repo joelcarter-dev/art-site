@@ -39,7 +39,7 @@ const Info = (props) => (
       <li style={{textTransform: "none",}}>{props.data.info}</li>
     </ul>
     
-    {props.data.price === "sold" || props.data.price === "SOLD" ?
+    {props.data.price !== "sold" || props.data.price !== "SOLD" ?
       <div className={S.buttonHolder}>
         <button 
           onClick={props.toggleForm}
@@ -50,6 +50,8 @@ const Info = (props) => (
 
         <AddToCart itemData={props.itemId} className={S.artItemButton}/>
       </div>  
+      :
+      <div> </div>
     }
   </div>
 )
