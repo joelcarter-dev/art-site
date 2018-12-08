@@ -39,16 +39,18 @@ const Info = (props) => (
       <li style={{textTransform: "none",}}>{props.data.info}</li>
     </ul>
     
-    <div className={S.buttonHolder}>
-      <button 
-        onClick={props.toggleForm}
-        className={S.artItemButton}
-      >
-        Order Now
-      </button> 
+    {props.data.price === "sold" || props.data.price === "SOLD" ?
+      <div className={S.buttonHolder}>
+        <button 
+          onClick={props.toggleForm}
+          className={S.artItemButton}
+        >
+          Place Order
+        </button> 
 
-      <AddToCart itemData={props.itemId} className={S.artItemButton}/>
-    </div>  
+        <AddToCart itemData={props.itemId} className={S.artItemButton}/>
+      </div>  
+    }
   </div>
 )
 
