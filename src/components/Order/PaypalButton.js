@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import PaypalExpressBtn from 'react-paypal-express-checkout'
+//import PaypalExpressBtn from 'react-paypal-express-checkout'
 
 export class PayPalCheckout extends Component {
   render() {
@@ -41,6 +41,7 @@ export class PayPalCheckout extends Component {
     
     if (typeof window !== 'undefined' && window ) {
       return (
+        {/*
         <PaypalExpressBtn 
           client={client} 
           env={env}
@@ -61,7 +62,7 @@ export class PayPalCheckout extends Component {
           items={items}
           
         />
-        
+        */}
       )
     }
   }
