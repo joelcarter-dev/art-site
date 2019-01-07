@@ -66,7 +66,7 @@ export default class Store extends Component {
         <HeaderMeta pageTitle="Store"/>
         
         <div className={S.menu}>
-          <Header to={["home", "cart"]} white={false}/>
+          <Header to={["home", "index"]} white={false}/>
         </div>
       
         <div className={S.listHolder}>

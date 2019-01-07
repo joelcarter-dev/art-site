@@ -50,7 +50,7 @@ export class IndexPage extends Component {
           </div>
           
           <div className={S.menu}>
-            <Header to={['store', 'cart']} white={false} isIndexPage={true}/>
+            <Header to={['store', 'index']} white={false} isIndexPage={true}/>
           </div>
           
         </div>

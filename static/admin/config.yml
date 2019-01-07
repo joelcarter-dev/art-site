@@ -4,6 +4,8 @@ backend:
 
 media_folder: src/pages/img
 
+display_url: https://elloron.art/store
+
 collections:
   - name: "item"
     label: "Art Items"
@@ -21,16 +23,16 @@ collections:
       - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "art-pice"}
-
+      
       - label: "Type"
         name: "type" 
         widget: "list" 
-        required: false
+        ##required: false
         feild:  
           - label: "Type Name" 
             name: "typeName" 
             widget: "string" 
-            required: false
+            ##required: false
 
       - label: "Featured Image"
         name: "featuredImage"
@@ -38,3 +40,51 @@ collections:
         customMediaPath: "../img/"
         rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
       
+      ##things to make item part of the arcive
+      ## this separate normal store art posts from arcive posts that could just be text. In that case this must be false
+      ## If the arcive item is also going to show in the store, then this must be true.
+      
+      ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa 
+      - {label: "IsArciveItem", name: "isarciveitem", widget: "boolean", default: true}
+      
+      - lable: "Arcive Topic" 
+        name: "arcivetopic" 
+        widget: "list"
+        fields: 
+          ## List of arcive topics
+          - {label: Maps, name: maps, widget: string, default: "Maps"}
+          - {label: Peoples, name: peoples, widget: string, default: "Peoples"}
+          - {label: Locations, name: locations, widget: string, default: "Locations"}
+          - {label: Creatures, name: creatures, widget: string, default: "Creatures"}
+          - {label: History, name: history, widget: string, default: "History"}
+      
+  # - name: "archive-item"
+  #   label: "World Archive Items"
+  #   folder: "src/pages/art-items"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - {label: "Title", name: "title", widget: "string"}
+  #     - {label: "Tags", name: "tags", widget: "list"}
+  #     - {label: "Info", name: "info", widget: "string", required: false}
+  #     - {label: "IsStoreItem", name: "original", widget: "boolean", default: true}
+  #     - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
+  #     - {label: "Publish Date", name: "date", widget: "datetime"}
+  #     - {label: "Template Key", name: "templateKey", widget: "hidden", default: "art-pice"}
+  #     - {label: "Is Archive", name: "is-archive", widget: "hidden", default: true}
+
+  #     - label: "Type"
+  #       name: "type" 
+  #       widget: "list" 
+  #       required: false
+  #       feild:  
+  #         - label: "Type Name" 
+  #           name: "typeName" 
+  #           widget: "string" 
+  #           required: false
+
+  #     - label: "Featured Image"
+  #       name: "featuredImage"
+  #       widget: "custompathimage"
+  #       customMediaPath: "../img/"
+  #       rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"

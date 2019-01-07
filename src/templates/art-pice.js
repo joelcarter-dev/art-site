@@ -129,6 +129,7 @@ class ArtPice extends Component {
   }
   
   render() {
+        
     const itemData = this.props.pageContext.node.frontmatter
     const itemId = this.props.pageContext.id
     
@@ -144,7 +145,7 @@ class ArtPice extends Component {
         />
         
         <div className={S.artPiceHeader}>
-          <Header to={["home", "cart"]} white={true} />
+          <Header to={["home", "index"]} white={true} />
         </div>
         
         <Link to = "/store"  className={S.storeLink} >

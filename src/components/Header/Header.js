@@ -9,14 +9,16 @@ import InlineSVG from 'svg-inline-react'
 // these make up the two menu items
 //takes a white prop that is true of false
 
-const MenuItem = (props) => (
-  <Link to={props.to === "home" ? "/" :`/${props.to}`} 
-    key={props.to} 
-    className={S.link}
-    >
-    {props.to === "/" ? "home" : props.to}
-  </Link>  
-)
+const MenuItem = (props) => {
+  if (props.to === "home") { 
+    return <Link to={"/"} key={props.to} className={S.link}>home</Link>  
+  } else if (props.to === "index") {
+    return <Link to={"/arcive"} key={props.to} className={S.link}>arcive</Link>
+  } else {
+    return <Link to={props.to} key={props.to} className={S.link}>{props.to}</Link>
+  }
+}
+
 
 const logoSvg = `
 <svg width="147px" height="73px" viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
