@@ -3,7 +3,7 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 
-//for SSR load a dud module on build html for paypal module as it uses window  
+//for SSR load a dud module on build html for paypal module as it uses .window  
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
@@ -83,6 +83,9 @@ exports.createPages = ({ actions, graphql }) => {
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)
     }
+    
+    //NOTE right now there is no code putting also a store item into the store. It shows on the store page
+    // but there ss no store item page made for it
 
     const allStorePosts = result.data.AllStoreItems.edges
 
