@@ -13,7 +13,7 @@ const MenuItem = (props) => {
   if (props.to === "home") { 
     return <Link to={"/"} key={props.to} className={S.link}>home</Link>  
   } else if (props.to === "index") {
-    return <Link to={"/arcive"} key={props.to} className={S.link}>arcive</Link>
+    return <Link to={"/archive"} key={props.to} className={S.link}>archive</Link>
   } else {
     return <Link to={props.to} key={props.to} className={S.link}>{props.to}</Link>
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ArciveItem extends Component {
+class ArchiveItem extends Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class ArciveItem extends Component {
     }
 }
 
-export default ArciveItem;
+export default ArchiveItem;
 
 // export const pageQuery = graphql`
 //   query ArciveItemByID($id: String!) {
