@@ -45,8 +45,13 @@ collections:
       ## If the arcive item is also going to show in the store, then this must be true.
       
       ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa 
-      - {label: "IsArciveItem", name: "isarciveitem", widget: "boolean", default: true}
+      - {label: "Is Arcive Item", name: "isarciveitem", widget: "boolean", default: true}
       
+      ##the html blog content of an arcive item. Only arcive items should have them
+      
+      - {label: "Arcive Body", name: "arcivebody", widget: "markdown"}
+      
+      ##the list of topics an arcive item can have
       - lable: "Arcive Topic" 
         name: "arcivetopic" 
         widget: "list"
