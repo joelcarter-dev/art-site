@@ -52,7 +52,6 @@ collections:
       - {label: "Arcive Body", name: "arcivebody", widget: "markdown"}
       
       ##the list of topics an arcive item can have
-      ]
   
       - lable: "Arcive Topic" 
         name: "arcivetopic" 
