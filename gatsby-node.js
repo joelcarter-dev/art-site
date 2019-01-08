@@ -23,61 +23,59 @@ exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
   return graphql(`
-    {
-      AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {is_archive_item: {ne: true}}}) {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              is_archive_item
-              title
-              about
-              artistNotes
-              price
-              info
-              tags
-              original
-              type
-              templateKey
-              featuredImage {
-                childImageSharp {
-                  fluid(maxHeight: 1000) {
-                    src
-                    sizes
-                    srcSet
-                    srcWebp
-                    srcSetWebp
-                    aspectRatio
-                  }
-                }
+{
+  AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {is_store_item: {ne: false}}}) {
+    edges {
+      node {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          is_store_item
+          
+          title
+          about
+          artistNotes
+          price
+          info
+          tags
+          original
+          type
+          featuredImage {
+            childImageSharp {
+              fluid(maxHeight: 1000) {
+                src
+                sizes
+                srcSet
+                srcWebp
+                srcSetWebp
+                aspectRatio
               }
             }
           }
         }
       }
-      AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            html
-            frontmatter {
-              title
-              tags
-              type
-              storeHighlight
-              is_archive_item
-            }
-          }
+    }
+  }
+  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
+    edges {
+      node {
+        id
+        fields {
+          slug
+        }
+        html
+        frontmatter {
+          title
+          tags
+          type
+          is_archive_item
         }
       }
     }
-  
+  }
+}
   `).then(result => {
     if (result.errors) {
       result.errors.forEach(e => console.error(e.toString()))

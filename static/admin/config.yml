@@ -46,7 +46,9 @@ collections:
       - {label: "Original", name: "original", widget: "boolean", default: true}
       - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       
-      ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa 
+      ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa
+      
+      ## archive_topic only shows in data if one is added. Could use this as is_archive_item instead as well as topic? 
       - {label: "Is Archive Item", name: "is_archive_item", widget: "boolean", default: false}
       
       ## This is so I use less queries
@@ -59,7 +61,7 @@ collections:
       ##the list of topics an arcive item can have
   
       - lable: "Archive Topic" 
-        name: "arcive topic" 
+        name: "arcive_topic" 
         widget: "select"
         multiple: true
         required: false

@@ -22,7 +22,7 @@ storeHighlight: true
 is_archive_item: true
 is_store_item: true
 arcivebody: 'phonex. spelt it wrong, I know it.'
-arcive topic:
+arcive_topic:
   - Creatures
 ---
 
