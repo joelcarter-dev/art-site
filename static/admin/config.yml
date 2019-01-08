@@ -15,8 +15,8 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "About", name: "about", widget: "text"}
-      - {label: "Artist Notes", name: "artistNotes", widget: "text" required: false}
-      - {label: "Price", name: "price", widget: "string" required: false}
+      - {label: "Artist Notes", name: "artistNotes", widget: "text", required: false}
+      - {label: "Price", name: "price", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Info", name: "info", widget: "string", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
