@@ -114,7 +114,7 @@ exports.createPages = ({ actions, graphql }) => {
     
     createPagesFromData(allArciveItems, "archive-item.js", "archive")
     
-    createPagesFromData(allArciveItems, "art-pice.js", "store-items")
+  // createPagesFromData(allArciveItems, "art-pice.js", "store-items")
 
     // //create page for each art item
     // allStorePosts.forEach(edge => {
