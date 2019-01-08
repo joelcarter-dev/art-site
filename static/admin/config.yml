@@ -19,8 +19,6 @@ collections:
       - {label: "Price", name: "price", widget: "string"}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Info", name: "info", widget: "string", required: false}
-      - {label: "Original", name: "original", widget: "boolean", default: true}
-      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "art-pice"}
       
@@ -43,6 +41,11 @@ collections:
       ##things to make item part of the arcive
       ## this separate normal store art posts from arcive posts that could just be text. In that case this must be false
       ## If the arcive item is also going to show in the store, then this must be true.
+      
+      
+      ##common bools just so they are grouped with all the other bools. Happy family
+      - {label: "Original", name: "original", widget: "boolean", default: true}
+      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       
       ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa 
       - {label: "Is Archive Item", name: "is_archive_item", widget: "boolean", default: false}
