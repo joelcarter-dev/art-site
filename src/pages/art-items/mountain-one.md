@@ -16,6 +16,7 @@ templateKey: art-pice
 type:
   - watercolor
 featuredImage: ../img/dsc06122.jpg
-isarciveitem: true
+is_archive_item: true
+is_store_item: false 
 ---
 

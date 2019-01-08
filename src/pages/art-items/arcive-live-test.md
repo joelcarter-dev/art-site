@@ -12,7 +12,8 @@ templateKey: art-pice
 type:
   - Pastel
 featuredImage: ../img/2018-05-06-14.08.47.jpg
-isarciveitem: true
+is_archive_item: true
+is_store_item: true
 arcivebody: >-
   The border to the empire and is guarded by a cliff with the height of 150 to
   200 feet. Though the Eavidourean Empire has many regions beyond this wall of

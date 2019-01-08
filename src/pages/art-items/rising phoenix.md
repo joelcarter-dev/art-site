@@ -20,7 +20,8 @@ templateKey: art-pice
 type:
   - watercolor
 featuredImage: ../img/DSC06367.jpg
-isarciveitem: true
+is_archive_item: true
+is—store_item: false
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

@@ -24,7 +24,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {isarciveitem: {ne: true}}}) {
+      AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {is_archive_item: {ne: true}}}) {
         edges {
           node {
             id
@@ -32,7 +32,7 @@ exports.createPages = ({ actions, graphql }) => {
               slug
             }
             frontmatter {
-              isarciveitem
+              is_archive_item
               title
               about
               artistNotes
@@ -58,7 +58,7 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
-      AllArciveItems: allMarkdownRemark(filter: {frontmatter: {isarciveitem: {ne: false}}}) {
+      AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
         edges {
           node {
             id
@@ -71,7 +71,7 @@ exports.createPages = ({ actions, graphql }) => {
               tags
               type
               storeHighlight
-              isarciveitem
+              is_archive_item
             }
           }
         }

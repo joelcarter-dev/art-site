@@ -31,7 +31,7 @@ export default class IndexItems extends Component {
 
 export const pageQuery = graphql`
   {
-   AllArciveItems: allMarkdownRemark(filter: {frontmatter: {isarciveitem: {ne: false}}}) {
+   AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
       edges {
         node {
           id
@@ -44,7 +44,7 @@ export const pageQuery = graphql`
             tags
             type
             storeHighlight
-            isarciveitem
+            is_archive_item
           }
         }
       }
