@@ -43,7 +43,6 @@ export const pageQuery = graphql`
             title
             tags
             type
-            storeHighlight
             is_archive_item
           }
         }
