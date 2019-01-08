@@ -5,7 +5,6 @@ artistNotes: 'This Item should show in the store and in the arcive '
 price: '1'
 tags:
   - test
-  - ''
 original: true
 storeHighlight: true
 date: 2019-01-08T01:33:17.648Z
