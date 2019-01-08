@@ -59,7 +59,12 @@ collections:
         widget: "select"
         multiple: true
         ## List of arcive topics
-        options: ["Maps", "Peoples", "Locations", "Creatures", "History"]
+        options: 
+          - Maps
+          - Peoples
+          - Locations
+          - Creatures
+          - History
 
       
   # - name: "archive-item"
