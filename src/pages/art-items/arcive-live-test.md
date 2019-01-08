@@ -5,13 +5,13 @@ artistNotes: 'This Item should show in the store and in the arcive '
 price: '1'
 tags:
   - test
-original: true
-storeHighlight: true
 date: 2019-01-08T01:33:17.648Z
 templateKey: art-pice
 type:
   - Pastel
 featuredImage: ../img/2018-05-06-14.08.47.jpg
+original: true
+storeHighlight: true
 is_archive_item: true
 is_store_item: true
 arcivebody: >-
@@ -54,7 +54,7 @@ arcivebody: >-
   fused with. The rest of the top was keep clear for catapults and archers that
   would come if any enemy army would wish to use a Towergate to march an
   invading force up into Eavidour.
-arcivetopic:
+arcive topic:
   - Peoples
   - Locations
 ---
