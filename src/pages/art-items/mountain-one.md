@@ -9,14 +9,13 @@ tags:
   - sketch
   - mountains
 info: 60x120 cm in size. Keeop out of sun
-original: true
-storeHighlight: true
 date: 2018-10-07T05:30:20.573Z
-templateKey: art-pice
 type:
   - watercolor
 featuredImage: ../img/dsc06122.jpg
-is_archive_item: true
-is_store_item: false 
+original: true
+storeHighlight: true
+is_archive_item: false
+is_store_item: true
 ---
 
