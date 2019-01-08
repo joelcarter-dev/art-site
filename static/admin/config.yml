@@ -54,7 +54,7 @@ collections:
       
       ##the html blog content of an arcive item. Only arcive items should have them
       
-      - {label: "Archive Body", name: "arcivebody", widget: "markdown" required: false}
+      - {label: "Archive Body", name: "arcivebody", widget: "markdown", required: false}
       
       ##the list of topics an arcive item can have
   
