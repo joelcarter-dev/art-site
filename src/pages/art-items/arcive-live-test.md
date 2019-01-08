@@ -55,10 +55,7 @@ arcivebody: >-
   would come if any enemy army would wish to use a Towergate to march an
   invading force up into Eavidour.
 arcivetopic:
-  - creatures: Creatures
-    history: History
-    locations: Locations
-    maps: Maps
-    peoples: Peoples
+  - Peoples
+  - Locations
 ---
 
