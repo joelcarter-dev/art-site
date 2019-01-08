@@ -52,16 +52,20 @@ collections:
       - {label: "Arcive Body", name: "arcivebody", widget: "markdown"}
       
       ##the list of topics an arcive item can have
+      ]
+  
       - lable: "Arcive Topic" 
         name: "arcivetopic" 
-        widget: "list"
-        fields: 
-          ## List of arcive topics
-          - {label: Maps, name: maps, widget: string, default: "Maps"}
-          - {label: Peoples, name: peoples, widget: string, default: "Peoples"}
-          - {label: Locations, name: locations, widget: string, default: "Locations"}
-          - {label: Creatures, name: creatures, widget: string, default: "Creatures"}
-          - {label: History, name: history, widget: string, default: "History"}
+        widget: "select"
+        ## List of arcive topics
+        options: [
+          "Maps",
+          "Peoples",
+          "Locations",
+          "Creatures",
+          "History"
+        ]
+
       
   # - name: "archive-item"
   #   label: "World Archive Items"
