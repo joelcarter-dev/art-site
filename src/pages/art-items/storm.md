@@ -18,7 +18,9 @@ templateKey: art-pice
 type:
   - watercolor
 featuredImage: ../img/DSC06288.jpg
-is_archive_item: false
+is_archive_item: true
 is_store_item: true
+arcive_topic:
+  - sGFhre
 ---
 

@@ -71,6 +71,7 @@ exports.createPages = ({ actions, graphql }) => {
           tags
           type
           is_archive_item
+          arcive_topic
         }
       }
     }
@@ -112,8 +113,6 @@ exports.createPages = ({ actions, graphql }) => {
     
     createPagesFromData(allArciveItems, "archive-item.js", "archive")
     
-  // createPagesFromData(allArciveItems, "art-pice.js", "store-items")
-
     // //create page for each art item
     // allStorePosts.forEach(edge => {
     //   const id = edge.node.id

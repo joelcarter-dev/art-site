@@ -16,7 +16,10 @@ templateKey: art-pice
 type:
   - watercolor
 featuredImage: ../img/dsc06128.jpg
-is_archive_item: false
+is_archive_item: true
 is_store_item: true
+arcive_topic:
+  - Creatures
+  - Locations
 ---
 
