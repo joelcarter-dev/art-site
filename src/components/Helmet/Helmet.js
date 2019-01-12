@@ -7,6 +7,8 @@ import { StaticQuery, graphql } from "gatsby"
 //If there is an art item data obj, its title will overrule the page prop if presant
 //tage an "itemGroup" object meants for tags and types. has array of titles and totalcount
 
+//
+
 const toUpperCase = (phrase) => {
   return phrase
     .toLowerCase()

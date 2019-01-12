@@ -1,0 +1,64 @@
+@import "../pages/main.sass"
+
+
+#AchiveItem
+  size: 100%
+  position: absolute
+  overflow-y: scroll
+  overflow-x: hidden
+  background-color: $main-black
+  .holder
+    margin: 0 auto 
+    size: 100%
+    .body
+      #indexLink
+        text-align: center
+        font-size: 25px
+        opacity: 0.8
+        margin: 0 auto
+        left: center
+        top: 90px
+      a
+        text-decoration: none
+        color: $red-white
+        &:before 
+          content: ''
+          display: block
+          width: 30px
+          position: relative
+          margin: 0 auto
+          top: 35px
+          border: none
+          border-bottom: 3px solid $red-white
+      .imgHeader
+        padding-top: 80px
+        max-width: 1000px
+        margin: 0 auto
+      #title
+        +resFontSize(20px, 25px)
+        font-family: 'cinzel decorative', serif
+        text-align: center
+        padding: 7rem 0 5rem 0
+        margin: 0 auto
+        max-width: max-content
+        letter-spacing: 2px
+        line-height: 10%
+        color: $red-white
+      .bodyHolder
+        size: 100%
+        background-color: $red-white
+        position: absolute
+        //overflow: auto
+        &:after 
+          clear: both
+          content: ""
+          display: table 
+        .bodyContent
+          max-width: 500px
+          left: center
+          //margin: 0 10vw 0 10vw
+          margin: 0 auto
+          padding-bottom: 100px
+          @media screen and (max-width: $m) 
+            width: 100%
+            padding: 30px

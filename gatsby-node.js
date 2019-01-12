@@ -72,6 +72,18 @@ exports.createPages = ({ actions, graphql }) => {
           type
           is_archive_item
           arcive_topic
+          featuredImage {
+            childImageSharp {
+              fluid(maxHeight: 500) {
+                src
+                sizes
+                srcSet
+                srcWebp
+                srcSetWebp
+                aspectRatio
+              }
+            }
+          }
         }
       }
     }
