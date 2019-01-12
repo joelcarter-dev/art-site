@@ -3,11 +3,19 @@
 body
   background-color: $red-white
   overflow: hidden 
+  
+=smallText()
+  +resFontSize(9px, 11px)
+  margin: 0 auto
+  width: 170px
+  opacity: 0.5
+  word-break: break-all
 
 #Archive
   size: 100%
   position: absolute
-  overflow: hidden
+  overflow-y: scroll
+  overflow-x: hidden
   .menu
     section
       div
@@ -19,17 +27,61 @@ body
     padding: 60px
     .topicHolder
       h2
-        font-size: responsive
-        max-font-size: 25px
-        min-font-size: 20px
+        +resFontSize(20px, 25px)
         font-family: 'cinzel', serif
-      .items
+        cursor: pointer
+      .topicItems
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: space-evenly
+        max-width: 1000px
         .itemHolder
-          max-width: 150px
+          flex: 1
+          width: 200px
+          padding: 30px
+          height: max-content
+          //padding-bottom: 35px
           .link
             text-decoration: none
             color: inherit
             h3
               font-weight: 400
-              text-transform: capitalize
-            
+              text-transform: lowercase
+              width: max-content
+              text-align: center
+              margin: 0 auto
+              font-family: 'cinzel', serif
+            p
+              +smallText()
+              padding: 10px
+  
+  .bannerMenu
+    // max-width: 1500px
+    // max-width: 1000px
+    max-width: 1300px
+    padding-top: 60px
+    margin: 0 auto
+    //padding: 60px
+    .holder
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: space-evenly
+      .banner
+        width: 300px
+        min-width: 300px
+        max-width: 300px
+        max-height: 400px
+        height: max-content
+        overflow: hidden
+        padding: 20px
+        padding-bottom: 30px
+        flex: 1
+        cursor: pointer
+        h2
+          text-align: center
+          +resFontSize(22px, 28px)
+          font-family: 'cinzel', serif
+        p
+          +smallText

@@ -9,31 +9,54 @@ import { groupBy, uniqBy } from 'lodash'
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel'
 
-const Topic = (props) => (
+const TopicBrowse = (props) => (
   <div className={S.topicHolder}>
     <h2 onClick={props.setTopic.bind(this, props.title)}>{props.title}</h2>
     
-    <div className={S.items}>
-      {props.items.map( i => {
-        const title = i.frontmatter.title
+    {props.currentTopic === props.title &&
+      <div className={S.topicItems}>
+        {props.items.map( i => {
+          const title = i.frontmatter.title
+          return (
+            <div className={S.itemHolder} key={title}>
+              <Link to={`archive/${title}`} className={S.link}> 
+                <h3>{title}</h3>
+                <p>{i.excerpt}</p>
+              </Link>
+            </div>
+          )
+        })}
+      </div>
+    } 
+  
+  </div>
+)
+
+const BannerMeu = (props) => (
+  <section className={S.bannerMenu}>
+    <div className={S.holder}>
+      {props.groups.map( i => {
+        const totalExcerpts = props.excerpts.filter( (item) => {
+          //console.log(i)
+          return item.group === i.topicName
+        })
         return (
-          <div className={S.itemHolder} key={title}>
-            <Link to={`archive/${title}`} className={S.link}> 
-              <h3>{title}</h3>
-            </Link>
+          <div className={S.banner} key={i.topicName} onClick={props.setTopic.bind(this, i.topicName)}>
+            <h2>{i.topicName}</h2>
+          
+            <p>{totalExcerpts[0].items.join(" ")}</p>
           </div>
         )
       })}
-    </div>
-  
-  </div>
+    </div>        
+  </section>
 )
 
 export default class ArchiveIndex extends Component {
   constructor(props) {
     super(props)
     this.state = { 
-     // allTopics: this.allTopics()
+
     }
   }
   
@@ -56,10 +79,12 @@ export default class ArchiveIndex extends Component {
     
     return uniqBy(Array.prototype.concat.apply([], topicArrays))
   }
-  
+    
   render() {
     
-    let groupedTopics = this.props.data.AllArciveItems.edges.reduce((r, {node: item}) => {
+    const allItems = this.props.data.AllArciveItems.edges
+    
+    let groupedTopics = allItems.reduce((r, {node: item}) => {
       for( let topic of item.frontmatter.arcive_topic ) {
         (r[topic] || (r[topic] = [])).push( item )
       }
@@ -70,6 +95,23 @@ export default class ArchiveIndex extends Component {
         a.push({topicName, items: groupedTopics[topicName]})
         return a
     }, [])
+    
+    console.log(topicGroups)
+    
+    let allExcerptsInGroup = []
+    
+    let noLoop = 0
+    for (var topic in topicGroups) {
+      // console.log(topicGroups[topic])
+      noLoop++
+      if (noLoop > 60) {return}
+      let topicExcerpts = []
+      topicGroups[topic].items.map( i => {
+        // console.log(i)
+        topicExcerpts.push(i.excerpt)
+      })
+      allExcerptsInGroup.push( {group: topicGroups[topic].topicName, items: topicExcerpts} )
+    }
 
     return (
       <section id={S.Archive}>
@@ -78,16 +120,14 @@ export default class ArchiveIndex extends Component {
           <Header to={["home", "store"]} white={false}/>
         </div>
         
-        {this.state.currentTopic != undefined ? (
+        {this.state.currentTopic !== undefined ? (
           <section className={S.topics}>
             {topicGroups.map(i => (
-              <Topic setTopic={this.setTopic} title={i.topicName} items={i.items} key={i.topicName}/>   
+              <TopicBrowse currentTopic={this.state.currentTopic} setTopic={this.setTopic} title={i.topicName} items={i.items} key={i.topicName}/>   
             ))}
           </section>
           ) : (
-            <section className={S.topicsUnselected}>
-            
-            </section>
+            <BannerMeu excerpts={allExcerptsInGroup} groups={topicGroups} setTopic={this.setTopic}/>
           )}
         
       </section>  
@@ -96,23 +136,24 @@ export default class ArchiveIndex extends Component {
 }
 
 export const pageQuery = graphql`
-  {
-   AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          html
-          frontmatter {
-            title
-            tags
-            is_archive_item
-            arcive_topic
-          }
+{
+  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
+    edges {
+      node {
+        id
+        fields {
+          slug
+        }
+        excerpt(pruneLength: 100)
+        frontmatter {
+          title
+          tags
+          is_archive_item
+          arcive_topic    
         }
       }
     }
   }
+}
+
 `
