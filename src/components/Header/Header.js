@@ -42,8 +42,9 @@ const Header = (props) => (
             file: LogoSides,
             animTimingFunction: 'EASE_OUT',
             type: 'delayed',
-            duration: 400,
+            duration: 1000,
             forceRender: true,
+            reverseStack: true, 
           }}
           style={{width: "268px", height: "57px" }}
           //callback={}
@@ -62,8 +63,9 @@ const Header = (props) => (
             file: LogoSides,
             animTimingFunction: 'EASE_OUT',
             type: 'delayed',
-            duration: 400,
+            duration: 1000,
             forceRender: true,
+            reverseStack: true, 
           }}
           style={{width: "268px", height: "57px" }}
           //callback={}
