@@ -71,10 +71,11 @@ exports.createPages = ({ actions, graphql }) => {
           tags
           type
           is_archive_item
+          is_store_item
           arcive_topic
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 500) {
+              fluid(maxHeight: 1500) {
                 src
                 sizes
                 srcSet
@@ -107,7 +108,7 @@ exports.createPages = ({ actions, graphql }) => {
         const id = edge.node.id
         const node = edge.node
         createPage({
-          path: `${pathName}/${edge.node.frontmatter.title}`,
+          path: `${pathName}/${_.kebabCase(edge.node.frontmatter.title)}`,
           tags: edge.node.frontmatter.tags,
           component: path.resolve(
             `src/templates/${template}`

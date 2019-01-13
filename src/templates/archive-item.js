@@ -21,7 +21,11 @@ class ArchiveItem extends Component {
           archiveBody = node.html,
           title = frontmatter.title,
           topics = frontmatter.archive_topics,
-          headerImage = frontmatter.featuredImage.childImageSharp.fluid || null
+          headerImage = frontmatter.featuredImage.childImageSharp.fluid || null,
+          isStoreItem = frontmatter.is_store_item,
+          storeSlug = node.fields.slug
+          
+      console.log(storeSlug)
           
       const ArchiveBody = ({className}) => (
         <div className={className} dangerouslySetInnerHTML={{ __html: archiveBody }} />
@@ -41,6 +45,14 @@ class ArchiveItem extends Component {
                 
                 {headerImage !== null &&
                   <section className={S.imgHeader}>
+                  
+                    {isStoreItem &&
+                      <div className={S.storeItemLink}>
+                        <h3>This piece is a store item</h3>
+                        <Link to={storeSlug} id={S.storeItemLink}> view in store </Link>
+                      </div>
+                      
+                    }
                     <Img
                       fluid={headerImage} 
                       target="_blank"

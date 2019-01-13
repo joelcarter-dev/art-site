@@ -9,7 +9,7 @@ display_url: https://elloron.art/store
 collections:
   - name: "item"
     label: "Art Items"
-    folder: "src/pages/art-items"
+    folder: "src/pages/store-items"
     create: true
     slug: "{{slug}}"
     fields:

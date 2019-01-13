@@ -1,15 +1,28 @@
 @import "./main.sass"
 
 body
-  background-color: $red-white
-  overflow: hidden 
+  background-color: $main-black
+  overflow: hidden
+  *
+    color: $red-white
   
 =smallText()
-  +resFontSize(9px, 11px)
+  +resFontSize(11px, 10px)
   margin: 0 auto
   width: 170px
-  opacity: 0.5
+  opacity: 0.9
   word-break: break-all
+  text-shadow: 0 0 2px $red-white
+  
+.dark
+  background-color: $main-black
+  *
+    color: $red-white
+  
+.light
+  background-color: $red-white
+  *
+    color: $main-black
 
 #Archive
   size: 100%
@@ -20,7 +33,7 @@ body
     section
       div
         margin-right: 0
-  
+        
   .topics
     max-width: 900px
     margin: 0 auto
@@ -46,11 +59,12 @@ body
             text-decoration: none
             color: inherit
             h3
-              font-weight: 400
+              font-weight: 600
               text-transform: lowercase
               width: max-content
               text-align: center
               margin: 0 auto
+              opacity: 0.9
               font-family: 'cinzel', serif
             p
               +smallText()

@@ -18,9 +18,9 @@
         margin: 0 auto
         left: center
         top: 90px
-      a
         text-decoration: none
         color: $red-white
+        z-index: 2
         &:before 
           content: ''
           display: block
@@ -34,6 +34,31 @@
         padding-top: 80px
         max-width: 1000px
         margin: 0 auto
+        position: relative
+        .storeItemLink
+          position: absolute
+          bottom: -100px
+          left: 0
+          z-index: 2
+          @media screen and (max-width: $m) 
+            position: relative
+            margin: 0 auto
+            width: 300px
+            bottom: 0
+          h3, .storeItemLink
+            color: $red-white   
+          h3
+            font-weight: 400
+            text-align: center
+          #storeItemLink
+            border: 1px solid $red-white      
+            padding: 20px
+            text-decoration: none
+            color: $red-white
+            @media screen and (max-width: $m)
+              left: center
+              top: 60px
+        
       #title
         +resFontSize(20px, 25px)
         font-family: 'cinzel decorative', serif
@@ -59,6 +84,7 @@
           //margin: 0 10vw 0 10vw
           margin: 0 auto
           padding-bottom: 100px
+          padding-top: 5rem
           @media screen and (max-width: $m) 
             width: 100%
             padding: 30px

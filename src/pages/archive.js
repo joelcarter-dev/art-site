@@ -4,7 +4,8 @@ import S from './index-items.module.sass'
 import Link from 'gatsby-link'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-import { groupBy, uniqBy } from 'lodash'
+import { groupBy, uniqBy, kebabCase } from 'lodash'
+
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel'
@@ -19,7 +20,7 @@ const TopicBrowse = (props) => (
           const title = i.frontmatter.title
           return (
             <div className={S.itemHolder} key={title}>
-              <Link to={`archive/${title}`} className={S.link}> 
+              <Link to={`archive/${kebabCase(title)}`} className={S.link}> 
                 <h3>{title}</h3>
                 <p>{i.excerpt}</p>
               </Link>
@@ -108,12 +109,12 @@ export default class ArchiveIndex extends Component {
       })
       allExcerptsInGroup.push( {group: topicGroups[topic].topicName, items: topicExcerpts} )
     }
-
+    
     return (
-      <section id={S.Archive}>
+      <section id={S.Archive} className={this.state.currentTopic === undefined ? S.dark : S.light}>
         <HeaderMeta pageTitle="Archive"/> 
         <div className={S.menu}>
-          <Header to={["home", "store"]} white={false}/>
+          <Header to={["home", "store"]} white={this.state.currentTopic === undefined ? true : false}/>
         </div>
         
         {this.state.currentTopic !== undefined ? (
