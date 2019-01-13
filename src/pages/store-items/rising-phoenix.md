@@ -3,6 +3,7 @@ title: Rising Phoenix
 about: >-
   A depiction of the mythological creature representing rebirth. We are
   ever-changing, and so must let old parts of ourselves die.
+price: '50'
 tags:
   - mythological
 date: 2019-01-13T22:32:18.748Z
