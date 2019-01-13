@@ -14,7 +14,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "About", name: "about", widget: "text"}
+      - {label: "About", name: "about", widget: "text" required: false}
       - {label: "Artist Notes", name: "artistNotes", widget: "text", required: false}
       - {label: "Price", name: "price", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "list"}
@@ -35,6 +35,7 @@ collections:
         name: "featuredImage"
         widget: "custompathimage"
         customMediaPath: "../img/"
+        required: false
         rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
       
       ##things to make item part of the arcive
