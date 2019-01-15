@@ -178,8 +178,8 @@ exports.createPages = ({ actions, graphql }) => {
 //     })
     
     
-//   })
-// }
+  })
+}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
