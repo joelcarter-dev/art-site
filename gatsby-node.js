@@ -128,7 +128,8 @@ exports.createPages = ({ actions, graphql }) => {
     
     // deprecated !!!!!!
 
-    Tag pages:
+    //Tag pages:
+    
     let tags = []
     // Iterate through each post, putting all found tags into `tags`
     allStorePosts.forEach(edge => {
