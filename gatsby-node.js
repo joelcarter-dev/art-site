@@ -126,92 +126,56 @@ exports.createPages = ({ actions, graphql }) => {
     
     createPagesFromData(allArciveItems, "archive-item.js", "archive")
     
-    // //create page for each art item
-    // allStorePosts.forEach(edge => {
-    //   const id = edge.node.id
-    //   const node = edge.node
-    //   createPage({
-    //     path: edge.node.fields.slug,
-    //     tags: edge.node.frontmatter.tags,
-    //     component: path.resolve(
-    //       `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-    //     ),
-    //     // additional data can be passed via context
-    //     context: {
-    //       id,
-    //       node,
-    //     },
-    //   })
-    // })
-    
-    // //create page for each Arcive item
-    // allArciveItems.forEach(edge => {
-    //   const id = edge.node.id
-    //   const node = edge.node
-    //   createPage({
-    //     path: `Arcive/${edge.node.frontmatter.title}`,
-    //     tags: edge.node.frontmatter.tags,
-    //     component: path.resolve(
-    //       `src/templates/arcive-item.js`
-    //     ),
-    //     // additional data can be passed via context
-    //     context: {
-    //       id,
-    //       node,
-    //     },
-    //   })
-    // })
-    
-    
     // deprecated !!!!!!
 
-    // Tag pages:
-   //  let tags = []
-   //  // Iterate through each post, putting all found tags into `tags`
-   //  allStorePosts.forEach(edge => {
-   //    if (_.get(edge, `node.frontmatter.tags`)) {
-   //      tags = tags.concat(edge.node.frontmatter.tags)
-   //    }
-   //  })
-   //  // Eliminate duplicate tags
-   //  tags = _.uniq(tags)
+    Tag pages:
+    let tags = []
+    // Iterate through each post, putting all found tags into `tags`
+    allStorePosts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.tags`)) {
+        tags = tags.concat(edge.node.frontmatter.tags)
+      }
+    })
+    // Eliminate duplicate tags
+    tags = _.uniq(tags)
 
-   //  // Make tag pages
-   //  tags.forEach(tag => {
-   //    const tagPath = `/cat/${_.kebabCase(tag)}/`
+    // Make tag pages
+    tags.forEach(tag => {
+      const tagPath = `/cat/${_.kebabCase(tag)}/`
 
-   //    createPage({
-   //      path: tagPath,
-   //      component: path.resolve(`src/templates/tags.js`),
-   //      context: {
-   //        tag,
-   //      },
-   //    })
-   //  })
+      createPage({
+        path: tagPath,
+        component: path.resolve(`src/templates/tags.js`),
+        context: {
+          tag,
+        },
+      })
+    })
   
   
-   // // Tag pages:
-   //  let types = []
-   //  // Iterate through each post, putting all found tags into `tags`
-   //  allStorePosts.forEach(edge => {
-   //    if (_.get(edge, `node.frontmatter.type`)) {
-   //      types = types.concat(edge.node.frontmatter.type)
-   //    }
-   //  })
-   //  // Eliminate duplicate tags
-   //  types = _.uniq(types)
-   //  // Make tag pages
-   //  types.forEach(type => {
-   //    const typePath = `/mediums/${_.kebabCase(type)}/`
+   // Tag pages:
+    let types = []
+    // Iterate through each post, putting all found tags into `tags`
+    allStorePosts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.type`)) {
+        types = types.concat(edge.node.frontmatter.type)
+      }
+    })
+    // Eliminate duplicate tags
+    types = _.uniq(types)
+    // Make tag pages
+    types.forEach(type => {
+      const typePath = `/mediums/${_.kebabCase(type)}/`
 
-   //    createPage({
-   //      path: typePath,
-   //      component: path.resolve(`src/templates/mediums.js`),
-   //      context: {
-   //        type,
-   //      },
-   //    })
-   //  })
+      createPage({
+        path: typePath,
+        component: path.resolve(`src/templates/mediums.js`),
+        context: {
+          type,
+        },
+      })
+    })
+    
     
   })
 }
