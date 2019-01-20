@@ -83,36 +83,14 @@ export default class Store extends Component {
 }
 
 export const pageQuery = graphql`
-  query ArtFeedQuery {
-    posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
-      types: group(
-        field: frontmatter___type
-      ) {
-          fieldValue
-          totalCount 
-          
-        }
-      
-      tags: group(
-        field: frontmatter___tags
-      ) {
-          fieldValue
-          totalCount 
-       
-        }
-
-    }
-    
-    selected: allMarkdownRemark(
-      filter: {
-        frontmatter: { storeHighlight: { ne: false } }
-      }
-    ) {
+query ArtFeedQuery {
+  posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+    types: group(field: frontmatter___type) {
+      fieldValue
+      totalCount
       edges {
         node {
-          fields {
-            slug
-          }
+          id
           frontmatter {
             title
             tags
@@ -121,7 +99,29 @@ export const pageQuery = graphql`
             featuredImage {
               childImageSharp {
                 fixed(width: 320, height: 320, cropFocus: CENTER) {
-                  ...GatsbyImageSharpFixed_withWebp_noBase64 
+                   ...GatsbyImageSharpFixed_withWebp_noBase64 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    tags: group(field: frontmatter___tags) {
+      fieldValue
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            tags
+            type
+            storeHighlight
+            featuredImage {
+              childImageSharp {
+                fixed(width: 320, height: 320, cropFocus: CENTER) {
+                   ...GatsbyImageSharpFixed_withWebp_noBase64 
                 }
               }
             }
@@ -130,4 +130,75 @@ export const pageQuery = graphql`
       }
     }
   }
+  selected: allMarkdownRemark(filter: {frontmatter: {storeHighlight: {ne: false}}}) {
+    edges {
+      node {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          tags
+          type
+          storeHighlight
+          featuredImage {
+            childImageSharp {
+              fixed(width: 320, height: 320, cropFocus: CENTER) {
+                ...GatsbyImageSharpFixed_withWebp_noBase64 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 `
+  // query ArtFeedQuery {
+  //   posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+  //     types: group(
+  //       field: frontmatter___type
+  //     ) {
+  //         fieldValue
+  //         totalCount 
+          
+  //       }
+      
+  //     tags: group(
+  //       field: frontmatter___tags
+  //     ) {
+  //         fieldValue
+  //         totalCount 
+       
+  //       }
+
+  //   }
+    
+  //   selected: allMarkdownRemark(
+  //     filter: {
+  //       frontmatter: { storeHighlight: { ne: false } }
+  //     }
+  //   ) {
+  //     edges {
+  //       node {
+  //         fields {
+  //           slug
+  //         }
+  //         frontmatter {
+  //           title
+  //           tags
+  //           type
+  //           storeHighlight
+  //           featuredImage {
+  //             childImageSharp {
+  //               fixed(width: 320, height: 320, cropFocus: CENTER) {
+  //                 ...GatsbyImageSharpFixed_withWebp_noBase64 
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // 
