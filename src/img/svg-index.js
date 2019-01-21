@@ -1,8 +1,15 @@
-export const mainLogoSvg = `<svg viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+export const mainLogoSvg = `
+<svg viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
     <g id="Art-Shop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Tablet-Portrait" transform="translate(-312.000000, -139.000000)" fill="#10090D">
-            <g id="Group" transform="translate(309.000000, -3.000000)">
-                <path d="M82.8377253,183.830583 L82.8472401,183.821068 L76.1297257,177.103553 L69.4122113,183.821068 L69.4499007,183.858757 L57.1543289,196.154329 L3,142 L149.617316,142 L95.3122292,196.305087 L82.8377253,183.830583 Z M81.3377253,185.330583 L93.4317639,197.424621 L76.1579003,214.698485 L58.8840367,197.424621 L70.9499007,185.358757 L76.1297257,190.538582 L81.3377253,185.330583 Z" id="Combined-Shape-Copy" transform="translate(76.308658, 178.349242) rotate(-180.000000) translate(-76.308658, -178.349242) "></path>
+        <g id="Desktop-HD-Copy" transform="translate(-43.000000, -261.000000)" fill="#00030D">
+            <g id="Group-5" transform="translate(43.000000, 65.000000)">
+                <g id="Group-6" transform="translate(0.000000, 196.000000)">
+                    <path d="M152.74299,33.0098147 L191.666941,71.9337656 L238.954003,118.987378 L238.720553,118.987378 L239.64109,119.907914 L120.14109,239.407914 L0.641089603,119.907914 L87.5539623,32.9950415 L120.155863,65.5969419 L152.74299,33.0098147 Z" id="Combined-Shape"></path>
+                    <path d="M90.0926935,30.6263153 L89.8553375,30.6263153 L89.8510974,30.6220752 L120.473173,-2.62900812e-13 L151.099488,30.6263153 L151.086256,30.6263153 L151.148903,30.6889624 L135.837865,46 L120.589475,30.7516095 L105.341084,46 L90.0300464,30.6889624 L90.0926935,30.6263153 Z" id="Combined-Shape" transform="translate(120.500000, 23.000000) rotate(-360.000000) translate(-120.500000, -23.000000) "></path>
+                </g>
             </g>
         </g>
     </g>

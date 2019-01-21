@@ -26,45 +26,70 @@ export class IndexPage extends Component {
       
         <HeaderMeta />
       
-    
-        <div className={S.header}>
-          <Img fluid={heroImageOne} /> 
-        </div>
+        <section className={S.menu}>
+          <Header to={['store', 'index']} white={false} isIndexPage={true}/>
+        </section>
         
-        <div className={S.title}>
+        <section className={S.title}>
           <h1>{metaData.title}</h1>
-        </div>
+        </section>
         
-        <div className={S.mainLogo}>
-          <InlineSVG src={mainLogoSvg} />
-        </div>
-          
-        <div className={S.content}>
+        <section className={S.imageHolder}>
+          <div className={S.heroTop}> <Img fluid={heroImageOne} /> </div>
+          <div className={S.heroBottom}> <Img fluid={heroImageTwo} /> </div>
+        </section>
         
-          <div className={S.sidesHolder}>
-            <InlineSVG src={sidesSvg} />
+        <section className={S.mid}>
+          <div className={S.sides}>     
+            <div className={S.right}></div>
+            <div className={S.left}></div>            
           </div>
-                      
-          <div className={S.tagLine}>
-            <h2>{metaData.tagLine}</h2>    
-          </div>
+            
+          <div className={S.mainLogo}>
           
-          <div className={S.menu}>
-            <Header to={['store', 'index']} white={false} isIndexPage={true}/>
-          </div>
-          
-        </div>
-        
-        <div className={S.about}>
-          <Img fluid={heroImageTwo} /> 
-        </div>
-        
+            <InlineSVG src={mainLogoSvg} />
+            
+          </div>          
+        </section>
+                  
       </section>
     )
     
   }
   
 }
+
+{/*
+
+<div className={S.header}>
+  <Img fluid={heroImageOne} /> 
+</div>
+
+<div className={S.title}>
+  <h1>{metaData.title}</h1>
+</div>
+
+<div className={S.mainLogo}>
+  <InlineSVG src={mainLogoSvg} />
+</div>
+  
+<div className={S.content}>
+
+  <div className={S.sidesHolder}>
+    <InlineSVG src={sidesSvg} />
+  </div>
+              
+  <div className={S.tagLine}>
+    <h2>{metaData.tagLine}</h2>    
+  </div>
+  
+</div>
+
+<div className={S.about}>
+  <Img fluid={heroImageTwo} /> 
+</div>
+        
+*/}
 
 export default IndexPage
 

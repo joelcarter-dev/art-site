@@ -15,39 +15,46 @@ $mainLogo: .03
   background-size: cover
   background-position: top
   background-repeat: no-repeat
-  
+
 #landing
-  background-color: white
+  width: 100%
   height: 100vh
-  min-width: 100vw
-  div
-    width: 100%
+  padding: 0
+  overflow-y: scroll
+  overflow-x: hidden
+  section
     position: absolute
-    left: 0
-    right: 0
     
-  .header
-    height: 104vh
+  .menu
+    grid-area: top
+    z-index: 90000
+    position: relative
+    margin: 0 auto
+  
+  .imageHolder
     width: 100%
-    //+bgImage("../img/testHero.jpg")
-    background-color: $main-black
-    +parallax($header)
-    z-index: 1
-    top: -3px
+    height: 100%
+    top: 0
+    background-color: pink
     div
       size: 100%
-
+      position: relative 
+    // .heroTop 
+    //   background-color: blue
+    // .heroBottom
+    //   background-color: red
+    
   .title
-    top: 30vh
-    +parallax($title)
+    left: 0
+    right: 0
+    top: 25vh
+    +parallax(.15)
     text-align: center
     z-index: 2
     h1
       font-weight: 100
       font-family: 'cinzel decorative', 'cinzel', serif
-      font-size: responsive
-      max-font-size: 100px
-      min-font-size: 60px
+      +resFontSize(40px, 100px)
       letter-spacing: 10px
       font-weight: 100
       color: $red-black
@@ -57,97 +64,36 @@ $mainLogo: .03
     @media screen and (max-width: $s) 
       h1
         font-weight: 400
-        
-  .mainLogo
-    margin-top: 19vh
-    top: 55vh
-    +parallax($mainLogo)
-    z-index: 3
-    i
-      max-width: 450px
-      min-width: 300px
-      display: block
-      margin: 0 auto
-        
-  .content
-    top: 53vh
-    padding-top: 20vh
-    +parallax($mainLogo)
-    z-index: 4
-    overflow: hidden
     
-    position: fixed
-    display: grid
-    grid-template-areas: "triHolder" "tagLine" "menu"
-
-    grid-template-columns: 100vw
-    grid-template-rows: 300px 100px 100px
-    $topPadding: 200px      
-    .sidesHolder
-      margin-top: $topPadding
-      width: 100%
-      position: absolute
-      top: -499px
-      height: 200px
-      grid-area: triHolder
-      z-index: 5
-      i
-        svg
-          width: 100%
-          min-width: 9000px
-          min-height: 300px
-          height: 500px
-          left: center
-    .tagLine
-      grid-area: tagLine
-      position: relative
-      width: 100%
-      height: 100px
-      width: 100%
-      text-align: center
-      top: center
-      top: -50px
-      background-color: $red-black
-      h2
-        color: $red-white
-        font-family:  'cinzel', serif
-        font-size: responsive
-        max-font-size: 30px
-        min-font-size: 15px
-        letter-spacing: 10px
-        margin: 0 auto
-    .menu
-      grid-area: menu
-      top: 0
-      width: 300px
-      //left: calc(50% - 165px)
-      //left: center
-      margin: 0 auto
-      margin-top: -101px
-      padding-left: 15px
-      @media screen and (max-width: $s) 
-        margin: 0 auto
-        margin-top: -101px
-        left: 0 !important
-        right: 0
-      *
-        font-size: 30px !important
-        &:before
-          border-bottom: 3px solid $red-white !important
-      a
-        color: $red-white !important
-        opacity: 1 !important
-      #global-left
-        left: -126px
-        
-
-  .about
+  .mid
     width: 100%
     height: 100vh
-    top: 88%
-    //+bgImage("../img/DSC05916.jpg")
-    background-color: $main-black
-    +parallax($about)
-    z-index: 1
-    div
-      size: 100%
+    left: center
+    top: 0
+    z-index: 2
+    .sides
+      size: 50vw
+      left: center
+      top: calc(100% - 25vw)
+      z-index: 3
+      .left, .right
+        size: 50vw
+        position: absolute
+        background-color: $main-black
+      .left
+        left: 100%
+        transform: rotate(-45deg)
+      .right
+        right: 100%
+        transform: rotate(45deg)   
+    .mainLogo
+      position: relative
+      left: center
+      top: calc(100% - 25vw)
+      padding-top: 10vw
+      max-width: 1000px
+      //min-width: 200px
+      size: 30vw
+      z-index: 3
+    
+      
