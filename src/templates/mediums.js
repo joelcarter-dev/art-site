@@ -80,7 +80,12 @@ query mediumsPage($medium: String) {
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 300){
-                ...GatsbyImageSharpFluid_withWebp
+                src
+                sizes
+                srcSet
+                srcWebp
+                srcSetWebp
+                aspectRatio
               }
             }
           }
@@ -94,3 +99,4 @@ query mediumsPage($medium: String) {
 // base64
 // srcSet
 // aspectRatio
+

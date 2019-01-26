@@ -87,7 +87,7 @@ class Sidebar extends Component {
         </div>
         
         {this.state.view === "info" && <Info data={this.props.data} itemId={this.props.itemId} toggleForm={this.props.toggleForm}/>}
-        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes}/>}
+        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes || this.props.data.about}/>}
         
       </div>  
     )

@@ -1,54 +1,44 @@
 import React, {Component} from 'react'
 import HeaderMeta from '../components/Helmet/Helmet.js'
+import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import S from './tags.module.sass'
-import Header from '../components/Header/Header.js'
+import S from './mediums.module.sass'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
 
-class TagRoute extends Component {
+//IS IT WATERCOLOR WITH A "U" IN NZ?
+
+class Category extends Component {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges
-
+    
     const allTitles = []
-
+    
     const postLinks = posts.map( post => {
       allTitles.push(post.node.frontmatter.title)
       return (
-        <li key={post.node.fields.slug} className={S.tagItem}>
+        <div key={post.node.fields.slug} className={S.imageItem}>
           <Link to={post.node.fields.slug}>
             <h2>{post.node.frontmatter.title}</h2>
             <Img
-              fixed={post.node.frontmatter.featuredImage.childImageSharp.fixed} 
+              fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
             />
-            <div className={S.content}>
-              <ul>
-                {post.node.frontmatter.tags.slice(0, 3)
-                  .map((tag, i)=> {
-                     if (tag === this.props.pageContext.tag) {
-                      return ( <li key={tag} style={{"opacity": "1"}}>{tag}</li> )
-                    } else {
-                      return (
-                        <li key={tag}>{tag}</li>
-                      )
-                    }
-                  })}
-              </ul>
-            </div>
           </Link>
-        </li>
+        </div>
       )
     })
-
+    
     //there is no type passed to types only tag through context
     const category = this.props.pageContext.category
-
+    
+    //const totalCount = this.props.data.allMarkdownRemark.totalCount not used
+    
     return (
-      <section id={S.Tags}>
+      <section id={S.Medium}>
       
         <HeaderMeta pageTitle={category} itemGroup={allTitles}/>
         
@@ -57,20 +47,18 @@ class TagRoute extends Component {
             <Header to={["home", "cart"]} white={true} />
           </div>
         </div>
-
-        <h1 id={S.title}>In the <b>{category}</b> category</h1>
         
-        <div className={S.tagHolder}>
-            
-          <ul>{postLinks}</ul>
-          
+        <h1 id={S.mediumTitle}>{category}</h1>
+        <div className={S.imageGrid}>
+          {postLinks}
         </div>
+      
       </section>
     )
   }
 }
 
-export default TagRoute
+export default Category
 
 //can pass tag data through context in node.js
 //but I'm not goinf to bc I want fixed images for thumbnails
@@ -89,15 +77,20 @@ query TagPage($category: String) {
         }
         frontmatter {
           title
-          tags
-          type
+
           featuredImage {
             childImageSharp {
-              fixed(width: 150, height: 150, cropFocus: CENTER) {
-                ...GatsbyImageSharpFixed_withWebp
+              fluid(maxHeight: 300){
+                src
+                sizes
+                srcSet
+                srcWebp
+                srcSetWebp
+                aspectRatio
               }
             }
           }
+          
         }
       }
     }

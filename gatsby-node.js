@@ -135,7 +135,7 @@ exports.createPages = ({ actions, graphql }) => {
       const tagPath = `/category/${_.kebabCase(category)}/`
       createPage({
         path: tagPath,
-        component: path.resolve(`src/templates/tags.js`),
+        component: path.resolve(`src/templates/categorys.js`),
         context: {
           category,
         },
