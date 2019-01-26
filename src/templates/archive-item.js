@@ -9,10 +9,6 @@ import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 
 class ArchiveItem extends Component {
-
-    constructor(props) {
-        super(props)
-    }
     
     render() {
       
@@ -20,7 +16,8 @@ class ArchiveItem extends Component {
           frontmatter = node.frontmatter,
           archiveBody = node.html,
           title = frontmatter.title,
-          topics = frontmatter.archive_topics,
+          //topics is not used atm. Might be if search is added
+          //topics = frontmatter.archive_topics,
           headerImage = frontmatter.featuredImage.childImageSharp.fluid || null,
           isStoreItem = frontmatter.is_store_item,
           storeSlug = node.fields.slug

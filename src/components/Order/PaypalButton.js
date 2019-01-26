@@ -22,7 +22,7 @@ export class PayPalCheckout extends Component {
     
     delete formData.orderData
     
-    const country = formData.country.value
+    //const country = formData.country.value
     
     //handle form not bing filled on paypal useage
     

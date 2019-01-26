@@ -70,7 +70,7 @@ export default class Store extends Component {
         </div>
       
         <div className={S.listHolder}>
-          <ItemList items={itemData.tags} folder="cat" title="Categories"/>
+          <ItemList items={itemData.tags} folder="category" title="Categories"/>
         
           <ItemList items={itemData.types} folder="mediums" title="Mediums"/>
         </div>
@@ -154,51 +154,3 @@ query ArtFeedQuery {
   }
 }
 `
-  // query ArtFeedQuery {
-  //   posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
-  //     types: group(
-  //       field: frontmatter___type
-  //     ) {
-  //         fieldValue
-  //         totalCount 
-          
-  //       }
-      
-  //     tags: group(
-  //       field: frontmatter___tags
-  //     ) {
-  //         fieldValue
-  //         totalCount 
-       
-  //       }
-
-  //   }
-    
-  //   selected: allMarkdownRemark(
-  //     filter: {
-  //       frontmatter: { storeHighlight: { ne: false } }
-  //     }
-  //   ) {
-  //     edges {
-  //       node {
-  //         fields {
-  //           slug
-  //         }
-  //         frontmatter {
-  //           title
-  //           tags
-  //           type
-  //           storeHighlight
-  //           featuredImage {
-  //             childImageSharp {
-  //               fixed(width: 320, height: 320, cropFocus: CENTER) {
-  //                 ...GatsbyImageSharpFixed_withWebp_noBase64 
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  // 

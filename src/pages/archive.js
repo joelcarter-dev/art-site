@@ -4,7 +4,7 @@ import S from './index-items.module.sass'
 import Link from 'gatsby-link'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-import { groupBy, uniqBy, kebabCase } from 'lodash'
+import { uniqBy, kebabCase } from 'lodash'
 
 
 import 'typeface-alegreya-sans-sc'

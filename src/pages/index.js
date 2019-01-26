@@ -4,7 +4,7 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import InlineSVG from 'svg-inline-react'
 import Img from 'gatsby-image'
-import { mainLogoSvg, sidesSvg } from '../img/svg-index.js'
+import { mainLogoSvg } from '../img/svg-index.js'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -59,37 +59,7 @@ export class IndexPage extends Component {
   
 }
 
-{/*
 
-<div className={S.header}>
-  <Img fluid={heroImageOne} /> 
-</div>
-
-<div className={S.title}>
-  <h1>{metaData.title}</h1>
-</div>
-
-<div className={S.mainLogo}>
-  <InlineSVG src={mainLogoSvg} />
-</div>
-  
-<div className={S.content}>
-
-  <div className={S.sidesHolder}>
-    <InlineSVG src={sidesSvg} />
-  </div>
-              
-  <div className={S.tagLine}>
-    <h2>{metaData.tagLine}</h2>    
-  </div>
-  
-</div>
-
-<div className={S.about}>
-  <Img fluid={heroImageTwo} /> 
-</div>
-        
-*/}
 
 export default IndexPage
 

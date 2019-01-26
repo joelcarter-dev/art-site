@@ -2,7 +2,6 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
-
 //for SSR load a dud module on build html for paypal module as it uses .window  
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
@@ -96,13 +95,6 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
     
-    //NOTE right now there is no code putting also a store item into the store. It shows on the store page
-    // but there ss no store item page made for it
-
-    const allStorePosts = result.data.AllStoreItems.edges
-
-    const allArciveItems = result.data.AllArciveItems.edges
-    
     function createPagesFromData(data, template, pathName) {
       data.forEach(edge => {
         const id = edge.node.id
@@ -118,66 +110,63 @@ exports.createPages = ({ actions, graphql }) => {
             id,
             node,
           },
+        })
+      })
+    }
+    
+    const allStorePosts = result.data.AllStoreItems.edges
+
+    const allArciveItems = result.data.AllArciveItems.edges
+    
+    
+    // NOTE I could rig up these pages to work like the others, but I would be looping a lot
+    // of data on build time in this file. Docs say template querys are fast, so I'll let gatsby do
+    // the work here
+     
+    let allCategorys = []
+    allStorePosts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.tags`)) {
+        allCategorys = allCategorys.concat(edge.node.frontmatter.tags)
+      }
+    })
+    allCategorys = _.uniq(allCategorys)
+    
+    allCategorys.forEach(category => {
+      const tagPath = `/category/${_.kebabCase(category)}/`
+      createPage({
+        path: tagPath,
+        component: path.resolve(`src/templates/tags.js`),
+        context: {
+          category,
+        },
       })
     })
-  }
+  
+  
+    let allMediums = []
+    allStorePosts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.type`)) {
+        allMediums = allMediums.concat(edge.node.frontmatter.type)
+      }
+    })
+    allMediums = _.uniq(allMediums)
+    
+    allMediums.forEach(medium => {
+      const typePath = `/mediums/${_.kebabCase(medium)}/`
+
+      createPage({
+        path: typePath,
+        component: path.resolve(`src/templates/mediums.js`),
+        context: {
+          medium,
+        },
+      })
+    })
     
     createPagesFromData(allStorePosts, "art-pice.js", "store-items")
     
     createPagesFromData(allArciveItems, "archive-item.js", "archive")
-    
-    // deprecated !!!!!!
 
-    //Tag pages:
-    
-//     let tags = []
-//     // Iterate through each post, putting all found tags into `tags`
-//     allStorePosts.forEach(edge => {
-//       if (_.get(edge, `node.frontmatter.tags`)) {
-//         tags = tags.concat(edge.node.frontmatter.tags)
-//       }
-//     })
-//     // Eliminate duplicate tags
-//     tags = _.uniq(tags)
-
-//     // Make tag pages
-//     tags.forEach(tag => {
-//       const tagPath = `/cat/${_.kebabCase(tag)}/`
-
-//       createPage({
-//         path: tagPath,
-//         component: path.resolve(`src/templates/tags.js`),
-//         context: {
-//           tag,
-//         },
-//       })
-//     })
-  
-  
-//    // Tag pages:
-//     let types = []
-//     // Iterate through each post, putting all found tags into `tags`
-//     allStorePosts.forEach(edge => {
-//       if (_.get(edge, `node.frontmatter.type`)) {
-//         types = types.concat(edge.node.frontmatter.type)
-//       }
-//     })
-//     // Eliminate duplicate tags
-//     types = _.uniq(types)
-//     // Make tag pages
-//     types.forEach(type => {
-//       const typePath = `/mediums/${_.kebabCase(type)}/`
-
-//       createPage({
-//         path: typePath,
-//         component: path.resolve(`src/templates/mediums.js`),
-//         context: {
-//           type,
-//         },
-//       })
-//     })
-    
-    
   })
 }
 

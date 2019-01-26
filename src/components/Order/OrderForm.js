@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import S from './order.module.sass'
-import Select from 'react-select'
-import countryList from 'react-select-country-list'
 
 function encode(data) {
   return Object.keys(data)

@@ -1,18 +1,5 @@
 @import "./main.sass"
 
-$red-black: #121011 
-
-$main-black: #0B101B
-
-$red-white: #F0E3DE
-
-$deep-blue: #00030D
-
-$xs: 24em // extra small
-$s: 35em  // small
-$m: 55em  // middle
-$l: 62em   // largez
-
 #store
   size: 100%
   background-color: $red-white
@@ -27,12 +14,13 @@ $l: 62em   // largez
   .menu
     max-width: 24em
     margin: 0 auto
+    
   .listHolder
     width: 100%
-    min-height: 80vh
+    min-height: max-content
     display: flex
     justify-content: center
-    //margin-bottom: 150px
+    padding-bottom: 100px
     @media screen and (max-width: $s) 
       display: block
       .itemList
@@ -61,7 +49,7 @@ $l: 62em   // largez
         margin-right: 20px
         float: right
         width: 200px
-        height: min-content
+        height: auto
         li
           padding: 5px
           a
@@ -76,6 +64,7 @@ $l: 62em   // largez
       position: absolute
       top: -499px
       height: 200px
+      pointer-events: none
       i
         svg
           width: 100%

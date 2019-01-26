@@ -3,7 +3,7 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 
 import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
-import AddToCart from '../components/Cart/AddToCart.js'
+//import AddToCart from '../components/Cart/AddToCart.js'
 import Order from '../components/Order/Order.js'
 import { arrowSvg } from '../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
@@ -15,9 +15,6 @@ import S from './art-pice.module.sass'
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
-
-//trying to pass art item data through context in node.js instead of 
-//another graphql query. It is in the pageContext prop
 
 const Info = (props) => (
   <div className={S.infoHolder}>
@@ -51,7 +48,7 @@ const Info = (props) => (
           Place Order
         </button> 
 
-        <AddToCart itemData={props.itemId} className={S.artItemButton}/>
+        {/*<AddToCart itemData={props.itemId} className={S.artItemButton}/>*/}
       </div>  
       
     }
