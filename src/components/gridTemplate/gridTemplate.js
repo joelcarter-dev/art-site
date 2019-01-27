@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import S from './mediums.module.sass'
+import { arrowSvg } from '../../img/svg-index.js'
+import InlineSVG from 'svg-inline-react'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -32,7 +34,9 @@ class GridTemplate extends Component {
     return (
       <section id={S.GridTemplate}>
       
-
+        <Link to = "/store"  className={S.storeLink} >
+          <InlineSVG src={arrowSvg} />
+        </Link>  
         
         <h1 id={S.mediumTitle}>{title}</h1>
         <div className={S.imageGrid}>
