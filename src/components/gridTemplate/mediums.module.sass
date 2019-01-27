@@ -45,13 +45,10 @@
     max-width: 1600px
     margin: 0 auto
     padding: 40px
-    padding-left: 100px
     column-count: 4
     column-gap: 60px
     line-height: 0
     .imageItem
-      //height: auto
-      //min-height: 300px
       width: 100%
       min-width: 200px
       margin: 0
@@ -61,15 +58,7 @@
       break-inside: avoid
       position: relative
       &:hover
-        transform: scale(1.05)
-        //height: calc(auto + 200px)
-        //padding-bottom: 90px
-        //the content makes it hard for siblings to poition
-        //on conlimns, removing them for now.
-        //removed them from data query too
-        // .content 
-        //   display: block
-        //   animation: grow 1s forwards
+        transform: scale(1.02)
       div
         min-width: max-content
       a
@@ -77,27 +66,9 @@
         color: $red-white
         text-transform: capitalize
       h2
-        //font-family: 'alegreya sans sc', sans-serif
         font-size: 20px
         font-weight: 300
         margin-bottom: 30px
-      // .content
-      //   max-height: 180px
-      //   position: absolute
-      //   bottom: 0
-      //   left: 0
-      //   display: none
-      //   break-inside: avoid
-      //   ul
-      //     padding: 0  
-      //     list-style: none
-      //     opacity: 0.4
-      //     li:nth-child(-n+3)
-      //       display: block
-      //       margin: 25px
-      //       margin-left: 10px
-      //     li
-      //       display: none
       
   @media screen and (max-width: $l)
     .imageGrid
