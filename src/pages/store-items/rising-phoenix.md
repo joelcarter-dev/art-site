@@ -18,3 +18,28 @@ arcive_topic:
   - Creatures
 ---
 blabla
+
+
+
+test embedded image
+
+![test embedded image](/src/pages/img/2018-05-06-14.08.47.jpg "test")
+
+## and this is to test text formatting
+
+
+
+**test**
+
+****
+
+test _test test_
+
+__
+
+> test
+
+* test
+
+1. test
+2. test2
