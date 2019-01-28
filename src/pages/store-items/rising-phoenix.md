@@ -20,12 +20,10 @@ arcive_topic:
 blabla
 
 
-
 test embedded image
 
-![test embedded image](/src/pages/img/2018-05-06-14.08.47.jpg "test")
 
-## and this is to test text formatting
+## and this is to test text formatting. formatting works but images do not.
 
 
 

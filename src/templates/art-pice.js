@@ -7,7 +7,7 @@ import Link from 'gatsby-link'
 import Order from '../components/Order/Order.js'
 import { arrowSvg } from '../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
-
+import { kebabCase } from 'lodash'
 import Img from 'gatsby-image'
 import S from './art-pice.module.sass'
 
@@ -38,18 +38,26 @@ const Info = (props) => (
     
     {props.data.price === "sold" || props.data.price === "SOLD" 
       ?
-      <div> </div>
+        <div> </div>
       :
-      <div className={S.buttonHolder}>
-        <button 
-          onClick={props.toggleForm}
-          className={S.artItemButton}
-        >
-          Place Order
-        </button> 
+        <div className={S.buttonHolder}>
+          <button 
+            onClick={props.toggleForm}
+            className={S.artItemButton}
+          >
+            Place Order
+          </button> 
+          
+          
+          {props.data.is_archive_item &&
+             <button className={S.artItemButton}>
+              <Link to = {kebabCase(props.data.title)}  className={S.storeLink} >
+                View In Archive
+              </Link>
+            </button> 
+          }
 
-        {/*<AddToCart itemData={props.itemId} className={S.artItemButton}/>*/}
-      </div>  
+        </div>
       
     }
   </div>
@@ -86,7 +94,7 @@ class Sidebar extends Component {
           <span onClick={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
         </div>
         
-        {this.state.view === "info" && <Info data={this.props.data} itemId={this.props.itemId} toggleForm={this.props.toggleForm}/>}
+        {this.state.view === "info" && <Info data={this.props.data} toggleForm={this.props.toggleForm}/>}
         {this.state.view === "notes" && <Notes data={this.props.data.artistNotes || this.props.data.about}/>}
         
       </div>  
@@ -128,8 +136,8 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-    const itemId = this.props.pageContext.id
-    
+      //const itemId = this.props.pageContext.id
+      
     return (
       <section className={S.artItemHolder}>
       
@@ -152,7 +160,7 @@ class ArtPice extends Component {
         <h1 id={S.title}>{itemData.title}</h1>
         
         <div className={S.left}>
-          <Sidebar data={itemData} itemId={itemId} toggleForm={this.toggleForm}/>
+          <Sidebar data={itemData} toggleForm={this.toggleForm}/>
         </div>
       
         <div 

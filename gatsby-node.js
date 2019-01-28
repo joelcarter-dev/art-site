@@ -32,7 +32,7 @@ exports.createPages = ({ actions, graphql }) => {
         }
         frontmatter {
           is_store_item
-          
+          is_archive_item
           title
           about
           artistNotes

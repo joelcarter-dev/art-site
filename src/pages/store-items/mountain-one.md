@@ -15,7 +15,7 @@ type:
 featuredImage: ../img/dsc06122.jpg
 original: true
 storeHighlight: true
-is_archive_item: true
+is_archive_item: false
 is_store_item: true
 arcive_topic:
   - Locations
