@@ -45,13 +45,13 @@ const Info = (props) => (
             onClick={props.toggleForm}
             className={S.artItemButton}
           >
-            Place Order
+            <span>Place Order</span>
           </button> 
           
           
           {props.data.is_archive_item &&
              <button className={S.artItemButton}>
-              <Link to = {kebabCase(props.data.title)}  className={S.storeLink} >
+              <Link to = {`archive/${kebabCase(props.data.title)}`}  className={S.storeLink} >
                 View In Archive
               </Link>
             </button> 

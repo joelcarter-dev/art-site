@@ -84,17 +84,6 @@ body
         width: 100%
         height: 100%
           
-  //order and cart button styles
-  .artItemButton
-    padding: 20px
-    width: 100%
-    border: 1px solid $red-white
-    color: $red-white
-    background-color: transparent
-    margin-bottom: 30px
-    cursor: pointer
-    font-size: 18px
-    letter-spacing: 2px
     
   @media screen and (max-width: 100em)
     grid-template-columns: minmax(200px, 300px) 3fr
@@ -140,10 +129,6 @@ body
         width: 100%
         height: 600px
         padding-top: 2vw
-        ul, .artItemButton
-          margin-left: 30px
-        ul
-          padding-top: 60px
         .buttonHolder
           position: absolute
           bottom: 0
@@ -157,17 +142,19 @@ body
 /// SIDEBAR
 %Sidebar
   #Sidebar
-    float: right
-    width: 80%
+    //float: right
     height: 100%
     margin: 0 auto
     padding-top: 3vw
     position: relative
-    font-family: 'hind', sans-serif
-    font-weight: 100
+    font-family: 'alegreya sans sc', sans-serif
+    font-weight: 300
+    text-transform: uppercase
     @media screen and (max-width: $m)
       float: none
       padding-top: 60px
+      max-width: 400px
+      margin: 0 auto
     #infoMenu
       width: 100%
       height: 60px
@@ -200,9 +187,12 @@ body
         &:hover
           opacity: 1
     .infoHolder
+      //width: 100%
+      width: 250px
+      @media screen and (max-width: $m)
+        width: 400px
       .priceHolder
-        min-width: 150px
-        width: 50%
+        width: 100%
         display: flex
         position: relative
         .price
@@ -213,18 +203,21 @@ body
           margin: 0 auto
           width: 100%
           display: flex
-          max-width: 250px
+          //max-width: 250px
           justify-content: center
           h3
             margin: 0
-            font-weight: 100
+            font-weight: 300
           span
             font-size: 16px
       .dataList
         list-style: none
         padding: 0
         margin-bottom: 30px
-        width: 240px
+        width: 100%
+        margin-left: 20px
+        @media screen and (max-width: $m)
+          margin-left: 0
         li
           width: 240px
           color: $red-white
@@ -237,13 +230,32 @@ body
       .buttonHolder
         position: relative
         width: 100%
-        max-width: 200px
+        display: inline-grid
         transition: all 0.5s cubic-bezier(.77,0,.18,1)
+        .artItemButton
+          width: 200px
+          margin: 0 auto
+          padding: 20px 0 20px 0
+          border: 1px solid $red-white
+          color: $red-white
+          background-color: transparent
+          margin-bottom: 30px
+          cursor: pointer
+          font-size: 18px
+          letter-spacing: 2px
+          a, span
+            width: 100%
+            text-decoration: none
+            margin: 0 auto
+            color: $red-white
+            font-size: 16px
+          
     .notesHolder
       color: $red-white
       text-align: left
-      //padding: 30px
-      float: left
+      //width: 100%
+      // float: left
+      padding: 0 30px 0 30px
       h3
         font-weight: 100
         font-size: 20px
@@ -262,4 +274,8 @@ body
           border: none
           border-bottom: 2px solid $red-white
           animation: grow 1s forwards
-          transition: all 1s linear 
+          transition: all 1s linear
+      // @media screen and (max-width: $m)
+      //   max-width: 400px
+      //   float: none
+      //   margin: 0 auto
