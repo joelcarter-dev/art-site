@@ -28,6 +28,7 @@ export default (props) => (
           siteMetadata {
             title
             tagLine
+            about
           }
         }
       }
@@ -70,7 +71,7 @@ export default (props) => (
             itemGroup !=null ?
               `${itemGroup.length} Art items in ${pageTitle}: ${toUpperCase(itemGroup.slice(0, 6).join(", "))}`
                 :
-              `${siteMetadata.tagLine}`
+              `${siteMetadata.about}`
           } />
         </Helmet>
       )}}

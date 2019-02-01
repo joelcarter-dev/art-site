@@ -14,6 +14,21 @@ import './main.sass'
 import S from './index.module.sass'
 import './mixins.module.scss'
 
+const ArchiveSlide = (props) => {
+  // const heading
+  return (
+    <div className={S.heroBottom}>
+      <Img fluid={props.img} />
+    </div>
+  )
+}
+
+const SlideHolder = (props) => {
+  return (
+    <ArchiveSlide img={props.heroImageTwo}/>
+  )
+}
+
 export class IndexPage extends Component {
   render() {
     
@@ -25,7 +40,7 @@ export class IndexPage extends Component {
       <section id={S.landing} className="Index">
       
         <HeaderMeta />
-      
+        
         <section className={S.menu}>
           <Header to={['store', 'index']} white={false} isIndexPage={true}/>
         </section>
@@ -36,7 +51,7 @@ export class IndexPage extends Component {
         
         <section className={S.imageHolder}>
           <div className={S.heroTop}> <Img fluid={heroImageOne} /> </div>
-          <div className={S.heroBottom}> <Img fluid={heroImageTwo} /> </div>
+          <SlideHolder heroImageTwo={heroImageTwo}/>
         </section>
         
         <section className={S.mid}>
@@ -54,9 +69,7 @@ export class IndexPage extends Component {
                   
       </section>
     )
-    
   }
-  
 }
 
 
