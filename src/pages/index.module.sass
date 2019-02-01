@@ -38,11 +38,82 @@ $mainLogo: .03
     background-color: $red-white
     div
       size: 100%
-      // position: relative 
-    // .heroBottom
-    //   top: 50vh
-    //   +parallax(.15)
-    
+    .slideOne
+      position: relative
+      .heroImage
+      .holder
+        size: 100%
+        position: absolute
+        top: 0
+        .heading, .desc
+          position: absolute
+          left: 16vw
+          margin: 60px
+          @media screen and (max-width: $m)
+            margin: 0 auto
+            left: center
+          color: $red-white
+          z-index: 3
+          font-family: 'cinzel decorative', 'cinzel', serif
+        .heading
+          width: auto
+          top: 20%
+          +resFontSize(25px, 45px)
+        .desc
+          max-width: 400px
+          top: 27%
+          margin: 60px
+          @media screen and (max-width: $m)
+            margin: 0 auto
+            width: 100%
+            text-align: center
+          +resFontSize(15px, 20px)
+        .archiveItemHolder
+          width: 400px
+          height: 400px
+          position: absolute
+          top: 40%
+          right: 20vw
+          @media screen and (max-width: $m)
+            left: center
+          .archiveItem
+            width: 400px
+            padding: 60px
+            height: 400px
+            overflow: hidden
+            h3, p
+              color: $red-white
+              width: 100%
+            h3
+              font-size: 30px
+              font-weight: 600
+              text-transform: lowercase
+              text-align: center
+              margin: 0 auto
+              opacity: 0.9
+              font-family: 'cinzel', serif
+            p
+              font-size: 14px
+              margin: 0 auto
+              opacity: 0.9
+              word-break: break-all
+              text-shadow: 0 0 2px $red-white
+              padding: 10px
+          a
+            color: $red-white
+            padding: 20px
+            text-decoration: none
+            border: 1px solid $red-white
+            position: absolute
+            margin-top: 30px
+            right: 0
+            font-size: 18px
+            letter-spacing: 2px
+            @media screen and (max-width: $m)
+             left: center
+            width: 200px
+          
+
   .title
     left: 0
     right: 0
@@ -53,16 +124,9 @@ $mainLogo: .03
     h1
       font-weight: 100
       font-family: 'cinzel decorative', 'cinzel', serif
-      +resFontSize(40px, 100px)
+      +resFontSize(50px, 100px)
       letter-spacing: 10px
-      font-weight: 100
       color: $red-black
-    @media screen and (max-width: $m) 
-      h1
-        font-weight: 300
-    @media screen and (max-width: $s) 
-      h1
-        font-weight: 400
     
   .mid
     width: 100%

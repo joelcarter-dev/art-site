@@ -4,6 +4,7 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import InlineSVG from 'svg-inline-react'
 import Img from 'gatsby-image'
+import Link from 'gatsby-link'
 import { mainLogoSvg } from '../img/svg-index.js'
 
 import 'typeface-alegreya-sans-sc'
@@ -15,10 +16,43 @@ import S from './index.module.sass'
 import './mixins.module.scss'
 
 const ArchiveSlide = (props) => {
-  // const heading
+  const heading = `Explore a world`
+  const desc = `An Archive of lore, illustrations, and short stories.`
+  const archiveItem = {
+    title: `title`,
+    text:
+      `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+
+    link: `/archive/rising-phoenix`
+  }
   return (
-    <div className={S.heroBottom}>
-      <Img fluid={props.img} />
+    <div className={S.slideOne}>
+      <Img fluid={props.img} className={S.heroImage}/>
+      <div className={S.holder}>
+        <h2 className={S.heading}>{heading}</h2>
+        <h3 className={S.desc}>{desc}</h3>
+        
+        <div className={S.archiveItemHolder}>
+          <div className={S.archiveItem}>
+            <h3>{archiveItem.title}</h3>
+            <p>{archiveItem.text}</p>
+          </div>
+          
+          <Link to={archiveItem.link} > View In Archive </Link>
+        </div>
+        
+      </div>
     </div>
   )
 }
@@ -51,7 +85,7 @@ export class IndexPage extends Component {
         
         <section className={S.imageHolder}>
           <div className={S.heroTop}> <Img fluid={heroImageOne} /> </div>
-          <SlideHolder heroImageTwo={heroImageTwo}/>
+          <SlideHolder heroImageTwo={heroImageTwo} />
         </section>
         
         <section className={S.mid}>
@@ -82,6 +116,7 @@ export const indexQuery = graphql`
       siteMetadata {
         title
         tagLine
+        about
       }
     }
     heroImageOne: allImageSharp(
