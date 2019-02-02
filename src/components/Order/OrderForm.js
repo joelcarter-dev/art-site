@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Select from 'react-select'
+import countryList from 'react-select-country-list'
 import S from './order.module.sass'
 
 function encode(data) {
@@ -75,7 +77,7 @@ export default class OrderForm extends Component {
             
             <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph ? this.state.ph : ""} onChange={this.handleChange} name="ph" tabIndex="3"/>
             
-            {/*
+            
             <hr/>
             
             <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one ? this.state.address_line_one : ""} onChange={this.handleChange} name="address_line_one" required /> 
@@ -97,7 +99,7 @@ export default class OrderForm extends Component {
 
             <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{4}" tabIndex="8" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
             
-            */}
+            
             
             <div id={S.submitHolder}>
               <button type="submit" id={S.submit} >Submit</button>

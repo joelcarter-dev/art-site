@@ -16,7 +16,7 @@ class Category extends Component {
       <div>
         <HeaderMeta pageTitle={this.props.pageContext.medium} itemGroup={allTitles}/>
                  
-        <Header to={["home", "cart"]} white={true} />      
+        <Header to={["home", "archive"]} white={true} />      
         <GridTemplate data={this.props.data.allMarkdownRemark.edges} children={Header, HeaderMeta} title={this.props.pageContext.category}/>
         
       </div>
