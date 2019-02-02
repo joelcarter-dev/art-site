@@ -11,11 +11,11 @@ import InlineSVG from 'svg-inline-react'
 
 const MenuItem = (props) => {
   if (props.to === "home") { 
-    return <Link to={"/"} key={props.to} className={S.link}>home</Link>  
+    return <Link to={"/"} key={props.to} className={S.link}> <span> home </span> </Link>  
   } else if (props.to === "index") {
-    return <Link to={"/archive"} key={props.to} className={S.link}>archive</Link>
+    return <Link to={"/archive"} key={props.to} className={S.link}> <span>archive </span></Link>
   } else {
-    return <Link to={props.to} key={props.to} className={S.link}>{props.to}</Link>
+    return <Link to={props.to} key={props.to} className={S.link}> <span> {props.to} </span> </Link>
   }
 }
 
