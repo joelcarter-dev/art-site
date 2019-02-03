@@ -13,7 +13,7 @@ export class Mediums extends Component {
       allTitles.push(post.node.frontmatter.title)
     })
     return (
-      <div>
+      <div style={{position: 'absolute', top: 0, height: '100%', width: '100%'}}>
         <HeaderMeta pageTitle={this.props.pageContext.medium} itemGroup={allTitles}/>
                  
         <Header to={["home", "archive"]} white={true} />      
