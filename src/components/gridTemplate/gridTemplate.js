@@ -34,11 +34,13 @@ class GridTemplate extends Component {
     return (
       <section id={S.GridTemplate}>
       
-        <Link to = "/store"  className={S.storeLink} >
-          <InlineSVG src={arrowSvg} />
-        </Link>  
-        
-        <h1 id={S.mediumTitle}>{title}</h1>
+        <div className={S.titleHolder}>
+          <Link to = "/store"  className={S.storeLink} >
+            <InlineSVG src={arrowSvg} />
+          </Link>  
+          
+          <h1 id={S.mediumTitle}>{title}</h1>
+        </div>
         <div className={S.imageGrid}>
           {postLinks}
         </div>
