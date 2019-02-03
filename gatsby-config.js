@@ -7,9 +7,10 @@ const short = require(`postcss-short`)
 module.exports = {
   siteMetadata: {
     title: 'Elloron Arts',
-    siteUrl: `https://elloron.art/`,
+    siteUrl: `https://elloron.art`,
     tagLine: 'Here we deal in the Wonderfull',
-    about: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.'
+    description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.'
+  
   },
   plugins: [
   

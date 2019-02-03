@@ -20,7 +20,8 @@ class ArchiveItem extends Component {
           //topics = frontmatter.archive_topics,
           headerImage = frontmatter.featuredImage.childImageSharp.fluid || null,
           isStoreItem = frontmatter.is_store_item,
-          storeSlug = node.fields.slug
+          storeSlug = node.fields.slug,
+          desc = node.excerpt
           
       console.log(storeSlug)
           
@@ -30,7 +31,14 @@ class ArchiveItem extends Component {
       
         return (
           <div id={S.AchiveItem}>
-            <HeaderMeta pageTitle="Archive"/> 
+          
+            <HeaderMeta 
+              subTitle={title} 
+              article={true} 
+              description={desc}
+              pathName={this.props.location.pathname}
+            /> 
+            
             <div className={S.menu}>
               <Header to={["home", "store"]} white={true}/>
             </div>

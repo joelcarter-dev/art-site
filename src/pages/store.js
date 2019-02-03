@@ -63,7 +63,8 @@ export default class Store extends Component {
     const itemData = this.props.data.posts
     return (
       <section id={S.store}>
-        <HeaderMeta pageTitle="Store"/>
+      
+        <HeaderMeta subTitle="Store" pathName={this.props.location.pathname}/>
         
         <div className={S.menu}>
           <Header to={["home", "index"]} white={false}/>

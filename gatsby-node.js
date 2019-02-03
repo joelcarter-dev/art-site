@@ -65,10 +65,12 @@ exports.createPages = ({ actions, graphql }) => {
           slug
         }
         html
+        excerpt(pruneLength: 200)
         frontmatter {
           title
           tags
           type
+          about
           is_archive_item
           is_store_item
           arcive_topic

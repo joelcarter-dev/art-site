@@ -116,7 +116,7 @@ export const indexQuery = graphql`
       siteMetadata {
         title
         tagLine
-        about
+
       }
     }
     heroImageOne: allImageSharp(

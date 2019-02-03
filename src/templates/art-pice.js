@@ -136,12 +136,18 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
+    const slug = this.props.pageContext.node.fields.slug
       //const itemId = this.props.pageContext.id
       
     return (
       <section className={S.artItemHolder}>
       
-        <HeaderMeta itemData={itemData}/>
+        <HeaderMeta 
+          itemData={itemData} 
+          subTitle={itemData.title}
+          description={`${itemData.about} ${itemData.artistNotes}`} 
+          pathName={this.props.location.pathname}
+        />
         
         <Order 
           hidden={this.state.orderFormHidden} 
