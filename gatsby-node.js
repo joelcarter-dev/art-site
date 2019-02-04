@@ -147,7 +147,7 @@ exports.createPages = ({ actions, graphql }) => {
   
     let allMediums = []
     allStorePosts.forEach(edge => {
-      if (_.get(edge, `node.frontmatter.type`)) {
+      if (_.get(edge, `node.frontmatter.type`) && edge.node.frontmatter.is_store_item === true ) {
         allMediums = allMediums.concat(edge.node.frontmatter.type)
       }
     })

@@ -13,7 +13,7 @@ featuredImage: ../img/DSC06367.jpg
 original: true
 storeHighlight: false
 is_archive_item: true
-is_store_item: true
+is_store_item: false
 arcive_topic:
   - Creatures
 ---
