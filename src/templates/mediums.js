@@ -34,7 +34,7 @@ export const mediumsPageQuery = graphql`
 query mediumsPage($medium: String) {
   allMarkdownRemark(
     sort: {fields: [frontmatter___date], order: DESC}, 
-    filter: {frontmatter: {type: {in: [$medium]}}}
+    filter: {frontmatter: {type: {in: [$medium]} is_store_item: {eq: true} }}
     ) {
     totalCount
     edges {

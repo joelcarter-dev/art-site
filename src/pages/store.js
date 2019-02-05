@@ -85,7 +85,10 @@ export default class Store extends Component {
 
 export const pageQuery = graphql`
 query ArtFeedQuery {
-  posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+  posts: allMarkdownRemark(sort: {
+    order: DESC, fields: [frontmatter___date]},
+    filter: {frontmatter: { is_store_item: {eq: true} }} 
+  ) {
     types: group(field: frontmatter___type) {
       fieldValue
       totalCount
@@ -131,7 +134,10 @@ query ArtFeedQuery {
       }
     }
   }
-  selected: allMarkdownRemark(filter: {frontmatter: {storeHighlight: {ne: false}}}) {
+  selected: allMarkdownRemark(filter: {frontmatter: {
+    is_store_item: {eq: true}
+    storeHighlight: {eq: true}
+  }}) {
     edges {
       node {
         fields {

@@ -23,7 +23,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
 {
-  AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {is_store_item: {ne: false}}}) {
+  AllStoreItems: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {is_store_item: {eq: true}}}) {
     edges {
       node {
         id
@@ -57,7 +57,7 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }
   }
-  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
+  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {eq: true}}}) {
     edges {
       node {
         id
@@ -143,7 +143,6 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
-  
   
     let allMediums = []
     allStorePosts.forEach(edge => {

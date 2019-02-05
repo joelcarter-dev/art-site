@@ -35,7 +35,7 @@ query TagPage($category: String) {
   allMarkdownRemark(
     sort: {
       fields: [frontmatter___date], order: DESC}, 
-      filter: {frontmatter: {tags: {in: [$category]}}}
+      filter: {frontmatter: {tags: {in: [$category]} is_store_item: {eq: true} }}
     ) {
     edges {
       node {
