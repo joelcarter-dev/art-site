@@ -30,6 +30,7 @@ $mainLogo: .03
     z-index: 90000
     position: relative
     margin: 0 auto
+    width: calc(100vw - 11px)
   
   .imageHolder
     width: 100%
@@ -147,14 +148,15 @@ $mainLogo: .03
     .sides
       size: 50% //vw
       left: center
-      top: calc(100% - 25vw)
-      @media screen and (max-width: 300px)
-        top: calc(100% - 30vw)
+      padding-top: calc(100vh - 25vw)
+      // @media screen and (max-width: 300px)
+      //   top: calc(100% - 30vw)
       z-index: 3
       .left, .right
         size: 50vw
         position: absolute
         background-color: $main-black
+        transform-origin: center
       .left
         left: 100%
         transform: rotate(-45deg)
@@ -164,10 +166,9 @@ $mainLogo: .03
     .mainLogo
       position: relative
       left: center
-      top: calc(100% - 25vw)
-      @media screen and (max-width: 300px)
-        top: calc(100% - 30vw)
-      padding-top: 10vw
+      padding-top: calc(100vh - 15vw)
+      // @media screen and (max-width: 300px)
+      //   top: calc(100% - 30vw)
       max-width: 1000px
       //min-width: 200px
       size: 30% //vw
