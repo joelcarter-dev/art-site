@@ -40,7 +40,17 @@ const ArchiveSlide = (props) => {
     <div className={S.slideOne}>
       <Img fluid={props.img} className={S.heroImage}/>
       <div className={S.holder}>
-  
+        <h2 className={S.heading}>{heading}</h2>
+        <h3 className={S.desc}>{desc}</h3>
+        
+        <div className={S.archiveItemHolder}>
+          <div className={S.archiveItem}>
+            <h3>{archiveItem.title}</h3>
+            <p>{archiveItem.text}</p>
+          </div>
+          
+          <Link to={archiveItem.link} > View In Archive </Link>
+        </div>
         
       </div>
     </div>

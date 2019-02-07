@@ -4,6 +4,7 @@ import Img from 'gatsby-image'
 import S from './mediums.module.sass'
 import { arrowSvg } from '../../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
+import Header from '../Header/Header.js'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -33,6 +34,10 @@ class GridTemplate extends Component {
     
     return (
       <section id={S.GridTemplate}>
+      
+        <div className={S.headerHolder}>
+          <Header to={["home", "archive"]} white={true} />
+        </div>
       
         <div className={S.titleHolder}>
           <Link to = "/store"  className={S.storeLink} >

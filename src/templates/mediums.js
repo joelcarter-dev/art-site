@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import GridTemplate from '../components/gridTemplate/gridTemplate.js'
 import { graphql } from 'gatsby'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-import Header from '../components/Header/Header.js'
+// import Header from '../components/Header/Header.js'
 
 //IS IT WATERCOLOR WITH A "U" IN NZ?
 
-export class Mediums extends Component {
+class Mediums extends Component {
   render() {
     let allTitles = []
     this.props.data.allMarkdownRemark.edges.map( post => {
@@ -16,8 +16,7 @@ export class Mediums extends Component {
       <div style={{position: "absolute", width: "100%", height: "100%"}}>
         <HeaderMeta pageTitle={this.props.pageContext.medium} itemGroup={allTitles}/>
                  
-        <Header to={["home", "archive"]} white={true} />      
-        <GridTemplate data={this.props.data.allMarkdownRemark.edges} children={Header, HeaderMeta} title={this.props.pageContext.medium}/>
+        <GridTemplate data={this.props.data.allMarkdownRemark.edges} title={this.props.pageContext.medium}/>
         
       </div>
     )
