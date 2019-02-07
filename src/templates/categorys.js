@@ -13,7 +13,7 @@ class Category extends Component {
       allTitles.push(post.node.frontmatter.title)
     })
     return (
-      <div style={{position: "absolute", width: "100%", height: "100%"}}>
+      <div style={{position: "absolute", width: "100%", height: "100%", overflow: "hidden", overflowY: "scroll"}}>
         <HeaderMeta pageTitle={this.props.pageContext.medium} itemGroup={allTitles}/>
                       
         <GridTemplate data={this.props.data.allMarkdownRemark.edges} title={this.props.pageContext.category}/>
