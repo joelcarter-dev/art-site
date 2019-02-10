@@ -35,21 +35,30 @@ const TopicBrowse = (props) => (
 
 const BannerMeu = (props) => (
   <section className={S.bannerMenu}>
-    <div className={S.holder}>
-      {props.groups.map( i => {
-        const totalExcerpts = props.excerpts.filter( (item) => {
-          //console.log(i)
-          return item.group === i.topicName
-        })
-        return (
-          <div className={S.banner} key={i.topicName} onClick={props.setTopic.bind(this, i.topicName)}>
-            <h2>{i.topicName}</h2>
-          
-            <p>{totalExcerpts[0].items.join(" ")}</p>
-          </div>
-        )
-      })}
-    </div>        
+    {props.groups.length > 6 ? 
+      <div className={S.holder}>
+        {props.groups.map( i => {
+          const totalExcerpts = props.excerpts.filter( (item) => {
+            //console.log(i)
+            return item.group === i.topicName
+          })
+          return (
+            <div className={S.banner} key={i.topicName} onClick={props.setTopic.bind(this, i.topicName)}>
+              <h2>{i.topicName}</h2>
+            
+              <p>{totalExcerpts[0].items.join(" ")}</p>
+            </div>
+          )
+        })}
+      </div>     
+      : 
+      <div className={S.holder}>
+        <div className={S.banner} key="notNow" >
+          <h3>The Archive has not yet Opend</h3>
+        </div>
+      </div>
+    }
+         
   </section>
 )
 
