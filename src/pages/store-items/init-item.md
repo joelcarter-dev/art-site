@@ -10,8 +10,8 @@ date: 2019-02-10T04:25:17.482Z
 type:
   - Init
 featuredImage: ../img/DSC06288.jpg
-original: false
-storeHighlight: false
+original: true
+storeHighlight: true
 is_archive_item: true
 is_store_item: true
 arcive_topic:
