@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import GridTemplate from '../components/gridTemplate/gridTemplate.js'
 import { graphql } from 'gatsby'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-import Header from '../components/Header/Header.js'
 
 //IS IT WATERCOLOR WITH A "U" IN NZ?
 
@@ -14,7 +13,7 @@ class Category extends Component {
     })
     return (
       <div style={{position: "absolute", width: "100%", height: "100%", overflow: "hidden", overflowY: "scroll"}}>
-        <HeaderMeta pageTitle={this.props.pageContext.medium} itemGroup={allTitles}/>
+        <HeaderMeta subTitle={this.props.pageContext.category} itemGroup={this.props.data.allMarkdownRemark}/>
                       
         <GridTemplate data={this.props.data.allMarkdownRemark.edges} title={this.props.pageContext.category}/>
         
@@ -36,6 +35,7 @@ query TagPage($category: String) {
       fields: [frontmatter___date], order: DESC}, 
       filter: {frontmatter: {tags: {in: [$category]} is_store_item: {eq: true} }}
     ) {
+    totalCount
     edges {
       node {
         fields {

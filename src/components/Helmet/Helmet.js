@@ -6,13 +6,6 @@ import apple_touch_icon from "../../img/favicons/apple-touch-icon.png"
 import favicon_32x32 from "../../img/favicons/favicon-32x32.png"
 import safari_pinned_tab from "../../img/favicons/safari-pinned-tab.svg"
 
-//Can take a data from a store item and apply in desc meta tags 
-//Takes a "pageTitle" prop that dispays "pageTitle | Site Title"
-//If there is an art item data obj, its title will overrule the page prop if presant
-//tage an "itemGroup" object meants for tags and types. has array of titles and totalcount
-
-//
-
 const toUpperCase = (phrase) => {
   return phrase
     .toLowerCase()
@@ -26,7 +19,10 @@ const maxLength = (string, length) => {
   return trimmedString
 }
 
-const SEO = ({ title, subTitle, description, image, pathName, article }) => (
+//take an optinal itemGroup prop for things like car . med pages where 
+//groups of items need to be described
+
+const SEO = ({ title, subTitle, description, image, pathName, article, itemGroup}) => (
   <StaticQuery
     query={query}
     render={(
@@ -39,19 +35,26 @@ const SEO = ({ title, subTitle, description, image, pathName, article }) => (
         },
       }}
     ) => {
+      
+      let itemDesc
+      if (itemGroup != null) {
+        let items = []
+        itemGroup.edges.map( ({node: item})  => {
+          items.push(item.frontmatter.title)
+        })
+        items.slice(0, 5).join(", ")
+        itemDesc = `${itemGroup.totalCount} art pieces under ${subTitle}. View ${items}... and more.`
+
+      }
+
       const seo = {
         title: subTitle != null ? `${subTitle} | ${defaultTitle}` : defaultTitle,
-        description: description || defaultDescription,
+        description: itemGroup != null ? itemDesc : description || defaultDescription,
         //image: `${siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathName || "/"}`,
         articleTitle: `${subTitle} | Archive`,
       }
       
-      // let itemGroup = props.itemGroup || null
-      // let pageTitle = props.pageTitle || null
-      // let itemData = props.itemData || null
-      //let siteMetadata = data.site.siteMetadata || null
-
       return (
         
         <Helmet title={toUpperCase(seo.title)} >
@@ -98,6 +101,7 @@ SEO.propTypes = {
   image: PropTypes.string,
   pathName: PropTypes.string,
   article: PropTypes.bool,
+  itemGroup: PropTypes.object
 }
 
 SEO.defaultProps = {
@@ -106,6 +110,7 @@ SEO.defaultProps = {
   image: null,
   pathName: null,
   article: false,
+  itemGroup: null,
 }
 
 const query = graphql`
