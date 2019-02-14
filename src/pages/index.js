@@ -81,6 +81,7 @@ export class IndexPage extends Component {
         
         <section className={S.title}>
           <h1>{metaData.title}</h1>
+          <h2>{metaData.tagLine}</h2>
         </section>
         
         <section className={S.imageHolder}>
