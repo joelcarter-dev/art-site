@@ -49,81 +49,50 @@ $mainLogo: .03
         position: absolute !important
         bottom: 0 !important
       .holder
-        size: 100%
+        height: 500px
+        min-width: 320px
+        width: 40vw 
         position: absolute
-        top: 0
+        top: 20vw
+        left: 20vw
         @media screen and (max-width: $m)
-          top: -60px
-        .heading, .desc
-          position: absolute
-          left: 16vw
-          margin: 60px
-          @media screen and (max-width: $m)
+          left: center
+          top: 200px
+          *
             margin: 0 auto
-            left: center
+            text-align: center
+          a
+            margin-top: 30px
+        .heading, .desc, a
+          z-index: 9000
+          margin-bottom: 30px
+          display: block
           color: $red-white
           z-index: 3
           font-family: 'cinzel decorative', 'cinzel', serif
         .heading
           width: auto
-          top: 30%
           z-index: 3
           +resFontSize(25px, 45px)
         .desc
           max-width: 400px
-          top: 37%
-          margin: 60px
           z-index: 3
           @media screen and (max-width: $m)
             margin: 0 auto
             width: 100%
             text-align: center
+            .heading, .desc
+              top: 0
           +resFontSize(15px, 20px)
-        .archiveItemHolder
-          width: 400px
-          height: 400px
-          position: absolute
-          top: 40%
-          right: 20vw
-          @media screen and (max-width: $m)
-            left: center
-          .archiveItem
-            width: 400px
-            padding: 60px
-            height: 400px
-            overflow: hidden
-            h3, p
-              color: $red-white
-              width: 100%
-            h3
-              font-size: 30px
-              font-weight: 600
-              text-transform: lowercase
-              text-align: center
-              margin: 0 auto
-              opacity: 0.9
-              font-family: 'cinzel', serif
-            p
-              font-size: 14px
-              margin: 0 auto
-              opacity: 0.9
-              word-break: break-all
-              text-shadow: 0 0 2px $red-white
-              padding: 10px
-          a
-            color: $red-white
-            padding: 20px
-            text-decoration: none
-            border: 1px solid $red-white
-            position: absolute
-            margin-top: 30px
-            right: 0
-            font-size: 18px
-            letter-spacing: 2px
-            @media screen and (max-width: $m)
-             left: center
-            width: 200px
-          
+        a
+          color: $red-white
+          padding: 20px
+          text-decoration: none
+          border: 1px solid $red-white
+          font-size: 18px
+          letter-spacing: 2px
+          width: 200px
+          font-family: 'Alegreya Sans SC'
 
   .title
     left: 0
