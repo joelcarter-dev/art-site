@@ -6,7 +6,6 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import { uniqBy, kebabCase } from 'lodash'
 
-
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel'
 

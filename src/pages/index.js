@@ -25,7 +25,7 @@ const ArchiveSlide = (props) => {
         <h2 className={S.heading}>{heading}</h2>
         <h3 className={S.desc}>{desc}</h3>
           
-        <Link to="/archive/" > View In Archive </Link>
+        <Link to="/archive/" > View Archive </Link>
         
       </div>
     </div>
