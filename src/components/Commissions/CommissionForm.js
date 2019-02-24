@@ -89,13 +89,13 @@ class CommissionForm extends Component {
         ...this.state
       })
     })
-      // ! change msg for feedback based on comissions open / closed
       .then(() => 
-				this.setState({submitMsg: this.props.commissionsOpen ? 
-					"Thank you. If your commission is a physical piece, I will be contacting you for shipping details."
+				this.setState({formSent: true, submitMsg: this.props.commissionsOpen ? 
+					"Thank you. If your commission is a physical piece, I will be contacting you for shipping details." 
 					:
 					"Thank you for your interest. Though commissions are closed, I'll try to go back to you. If not, you're in queue."
-				}))
+        }))
+      
       .catch(error => this.setState({submitMsg: `Something went wrong: ${error}`}))
 
   }
@@ -153,9 +153,11 @@ class CommissionForm extends Component {
                 required
               />
                     
-              <div id={S.buttonHolder}>
-                <button type="submit" id={S.formButton} >Submit</button>
-              </div>
+              {!this.state.formSent && 
+                <div id={S.buttonHolder}>
+                  <button type="submit" id={S.formButton} >Submit</button>
+                </div>
+              }
         
               <p>{this.state.submitMsg}</p>
             </form>
