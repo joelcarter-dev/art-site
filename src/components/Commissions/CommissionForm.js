@@ -116,8 +116,8 @@ class CommissionForm extends Component {
             <span className={S.sliderNumber}>Your Budget <h4> ${this.state.budget || 0} </h4></span>
             <Slider onCahngeBudget={this.onCahngeBudget}/>
   
-            <form id="commissionForm" name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-              <input type="hidden" name="bot-field" value="contact" />
+            <form id="commissionForm" name="commissions" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+              <input type="hidden" name="bot-field" value="commissions" />
 
               <SelectType onSelectMedium={this.onSelectMedium} className={S.dropdown}/>
   
