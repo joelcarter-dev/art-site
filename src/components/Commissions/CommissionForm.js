@@ -59,7 +59,7 @@ class CommissionForm extends Component {
   }
 
   onSelectMedium = (medium) => {
-    this.setState({medium: medium})
+    this.setState({medium: medium.label})
   }
 
   onCahngeBudget = (budget) => {
@@ -117,7 +117,7 @@ class CommissionForm extends Component {
             <Slider onCahngeBudget={this.onCahngeBudget}/>
   
             <form id="commissionForm" name="commissionForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-              <input type="hidden" name="bot-field" value="contact" />
+              <input type="hidden" name="bot-field" value="commissionForm" />
 
               <SelectType onSelectMedium={this.onSelectMedium} className={S.dropdown}/>
   

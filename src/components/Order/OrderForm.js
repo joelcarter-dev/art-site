@@ -21,13 +21,13 @@ export default class OrderForm extends Component {
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
-  
-   componentDidMount() {
-      this.setState({
-        title: this.props.orderData[0].frontmatter.title,
-        url: this.props.orderData[0].fields.slug
-      })
-   }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.orderData[0].frontmatter.title,
+      url: this.props.orderData[0].fields.slug
+    })
+  }
     
     
   handleChange = (event) => {
@@ -64,7 +64,7 @@ export default class OrderForm extends Component {
       <section id={S.OrderForm}>
       
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-          <input type="hidden" name="bot-field" value="contact" />
+          <input type="hidden" name="bot-field" value="orderForm" />
  
           <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.title || ""} />
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
