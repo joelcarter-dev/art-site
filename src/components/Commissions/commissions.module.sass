@@ -1,0 +1,183 @@
+@import "../../pages/main.sass"
+
+#Button
+  color: $red-white
+  padding: 15px
+  border: 1px solid $red-white
+  font-size: 18px
+  letter-spacing: 2px
+  width: auto
+  height: 54px
+  display: block
+  cursor: pointer
+  background-color: transparent
+  font-family: 'Alegreya Sans SC'
+
+#Commissions
+  width: 100%
+  min-height: 300px
+  height: auto
+  position: relative
+  background-color: $main-black
+  padding-top: 30px
+  .holderOpen, .holderClosed
+    margin: 0 auto
+    // padding: 60px
+    max-width: 520px
+    h1
+      color: $red-white
+      text-align: center
+      font-weight: 300
+      margin-bottom: 30px
+      +resFontSize(20px, 30px)
+    .left, .right
+      width: 50%
+      min-height: 200px
+
+    .left
+      float: left
+      display: flex
+      justify-content: center
+      align-items: center
+    .right
+      float: right
+      //border-left: 2px solid $red-white
+      span, h3
+        display: none
+      ul
+        border-left: 2px solid $red-white
+        min-height: 200px
+        padding-left: 30px
+        li
+          padding: 5px
+          a
+            color: $red-white
+            text-decoration: none
+    @media screen and (max-width: $s)
+      .left, .right
+        width: 100%
+      .left
+        display: block
+        min-height: auto
+        button
+          margin: 0 auto
+      .right
+        ul
+          margin: 60px
+          margin-top: 35px
+
+#CommissionForm
+  size: 100%
+  position: fixed 
+  bottom: 0
+  z-index: 900000001
+  background-color: $red-white
+  opacity: 0.9
+  display: flex
+  justify-content: center
+  align-items: center
+  .holder
+    position: relative
+    width: 500px
+    .formHolder
+      padding: 30px
+      h3
+        text-align: center
+        line-height: 3
+      .close
+        position: fixed
+        top: 0
+        left: -20px
+      .sliderNumber
+        display: flex
+        align-items: first baseline
+        h4
+          margin-left: 10px
+      #Slider
+        width: 100%
+        height: 50px
+        span
+          margin-bottom: 20px
+        .budgetSlider
+          width: 100%
+          height: 20px
+          overflow: hidden
+          margin-top: 10px
+          .handle
+            size: 20px
+            border-radius: 50%
+            border: 2px solid $main-black
+            background-color: $red-white
+          .bar
+            background-color: $red-black
+            width: 100%
+            height: 2px
+            margin-top: 8px
+      form
+        display: inline-block
+        width: 100%
+        .input
+          font-family: 'Alegreya Sans SC'
+          background-color: $red-white
+          color: $red-black
+          margin: 0 auto
+          padding: 20px
+          border: none
+          display: block
+          border-bottom: 2px solid $red-black
+          font-size: 16px
+          width: 80%
+          max-width: 300px
+          line-height: 40px
+          letter-spacing: 2px
+          outline: none
+          transition: all 0.3s ease-in-out
+          &:focus
+            outline: none
+            padding-left: 10px
+            padding: 15px 0 15px 0
+            max-width: 300px
+          &:invalid 
+            box-shadow: none
+          p
+            font-size: 16px   
+        .dropdown
+          height: 40px
+          margin: 20px 0 20px 0
+          *
+            background-color: $red-white
+
+  #buttonHolder
+    width: 100%
+    height: 60px
+    display: flex
+    #formButton
+      padding: 10px
+      width: 100px
+      color: $red-black
+      background-color: transparent
+      margin: 10px
+      cursor: pointer
+      font-size: 16px
+      letter-spacing: 2px
+      position: relative
+      float: right
+      border: none
+      &:before 
+        content: ''
+        display: block
+        width: 50%
+        position: absolute 
+        bottom: 0
+        border: none
+        border-bottom: 2px solid $red-black
+      &:hover
+        &:before 
+          content: ''
+          display: block
+          position: absolute 
+          bottom: 0
+          border: none
+          width: 80%
+          border-bottom: 2px solid $red-black
+          transition: all 0.1s ease-in-out

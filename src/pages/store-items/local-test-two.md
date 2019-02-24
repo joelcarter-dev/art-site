@@ -1,12 +1,12 @@
 ---
-title: Init Item
-about: Init About
-artistNotes: Init Notes
-price: '0'
+title: Test Two
+about: Test Two About
+artistNotes: Test Two Notes
+price: '2'
 tags:
-  - Init Tag
-  - Commercial
-info: Init
+  -  Map
+  - Useless Tag
+info: Test Two Init
 date: 2019-02-10T04:25:17.482Z
 type:
   - Init Medium

@@ -67,8 +67,10 @@ body
     grid-area: main
     position: relative
     padding: 0
-    @media screen and (max-width: 100em)
-      padding: 60px
+    padding: 60px
+    // @media screen and (max-width: 100em)
+    @media screen and ($s)
+      padding: 0
     padding-top: 3vw
     width: 100%
     height: auto

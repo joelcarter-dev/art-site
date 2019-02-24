@@ -17,7 +17,7 @@ export const mainLogoSvg = `
 
 export const sidesSvg = `<svg  viewBox="0 0 768 135" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="Art-Shop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Tablet-Portrait" transform="translate(0.000000, -534.000000)" fill="#10090D">
+        <g id="Tablet-Portrait" transform="translate(0.000000, -534.000000)" fill="#00030D">
             <path d="M0,534 L768,534 L768,669 L0,669 L0,534 Z M384,654 L768,534 L0,534 L384,654 Z" id="Combined-Shape"></path>
         </g>
     </g>

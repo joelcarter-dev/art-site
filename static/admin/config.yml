@@ -17,19 +17,67 @@ collections:
       - {label: "About", name: "about", widget: "text", required: false}
       - {label: "Artist Notes", name: "artistNotes", widget: "text", required: false}
       - {label: "Price", name: "price", widget: "string", required: false}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
+      
       - {label: "Info", name: "info", widget: "string", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
+
+      # ! ALL TAGS MEDIUM/TYPES AND NAMES MUST BE capitalised NOT LOWERCASE
+      - label: "Tags"
+        name: "tags" 
+        widget: "select" 
+        required: true
+        feild:  
+          - label: "Tag Name" 
+            name: "tagName" 
+            widget: "string" 
+            required: false
+            multiple: true
+            ## List of all available TAGS
+            options: 
+              - Commercial
+              - Commissions
+              - Logos
+              - Graphics
+              - Maps
+              - Landscapes
+              - Sketches
+              - Abstract
+              - Fantasy
+              - Concept Art
+              - Environment Concepts
       
       - label: "Type"
         name: "type" 
-        widget: "list" 
+        widget: "select" 
         required: false
         feild:  
           - label: "Type Name" 
             name: "typeName" 
             widget: "string" 
             required: false
+            multiple: true
+            ## List of  available mediums(types)
+            options: 
+              - Watercolor
+              - Digital
+              - Oil
+              - Acrylic
+              - Pastel
+              - Ink
+              - Graphite
+
+      - lable: "Archive Topic" 
+        name: "arcive_topic" 
+        widget: "select"
+        multiple: true
+        required: false
+        ## List of arcive topics
+        options: 
+          - Maps
+          - Peoples
+          - Locations
+          - Creatures
+          - History
 
       - label: "Featured Image"
         name: "featuredImage"

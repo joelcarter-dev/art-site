@@ -171,7 +171,11 @@ class ArtPice extends Component {
       
         <div 
           className={S.imageHolder} 
-          style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}>
+
+          // ! testing image responsive without this
+          //style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}
+          
+        >
          
           <Img
             fluid={itemData.featuredImage.childImageSharp.fluid} 

@@ -43,6 +43,7 @@
     "react-paypal-express-checkout": "git+https://github.com/thinhvo0108/react-paypal-express-checkout.git",
     "react-select": "^2.3.0",
     "react-select-country-list": "^1.0.7",
+    "react-slider": "^0.11.2",
     "react-validify": "^4.0.2",
     "react-vivus": "0.0.2",
     "rucksack-css": "^1.0.2",
