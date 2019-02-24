@@ -117,7 +117,8 @@ class CommissionForm extends Component {
             <Slider onCahngeBudget={this.onCahngeBudget}/>
   
             <form id="commissionForm" name="commissions" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-              <input type="hidden" name="bot-field" value="commissions" />
+              <input type="hidden" name="commissions" value="commissions" />
+              <input type="hidden" name="bot-field" onChange={this.handleChange} />
 
               <SelectType onSelectMedium={this.onSelectMedium} className={S.dropdown}/>
   
