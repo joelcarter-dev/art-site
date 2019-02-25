@@ -132,6 +132,9 @@ class CommissionForm extends Component {
             <form id="commissionForm" name="commissions" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
               <input type="hidden" name="commissions" value="commissions" />
               <input type="hidden" name="bot-field" onChange={this.handleChange} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="budget" value={this.state.budget || ""} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="size" value={this.state.size || ""} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="medium" value={this.state.medium || ""} />
 
               <SelectType 
                 onSelect={this.onSelectMedium} 
