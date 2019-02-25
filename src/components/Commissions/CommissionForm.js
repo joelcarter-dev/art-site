@@ -52,7 +52,7 @@ const SelectType = (props) => {
       options={props.types ? types : sizes}
       // value={this.state.medium.value}
       // name={this.state.medium.lable}
-      onChange={props.onSelectMedium}
+      onChange={props.onSelect}
       placeholder={props.types ? "Select Medium" : "Select Size"}
       className={S.dropdown}
     />
@@ -71,7 +71,7 @@ class CommissionForm extends Component {
     this.setState({medium: medium.label})
   }
 
-  onSelectMedium = (size) => {
+  onSelectSize = (size) => {
     this.setState({size: size.label})
   }
 
@@ -85,7 +85,7 @@ class CommissionForm extends Component {
 
   handleSubmit = (e) => {
 
-    if (this.state.medium === null) {
+    if (this.state.medium === null && this.state.size === null) {
       this.setState({submitMsg: "Please select your Medium"})
       e.preventDefault()
       return
@@ -134,13 +134,13 @@ class CommissionForm extends Component {
               <input type="hidden" name="bot-field" onChange={this.handleChange} />
 
               <SelectType 
-                onSelectMedium={this.onSelectMedium} 
+                onSelect={this.onSelectMedium} 
                 className={S.dropdown}
                 types={true}  
               />
 
               <SelectType 
-                onSelectMedium={this.onSelectSize} 
+                onSelect={this.onSelectSize} 
                 className={S.dropdown}
               />
   
