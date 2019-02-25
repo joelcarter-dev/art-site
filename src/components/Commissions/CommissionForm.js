@@ -37,14 +37,23 @@ const SelectType = (props) => {
     { value: 'graphite', label: 'Graphite' },
     { value: 'AnyMixed', label: 'Any / Mixed' },
   ]
+
+  const sizes = [
+    { value: '149 x 210mm', label: '149 x 210mm' },
+    { value: '299 x 210mm', label: '299 x 210mm' },
+    { value: '210 x 295mm', label: '210 x 295mm' },
+    { value: '420 x 295mm', label: '420 x 295mm' },
+    { value: 'any', label: 'Any' },
+    { value: 'Custom', label: 'Custom (specify)' },
+  ]
   
   return (
     <Select
-      options={types}
+      options={props.types ? types : sizes}
       // value={this.state.medium.value}
       // name={this.state.medium.lable}
       onChange={props.onSelectMedium}
-      placeholder="Select Medium"
+      placeholder={props.types ? "Select Medium" : "Select Size"}
       className={S.dropdown}
     />
   )
@@ -60,6 +69,10 @@ class CommissionForm extends Component {
 
   onSelectMedium = (medium) => {
     this.setState({medium: medium.label})
+  }
+
+  onSelectMedium = (size) => {
+    this.setState({size: size.label})
   }
 
   onCahngeBudget = (budget) => {
@@ -120,7 +133,16 @@ class CommissionForm extends Component {
               <input type="hidden" name="commissions" value="commissions" />
               <input type="hidden" name="bot-field" onChange={this.handleChange} />
 
-              <SelectType onSelectMedium={this.onSelectMedium} className={S.dropdown}/>
+              <SelectType 
+                onSelectMedium={this.onSelectMedium} 
+                className={S.dropdown}
+                types={true}  
+              />
+
+              <SelectType 
+                onSelectMedium={this.onSelectSize} 
+                className={S.dropdown}
+              />
   
               <input
                 className={S.input}
