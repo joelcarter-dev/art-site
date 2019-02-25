@@ -96,22 +96,23 @@ export default class Store extends Component {
 					<ItemList items={itemData.types} folder="mediums" title="Mediums" />
 				</div>
 
-				<section id={S.black}>
+				<section id={S.bottomHolder}>
 					<div className={S.angleSvgHolder}>
 						<InlineSVG src={sidesSvg} />
 					</div>
+					<div className={S.black}>
+						<Commissions>
+							{/* ! should display comission items */}
+							<ItemList 
+								items={commercialItems} 
+								folder="category" 
+								title="Commissions & Specialties" 
+								showCommissions={true}
+							/>
+						</Commissions>
 
-					<Commissions>
-						{/* ! should display comission items */}
-						<ItemList 
-							items={commercialItems} 
-							folder="category" 
-							title="Commissions & Specialties" 
-							showCommissions={true}
-						/>
-					</Commissions>
-
-					<Selected data={this.props.data.selected.edges} />
+						<Selected data={this.props.data.selected.edges} />
+					</div>
 				</section>
 			</section>
 		)

@@ -56,70 +56,72 @@
           a
             text-decoration: none
 
-  #black
+  #bottomHolder
     .angleSvgHolder
       //margin-bottom: -30px
       svg
         margin-bottom: -6px
-    #selectedHolder
-      width: 100%
+    .black
       background-color: $main-black
-      padding-bottom: 60px
-      position: relative
-      #selectedTitle
-        color: $red-white
+      #selectedHolder
         width: 100%
-        font-weight: 300
-        font-size: responsive
-        min-font-size: 30px
-        max-font-size: 50px
-        text-align: center
-        padding: 60px
-        margin: 0 auto
-        letter-spacing: 2px
-        font-family: 'cinzel'
-        //font-family: 'bellefair'
-      .items
-        display: flex
-        flex-wrap: wrap
-        justify-content: center
-        width: 100%
+        
+        padding-bottom: 60px
         position: relative
-        @media screen and (max-width: $s)
-          display: block
-        .selectedItem
-          margin: 60px
-          padding-top: 0
-          width: 320px
+        #selectedTitle
+          color: $red-white
+          width: 100%
+          font-weight: 300
+          font-size: responsive
+          min-font-size: 30px
+          max-font-size: 50px
+          text-align: center
+          padding: 60px
+          margin: 0 auto
+          letter-spacing: 2px
+          font-family: 'cinzel'
+          //font-family: 'bellefair'
+        .items
+          display: flex
+          flex-wrap: wrap
+          justify-content: center
+          width: 100%
           position: relative
-          @media screen and (max-width: $s) 
-            margin: 0 auto 
-            h3
-              text-align: center
-          //   // .gatsby-image-wrapper
-          //   //   margin: 0 auto
-          h3
-            color: $red-white
-            font-weight: 300
+          @media screen and (max-width: $s)
+            display: block
+          .selectedItem
+            margin: 60px
+            padding-top: 0
+            width: 320px
             position: relative
-            padding-bottom: 20px
-            font-family: 'cinzel'
-            text-transform: uppercase
-            max-width: max-content
-            margin-left: 2em
-            //font-family: 'alegreya sans sc'
-            @keyframes grow
-              from 
-                width: 10%
-              to 
-                width: 40%
-            &::before 
-              content: ''
-              display: block
-              max-width: 200px
-              position: absolute 
-              bottom: 4px
-              border: none
-              border-bottom: 2px solid $red-white
-              animation: grow 1s forwards
-              transition: all 1s linear 
+            @media screen and (max-width: $s) 
+              margin: 0 auto 
+              h3
+                text-align: center
+            //   // .gatsby-image-wrapper
+            //   //   margin: 0 auto
+            h3
+              color: $red-white
+              font-weight: 300
+              position: relative
+              padding-bottom: 20px
+              font-family: 'cinzel'
+              text-transform: uppercase
+              max-width: max-content
+              margin-left: 2em
+              //font-family: 'alegreya sans sc'
+              @keyframes grow
+                from 
+                  width: 10%
+                to 
+                  width: 40%
+              &::before 
+                content: ''
+                display: block
+                max-width: 200px
+                position: absolute 
+                bottom: 4px
+                border: none
+                border-bottom: 2px solid $red-white
+                animation: grow 1s forwards
+                transition: all 1s linear 
