@@ -1,8 +1,8 @@
 ---
 title: Init Item
-about: Init About
-artistNotes: Init Notes
-price: '0'
+about: Init About string
+artistNotes: Init Notes. Notes about the item
+price: '2'
 tags:
   - Init Tag
   - Commercial
