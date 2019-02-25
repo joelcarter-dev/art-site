@@ -115,7 +115,7 @@ class CommissionForm extends Component {
 
   render() {
     return (
-      <div id={S.CommissionForm}>
+      <div id={this.props.formOpen ? S.CommissionForm : S.CommissionFormHidden}>
         <div className={S.holder}>
 
           <div className={S.formHolder}>

@@ -19,10 +19,13 @@ class Commissions extends Component {
 	}
 
 	render() {
-		if (this.state.formOpen) {
-			return <CommissionForm commissionsOpen={this.props.open} toggleForm={this.toggleForm} />
-		} else {
-			return (
+		return (
+			<>
+				<CommissionForm  
+					formOpen={this.state.formOpen}
+					commissionsOpen={this.props.open} 
+					toggleForm={this.toggleForm} 
+				/>
 				<div id={S.Commissions}>
 					<div className={S.holderOpen}>
 						<h1>{this.props.open ? 'Commissions are Open' : 'Commissions are Closed'}</h1>
@@ -35,10 +38,11 @@ class Commissions extends Component {
 						<div className={S.right}>{this.props.children}</div>
 					</div>
 				</div>
-			)
-		}
+			</>
+		)
 	}
 }
+
 
 // NOTE CAHNGE FOR COMMISION OPEN / CLOSED
 Commissions.defaultProps = {
