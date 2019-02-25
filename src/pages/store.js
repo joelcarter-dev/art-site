@@ -22,17 +22,29 @@ const ItemList = (props) => (
 		<span>Sort By</span>
 		<h3>{props.title}</h3>
 		<ul>
-			{props.items.map((item) => {
-				if (item.fieldValue !== "commercial" && item.fieldValue !== "Commercial") 
-					return(
-						<li key={item.fieldValue}>
-							<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
-								{item.fieldValue} | {item.totalCount}
-							</Link>
-						</li>
-					)
-				
-			})}
+		{props.showCommissions ? 
+			props.items.map((item) => ( 
+				<li key={item.fieldValue}>
+					<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
+						{item.fieldValue} | {item.totalCount}
+					</Link>
+				</li>
+			))
+		:
+			props.items.map((item) => {
+				if (
+					item.fieldValue !== "commercial" && item.fieldValue !== "Commercial" &&
+					item.fieldValue != "commissions" && item.fieldValue != "Commissions"
+				) 
+				return(
+					<li key={item.fieldValue}>
+						<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
+							{item.fieldValue} | {item.totalCount}
+						</Link>
+					</li>
+				)
+			})
+		}
 		</ul>
 	</div>
 )
@@ -90,8 +102,13 @@ export default class Store extends Component {
 					</div>
 
 					<Commissions>
-						{/* ! using tag data, need to exstract commissioin/comersial data */}
-						<ItemList items={commercialItems} folder="category" title="Categories" />
+						{/* ! should display comission items */}
+						<ItemList 
+							items={commercialItems} 
+							folder="category" 
+							title="Commissions & Specialties" 
+							showCommissions={true}
+						/>
 					</Commissions>
 
 					<Selected data={this.props.data.selected.edges} />
