@@ -106,29 +106,10 @@ class ArtPice extends Component {
   constructor(props) {
     super(props)
     this.state = { 
-      maxWidth: this.updateWindowDimensions(),
       orderFormHidden: true
     }
-    this.updateWindowDimensions()
   }
-  
-  componentDidMount() {
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
-  
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions)
-  }
-  
-  updateWindowDimensions = () => { 
-    if (typeof window !== 'undefined' && window ) {
-      let maxWidth = window.innerHeight 
-      return maxWidth
-    } else {
-      return
-    }
-  }
-  
+
   toggleForm = () => {
     this.setState({orderFormHidden: !this.state.orderFormHidden})
   }
@@ -169,13 +150,7 @@ class ArtPice extends Component {
           <Sidebar data={itemData} toggleForm={this.toggleForm}/>
         </div>
       
-        <div 
-          className={S.imageHolder} 
-
-          // ! testing image responsive without this
-          //style={{ "maxWidth": `calc(${this.state.maxWidth}px - 160px)` }}
-          
-        >
+        <div className={S.imageHolder}>
          
           <Img
             fluid={itemData.featuredImage.childImageSharp.fluid} 
