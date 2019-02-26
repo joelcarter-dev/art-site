@@ -14,9 +14,27 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "About", name: "about", widget: "text", required: false}
-      - {label: "Artist Notes", name: "artistNotes", widget: "text", required: false}
-      - {label: "Price", name: "price", widget: "string", required: false}
+      - {
+          label: "About", 
+          name: "about", 
+          widget: "text", 
+          required: false,
+          hint: "Used for SEO descriptions, does not show in store"  
+        }
+      - {
+          label: "Artist Notes", 
+          name: "artistNotes", 
+          widget: "text", 
+          required: false,
+          hint: "Add a story about the pice. If it is an archive item, hint at it's content, nothing more"  
+      }
+      - {
+          label: "Price", 
+          name: "price", 
+          widget: "string", 
+          required: false,
+          hint: "Set to sold when item is gone / out of stock. Will show comission if taged with comission"
+        }
       
       - {
           label: "Info", 
@@ -33,7 +51,7 @@ collections:
         widget: "string" 
         required: false
         multiple: true
-        ## List of all available TAGS
+        hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price"
         options: 
           - Commercial
           - Commission
@@ -52,7 +70,7 @@ collections:
         widget: "string" 
         required: false
         multiple: true
-        ## List of  available mediums(types)
+        hint: "Set item medium, add multible if medium is mixed"
         options: 
           - Watercolor
           - Digital
@@ -67,7 +85,7 @@ collections:
         widget: "select"
         multiple: true
         required: false
-        ## List of archive topics
+        hint: "Set catergory/topic for archive page"
         options: 
           - Maps
           - Peoples
@@ -81,42 +99,53 @@ collections:
         customMediaPath: "../img/"
         required: false
         rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
-      
-      ##things to make item part of the archive
-      ## this separate normal store art posts from archive posts that could just be text. In that case this must be false
-      ## If the archive item is also going to show in the store, then this must be true.
-      
-      
+        hint: "Choose a good image, please. Clarify if it comes with frame if it has one in the image"
+            
       ##common bools just so they are grouped with all the other bools. Happy family
       - {label: "Original", name: "original", widget: "boolean", default: true}
       - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       
-      ## based on this, if true, I somehow need to link pass a link to the store item from the archive item, and vise versa
-      
-      ## archive_topic only shows in data if one is added. Could use this as is_archive_item instead as well as topic? 
-      - {label: "Is Archive Item", name: "is_archive_item", widget: "boolean", default: false}
+      - {
+          label: "Is Archive Item", 
+          name: "is_archive_item", 
+          widget: "boolean", 
+          default: false,
+          hint: "Set to false if item is just a Store item"
+        }
       
       ## This is so I use less queries
-      - {label: "Is Store Item", name: "is_store_item", widget: "boolean", default: true}
+      - {
+          label: "Is Store Item", 
+          name: "is_store_item", 
+          widget: "boolean", 
+          default: true,
+          hint: "Set to false if item is just an Archive item"
+      }
       
       ##the html blog content of an archive item. Only archive items should have them
       
-      - {label: "Body", name: "body", widget: "markdown", required: false}
+      - {
+          label: "Body", 
+          name: "body", 
+          widget: "markdown", 
+          required: false,
+          hint: "Leave empty if NOT and Archive item"
+        }
       
       ##the list of topics an archive item can have
   
-      - lable: "Archive Topic" 
-        name: "archive_topic" 
-        widget: "select"
-        multiple: true
-        required: false
-        ## List of archive topics
-        options: 
-          - Maps
-          - Peoples
-          - Locations
-          - Creatures
-          - History
+      # - lable: "Archive Topic" 
+      #   name: "archive_topic" 
+      #   widget: "select"
+      #   multiple: true
+      #   required: false
+      #   ## List of archive topics
+      #   options: 
+      #     - Maps
+      #     - Peoples
+      #     - Locations
+      #     - Creatures
+      #     - History
 
       
   # - name: "archive-item"
