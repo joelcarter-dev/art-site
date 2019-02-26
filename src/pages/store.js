@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
-import Img from 'gatsby-image'
+import ArtImage from '../components/ArtImgae/ArtImage'
 import { kebabCase } from 'lodash'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Header from '../components/Header/Header.js'
@@ -56,14 +56,17 @@ const Selected = (props) => (
 	<div id={S.selectedHolder}>
 		<h2 id={S.selectedTitle}>Personally Selected</h2>
 		<div className={S.items}>
-			{props.data.map(({ node: item }, i) => (
-				<div className={S.selectedItem} key={i}>
-					<Link to={item.fields.slug}>
-						<h3>{item.frontmatter.title}</h3>
-						<Img fixed={item.frontmatter.featuredImage.childImageSharp.fixed} />
-					</Link>
-				</div>
-			))}
+			{props.data.map(({ node: item }, i) => {
+				const frontmatter = item.frontmatter
+				return (
+					<div className={S.selectedItem} key={i}>
+						<Link to={item.fields.slug}>
+							<h3>{frontmatter.title}</h3>
+							<ArtImage imageData={frontmatter} fixed={frontmatter.featuredImage.childImageSharp.fixed} />
+						</Link>
+					</div>
+				)
+			})}
 		</div>
 	</div>
 )
@@ -134,6 +137,10 @@ query ArtFeedQuery {
         }
         frontmatter {
 					title
+					about
+          artistNotes
+          type
+          original
 					featuredImage {
 						childImageSharp {
 						  fixed(width: 320, height: 320, cropFocus: CENTER) {

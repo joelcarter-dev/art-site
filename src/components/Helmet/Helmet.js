@@ -19,7 +19,7 @@ const maxLength = (string, length) => {
   return trimmedString
 }
 
-//take an optinal itemGroup prop for things like car . med pages where 
+//take an optinal itemGroup prop for things like cat/med pages where 
 //groups of items need to be described
 
 const SEO = ({ title, subTitle, description, image, pathName, article, itemGroup}) => (

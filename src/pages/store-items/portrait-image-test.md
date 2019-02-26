@@ -13,4 +13,3 @@ storeHighlight: true
 is_store_item: true
 is_archive_item: false
 ---
-

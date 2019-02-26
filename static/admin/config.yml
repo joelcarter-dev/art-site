@@ -13,13 +13,18 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
+      - {
+          label: "Title", 
+          name: "title", 
+          widget: "string",
+          hint: "Use Capitalization for Tte Title"
+        }
       - {
           label: "About", 
           name: "about", 
           widget: "text", 
-          required: false,
-          hint: "Used for SEO descriptions, does not show in store"  
+          # required: false,
+          hint: "Used for SEO descriptions, does not show in store. Is needed to not have null in metadata"  
         }
       - {
           label: "Artist Notes", 

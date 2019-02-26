@@ -8,7 +8,7 @@ import Order from '../components/Order/Order.js'
 import { arrowSvg } from '../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
 import { kebabCase } from 'lodash'
-import Img from 'gatsby-image'
+import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
 
@@ -16,59 +16,77 @@ import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
 
-const Info = (props) => (
-  <div className={S.infoHolder}>
-    <div className={S.priceHolder}>
-      {props.data.price === "sold" || props.data.price === "SOLD" ?
+const Info = (props) => {
+
+  function setPriceCondition() {
+    if(props.data.price === "sold" || props.data.price === "SOLD") {
+      return (
         <div className={S.price}>
-          <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",}}>{props.data.price}</h3> 
+          <h3 style={{textTransform: "uppercase", fontFamily: "cinzel"}}>{props.data.price}</h3> 
         </div> 
-        :
+      )
+    } else if(props.data.tags.includes("Commission")) {
+      console.log("is comission")
+      return (
+        <div className={S.price}>
+          <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
+        </div> 
+      )
+    } else {
+      return (
         <div className={S.price}>
           <h3>${props.data.price}</h3>
           <span>NZD</span>    
         </div> 
+      )
+    }
+  }
+
+  return (
+    <div className={S.infoHolder}>
+      <div className={S.priceHolder}>
+        {setPriceCondition()}
+      </div>
+      <ul className={S.dataList}>
+        <li>{props.data.original ? "original work" : "print"}</li>
+        <li>{props.data.type}</li>
+        <li style={{textTransform: "none"}}>{props.data.info}</li>
+      </ul>
+      
+      {props.data.price === "sold" || props.data.price === "SOLD" 
+        ?
+          <div> </div>
+        :
+          <div className={S.buttonHolder}>
+            <button 
+              onClick={props.toggleForm}
+              className={S.artItemButton}
+            >
+              <span>Place Order</span>
+            </button> 
+            
+            
+            {props.data.is_archive_item &&
+              <button className={S.artItemButton}>
+                <Link to = {`archive/${kebabCase(props.data.title)}`}  className={S.storeLink} >
+                  View In Archive
+                </Link>
+              </button> 
+            }
+
+          </div>
+        
       }
     </div>
-    <ul className={S.dataList}>
-      <li>{props.data.original ? "original work" : "print"}</li>
-      <li>{props.data.type}</li>
-      <li style={{textTransform: "none"}}>{props.data.info}</li>
-    </ul>
-    
-    {props.data.price === "sold" || props.data.price === "SOLD" 
-      ?
-        <div> </div>
-      :
-        <div className={S.buttonHolder}>
-          <button 
-            onClick={props.toggleForm}
-            className={S.artItemButton}
-          >
-            <span>Place Order</span>
-          </button> 
-          
-          
-          {props.data.is_archive_item &&
-             <button className={S.artItemButton}>
-              <Link to = {`archive/${kebabCase(props.data.title)}`}  className={S.storeLink} >
-                View In Archive
-              </Link>
-            </button> 
-          }
-
-        </div>
-      
-    }
-  </div>
-)
+  )
+}
 
 const Notes = (props) => (
   <div className={S.notesHolder}>
     {/* is it 's or s*/}
     <h3>Artists Notes</h3>
     <div className={S.notes}>
-      <p>{props.data}</p>
+      <p>{props.data || "Notes are yet to come"}</p>
     </div>
   </div>  
 )
@@ -117,8 +135,6 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-    const slug = this.props.pageContext.node.fields.slug
-      //const itemId = this.props.pageContext.id
       
     return (
       <section className={S.artItemHolder}>
@@ -152,13 +168,7 @@ class ArtPice extends Component {
       
         <div className={S.imageHolder}>
          
-          <Img
-            fluid={itemData.featuredImage.childImageSharp.fluid} 
-            alt={`${itemData.type} ${itemData.original ? "original work" : "print"} ${itemData.title}`}
-            className={S.innerImage}
-            src=""
-            critical={true}
-          />
+          <ArtImage imageData={itemData} className={S.innerImage} critical={true} fluid={itemData.featuredImage.childImageSharp.fluid}/>
          
         </div>
         

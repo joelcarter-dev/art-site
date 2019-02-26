@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Link from 'gatsby-link'
-import Img from 'gatsby-image'
+import ArtImage from '../../components/ArtImgae/ArtImage'
 import S from './mediums.module.sass'
 import { arrowSvg } from '../../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
@@ -10,21 +10,28 @@ import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
 
-//IS IT WATERCOLOR WITH A "U" IN NZ?
+/** 
+ * @param {} data an object of art item nodes to display in a grid. Frontmatter requied 
+ * @param {} title a title of the page
+*/
 
 class GridTemplate extends Component {
   render() {
   
-    const postLinks = this.props.data.map( post => (
-      <div key={post.node.fields.slug} className={S.imageItem}>
-        <Link to={post.node.fields.slug}>
-          <h2>{post.node.frontmatter.title}</h2>
-          <Img
-            fluid={post.node.frontmatter.featuredImage.childImageSharp.fluid} 
-          />
-        </Link>
-      </div>
-    ))
+    const postLinks = this.props.data.map( post => {
+      const frontmatter = post.node.frontmatter
+      return (
+        <div key={post.node.fields.slug} className={S.imageItem}>
+          <Link to={post.node.fields.slug}>
+            <h2>{frontmatter.title}</h2>
+            <ArtImage
+              fluid={frontmatter.featuredImage.childImageSharp.fluid} 
+              imageData={frontmatter}
+            />
+          </Link>
+        </div>
+      )
+    })
   
     
     //from context

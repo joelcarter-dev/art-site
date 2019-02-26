@@ -42,6 +42,9 @@ query mediumsPage($medium: String) {
         }
         frontmatter {
           title
+          about
+          artistNotes
+          type
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 300){

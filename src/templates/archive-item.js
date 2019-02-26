@@ -3,7 +3,7 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import S from './archive.module.sass'
 import Link from 'gatsby-link'
-import Img from 'gatsby-image'
+import ArtImage from '../components/ArtImgae/ArtImage'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -58,8 +58,9 @@ class ArchiveItem extends Component {
                       </div>
                       
                     }
-                    <Img
-                      fluid={headerImage} 
+                    <ArtImage
+                      fluid={headerImage}
+                      imageData={frontmatter}
                       target="_blank"
                       className={S.innerImage}
                       src=""
