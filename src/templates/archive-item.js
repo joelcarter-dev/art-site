@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-import S from './arcive.module.sass'
+import S from './archive.module.sass'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 

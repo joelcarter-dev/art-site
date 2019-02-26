@@ -57,7 +57,7 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }
   }
-  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {eq: true}}}) {
+  AllArchiveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {eq: true}}}) {
     edges {
       node {
         id
@@ -73,7 +73,7 @@ exports.createPages = ({ actions, graphql }) => {
           about
           is_archive_item
           is_store_item
-          arcive_topic
+          archive_topic
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 1500) {
@@ -118,7 +118,7 @@ exports.createPages = ({ actions, graphql }) => {
     
     const allStorePosts = result.data.AllStoreItems.edges
 
-    const allArciveItems = result.data.AllArciveItems.edges
+    const allArchiveItems = result.data.AllArchiveItems.edges
     
     
     // NOTE I could rig up these pages to work like the others, but I would be looping a lot
@@ -166,7 +166,7 @@ exports.createPages = ({ actions, graphql }) => {
     
     createPagesFromData(allStorePosts, "art-pice.js", "store-items")
     
-    createPagesFromData(allArciveItems, "archive-item.js", "archive")
+    createPagesFromData(allArchiveItems, "archive-item.js", "archive")
 
   })
 }

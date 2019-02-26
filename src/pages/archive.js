@@ -82,8 +82,8 @@ export default class ArchiveIndex extends Component {
   allTopics = () => {
     let topicArrays = []
 
-    this.props.data.AllArciveItems.edges.map( ({node: item}) => (
-      topicArrays.push(item.frontmatter.arcive_topic)
+    this.props.data.AllArchiveItems.edges.map( ({node: item}) => (
+      topicArrays.push(item.frontmatter.archive_topic) 
     ))
     
     return uniqBy(Array.prototype.concat.apply([], topicArrays))
@@ -91,10 +91,10 @@ export default class ArchiveIndex extends Component {
     
   render() {
     
-    const allItems = this.props.data.AllArciveItems.edges
+    const allItems = this.props.data.AllArchiveItems.edges
     
     let groupedTopics = allItems.reduce((r, {node: item}) => {
-      for( let topic of item.frontmatter.arcive_topic ) {
+      for( let topic of item.frontmatter.archive_topic ) {
         (r[topic] || (r[topic] = [])).push( item )
       }
       return r
@@ -144,7 +144,7 @@ export default class ArchiveIndex extends Component {
 
 export const pageQuery = graphql`
 {
-  AllArciveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
+  AllArchiveItems: allMarkdownRemark(filter: {frontmatter: {is_archive_item: {ne: false}}}) {
     edges {
       node {
         id
@@ -156,7 +156,7 @@ export const pageQuery = graphql`
           title
           tags
           is_archive_item
-          arcive_topic    
+          archive_topic    
         }
       }
     }

@@ -18,7 +18,13 @@ collections:
       - {label: "Artist Notes", name: "artistNotes", widget: "text", required: false}
       - {label: "Price", name: "price", widget: "string", required: false}
       
-      - {label: "Info", name: "info", widget: "string", required: false}
+      - {
+          label: "Info", 
+          name: "info", 
+          widget: "string", 
+          required: false, 
+          description: "Used for things like size, type"
+        }
       - {label: "Publish Date", name: "date", widget: "datetime"}
 
       # ! ALL TAGS MEDIUM/TYPES AND NAMES MUST BE capitalised NOT LOWERCASE
@@ -35,7 +41,7 @@ collections:
             ## List of all available TAGS
             options: 
               - Commercial
-              - Commissions
+              - Commission
               - Logos
               - Graphics
               - Maps
@@ -67,11 +73,11 @@ collections:
               - Graphite
 
       - lable: "Archive Topic" 
-        name: "arcive_topic" 
+        name: "archive_topic" 
         widget: "select"
         multiple: true
         required: false
-        ## List of arcive topics
+        ## List of archive topics
         options: 
           - Maps
           - Peoples
@@ -86,16 +92,16 @@ collections:
         required: false
         rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
       
-      ##things to make item part of the arcive
-      ## this separate normal store art posts from arcive posts that could just be text. In that case this must be false
-      ## If the arcive item is also going to show in the store, then this must be true.
+      ##things to make item part of the archive
+      ## this separate normal store art posts from archive posts that could just be text. In that case this must be false
+      ## If the archive item is also going to show in the store, then this must be true.
       
       
       ##common bools just so they are grouped with all the other bools. Happy family
       - {label: "Original", name: "original", widget: "boolean", default: true}
       - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
       
-      ## based on this, if true, I somehow need to link pass a link to the store item from the arcive item, and vise versa
+      ## based on this, if true, I somehow need to link pass a link to the store item from the archive item, and vise versa
       
       ## archive_topic only shows in data if one is added. Could use this as is_archive_item instead as well as topic? 
       - {label: "Is Archive Item", name: "is_archive_item", widget: "boolean", default: false}
@@ -103,18 +109,18 @@ collections:
       ## This is so I use less queries
       - {label: "Is Store Item", name: "is_store_item", widget: "boolean", default: true}
       
-      ##the html blog content of an arcive item. Only arcive items should have them
+      ##the html blog content of an archive item. Only archive items should have them
       
       - {label: "Body", name: "body", widget: "markdown", required: false}
       
-      ##the list of topics an arcive item can have
+      ##the list of topics an archive item can have
   
       - lable: "Archive Topic" 
-        name: "arcive_topic" 
+        name: "archive_topic" 
         widget: "select"
         multiple: true
         required: false
-        ## List of arcive topics
+        ## List of archive topics
         options: 
           - Maps
           - Peoples

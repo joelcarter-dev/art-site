@@ -17,37 +17,40 @@ import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
 
-const ItemList = (props) => (
-	<div className={S.itemList}>
-		<span>Sort By</span>
-		<h3>{props.title}</h3>
-		<ul>
-		{props.showCommissions ? 
-			props.items.map((item) => ( 
-				<li key={item.fieldValue}>
-					<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
-						{item.fieldValue} | {item.totalCount}
-					</Link>
-				</li>
-			))
-		:
-			props.items.map((item) => {
-				if (
-					item.fieldValue !== "commercial" && item.fieldValue !== "Commercial" &&
-					item.fieldValue != "commissions" && item.fieldValue != "Commissions"
-				) 
-				return(
+const ItemList = (props) => {
+
+	return (
+		<div className={S.itemList}>
+			<span>Sort By</span>
+			<h3>{props.title}</h3>
+			<ul>
+			{props.showCommissions ? 
+				props.items.map((item) => ( 
 					<li key={item.fieldValue}>
 						<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
 							{item.fieldValue} | {item.totalCount}
 						</Link>
 					</li>
-				)
-			})
-		}
-		</ul>
-	</div>
-)
+				))
+			:
+				props.items.map((item) => {
+					if (
+						item.fieldValue !== "commercial" && item.fieldValue !== "Commercial" &&
+						item.fieldValue != "commissions" && item.fieldValue != "Commissions"
+					) 
+					return(
+						<li key={item.fieldValue}>
+							<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
+								{item.fieldValue} | {item.totalCount}
+							</Link>
+						</li>
+					)
+				})
+			}
+			</ul>
+		</div>
+	)
+}
 
 const Selected = (props) => (
 	<div id={S.selectedHolder}>
@@ -68,19 +71,7 @@ const Selected = (props) => (
 export default class Store extends Component {
 	render() {
 		const itemData = this.props.data.posts
-		const commercialItems = this.props.data.commercial.items
-		//console.log(itemData)
-
-		// let commercialItems = []
-
-		// itemData.tags.forEach((edge) => {
-		// 	console.log(edge)
-		// 	if (get(edge, `node.frontmatter.tags`)) {
-		// 		commercialItems = commercialItems.concat(edge.node.frontmatter.tags)
-		// 	}
-		// })
-		// commercialItems = uniq(commercialItems)
-		// // console.log(commercialItems)
+		const commercialItems = this.props.data.commercial ? this.props.data.commercial.items : null
 
 		return (
 			<section id={S.store}>
@@ -103,12 +94,14 @@ export default class Store extends Component {
 					<div className={S.black}>
 						<Commissions>
 							{/* ! should display comission items */}
-							<ItemList 
-								items={commercialItems} 
-								folder="category" 
-								title="Commissions & Specialties" 
-								showCommissions={true}
-							/>
+							{commercialItems &&
+								<ItemList 
+									items={commercialItems} 
+									folder="category" 
+									title="Commissions & Specialties" 
+									showCommissions={true}
+								/>
+							}
 						</Commissions>
 
 						<Selected data={this.props.data.selected.edges} />

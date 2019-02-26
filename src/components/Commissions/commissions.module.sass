@@ -32,33 +32,35 @@
       font-weight: 300
       margin-bottom: 30px
       +resFontSize(20px, 30px)
-    .left, .right
-      width: 50%
-      min-height: 200px
-
-    .left
-      float: left
+    .leftRightHolder
       display: flex
-      justify-content: center
-      align-items: center
-    .right
-      float: right
-      //border-left: 2px solid $red-white
-      span
-        display: none
-      h3
-        margin-top: 60px
-        text-align: center
-        color: $red-white
-        font-weight: 500
-      ul
-        border-left: 2px solid $red-white
-        padding-left: 30px
-        li
-          padding: 5px
-          a
-            color: $red-white
-            text-decoration: none
+      .left, .right
+        width: 50%
+        min-height: 200px
+
+      .left
+        float: left
+        display: flex
+        justify-content: center
+        align-items: center
+      .right
+        float: right
+        //border-left: 2px solid $red-white
+        span
+          display: none
+        h3
+          margin-top: 60px
+          text-align: center
+          color: $red-white
+          font-weight: 500
+        ul
+          border-left: 2px solid $red-white
+          padding-left: 30px
+          li
+            padding: 5px
+            a
+              color: $red-white
+              text-decoration: none
     @media screen and (max-width: $s)
       .left, .right
         width: 100%

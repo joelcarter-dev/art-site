@@ -29,13 +29,21 @@ class Commissions extends Component {
 				<div id={S.Commissions}>
 					<div className={S.holderOpen}>
 						<h1>{this.props.open ? 'Commissions are Open' : 'Commissions are Closed'}</h1>
-						<div className={S.left}>
-							<Button
-								msg={this.props.open ? 'Place an Order' : 'Request an Order'}
-								toggleForm={this.toggleForm}
-							/>
+						<div className={S.leftRightHolder}>
+							<div className={S.left}>
+								<Button
+									msg={this.props.open ? 'Place an Order' : 'Request an Order'}
+									toggleForm={this.toggleForm}
+								/>
+							</div>
+							{/* 
+								// * does not render ItemList if there are no items for it,
+								// * alowing Button for form to be in the center using flexbox
+							*/}
+							{this.props.children &&
+								<div className={S.right}>{this.props.children}</div>
+							}
 						</div>
-						<div className={S.right}>{this.props.children}</div>
 					</div>
 				</div>
 			</>

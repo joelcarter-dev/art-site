@@ -5,7 +5,7 @@ artistNotes: Init Notes. Notes about the item
 price: '2'
 tags:
   - Init Tag
-  - Commercial
+  - Commission
 info: Init
 date: 2019-02-10T04:25:17.482Z
 type:
@@ -15,7 +15,7 @@ original: true
 storeHighlight: true
 is_archive_item: true
 is_store_item: true
-arcive_topic:
+archive_topic:
   - History
 ---
 Init

@@ -6,7 +6,7 @@ price: '2'
 tags:
   -  Map
   - Useless Tag
-info: Test Two Init
+info: 295 x 210mm, frame not included. Comes in tube.
 date: 2019-02-10T04:25:17.482Z
 type:
   - Init Medium
@@ -15,7 +15,7 @@ original: true
 storeHighlight: true
 is_archive_item: true
 is_store_item: true
-arcive_topic:
+archive_topic:
   - History
 ---
 Init
