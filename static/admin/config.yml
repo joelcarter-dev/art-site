@@ -46,9 +46,10 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
 
       # ! ALL TAGS MEDIUM/TYPES AND NAMES MUST BE capitalised NOT LOWERCASE
+
       - label: "Tags" 
         name: "tags" 
-        widget: "string" 
+        widget: "select" 
         required: false
         multiple: true
         hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price"
@@ -67,7 +68,7 @@ collections:
       
       - label: "Type" 
         name: "type" 
-        widget: "string" 
+        widget: "select" 
         required: false
         multiple: true
         hint: "Set item medium, add multible if medium is mixed"
@@ -80,6 +81,45 @@ collections:
           - Ink
           - Graphite
 
+      - label: "Featured Image"
+        name: "featuredImage"
+        widget: "custompathimage"
+        customMediaPath: "../img/"
+        required: false
+        rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
+        hint: "Choose a good image, please. Clarify if it comes with frame if it has one in the image"
+            
+      ##common bools just so they are grouped with all the other bools. Happy family
+      - {label: "Original", name: "original", widget: "boolean", default: true}
+      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
+            
+      ## This is so I use less queries
+      - {
+          label: "Is Store Item", 
+          name: "is_store_item", 
+          widget: "boolean", 
+          default: true,
+          hint: "Set to false if item is just an Archive item"
+      }
+      
+      ##the html blog content of an archive item. Only archive items should have them
+
+      - {
+          label: "Is Archive Item", 
+          name: "is_archive_item", 
+          widget: "boolean", 
+          default: false,
+          hint: "Set to false if item is just a Store item"
+        }
+      
+      - {
+          label: "Body", 
+          name: "body", 
+          widget: "markdown", 
+          required: false,
+          hint: "Leave empty if NOT and Archive item"
+        }
+      
       - lable: "Archive Topic" 
         name: "archive_topic" 
         widget: "select"
@@ -92,46 +132,6 @@ collections:
           - Locations
           - Creatures
           - History
-
-      - label: "Featured Image"
-        name: "featuredImage"
-        widget: "custompathimage"
-        customMediaPath: "../img/"
-        required: false
-        rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
-        hint: "Choose a good image, please. Clarify if it comes with frame if it has one in the image"
-            
-      ##common bools just so they are grouped with all the other bools. Happy family
-      - {label: "Original", name: "original", widget: "boolean", default: true}
-      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
-      
-      - {
-          label: "Is Archive Item", 
-          name: "is_archive_item", 
-          widget: "boolean", 
-          default: false,
-          hint: "Set to false if item is just a Store item"
-        }
-      
-      ## This is so I use less queries
-      - {
-          label: "Is Store Item", 
-          name: "is_store_item", 
-          widget: "boolean", 
-          default: true,
-          hint: "Set to false if item is just an Archive item"
-      }
-      
-      ##the html blog content of an archive item. Only archive items should have them
-      
-      - {
-          label: "Body", 
-          name: "body", 
-          widget: "markdown", 
-          required: false,
-          hint: "Leave empty if NOT and Archive item"
-        }
-      
       ##the list of topics an archive item can have
   
       # - lable: "Archive Topic" 
