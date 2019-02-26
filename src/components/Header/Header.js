@@ -36,7 +36,19 @@ const Header = (props) => (
     <div className={S.logoHolder} id={props.white ? S.white : S.black}>
     
       <div className={S.left}>
-    
+        <ReactVivus
+          id={props.isIndexPage ? S.svgLeftAtIndex : S.svgLeft }
+          option={{
+            file: LogoSides,
+            animTimingFunction: 'EASE_OUT',
+            type: 'delayed',
+            duration: 400,
+            forceRender: true,
+            reverseStack: true, 
+          }}
+          style={{width: "268px", height: "57px" }}
+          //callback={}
+        />
         <MenuItem to={props.to[0]} />
       </div>
 
@@ -45,7 +57,19 @@ const Header = (props) => (
       </div>
       
       <div className={S.right}>
-    
+        <ReactVivus
+          id={S.svgRight}
+          option={{
+            file: LogoSides,
+            animTimingFunction: 'EASE_OUT',
+            type: 'delayed',
+            duration: 400,
+            forceRender: true,
+            reverseStack: true, 
+          }}
+          style={{width: "268px", height: "57px" }}
+          //callback={}
+        />
         <MenuItem to={props.to[1]} />
       </div>
       
