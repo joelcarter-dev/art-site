@@ -11,6 +11,7 @@ tags:
   - Mountains
   - Sketches
   - Landscapes
+featuredImage: ../img/dsc_0571.jpg
 original: true
 storeHighlight: false
 is_store_item: true
