@@ -13,6 +13,7 @@ tags:
   - Landscapes
 type:
   - Watercolor
+  - Ink
 featuredImage: ../img/dsc_0570-2.jpg
 original: true
 storeHighlight: true
