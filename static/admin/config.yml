@@ -92,7 +92,7 @@ collections:
         name: "featuredImage"
         widget: "custompathimage"
         customMediaPath: "../img/"
-        ##required: false
+        required: true
         rawMediaPath: "https://raw.githubusercontent.com/Dwaxy/art-site/tree/master/src/pages/img"
         hint: "Choose a good image, please. Clarify if it comes with frame if it has one in the image"
             
