@@ -60,7 +60,9 @@ export class IndexPage extends Component {
         </section>
         
         <section className={S.imageHolder}>
-          <div className={S.heroTop}> <Img fluid={heroImageOne} /> </div>
+          <div className={S.heroTop}> 
+            <Img fluid={heroImageOne} /> 
+          </div>
           <SlideHolder heroImageTwo={heroImageTwo} />
         </section>
         
@@ -99,10 +101,10 @@ export const indexQuery = graphql`
       filter: {
         fluid: {originalName: {regex: "/testHero.jpg/"}}
       }) {
-      edges {
+      edges {   
         node {
           id
-          fluid {
+          fluid(quality: 100, maxHeight: 1000) {
             ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
@@ -115,7 +117,7 @@ export const indexQuery = graphql`
       edges {
         node {
           id
-          fluid(quality: 100) {
+          fluid(quality: 100, maxHeight: 1000) {
             ...GatsbyImageSharpFluid_withWebp_noBase64 
           }
         }

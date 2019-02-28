@@ -37,17 +37,26 @@ $mainLogo: .03
     height: 100%
     top: 0
     background-color: $red-white
-    div
-      size: 100%
     .heroTop
       // background-color: green
+      width: 100%
+      height: 100vh
+      overflow: hidden
+      position: relative
+      div //image holder
+        size: 100%
+        object-fit: cover
     .slideOne
       position: relative
       // background-color: red
       z-index: 2
+      size: 100%
+      margin: 0 auto
       .heroImage
         position: absolute !important
         bottom: 0 !important
+        size: 100%
+        object-fit: cover
       .holder
         height: 500px
         min-width: 320px

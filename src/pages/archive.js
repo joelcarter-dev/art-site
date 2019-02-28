@@ -34,7 +34,7 @@ const TopicBrowse = (props) => (
 
 const BannerMeu = (props) => (
   <section className={S.bannerMenu}>
-    {props.groups.length > 6 ? 
+    {props.groups.length > 0 ? 
       <div className={S.holder}>
         {props.groups.map( i => {
           const totalExcerpts = props.excerpts.filter( (item) => {
@@ -134,7 +134,11 @@ export default class ArchiveIndex extends Component {
             ))}
           </section>
           ) : (
-            <BannerMeu excerpts={allExcerptsInGroup} groups={topicGroups} setTopic={this.setTopic}/>
+            <BannerMeu 
+              excerpts={allExcerptsInGroup} 
+              groups={topicGroups} 
+              setTopic={this.setTopic}
+            />
           )}
         
       </section>  
