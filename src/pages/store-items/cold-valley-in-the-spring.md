@@ -22,6 +22,7 @@ tags:
   - Landscapes
   - Abstract
   - Sketches
+  - Mountains
 type:
   - Watercolor
 featuredImage: ../img/dsc_0548.jpg
