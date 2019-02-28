@@ -16,6 +16,7 @@ tags:
   - Sketches
 type:
   - Watercolor
+featuredImage: ../img/dsc_0564.jpg
 original: true
 storeHighlight: false
 is_store_item: true
