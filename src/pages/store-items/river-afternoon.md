@@ -11,6 +11,7 @@ tags:
   - Landscapes
 type:
   - Watercolor
+featuredImage: ../img/dsc_0569.jpg
 original: true
 storeHighlight: false
 is_store_item: true
