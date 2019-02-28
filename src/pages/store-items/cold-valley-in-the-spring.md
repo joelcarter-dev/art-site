@@ -23,6 +23,8 @@ featuredImage: ../img/dsc_0548.jpg
 original: true
 storeHighlight: true
 is_store_item: true
-is_archive_item: false
+is_archive_item: true
+archive_topic:
+  - Locations
 ---
-
+He used to be a prospector, once. You would think he still is, but he doesn't. he lost his way months long ago in a winter storm, and the land is barren. Winding his way through deep narrow gaps between sheer hills, living off berries and the stolen eggs of his now pursuer. Now, he descends down smooth stone trickling with awakening streams, and the morning sun turns to hills into a tentative spring green.
