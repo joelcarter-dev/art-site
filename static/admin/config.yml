@@ -55,7 +55,7 @@ collections:
       - label: "Tags" 
         name: "tags" 
         widget: "select" 
-        required: false
+        required: true
         multiple: true
         hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price"
         options: 
@@ -76,7 +76,7 @@ collections:
       - label: "Type" 
         name: "type" 
         widget: "select" 
-        required: false
+        required: true
         multiple: true
         hint: "Set item medium, add multible if medium is mixed"
         options: 
