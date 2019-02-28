@@ -11,6 +11,8 @@ tags:
   - Mountains
   - Sketches
   - Landscapes
+type:
+  - Watercolor
 featuredImage: ../img/dsc_0571.jpg
 original: true
 storeHighlight: false
