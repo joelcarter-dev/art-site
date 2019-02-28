@@ -6,12 +6,17 @@ about: >-
   stones and patches of snow, returning from a place far away.
 artistNotes: >-
   Combining techniques of bold, heavy color mixing on the paper with a simple
-  composition and contrast, accidentally created this atmosphere. All paint was
-  mixed directly on the paper, allowing for deep warms and cools as the forms
-  for this mountainside. Over subtle gradients, abstract forms gave me a feeling
-  of strangeness. A productive afternoon, and a nice change.
+  composition and contrast, accidentally created this atmosphere. 
+
+
+  All paint was mixed directly on the paper, allowing for deep warms and cools
+  as the forms for this mountainside. 
+
+
+  Over subtle gradients, abstract forms gave me a feeling of strangeness. A
+  productive afternoon, and a nice change.
 price: '65'
-info: 'Watercolor, 295 x 210mm'
+info: 295 x 210mm
 date: 2019-02-28T03:52:17.670Z
 tags:
   - Landscapes
