@@ -10,7 +10,7 @@ tags:
 type:
   - Watercolor
   - Ink
-featuredImage: ../img/dsc_0566-2.jpg
+featuredImage: ../img/dsc_0567-8.10.58-pm.jpg
 original: true
 storeHighlight: false
 is_store_item: true
