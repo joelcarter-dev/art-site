@@ -16,6 +16,7 @@ tags:
   - Abstract
 type:
   - Watercolor
+featuredImage: ../img/dsc_0561.jpg
 original: true
 storeHighlight: true
 is_store_item: true
