@@ -1,5 +1,5 @@
 ---
-title: Cold Valley in the Spring
+title: Cold Spring Valley
 about: >-
   A Watercolor sketch of a distant, high valley, with the first day of spring as
   it's dawn. Here a traveller walks alone in a strange world, across the smooth
