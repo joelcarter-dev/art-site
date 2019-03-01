@@ -36,7 +36,7 @@ const ItemList = (props) => {
 				props.items.map((item) => {
 					if (
 						item.fieldValue !== "commercial" && item.fieldValue !== "Commercial" &&
-						item.fieldValue != "commissions" && item.fieldValue != "Commissions"
+						item.fieldValue !== "commissions" && item.fieldValue !== "Commissions"
 					) 
 					return(
 						<li key={item.fieldValue}>
@@ -116,7 +116,7 @@ export default class Store extends Component {
 }
 
 export const pageQuery = graphql`
-query ArtFeedQuery {
+query StoreQuery {
   posts: allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {
     frontmatter: {is_store_item: {eq: true}, tags: {nin: ["Commercial", "Maps", "Logos", "Commission"] }}
   }) {
@@ -138,7 +138,6 @@ query ArtFeedQuery {
         frontmatter {
 					title
 					about
-          artistNotes
           type
           original
 					featuredImage {

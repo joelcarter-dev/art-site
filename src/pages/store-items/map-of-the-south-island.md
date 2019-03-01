@@ -8,7 +8,6 @@ date: 2019-02-28T06:56:10.522Z
 tags:
   - Maps
 type:
-  - Watercolor
   - Ink
 featuredImage: ../img/dsc_0567-8.10.58-pm.jpg
 original: true
