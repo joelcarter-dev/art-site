@@ -14,7 +14,6 @@ import Commissions from '../components/Commissions/Commissions.js'
 //group all links under their tag and type
 
 import 'typeface-alegreya-sans-sc'
-import 'typeface-cinzel-decorative'
 import 'typeface-cinzel'
 
 const ItemList = (props) => {

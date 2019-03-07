@@ -5,7 +5,7 @@ import S from './archive.module.sass'
 import Link from 'gatsby-link'
 import ArtImage from '../components/ArtImgae/ArtImage'
 
-import 'typeface-alegreya-sans-sc'
+import 'typeface-lora'
 import 'typeface-cinzel-decorative'
 
 class ArchiveItem extends Component {

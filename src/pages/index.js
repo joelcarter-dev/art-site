@@ -9,7 +9,6 @@ import { mainLogoSvg } from '../img/svg-index.js'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
-import 'typeface-cinzel'
 
 import './main.sass'
 import S from './index.module.sass'

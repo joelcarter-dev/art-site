@@ -57,6 +57,7 @@
     "typeface-cormorant-unicase": "0.0.54",
     "typeface-hind": "0.0.54",
     "typeface-italianno": "0.0.54",
+    "typeface-lora": "0.0.72",
     "typeface-sorts-mill-goudy": "0.0.54",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "uuid": "^3.3.2",

@@ -11,9 +11,8 @@ import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
-
 import 'typeface-alegreya-sans-sc'
-import 'typeface-cinzel-decorative'
+import 'typeface-lora'
 import 'typeface-cinzel'
 
 const Info = (props) => {
