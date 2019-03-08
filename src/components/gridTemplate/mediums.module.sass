@@ -10,12 +10,6 @@
     width: 200px
     
 body
-  //overflow-y: scroll
-  // min-height: 100%
-  //background-color: $deep-blue
-  // position: absolute
-  // width: 100%
-  // min-height: 100vh
   overflow: hidden
   overflow-y: scroll
   background-color: $deep-blue
@@ -93,13 +87,19 @@ body
         
     @media screen and (max-width: $l)
       .imageGrid
-        column-count: 3
         padding: 40px
     @media screen and (max-width: $m) 
       .imageGrid
-        column-count: 2
-    @media screen and (max-width: $s) 
+        column-count: 3
+    @media screen and (max-width: 45em) 
       .imageGrid
         display: grid
+        padding: 60px
+        max-width: 500px
+    @media screen and (max-width: $s)
+      .imageGrid
+        padding: 30px 
+        max-width: none
+
         
 
