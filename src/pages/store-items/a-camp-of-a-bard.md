@@ -14,6 +14,7 @@ tags:
   - Environment Concepts
 type:
   - Watercolor
+  - Ink
 featuredImage: ../img/img_20190308_154107.jpg
 original: true
 storeHighlight: false
