@@ -21,7 +21,9 @@
     display: flex
     flex-wrap: wrap
     justify-content: center
-    padding-bottom: 100px
+    margin-bottom: -150px
+    @media screen and (max-width: $m)
+      margin-bottom: -50px
     .itemList
       min-width: 320px
       max-width: 340px
@@ -29,6 +31,8 @@
       position: relative
       padding: 30px
       padding-bottom: 100px
+      @media screen and (max-width: $m)
+        padding-bottom: 30px
       margin-top: 30px
       span
         float: left
