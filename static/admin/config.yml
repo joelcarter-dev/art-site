@@ -98,7 +98,13 @@ collections:
             
       ##common bools just so they are grouped with all the other bools. Happy family
       - {label: "Original", name: "original", widget: "boolean", default: true}
-      - {label: "Store Highlight", name: "storeHighlight", widget: "boolean", default: false}
+      - {
+          label: "Store Highlight", 
+          name: "storeHighlight", 
+          widget: "boolean", 
+          default: false,
+          hint: "Only set to true if Store Item is True"
+        }
             
       ## This is so I use less queries
       - {
