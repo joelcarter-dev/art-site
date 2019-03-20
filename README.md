@@ -29,3 +29,4 @@
 - Been more pedantic about some functions in node.js that were not Do Not Repeat friendly
 - Separated Sass variables and base styles from the start
 - Documented parameters and functions form the start
+- Not wastesd all that time trying to send multiple items to paypal. Their docs still overwhelm me
