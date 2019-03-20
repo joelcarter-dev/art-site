@@ -3,8 +3,6 @@ import GridTemplate from '../components/gridTemplate/gridTemplate.js'
 import { graphql } from 'gatsby'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 
-//IS IT WATERCOLOR WITH A "U" IN NZ?
-
 class Category extends Component {
   render() {
     let allTitles = []
