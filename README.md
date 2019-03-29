@@ -6,7 +6,7 @@
 
 - Allows me to quickly add items to the store using custom data structures using Netlify's CMS collections
 - Optimisation of images are automatically handled thanks to Gatsby Image
-- Items are organised within the site automatically based on tagas and types
+- Items are organised within the site automatically based on tags and types
 - Responsive UI using CSS Grid
 - Implements SSR react Paypal for orders
 - Has a commission and order form
