@@ -9,7 +9,7 @@
 - Items are organised within the site automatically based on tags and types
 - Responsive UI using CSS Grid
 - Implements SSR react Paypal for orders
-- Has a commission and order form
+- Has a commission and order form using Netlifys Form service 
 - Crosslinks Archive items that are also Store items and vice versa
 - It's built with Gatsby. The entire site is a dynamically generated static site. The site that arrives in the browser as as fast as a site can get
 - Google analytics
