@@ -83,7 +83,7 @@ module.exports = {
         
            // go before gatsby-remark-images
           
-          'gatsby-remark-relative-images', //change
+          //'gatsby-remark-relative-images', //change
           
           {
             resolve: `gatsby-remark-images`,

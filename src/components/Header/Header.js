@@ -43,7 +43,7 @@ const Header = (props) => (
             animTimingFunction: 'EASE_OUT',
             type: 'delayed',
             duration: 400,
-            //forceRender: true,
+            forceRender: true,
             reverseStack: true, 
           }}
           style={{width: "268px", height: "57px" }}
@@ -64,7 +64,7 @@ const Header = (props) => (
             animTimingFunction: 'EASE_OUT',
             type: 'delayed',
             duration: 400,
-            //forceRender: true,
+            forceRender: true,
             reverseStack: true, 
           }}
           style={{width: "268px", height: "57px" }}
