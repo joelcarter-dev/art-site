@@ -15,10 +15,8 @@ module.exports = {
   plugins: [
   
     'gatsby-plugin-sitemap',
-    //"gatsby-image-sitemap",
     'gatsby-plugin-robots-txt',
     
-    //'gatsby-plugin-sass',
     
     {
       resolve: 'gatsby-plugin-sass',
