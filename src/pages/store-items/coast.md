@@ -2,7 +2,7 @@
 title: 'Coast '
 about: 'Cliff like rocks on a cost, looking out to sea.'
 artistNotes: My first water study. Experimenting with a new style.
-price: '30'
+price: '20'
 info: 295 x 210mm
 date: 2019-04-05T03:25:01.978Z
 tags:

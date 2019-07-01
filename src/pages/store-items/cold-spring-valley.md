@@ -15,7 +15,7 @@ artistNotes: >-
 
   Over subtle gradients, abstract forms gave me a feeling of strangeness. A
   productive afternoon, and a nice change.
-price: '65'
+price: '25'
 info: 295 x 210mm
 date: 2019-02-28T03:52:17.670Z
 tags:

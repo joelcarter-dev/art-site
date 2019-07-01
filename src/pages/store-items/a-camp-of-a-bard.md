@@ -4,7 +4,7 @@ about: >-
   Deep in high country, a Bard of Ornthier caved the runes to a song long ago.
   Now it is a known campsite for hunters. Manny sing and play their flutes to
   the carving, wondering how close they are to the Bards original intention.
-price: '60'
+price: '15'
 info: 165 x 210mm
 date: 2019-03-08T02:49:21.927Z
 tags:
