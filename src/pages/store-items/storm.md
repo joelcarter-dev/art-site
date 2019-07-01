@@ -4,7 +4,7 @@ about: 'A painting of a summer storm over the sea, exploding with light.'
 artistNotes: >-
   Clouds are cool. Godrays are cooler. Ironically, water can be hard to do in
   watercolor. Unsatisfied with it at first, framed on my wall it grew on me.
-price: '120'
+price: '40'
 info: 195 x 210mm
 date: 2019-02-28T05:25:02.661Z
 tags:
