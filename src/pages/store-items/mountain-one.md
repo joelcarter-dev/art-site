@@ -4,7 +4,7 @@ about: 'The first in a series of watercolor sketches and studies. '
 artistNotes: >-
   The first attempt that was decent enough to upload. A focus on strong
   highlights, build up with many layers.
-price: '60'
+price: '25'
 info: 295 x 210mm
 date: 2019-02-28T04:59:14.332Z
 tags:
