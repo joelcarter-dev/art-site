@@ -7,7 +7,7 @@ artistNotes: >-
   This one was small. With limited space, contrast had to be what held this
   painting up. An important lesson is learnt: Contrast of light and dank is all
   you need.
-price: '60'
+price: '15'
 info: 210 x 150mm
 date: 2019-02-28T05:19:50.030Z
 tags:
