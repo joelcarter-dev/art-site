@@ -4,7 +4,7 @@ about: >-
   Beings in the currents drift up, while I sink into the corruption of the
   undercurrent 
 artistNotes: My second abstract
-price: '60'
+price: '30'
 info: 295 x 425mm
 date: 2019-04-05T03:25:01.978Z
 tags:
