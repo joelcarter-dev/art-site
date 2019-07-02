@@ -39,10 +39,12 @@ const SEO = ({ title, subTitle, description, image, pathName, article, itemGroup
       let itemDesc
       if (itemGroup != null) {
         let items = []
-        itemGroup.edges.map( ({node: item})  => {
+        itemGroup.edges.forEach( ({node: item})  => {
           items.push(item.frontmatter.title)
         })
-        items.slice(0, 5).join(", ")
+        items
+          .slice(0, 5)
+          .join(", ")
         itemDesc = `${itemGroup.totalCount} art pieces under ${subTitle}. View ${items}... and more.`
 
       }

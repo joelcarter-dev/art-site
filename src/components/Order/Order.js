@@ -60,6 +60,7 @@ export default class Order extends Component {
     this.props.orderData.map((i) => {
       totalPrice.push(Number(i.frontmatter.price.replace(/[^0-9.-]+/g,"")))
       itemInfo.push({title: i.frontmatter.title, price: i.frontmatter.price})
+      return null
     })
     //console.log("item info ", itemInfo)
     //console.log("orderData ",this.props.orderData)

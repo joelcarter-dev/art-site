@@ -112,7 +112,7 @@ export default class ArchiveIndex extends Component {
       noLoop++
       if (noLoop > 60) {return}
       let topicExcerpts = []
-      topicGroups[topic].items.map( i => {
+      topicGroups[topic].items.forEach( i => {
         topicExcerpts.push(i.excerpt)
       })
       allExcerptsInGroup.push( {group: topicGroups[topic].topicName, items: topicExcerpts} )

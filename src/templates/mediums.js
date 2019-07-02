@@ -8,7 +8,7 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 class Mediums extends Component {
   render() {
     let allTitles = []
-    this.props.data.allMarkdownRemark.edges.map( post => {
+    this.props.data.allMarkdownRemark.edges.forEach( post => {
       allTitles.push(post.node.frontmatter.title)
     })
     return (
@@ -42,7 +42,6 @@ query mediumsPage($medium: String) {
         }
         frontmatter {
           title
-          about
           artistNotes
           type
           featuredImage {

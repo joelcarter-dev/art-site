@@ -23,24 +23,12 @@ const ItemList = (props) => {
 			<span>Sort By</span>
 			<h3>{props.title}</h3>
 			<ul>
-			{props.showCommissions ? 
-				props.items.map((item) => ( 
-					<li key={item.fieldValue}>
-						<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
-							{item.fieldValue} | {item.totalCount}
-						</Link>
-					</li>
-				))
-			:
-				props.items.map((item) => {
-					if (
-						item.fieldValue !== "commercial" && item.fieldValue !== "Commercial" &&
-						item.fieldValue !== "commissions" && item.fieldValue !== "Commissions"
-					) 
+			{props.items.map((item) => {
+					// NOTE used to be code here to remove comresial and comission items. Maybe wanted them in anotehr section. I think it's ok to leave them
 					return(
 						<li key={item.fieldValue}>
 							<Link to={`/${props.folder}/${kebabCase(item.fieldValue)}/`}>
-								{item.fieldValue} | {item.totalCount}
+							 {item.totalCount} {item.fieldValue} 
 							</Link>
 						</li>
 					)

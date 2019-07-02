@@ -47,7 +47,7 @@ class GridTemplate extends Component {
         </div>
       
         <div className={S.titleHolder}>
-          <Link to = "/store"  className={S.storeLink} >
+          <Link to = "/store" className={S.storeLink} >
             <InlineSVG src={arrowSvg} />
           </Link>  
           

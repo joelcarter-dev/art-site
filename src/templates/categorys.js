@@ -6,7 +6,7 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 class Category extends Component {
   render() {
     let allTitles = []
-    this.props.data.allMarkdownRemark.edges.map( post => {
+    this.props.data.allMarkdownRemark.edges.forEach( post => {
       allTitles.push(post.node.frontmatter.title)
     })
     return (
@@ -41,7 +41,6 @@ query TagPage($category: String) {
         }
         frontmatter {
           title
-          about
           artistNotes
           type
           featuredImage {

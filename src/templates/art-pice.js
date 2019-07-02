@@ -155,7 +155,7 @@ class ArtPice extends Component {
           <Header to={["home", "index"]} white={true} />
         </div>
         
-        <Link to = "/store"  className={S.storeLink} >
+        <Link to="/store" className={S.storeLink} >
           <InlineSVG src={arrowSvg} />
         </Link>  
         
