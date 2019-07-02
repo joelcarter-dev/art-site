@@ -5,7 +5,7 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 
 //IS IT WATERCOLOR WITH A "U" IN NZ?
 
-class Mediums extends Component {
+class Mediums extends Component {    
   render() {
     let allTitles = []
     this.props.data.allMarkdownRemark.edges.forEach( post => {
@@ -15,7 +15,11 @@ class Mediums extends Component {
       <div style={{position: "absolute", width: "100%", height: "100%", overflow: "hidden", overflowY: "scroll"}}>
         <HeaderMeta subTitle={this.props.pageContext.medium} itemGroup={this.props.data.allMarkdownRemark}/>
                  
-        <GridTemplate data={this.props.data.allMarkdownRemark.edges} title={this.props.pageContext.medium}/>
+        <GridTemplate 
+          data={this.props.data.allMarkdownRemark.edges} 
+          title={this.props.pageContext.medium}
+          pastUrl={this.props.location.pathname}  
+        />
         
       </div>
     )

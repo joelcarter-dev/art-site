@@ -22,7 +22,11 @@ class GridTemplate extends Component {
       const frontmatter = post.node.frontmatter
       return (
         <div key={post.node.fields.slug} className={S.imageItem}>
-          <Link to={post.node.fields.slug}>
+          <Link 
+            to={post.node.fields.slug}
+            //pass prop of cat / med paths for back button on art item 
+            state={{pastUrl: this.props.pastUrl || null}}  
+          >
             <h2>{frontmatter.title}</h2>
             <ArtImage
               fluid={frontmatter.featuredImage.childImageSharp.fluid} 

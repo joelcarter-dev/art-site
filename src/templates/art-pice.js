@@ -155,7 +155,8 @@ class ArtPice extends Component {
           <Header to={["home", "index"]} white={true} />
         </div>
         
-        <Link to="/store" className={S.storeLink} >
+        // to given url prop if came from a cat / med page, or just back to store
+        <Link to={this.props.location.state.pastUrl || "/store"} className={S.storeLink} >
           <InlineSVG src={arrowSvg} />
         </Link>  
         
