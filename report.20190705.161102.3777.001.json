@@ -3,10 +3,10 @@
   "header": {
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20190702.163804.8062.001.json",
-    "dumpEventTime": "2019-07-02T16:38:04Z",
-    "dumpEventTimeStamp": "1562042284572",
-    "processId": 8062,
+    "filename": "report.20190705.161102.3777.001.json",
+    "dumpEventTime": "2019-07-05T16:11:02Z",
+    "dumpEventTimeStamp": "1562299862675",
+    "processId": 3777,
     "commandLine": [
       "node",
       "/Users/DwaxyWaxy/Documents/GitHub/elloron-art/node_modules/.bin/gatsby",
@@ -101,15 +101,23 @@
       "symbol": "v8::internal::Runtime_AllocateInNewSpace(int, v8::internal::Object**, v8::internal::Isolate*) [/usr/local/bin/node]"
     },
     {
-      "pc": "0x0000193018c4fc7d",
+      "pc": "0x00001145cbf4fc7d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00001145cd2c7850",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00001145cd2b9575",
       "symbol": ""
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 1490657280,
-    "totalCommittedMemory": 1487535480,
-    "usedMemory": 1391984912,
-    "availableMemory": 40694512,
+    "totalMemory": 1496080384,
+    "totalCommittedMemory": 1489212920,
+    "usedMemory": 1389152856,
+    "availableMemory": 37837136,
     "memoryLimit": 1526909922,
     "heapSpaces": {
       "read_only_space": {
@@ -120,39 +128,39 @@
         "available": 482064
       },
       "new_space": {
-        "memorySize": 2097152,
-        "committedMemory": 1065856,
-        "capacity": 1031168,
-        "used": 0,
-        "available": 1031168
+        "memorySize": 8388608,
+        "committedMemory": 3008320,
+        "capacity": 4124672,
+        "used": 854896,
+        "available": 3269776
       },
       "old_space": {
-        "memorySize": 1385369600,
-        "committedMemory": 1384837112,
-        "capacity": 1298391088,
-        "used": 1295270480,
-        "available": 3120608
+        "memorySize": 1408438272,
+        "committedMemory": 1407828552,
+        "capacity": 1319031592,
+        "used": 1315583864,
+        "available": 3447728
       },
       "code_space": {
         "memorySize": 7340032,
-        "committedMemory": 6724576,
-        "capacity": 6045728,
-        "used": 6045728,
+        "committedMemory": 7076960,
+        "capacity": 6281760,
+        "used": 6281760,
         "available": 0
       },
       "map_space": {
-        "memorySize": 6828032,
-        "committedMemory": 6367536,
-        "capacity": 3846480,
-        "used": 3846480,
+        "memorySize": 7352320,
+        "committedMemory": 7220000,
+        "capacity": 3975440,
+        "used": 3975440,
         "available": 0
       },
       "large_object_space": {
-        "memorySize": 88498176,
-        "committedMemory": 88498176,
-        "capacity": 122849376,
-        "used": 86788704,
-        "available": 36060672
+        "memorySize": 64036864,
+        "committedMemory": 64036864,
+        "capacity": 93060944,
+        "used": 62423376,
+        "available": 30637568
       },
       "new_large_object_space": {
         "memorySize": 0,
@@ -164,17 +172,17 @@
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 165.771,
-    "kernelCpuSeconds": 8.83526,
-    "cpuConsumptionPercent": 172.878,
-    "maxRss": 1605596348416,
+    "userCpuSeconds": 221.679,
+    "kernelCpuSeconds": 12.4332,
+    "cpuConsumptionPercent": 168.426,
+    "maxRss": 1595764899840,
     "pageFaults": {
-      "IORequired": 510,
-      "IONotRequired": 927143
+      "IORequired": 1147,
+      "IONotRequired": 1109753
     },
     "fsActivity": {
-      "reads": 1828,
-      "writes": 145
+      "reads": 586,
+      "writes": 139
     }
   },
   "libuv": [
@@ -187,7 +195,7 @@
     "npm_config_only": "",
     "npm_config_commit_hooks": "true",
     "npm_config_browser": "",
-    "npm_package_gitHead": "6fda1586e90dae2274ca2056a9de0473f50e967f",
+    "npm_package_gitHead": "1341ac9b01910a2d53596d0ff058ee10ddec7812",
     "npm_package_devDependencies_prettier": "^1.18.2",
     "npm_package_dependencies_typeface_cormorant_infant": "0.0.54",
     "npm_package_dependencies_typeface_bellefair": "0.0.54",
@@ -215,7 +223,7 @@
     "TMPDIR": "/var/folders/5p/j_tq9g4s3553sbh107cg7_rm0000gp/T/",
     "npm_config_timing": "",
     "npm_config_init_license": "ISC",
-    "Apple_PubSub_Socket_Render": "/private/tmp/com.apple.launchd.9EgnTiXDJR/Render",
+    "Apple_PubSub_Socket_Render": "/private/tmp/com.apple.launchd.c5OW3DrhbK/Render",
     "npm_config_if_present": "",
     "npm_package_dependencies_gatsby_plugin_sass": "^2.1.0",
     "TERM_PROGRAM_VERSION": "1.35.1",
@@ -253,7 +261,7 @@
     "npm_package_dependencies_react_select_country_list": "^1.0.7",
     "npm_package_dependencies_react_helmet": "^5.2.1",
     "npm_package_dependencies_lodash": "^4.17.11",
-    "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.kFl199r4CD/Listeners",
+    "SSH_AUTH_SOCK": "/private/tmp/com.apple.launchd.Xczmj0ZxTs/Listeners",
     "npm_package_devDependencies_eslint": "^5.16.0",
     "npm_package_dependencies_gatsby_plugin_netlify": "^2.1.0",
     "__CF_USER_TEXT_ENCODING": "0x1F6:0x0:0x0",
@@ -358,7 +366,7 @@
     "npm_config_cache_lock_stale": "60000",
     "npm_package_dependencies_react_validify": "^4.0.2",
     "npm_package_dependencies_postcss_alias": "^2.0.0",
-    "npm_package_dependencies_gatsby": "^2.11.7",
+    "npm_package_dependencies_gatsby": "^2.12.0",
     "npm_config_otp": "",
     "npm_config_cache_min": "10",
     "npm_package_dependencies_typeface_cinzel": "0.0.54",
@@ -382,7 +390,7 @@
     "npm_config_production": "",
     "npm_package_dependencies_typeface_sorts_mill_goudy": "0.0.54",
     "npm_package_dependencies_typeface_italianno": "0.0.54",
-    "DISPLAY": "/private/tmp/com.apple.launchd.7XyWR5cA1E/org.macosforge.xquartz:0",
+    "DISPLAY": "/private/tmp/com.apple.launchd.Rd8G9rC1i5/org.macosforge.xquartz:0",
     "npm_config_send_metrics": "",
     "npm_config_save_bundle": "",
     "npm_package_dependencies_typeface_cinzel_decorative": "0.0.54",

@@ -156,7 +156,7 @@ class ArtPice extends Component {
         </div>
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
-        <Link to={this.props.location.state.pastUrl || "/store"} className={S.storeLink} >
+        <Link to={this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"} className={S.storeLink} >
           <InlineSVG src={arrowSvg} />
         </Link>  
         
