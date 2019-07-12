@@ -1,5 +1,5 @@
 import React from "react";
-import CMS from "netlify-cms";
+import CMS from "netlify-cms-app";
 import { Map } from "immutable";
 
 export class CustomPathImageControl extends React.Component {

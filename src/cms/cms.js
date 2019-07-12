@@ -1,4 +1,4 @@
-import CMS from 'netlify-cms'
+import CMS from 'netlify-cms-app'
 
 // import my homemade widget
 import { CustomPathImageControl, CustomPathImagePreview } from "./customPathImage.js";
