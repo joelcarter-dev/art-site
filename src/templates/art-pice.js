@@ -129,7 +129,9 @@ class ArtPice extends Component {
   }
 
   componentDidMount() {
-    this.setState({pastUrlTrue: true})
+    if(this.props.location.state.pastUrl) {
+      this.setState({pastUrlTrue: true})
+    }
   }
 
   toggleForm = () => {
