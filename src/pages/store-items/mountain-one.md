@@ -1,5 +1,5 @@
 ---
-title: Mountain One Finn
+title: Mountain One
 about: 'The first in a series of watercolor sketches and studies. '
 artistNotes: >-
   The first attempt that was decent enough to upload. A focus on strong
