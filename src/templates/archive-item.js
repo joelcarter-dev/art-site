@@ -51,13 +51,6 @@ class ArchiveItem extends Component {
                 {headerImage !== null &&
                   <section className={S.imgHeader}>
                   
-                    {isStoreItem &&
-                      <div className={S.storeItemLink}>
-                        <h3>This piece is a store item</h3>
-                        <Link to={storeSlug} id={S.storeItemLink}> view in store </Link>
-                      </div>
-                      
-                    }
                     <ArtImage
                       fluid={headerImage}
                       imageData={frontmatter}
@@ -66,6 +59,14 @@ class ArchiveItem extends Component {
                       src=""
                       critical={true}
                     />
+                    
+                    {isStoreItem &&
+                      <div className={S.storeItemLink}>
+                        <h3>This piece is a store item</h3>
+                        <Link to={storeSlug} id={S.storeItemLink}> view in store </Link>
+                      </div>
+                      
+                    }
                   </section>
                 }
                 <h1 id={S.title}>{title}</h1>

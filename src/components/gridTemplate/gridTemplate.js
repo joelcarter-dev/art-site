@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Link from 'gatsby-link'
 import ArtImage from '../../components/ArtImgae/ArtImage'
-import S from './mediums.module.sass'
+import S from './imageGrid.module.sass'
 import { arrowSvg } from '../../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
 import Header from '../Header/Header.js'

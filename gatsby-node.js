@@ -71,6 +71,7 @@ exports.createPages = ({ actions, graphql }) => {
           tags
           type
           about
+          original
           is_archive_item
           is_store_item
           archive_topic

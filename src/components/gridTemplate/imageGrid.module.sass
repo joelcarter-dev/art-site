@@ -53,16 +53,17 @@ body
         font-weight: 100
         letter-spacing: 3px
         margin-left: 5vw
+
     .imageGrid
       width: 100%
-      max-width: 100px
-      height: 100%
-      min-height: calc(100vh - 200px)
       max-width: 1600px
       margin: 0 auto
+      display: grid
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr))
       column-gap: 60px
-      column-count: 4
+      grid-column: span 3
       line-height: 0
+      padding: 60px
       .imageItem
         width: 100%
         min-width: 200px
@@ -85,22 +86,23 @@ body
           font-weight: 300
           margin-bottom: 30px
         
-    @media screen and (max-width: $l)
-      .imageGrid
-        padding: 40px
-        column-count: 4
-    @media screen and (max-width: $m) 
-      .imageGrid
-        column-count: 3
-    @media screen and (max-width: 45em) 
-      .imageGrid
-        display: grid
-        padding: 60px
-        max-width: 500px
-    @media screen and (max-width: $s)
-      .imageGrid
-        padding: 30px 
-        max-width: none
+    // @media screen and (max-width: $l)
+    //   .imageGrid
+    //     padding: 60px
+    //     column-count: 4
+    // @media screen and (max-width: $m) 
+    //   .imageGrid
+    //     padding: 60px 
+    //     column-count: 3
+    // @media screen and (max-width: 45em) 
+    //   .imageGrid
+    //     display: grid
+    //     padding: 60px
+    //     max-width: 500px
+    // @media screen and (max-width: $s)
+    //   .imageGrid
+    //     padding: 30px 
+    //     max-width: none
 
         
 
