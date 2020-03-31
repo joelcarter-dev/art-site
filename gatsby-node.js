@@ -30,6 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
         fields {
           slug
         }
+        html
         frontmatter {
           is_store_item
           is_archive_item
@@ -43,7 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
           type
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 1000) {
+              fluid(maxHeight: 1500) {
                 src
                 sizes
                 srcSet

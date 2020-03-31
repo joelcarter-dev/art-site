@@ -29,7 +29,7 @@ collections:
       - {
           label: "Artist Notes", 
           name: "artistNotes", 
-          widget: "text", 
+          widget: "markdown", 
           required: false,
           hint: "Add a story about the pice. If it is an archive item, hint at it's content, nothing more"  
       }
