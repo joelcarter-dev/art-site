@@ -11,7 +11,7 @@ about: |-
   Mankind has forgotten the gateways
   By the mouth of the serpent regenerate 
 price: '150'
-info: A3
+info: 'Size: A3'
 date: 2020-03-31T03:59:28.099Z
 tags:
   - Abstract
