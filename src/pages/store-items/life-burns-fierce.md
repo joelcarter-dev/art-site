@@ -1,6 +1,6 @@
 ---
 title: Life burns fierce
-about: |-
+about: >-
   On the peaks of radiant mountains
   This truth is growing before me
   My attention fixed on this silence

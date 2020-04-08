@@ -11,6 +11,9 @@ import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
+import showdown from 'showdown'
+
+
 import 'typeface-alegreya-sans-sc'
 import 'typeface-lora'
 import 'typeface-cinzel'
@@ -80,15 +83,27 @@ const Info = (props) => {
   )
 }
 
-const Notes = (props) => (
-  <div className={S.notesHolder}>
+
+
+// const MarkdownContent = ({ content, className }) => (
+//   <div className={className} dangerouslySetInnerHTML={{ __html: converter.makeHtml(content) }} />
+// )
+
+const Notes = (props) => {
+  const converter = new showdown.Converter()
+  let h = converter.makeHtml(props.data)
+  console.log(h)
+  return (
+    <div className={S.notesHolder}>
     {/* is it 's or s*/}
+    {h}
     <h3>Artists Notes</h3>
     <div className={S.notes}>
-      <p>{props.data || "Notes are yet to come"}</p>
+      <div className={S.notes} dangerouslySetInnerHTML={{ __html: h || "Notes are yet to come" }} />
     </div>
   </div>  
-)
+  )
+}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -112,7 +127,7 @@ class Sidebar extends Component {
         </div>
         
         {this.state.view === "info" && <Info data={this.props.data} toggleForm={this.props.toggleForm}/>}
-        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes || this.props.data.about}/>}
+        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes}/>}
         
       </div>  
     )
