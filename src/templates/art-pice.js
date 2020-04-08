@@ -83,23 +83,14 @@ const Info = (props) => {
   )
 }
 
-
-
-// const MarkdownContent = ({ content, className }) => (
-//   <div className={className} dangerouslySetInnerHTML={{ __html: converter.makeHtml(content) }} />
-// )
-
 const Notes = (props) => {
   const converter = new showdown.Converter()
-  let h = converter.makeHtml(props.data)
-  console.log(h)
   return (
     <div className={S.notesHolder}>
     {/* is it 's or s*/}
-    {h}
     <h3>Artists Notes</h3>
     <div className={S.notes}>
-      <div className={S.notes} dangerouslySetInnerHTML={{ __html: h || "Notes are yet to come" }} />
+      <div className={S.notes} dangerouslySetInnerHTML={{ __html: converter.makeHtml(props.data) || "Notes are yet to come" }} />
     </div>
   </div>  
   )
