@@ -11,11 +11,11 @@ about: |-
   Mankind has forgotten the gateways
   By the mouth of the serpent regenerate 
 artistNotes: |-
-  **On** the peaks of radiant mountains\
+  On the peaks of radiant mountains\
   This truth is growing before me\
-  My attention fixed on the silence\
-  Rediscover life while I'm breathing
-
+  My attention fixed on this silence\
+  Rediscover life while I'm breathing\
+  \
   Designing the shape of material\
   Frozen icon distant reminder\
   Mankind has forgotten the gateways\
