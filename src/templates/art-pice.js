@@ -11,6 +11,8 @@ import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
+import BackButton from '../components/BackButton/backButton'
+
 import showdown from 'showdown'
 
 
@@ -113,8 +115,8 @@ class Sidebar extends Component {
     return (
       <div id={S.Sidebar}>
         <div id={S.infoMenu}>
-          <span onClick={this.toggleView.bind(this, "info")} className={this.state.view === "info" ? S.selected : ""}>Info</span>
-          <span onClick={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
+          <span role="button" tabIndex="0" onClick={this.toggleView.bind(this, "info")} onKeyDown={this.toggleView.bind(this, "info")} className={this.state.view === "info" ? S.selected : ""}>Info</span>
+          <span role="button" tabIndex="0" onClick={this.toggleView.bind(this, "notes")} onKeyDown={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
         </div>
         
         {this.state.view === "info" && <Info data={this.props.data} toggleForm={this.props.toggleForm}/>}
@@ -169,9 +171,7 @@ class ArtPice extends Component {
         </div>
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
-        <Link to={this.state.pastUrlTrue ? this.props.location.state.pastUrl : "/store"} className={S.storeLink} >
-          <InlineSVG src={arrowSvg} />
-        </Link>  
+        <BackButton className=".storeLink" to={this.state.pastUrlTrue ? this.props.location.state.pastUrl : "/store"} /> 
         
         <h1 id={S.title}>{itemData.title}</h1>
         

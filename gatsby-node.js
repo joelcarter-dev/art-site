@@ -78,7 +78,7 @@ exports.createPages = ({ actions, graphql }) => {
           archive_topic
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 1500) {
+              fluid(maxHeight: 1000) {
                 src
                 sizes
                 srcSet

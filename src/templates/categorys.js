@@ -49,7 +49,7 @@ query TagPage($category: String) {
           type
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 300){
+              fluid(maxHeight: 500){
                 src
                 sizes
                 srcSet

@@ -71,18 +71,18 @@ export default class OrderForm extends Component {
 
           <p>Order Form</p>
         
-            <input placeholder="Your name" type="text" tabIndex="1" value={this.state.name ? this.state.name : ""} onChange={this.handleChange} name="name" required autoFocus />
+            <input placeholder="Your name" type="text" tabIndex="0" value={this.state.name ? this.state.name : ""} onChange={this.handleChange} name="name" required />
 
-            <input placeholder="Your Email Address" type="email" tabIndex="2" value={this.state.email ? this.state.email : ""} onChange={this.handleChange} name="email" required /> 
+            <input placeholder="Your Email Address" type="email" tabIndex="-1" value={this.state.email ? this.state.email : ""} onChange={this.handleChange} name="email" required /> 
             
-            <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph ? this.state.ph : ""} onChange={this.handleChange} name="ph" tabIndex="3"/>
+            <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph ? this.state.ph : ""} onChange={this.handleChange} name="ph" tabIndex="-2"/>
             
             
             <hr/>
             
-            <input placeholder="Address" type="adress-line-one" tabIndex="4" value={this.state.address_line_one ? this.state.address_line_one : ""} onChange={this.handleChange} name="address_line_one" required /> 
+            <input placeholder="Address" type="adress-line-one" tabIndex="-3" value={this.state.address_line_one ? this.state.address_line_one : ""} onChange={this.handleChange} name="address_line_one" required /> 
             
-            <input placeholder="Address Line Two" type="adress-line-two" tabIndex="5" value={this.state.address_line_two ? this.state.address_line_two : ""} onChange={this.handleChange} name="address_line_two" /> 
+            <input placeholder="Address Line Two" type="adress-line-two" tabIndex="-4" value={this.state.address_line_two ? this.state.address_line_two : ""} onChange={this.handleChange} name="address_line_two" /> 
             
              <Select
               options={countryList().getData()}
@@ -93,11 +93,11 @@ export default class OrderForm extends Component {
               className={S.dropdown}
             />
           
-            <input placeholder="City" type="city" value={this.state.city ? this.state.city : ""} tabIndex="6"  onChange={this.handleChange} name="city" required /> 
+            <input placeholder="City" type="city" value={this.state.city ? this.state.city : ""} tabIndex="-5"  onChange={this.handleChange} name="city" required /> 
             
-            <input placeholder="State/Province/Region" type="state_region" tabIndex="7" value={this.state.state_region ? this.state.state_region : ""} onChange={this.handleChange} name="state_region" required/> 
+            <input placeholder="State/Province/Region" type="state_region" tabIndex="-6" value={this.state.state_region ? this.state.state_region : ""} onChange={this.handleChange} name="state_region" required/> 
 
-            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{4}" tabIndex="8" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
+            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{4}" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
             
             
             

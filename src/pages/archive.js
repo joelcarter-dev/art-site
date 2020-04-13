@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { graphql } from 'gatsby'
-import S from './index-items.module.sass'
+import S from './archive.module.sass'
 import Link from 'gatsby-link'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
@@ -11,7 +11,9 @@ import 'typeface-cinzel'
 
 const TopicBrowse = (props) => (
   <div className={S.topicHolder}>
-    <h2 onClick={props.setTopic.bind(this, props.title)}>{props.title}</h2>
+    <button tabIndex="0" onClick={props.setTopic.bind(this, props.title)} onKeyDown={props.setTopic.bind(this, props.title)}>
+      <h2>{props.title}</h2>
+    </button>
     
     {props.currentTopic === props.title &&
       <div className={S.topicItems}>
@@ -42,9 +44,8 @@ const BannerMeu = (props) => (
             return item.group === i.topicName
           })
           return (
-            <div className={S.banner} key={i.topicName} onClick={props.setTopic.bind(this, i.topicName)}>
+            <div className={S.banner} key={i.topicName} role="button" tabIndex="0" onClick={props.setTopic.bind(this, i.topicName)} onKeyDown={props.setTopic.bind(this, i.topicName)}>
               <h2>{i.topicName}</h2>
-            
               <p>{totalExcerpts[0].items.join(" ")}</p>
             </div>
           )

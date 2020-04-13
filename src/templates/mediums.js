@@ -30,8 +30,9 @@ export default Mediums
 
 
 //can pass tag data through context in node.js
-//but I'm not goinf to bc I want fixed images for thumbnails
-//and the node query gets fluid images
+//but I'm not going to bc I want fixed images for thumbnails
+//and the node query gets fluid images, meanming I would need to
+//write another query
 export const mediumsPageQuery = graphql`
 query mediumsPage($medium: String) {
   allMarkdownRemark(
@@ -50,7 +51,7 @@ query mediumsPage($medium: String) {
           type
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 300){
+              fluid(maxHeight: 600){
                 src
                 sizes
                 srcSet
