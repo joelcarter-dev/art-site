@@ -57,7 +57,7 @@ collections:
         widget: "select" 
         required: true
         multiple: true
-        hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price"
+        hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price. If taged with Archive it must be an Archive item"
         options: 
           - Commercial
           - Commission
