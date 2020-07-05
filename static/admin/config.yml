@@ -61,6 +61,7 @@ collections:
         options: 
           - Commercial
           - Commission
+          - Archive
           - Logos
           - Graphics
           - Maps

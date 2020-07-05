@@ -36,6 +36,13 @@ const Info = (props) => {
           <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
         </div> 
       )
+    } else if(props.data.tags.includes("archive") || props.data.tags.includes("Archive")) {
+      console.log("is archive")
+      return (
+        <div className={S.price}>
+          <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Archived Piece</h3>  
+        </div> 
+      )
     } else {
       return (
         <div className={S.price}>
