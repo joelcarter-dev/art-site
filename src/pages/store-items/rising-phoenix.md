@@ -19,7 +19,8 @@ featuredImage: ../img/dsc_0561.jpg
 original: true
 storeHighlight: true
 is_store_item: true
-is_archive_item: false
+is_archive_item: true
 archive_topic:
   - Creatures
 ---
+A Phoenix breaking free of it's dead past self. Though painful, it rises again engulfed in the fires of life.
