@@ -12,13 +12,14 @@ info: 295 x 425mm
 date: 2019-02-28T04:39:27.716Z
 tags:
   - Abstract
+  - Archive
 type:
   - Watercolor
 featuredImage: ../img/dsc_0561.jpg
 original: true
 storeHighlight: true
-is_store_item: false
-is_archive_item: true
+is_store_item: true
+is_archive_item: false
 archive_topic:
   - Creatures
 ---
