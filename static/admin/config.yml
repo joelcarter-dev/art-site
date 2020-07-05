@@ -38,7 +38,7 @@ collections:
           name: "price", 
           widget: "string", 
           required: false,
-          hint: "Set to sold when item is gone / out of stock. Will show comission if taged with comission"
+          hint: "Set to sold when item is gone / out of stock. Will show comission if taged with comission. Will show Archive if taged with Archive"
         }
       
       - {
