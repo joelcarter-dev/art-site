@@ -8,7 +8,7 @@ module.exports = {
   siteMetadata: {
     title: 'Elloron Arts',
     siteUrl: `https://elloron.art`,
-    tagLine: 'Here we deal in the Wonderfull',
+    tagLine: 'All paths lead to the mountain',
     description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.'
   
   },
