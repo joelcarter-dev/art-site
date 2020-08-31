@@ -6,15 +6,10 @@
   position: absolute
   overflow-y: scroll
   overflow-x: hidden
-  // background-color: $main-black
   background-color: $red-white
   .holder
-    margin: 0 auto 
-    width: 100%
-    height: 200%
     background-color: $main-black
     margin-top: -100px
-    padding-bottom: 20rem
     .body
       #indexLink
         text-align: center
@@ -36,10 +31,11 @@
           border: none
           border-bottom: 3px solid $red-white
       .imgHeader
-        max-width: 1500px
         margin: 0 auto
         position: relative
-        padding: 180px 100px 0 100px
+        padding: 180px 200px 0 200px
+        display: grid
+        grid-template-columns: minmax(30px, 1fr) 5fr minmax(30px, 1fr)
         @media screen and (max-width: $m)
           padding: 180px 0 0 0
         .storeItemLink
@@ -82,7 +78,7 @@
       .bodyHolder
         size: 100%
         background-color: $red-white
-        position: absolute
+        position: relative
         //overflow: auto
         &:after 
           clear: both

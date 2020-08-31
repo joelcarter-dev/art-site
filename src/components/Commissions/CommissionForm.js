@@ -122,7 +122,7 @@ class CommissionForm extends Component {
 
             <h3>Commission Form</h3>
 
-            <div id={S.buttonHolder} className={S.close} onClick={this.props.toggleForm}>
+            <div id={S.buttonHolder} className={S.close} onClick={this.props.toggleForm} onKeyDown={this.props.toggleForm} role="button"  tabIndex={0}>
               <button id={S.formButton}>Close</button>
             </div>
 
@@ -151,18 +151,18 @@ class CommissionForm extends Component {
                 className={S.input}
                 placeholder="Your Name" 
                 type="text" 
-                tabIndex="1" 
+                tabIndex="0" 
                 value={this.state.name ? this.state.name : ""} 
                 onChange={this.handleChange} name="name" 
                 required 
-                autoFocus 
+                // autoFocus 
               />
 
               <input 
                 className={S.input}
                 placeholder="Email" 
                 type="email" 
-                tabIndex="2" 
+                tabIndex="-1" 
                 value={this.state.email ? this.state.email : ""} 
                 onChange={this.handleChange} name="email" 
                 required 
@@ -175,7 +175,7 @@ class CommissionForm extends Component {
                 placeholder="Enter the Description of your commission here..." 
                 value={this.state.description ? this.state.description : ""} 
                 onChange={this.handleChange} 
-                tabIndex="3" 
+                tabIndex="-2" 
                 required
               />
                     

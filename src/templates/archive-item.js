@@ -50,22 +50,25 @@ class ArchiveItem extends Component {
                 
                 {headerImage !== null &&
                   <section className={S.imgHeader}>
-                  
-                    {isStoreItem &&
-                      <div className={S.storeItemLink}>
-                        <h3>This piece is a store item</h3>
-                        <Link to={storeSlug} id={S.storeItemLink}> view in store </Link>
-                      </div>
+                    <div className="left"></div>
+                    <div className="mid">
+                      <ArtImage
+                        fluid={headerImage}
+                        imageData={frontmatter}
+                        target="_blank"
+                        className={S.innerImage}
+                        src=""
+                        critical={true}
+                      />
                       
-                    }
-                    <ArtImage
-                      fluid={headerImage}
-                      imageData={frontmatter}
-                      target="_blank"
-                      className={S.innerImage}
-                      src=""
-                      critical={true}
-                    />
+                      {isStoreItem &&
+                        <div className={S.storeItemLink}>
+                          <h3>This piece is a store item</h3>
+                          <Link to={storeSlug} id={S.storeItemLink}> view in store </Link>
+                        </div>                        
+                      }
+                    </div>
+                    <div className="right"></div>
                   </section>
                 }
                 <h1 id={S.title}>{title}</h1>

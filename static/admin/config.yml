@@ -29,7 +29,7 @@ collections:
       - {
           label: "Artist Notes", 
           name: "artistNotes", 
-          widget: "text", 
+          widget: "markdown", 
           required: false,
           hint: "Add a story about the pice. If it is an archive item, hint at it's content, nothing more"  
       }
@@ -38,7 +38,7 @@ collections:
           name: "price", 
           widget: "string", 
           required: false,
-          hint: "Set to sold when item is gone / out of stock. Will show comission if taged with comission"
+          hint: "Set to sold when item is gone / out of stock. Will show comission if taged with comission. Will show Archive if taged with Archive"
         }
       
       - {
@@ -57,10 +57,11 @@ collections:
         widget: "select" 
         required: true
         multiple: true
-        hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price"
+        hint: "Will put item under these categories if taged. Commission will move it to a special section and hide price. If taged with Archive it must be an Archive item"
         options: 
           - Commercial
           - Commission
+          - Archive
           - Logos
           - Graphics
           - Maps

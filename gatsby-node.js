@@ -30,6 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
         fields {
           slug
         }
+        html
         frontmatter {
           is_store_item
           is_archive_item
@@ -43,7 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
           type
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 1000) {
+              fluid(maxHeight: 1500) {
                 src
                 sizes
                 srcSet
@@ -71,12 +72,13 @@ exports.createPages = ({ actions, graphql }) => {
           tags
           type
           about
+          original
           is_archive_item
           is_store_item
           archive_topic
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 1500) {
+              fluid(maxHeight: 1000) {
                 src
                 sizes
                 srcSet
@@ -113,6 +115,7 @@ exports.createPages = ({ actions, graphql }) => {
             node,
           },
         })
+        console.log(edge.node.frontmatter.title)
       })
     }
     
@@ -148,7 +151,6 @@ exports.createPages = ({ actions, graphql }) => {
     allStorePosts.forEach(edge => {
       if (_.get(edge, `node.frontmatter.type`) && edge.node.frontmatter.is_store_item === true ) {
         allMediums = allMediums.concat(edge.node.frontmatter.type)
-        console.log(edge.node.frontmatter.title)
       }
     })
     allMediums = _.uniq(allMediums)

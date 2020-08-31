@@ -24,7 +24,7 @@ const maxLength = (string, length) => {
 const ArtImage = ({className, imageData, fluid, fixed, ...props}) => {
   const alt = 
     maxLength(
-      `${imageData.title}, a ${imageData.original ? "original work of" : "print of the original"} ${imageData.type.join(" and ")} piece. ${imageData.about}`
+      `${imageData.title}, a ${imageData.original ? "original work of" : "print of the original"} ${imageData.type.join(" and ")}. ${imageData.about}`
       , 100)
   
   if(fluid) { 

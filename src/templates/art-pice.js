@@ -3,13 +3,18 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 
 import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
-//import AddToCart from '../components/Cart/AddToCart.js'
+
 import Order from '../components/Order/Order.js'
 import { arrowSvg } from '../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
 import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
+
+import BackButton from '../components/BackButton/backButton'
+
+import showdown from 'showdown'
+
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-lora'
@@ -29,6 +34,13 @@ const Info = (props) => {
       return (
         <div className={S.price}>
           <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
+        </div> 
+      )
+    } else if(props.data.tags.includes("archive") || props.data.tags.includes("Archive")) {
+      console.log("is archive")
+      return (
+        <div className={S.price}>
+          <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Archived Piece</h3>  
         </div> 
       )
     } else {
@@ -80,15 +92,18 @@ const Info = (props) => {
   )
 }
 
-const Notes = (props) => (
-  <div className={S.notesHolder}>
+const Notes = (props) => {
+  const converter = new showdown.Converter()
+  return (
+    <div className={S.notesHolder}>
     {/* is it 's or s*/}
     <h3>Artists Notes</h3>
     <div className={S.notes}>
-      <p>{props.data || "Notes are yet to come"}</p>
+      <div className={S.notes} dangerouslySetInnerHTML={{ __html: converter.makeHtml(props.data) || "Notes are yet to come" }} />
     </div>
   </div>  
-)
+  )
+}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -107,12 +122,12 @@ class Sidebar extends Component {
     return (
       <div id={S.Sidebar}>
         <div id={S.infoMenu}>
-          <span onClick={this.toggleView.bind(this, "info")} className={this.state.view === "info" ? S.selected : ""}>Info</span>
-          <span onClick={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
+          <span role="button" tabIndex="0" onClick={this.toggleView.bind(this, "info")} onKeyDown={this.toggleView.bind(this, "info")} className={this.state.view === "info" ? S.selected : ""}>Info</span>
+          <span role="button" tabIndex="0" onClick={this.toggleView.bind(this, "notes")} onKeyDown={this.toggleView.bind(this, "notes")} className={this.state.view === "notes" ? S.selected : ""}>Notes</span>
         </div>
         
         {this.state.view === "info" && <Info data={this.props.data} toggleForm={this.props.toggleForm}/>}
-        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes || this.props.data.about}/>}
+        {this.state.view === "notes" && <Notes data={this.props.data.artistNotes}/>}
         
       </div>  
     )
@@ -163,9 +178,7 @@ class ArtPice extends Component {
         </div>
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
-        <Link to={this.state.pastUrlTrue ? this.props.location.state.pastUrl : "/store"} className={S.storeLink} >
-          <InlineSVG src={arrowSvg} />
-        </Link>  
+        <BackButton className=".storeLink" to={this.state.pastUrlTrue ? this.props.location.state.pastUrl : "/store"} /> 
         
         <h1 id={S.title}>{itemData.title}</h1>
         
