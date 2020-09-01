@@ -53,6 +53,8 @@ const Info = (props) => {
     }
   }
 
+  const showBuyButton = props.data.price === "sold" || props.data.price === "SOLD"
+
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
@@ -64,18 +66,16 @@ const Info = (props) => {
         <li style={{textTransform: "none"}}>{props.data.info}</li>
       </ul>
       
-      {props.data.price === "sold" || props.data.price === "SOLD" 
-        ?
-          <div> </div>
-        :
+   
           <div className={S.buttonHolder}>
-            <button 
-              onClick={props.toggleForm}
-              className={S.artItemButton}
-            >
-              <span>Place Order</span>
-            </button> 
-            
+            {showBuyButton &&
+              <button 
+                onClick={props.toggleForm}
+                className={S.artItemButton}
+              >
+                <span>Place Order</span>
+              </button> 
+            }
             
             {props.data.is_archive_item &&
               <button className={S.artItemButton}>
@@ -87,7 +87,7 @@ const Info = (props) => {
 
           </div>
         
-      }
+      
     </div>
   )
 }
