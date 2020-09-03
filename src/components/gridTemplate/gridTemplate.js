@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import Link from 'gatsby-link'
-import ArtImage from '../../components/ArtImgae/ArtImage'
+import React, {Component} from '../../../node_modules/react'
+import Link from '../../../node_modules/gatsby-link'
+import ArtImage from '../ArtImgae/ArtImage'
 import S from './imageGrid.module.sass'
 import { arrowSvg } from '../../img/svg-index.js'
-import InlineSVG from 'svg-inline-react'
+import InlineSVG from '../../../node_modules/svg-inline-react'
 import Header from '../Header/Header.js'
 
-import 'typeface-alegreya-sans-sc'
-import 'typeface-cinzel-decorative'
-import 'typeface-cinzel'
+import '../../../node_modules/typeface-alegreya-sans-sc'
+import '../../../node_modules/typeface-cinzel-decorative'
+import '../../../node_modules/typeface-cinzel'
 
 /** 
  * @param {} data an object of art item nodes to display in a grid. Frontmatter requied 
@@ -16,8 +16,8 @@ import 'typeface-cinzel'
 */
 
 class GridTemplate extends Component {
-  render() {
   
+  render() {
     const postLinks = this.props.data.map( post => {
       const frontmatter = post.node.frontmatter
       return (

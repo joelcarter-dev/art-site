@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GridTemplate from '../components/gridTemplate/gridTemplate.js'
+import GridTemplate from '../components/GridTemplate/GridTemplate.js'
 import { graphql } from 'gatsby'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 

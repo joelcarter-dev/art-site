@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import { graphql } from 'gatsby'
 import S from './archive.module.sass'
 import Link from 'gatsby-link'
@@ -6,8 +6,8 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import { uniqBy, kebabCase } from 'lodash'
 
-import 'typeface-alegreya-sans-sc'
-import 'typeface-cinzel'
+import '../../node_modules/typeface-alegreya-sans-sc'
+import '../../node_modules/typeface-cinzel'
 
 const TopicBrowse = (props) => (
   <div className={S.topicHolder}>
@@ -21,7 +21,7 @@ const TopicBrowse = (props) => (
           const title = i.frontmatter.title
           return (
             <div className={S.itemHolder} key={title}>
-              <Link to={`archive/${kebabCase(title)}`} className={S.link}> 
+              <Link to={`${kebabCase(title)}`} className={S.link}> 
                 <h3>{title}</h3>
                 <p>{i.excerpt}</p>
               </Link>

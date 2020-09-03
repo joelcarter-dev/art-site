@@ -12,9 +12,8 @@ import Commissions from '../components/Commissions/Commissions.js'
 //get all tags and display five items under that tag. Clicking on the tag shows all items
 
 //group all links under their tag and type
-
-import 'typeface-alegreya-sans-sc'
-import 'typeface-cinzel'
+import '../../node_modules/typeface-alegreya-sans-sc'
+import '../../node_modules/typeface-cinzel'
 
 const ItemList = (props) => {
 
@@ -124,9 +123,7 @@ query StoreQuery {
         }
         frontmatter {
 					title
-					about
-          type
-          original
+					type
 					featuredImage {
 						childImageSharp {
 						  fixed(width: 320, height: 320, cropFocus: CENTER) {

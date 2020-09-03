@@ -4,21 +4,22 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
 
-import Order from '../components/Order/Order.js'
 import { arrowSvg } from '../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
+
+import Order from '../components/Order/Order.js'
 import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
-import BackButton from '../components/BackButton/backButton'
+import BackButton from '../components/BackButton/BackButton'
 
 import showdown from 'showdown'
 
 
-import 'typeface-alegreya-sans-sc'
-import 'typeface-lora'
-import 'typeface-cinzel'
+import '../../node_modules/typeface-alegreya-sans-sc'
+import '../../node_modules/typeface-lora'
+import '../../node_modules/typeface-cinzel'
 
 const Info = (props) => {
 
@@ -156,7 +157,8 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-      
+    const pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
+ 
     return (
       <section className={S.artItemHolder}>
       
@@ -178,7 +180,10 @@ class ArtPice extends Component {
         </div>
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
-        <BackButton className=".storeLink" to={this.state.pastUrlTrue ? this.props.location.state.pastUrl : "/store"} /> 
+        {/* <BackButton className=".storeLink" path={pastUrl} />  */}
+        <Link to={pastUrl} className={S.storeLink} >
+            <InlineSVG src={arrowSvg} />
+        </Link>  
         
         <h1 id={S.title}>{itemData.title}</h1>
         
