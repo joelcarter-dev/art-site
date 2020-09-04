@@ -30,7 +30,7 @@ class ArchiveItem extends Component {
       )
       
         return (
-          <div id={S.AchiveItem}>
+          <section id={S.AchiveItem}>
           
             <HeaderMeta 
               subTitle={title} 
@@ -39,9 +39,9 @@ class ArchiveItem extends Component {
               pathName={this.props.location.pathname}
             /> 
             
-            <div className={S.menu}>
+            
               <Header to={["home", "store"]} white={true}/>
-            </div>
+            
             
             <div className={S.holder}>
               
@@ -79,7 +79,7 @@ class ArchiveItem extends Component {
             
             </div>
                       
-          </div>
+          </section>
         );
     }
 }

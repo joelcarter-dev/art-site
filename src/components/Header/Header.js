@@ -46,7 +46,7 @@ const Header = (props) => (
             forceRender: true,
             reverseStack: true, 
           }}
-          style={{width: "268px", height: "57px" }}
+          style={{maxWidth: "268px", height: "57px" }}
           //callback={}
         />
         <MenuItem to={props.to[0]} />
@@ -67,7 +67,7 @@ const Header = (props) => (
             forceRender: true,
             reverseStack: true, 
           }}
-          style={{width: "268px", height: "57px" }}
+          style={{maxWidth: "268px", height: "57px" }}
           //callback={}
         />
         <MenuItem to={props.to[1]} />
