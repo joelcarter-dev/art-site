@@ -12,8 +12,6 @@ import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
 
-import BackButton from '../components/BackButton/BackButton'
-
 import showdown from 'showdown'
 
 

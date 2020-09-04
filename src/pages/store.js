@@ -66,9 +66,9 @@ export default class Store extends Component {
 			<section id={S.store}>
 				<HeaderMeta subTitle="Store" pathName={this.props.location.pathname} />
 
-				<div className={S.menu}>
+				
 					<Header to={[ 'home', 'index' ]} white={false} />
-				</div>
+				
 
 				<div className={S.listHolder}>
 					<ItemList items={itemData.tags} folder="category" title="Categories" />
