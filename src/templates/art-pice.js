@@ -156,7 +156,7 @@ class ArtPice extends Component {
         
     const itemData = this.props.pageContext.node.frontmatter
     const pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
- 
+
     return (
       <section className={S.artItemHolder}>
       

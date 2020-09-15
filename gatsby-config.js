@@ -9,8 +9,18 @@ module.exports = {
     title: 'Elloron Arts',
     siteUrl: `https://elloron.art`,
     tagLine: 'All paths lead to the mountain',
-    description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.'
-  
+    description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.',
+    wordings: [
+      "All paths lead to the Mountain",
+      "A place where none can find you",
+      "The words of distant places",
+      "Sights of such wonder",
+      "To meet what comes",
+      "And we breath in, then speak",
+      "Two worlds, and a place in between",
+      "Where Mountains and Sky join, the Bridge",
+      "Inbark on your Crossing"
+    ],
   },
   plugins: [
   

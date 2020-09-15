@@ -64,11 +64,13 @@ body
       max-width: 1600px
       margin: 0 auto
       display: grid
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr))
-      column-gap: 60px
-      grid-column: span 3
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr))
+      column-gap: 65px
+      grid-column: span 4
       line-height: 0
       padding: 60px
+      @media screen and (max-width: $s)
+        display: block
       .imageItem
         width: 100%
         min-width: 200px
@@ -90,3 +92,4 @@ body
           font-size: 20px
           font-weight: 300
           margin-bottom: 30px
+          line-height: normal

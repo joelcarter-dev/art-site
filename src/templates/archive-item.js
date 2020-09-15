@@ -50,7 +50,7 @@ class ArchiveItem extends Component {
                 
                 {headerImage !== null &&
                   <section className={S.imgHeader}>
-                    <div className="left"></div>
+                    {/* <div className="left"></div> */}
                     <div className="mid">
                       <ArtImage
                         fluid={headerImage}
@@ -68,7 +68,7 @@ class ArchiveItem extends Component {
                         </div>                        
                       }
                     </div>
-                    <div className="right"></div>
+                    {/* <div className="right"></div> */}
                   </section>
                 }
                 <h1 id={S.title}>{title}</h1>

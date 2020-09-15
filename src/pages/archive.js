@@ -124,9 +124,9 @@ export default class ArchiveIndex extends Component {
       
         <HeaderMeta subTitle="Archive" pathName={this.props.location.pathname}/> 
         
-        <div className={S.menu}>
+        {/* <div className={S.menu}> */}
           <Header to={["home", "store"]} white={this.state.currentTopic === undefined ? true : false}/>
-        </div>
+        {/* </div> */}
         
         {this.state.currentTopic !== undefined ? (
           <section className={S.topics}>

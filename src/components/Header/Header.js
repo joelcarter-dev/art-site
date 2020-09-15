@@ -12,16 +12,17 @@ import InlineSVG from 'svg-inline-react'
 const MenuItem = (props) => {
   if (props.to === "home") { 
     return <Link to={"/"} key={props.to} className={S.link}> <span> home </span> </Link>  
-  } else if (props.to === "index") {
+  } else if (props.to === "index" || props.to === "archive") {
     return <Link to={"/archive"} key={props.to} className={S.link}> <span>archive </span></Link>
+  } else if (props.to === "store") {
+    return <Link to={"/store"} key={props.to} className={S.link}> <span>store </span></Link>
   } else {
     return <Link to={props.to} key={props.to} className={S.link}> <span> {props.to} </span> </Link>
   }
 }
-
-
+// width="147" height="73"
 const logoSvg = `
-<svg width="147px" height="73px" viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg  viewBox="0 0 147 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="Art-Shop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Tablet-Portrait" transform="translate(-309.000000, -88.000000)" fill="#10090D">
             <g id="Group" transform="translate(309.000000, 88.000000)">
@@ -37,7 +38,7 @@ const Header = (props) => (
     
       <div className={S.left}>
         <ReactVivus
-          id={props.isIndexPage ? S.svgLeftAtIndex : S.svgLeft }
+          id={S.svgLeft}
           option={{
             file: LogoSides,
             animTimingFunction: 'EASE_OUT',
@@ -46,7 +47,6 @@ const Header = (props) => (
             forceRender: true,
             reverseStack: true, 
           }}
-          style={{maxWidth: "268px", height: "57px" }}
           //callback={}
         />
         <MenuItem to={props.to[0]} />
@@ -67,7 +67,6 @@ const Header = (props) => (
             forceRender: true,
             reverseStack: true, 
           }}
-          style={{maxWidth: "268px", height: "57px" }}
           //callback={}
         />
         <MenuItem to={props.to[1]} />

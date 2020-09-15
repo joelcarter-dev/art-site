@@ -6,7 +6,6 @@
   position: absolute
   overflow-y: scroll
   overflow-x: hidden
-  background-color: $red-white
   .holder
     background-color: $main-black
     margin-top: -100px
@@ -33,30 +32,24 @@
       .imgHeader
         margin: 0 auto
         position: relative
-        padding: 180px 200px 0 200px
-        display: grid
-        grid-template-columns: minmax(30px, 1fr) 5fr minmax(30px, 1fr)
+        padding: 180px 100px 0 100px
+        max-width: 1000px
         @media screen and (max-width: $m)
           padding: 180px 0 0 0
         .storeItemLink
-          position: absolute
-          bottom: -100px
-          left: 30px
-          z-index: 2
-          @media screen and (max-width: $m) 
-            position: relative
-            margin: 0 auto
-            width: 300px
-            height: 150px
-            bottom: 0
-            left: 0
+          position: relative
+          margin: 0 auto
+          width: 300px
+          height: 100px
+          bottom: 0
+          left: 0
           h3, .storeItemLink
             color: $red-white   
           h3
             font-weight: 400
             text-align: center
-            line-height: 56px
           #storeItemLink
+            left: center
             border: 1px solid $red-white      
             padding: 20px
             text-decoration: none
@@ -69,28 +62,21 @@
         +resFontSize(20px, 25px)
         font-family: 'cinzel decorative', serif
         text-align: center
-        padding: 7rem 0 5rem 0
+        padding: 60px 15px
         margin: 0 auto
         max-width: max-content
         letter-spacing: 2px
-        line-height: 10%
         color: $red-white
       .bodyHolder
         size: 100%
         background-color: $red-white
         position: relative
-        //overflow: auto
-        &:after 
-          clear: both
-          content: ""
-          display: table 
         .bodyContent
-          max-width: 500px
-          left: center
-          //margin: 0 10vw 0 10vw
           margin: 0 auto
           padding-bottom: 100px
           padding-top: 5rem
+          text-align: center
+          background-color: $red-white
           @media screen and (max-width: $m) 
             width: 100%
             padding: 30px
@@ -98,3 +84,5 @@
             line-height: 30px
             font-family: 'Lora', Arial, Helvetica, sans-serif
             letter-spacing: 2px
+            max-width: 500px
+            margin: 0 auto

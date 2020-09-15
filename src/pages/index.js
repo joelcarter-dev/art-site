@@ -49,9 +49,9 @@ export class IndexPage extends Component {
       
         <HeaderMeta />
         
-        <section className={S.menu}>
-          <Header to={['store', 'index']} white={false} isIndexPage={true}/>
-        </section>
+        {/* <section className={S.menu}> */}
+          <Header to={['store', 'index']} white={false} />
+        {/* </section> */}
         
         <section className={S.title}>
           <h1>{metaData.title}</h1>

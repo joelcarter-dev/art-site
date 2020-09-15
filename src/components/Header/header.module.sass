@@ -5,9 +5,9 @@ $black: #0B101B
 
 #Header
   position: relative
+  //position: absolute
+  width: 100%
   z-index: 900000000
-  *
-    max-height: 100px
   #black
     .left, .right
       svg g path
@@ -20,6 +20,12 @@ $black: #0B101B
       i
         svg g path, svg g rect
           fill: $red-black !important
+          max-height: 90px 
+          height: 60px
+          //min-height: 55px
+          // @media screen and (max-width: $s)
+          //   max-height: 50px
+ 
   #white
     .left, .right
       svg g path
@@ -36,44 +42,45 @@ $black: #0B101B
   .logoHolder
     display: flex
     justify-content: center
+    max-width: 588px
+    margin: 0 auto
     .mainLogo
-      grid-area: mid
+      width: 50%
+      min-width: 100px
     .left, .right
       justify-content: center
       align-items: center
       width: 100%
       svg
         display: block
-
       .link
         display: block
+
+    #svgLeft, #svgRight
+      position: absolute
+      top: 10px
+      max-width: 268px
+      @media screen and (max-width: $s)
+        top: 15px
+
     .left
-      grid-area: left
       #svgLeft
-        position: absolute
-        top: 5px
-        right: -40px
-      #svgLeftAtIndex
-        position: absolute
-        top: 5px
-        right: -50px
-        left: -126px
+        right: -30px
       .link
         text-align: right
         &:before
           float: right
     .right
-      grid-area: right
       #svgRight
-        position: absolute
-        top: 5px
-        left: -40px
+        left: -30px
         transform: rotateY(180deg)
       .link
         margin: 0 auto
         text-align: left
+
     .left, .right, .mainLogo
       position: relative
+
     .left, .right
       .link
         opacity: 0.8

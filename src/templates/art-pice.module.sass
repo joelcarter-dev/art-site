@@ -25,13 +25,11 @@ body
   overflow-y: scroll
 
   .artPiceHeader
-    grid-row: 1
-    grid-column: 1
     grid-area: header
-    max-width: 24em
-    margin: 0 auto
+    width: 100%
+    position: fixed
+    background-color: $main-black
   .storeLink
-    //grid-column: 1 / span 2
     grid-area: title-start
     z-index: 2
     width: 100px
@@ -67,11 +65,9 @@ body
     grid-area: main
     position: relative
     padding: 0
-    padding: 60px
-    // @media screen and (max-width: 100em)
+    padding: 3vw 60px 60px 0
     @media screen and ($s)
       padding: 0
-    padding-top: 3vw
     width: 100%
     max-width: 800px
     height: auto
@@ -110,10 +106,11 @@ body
       margin-top: 120px
       grid-area: top
       line-height: 30px
-    .artPiceHeader
-      padding-right: 13px
-      grid-area: top
-    .artPiceHeader, #title
+    // .artPiceHeader
+    //   padding-right: 13px
+    //   grid-area: top
+    // .artPiceHeader, 
+    #title
       grid-column: -2
       position: fixed
       left: center
@@ -163,11 +160,13 @@ body
       max-width: 400px
       margin: 0 auto
     #infoMenu
-      width: 100%
+      width: 250px
       height: 60px
       display: flex
       justify-content: space-evenly
       margin-bottom: 30px
+      @media screen and (max-width: $m)
+        width: 100%
       .selected
         opacity: 1
         &:before 
@@ -191,13 +190,13 @@ body
         border: none
         opacity: 0.5
         transition: all 0.5s ease-in-out
+        outline: none
         &:hover
           opacity: 1
     .infoHolder
-      //width: 100%
       width: 250px
       @media screen and (max-width: $m)
-        width: 400px
+        width: 100%
       .priceHolder
         width: 100%
         display: flex
@@ -224,7 +223,7 @@ body
         width: 100%
         padding-left: 20px
         @media screen and (max-width: $m)
-          margin-left: 0
+          padding-left: 0
         li
           width: 240px
           color: $red-white
@@ -239,11 +238,13 @@ body
             text-align: center
       .buttonHolder
         position: relative
-        padding-left: 20px
+        padding-left: 24px
         display: inline-grid
         transition: all 0.5s cubic-bezier(.77,0,.18,1)
         @media screen and (max-width: $m)
-          padding-left: 100px
+          padding: 0
+          display: flex 
+          /* Causes button to jolt into place on small screen */
         .artItemButton
           width: 200px
           margin: 0 auto
@@ -265,8 +266,6 @@ body
     .notesHolder
       color: $red-white
       text-align: left
-      //width: 100%
-      // float: left
       padding: 0 30px 0 30px
       h3
         font-weight: 100
