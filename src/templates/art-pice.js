@@ -155,7 +155,10 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-    const pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
+    let pastUrl = null
+    if(this.state.pastUrlTrue) {
+      pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
+    }
 
     return (
       <section className={S.artItemHolder}>
@@ -179,9 +182,11 @@ class ArtPice extends Component {
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
         {/* <BackButton className=".storeLink" path={pastUrl} />  */}
-        <Link to={pastUrl} className={S.storeLink} >
+        {this.state.pastUrlTrue && pastUrl != null &&
+          <Link to={pastUrl} className={S.storeLink} >
             <InlineSVG src={arrowSvg} />
-        </Link>  
+          </Link>  
+        }
         
         <h1 id={S.title}>{itemData.title}</h1>
         
