@@ -52,7 +52,7 @@ const Info = (props) => {
     }
   }
 
-  const showBuyButton = props.data.price === "sold" || props.data.price === "SOLD"
+  const showBuyButton = !props.data.price === "sold" || !props.data.price === "SOLD"
 
   return (
     <div className={S.infoHolder}>
