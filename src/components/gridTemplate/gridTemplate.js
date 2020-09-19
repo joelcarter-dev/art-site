@@ -1,14 +1,15 @@
-import React, {Component} from '../../../node_modules/react'
-import Link from '../../../node_modules/gatsby-link'
-import ArtImage from '../ArtImgae/ArtImage'
+
+import React, { Component } from 'react';
 import S from './imageGrid.module.sass'
+import ArtImage from '../ArtImgae/ArtImage.js'
+import Link from 'gatsby-link'
 import { arrowSvg } from '../../img/svg-index.js'
-import InlineSVG from '../../../node_modules/svg-inline-react'
+import InlineSVG from 'svg-inline-react'
 import Header from '../Header/Header.js'
 
-import '../../../node_modules/typeface-alegreya-sans-sc'
-import '../../../node_modules/typeface-cinzel-decorative'
-import '../../../node_modules/typeface-cinzel'
+import 'typeface-alegreya-sans-sc'
+import 'typeface-cinzel-decorative'
+import 'typeface-cinzel'
 
 /** 
  * @param {} data an object of art item nodes to display in a grid. Frontmatter requied 
