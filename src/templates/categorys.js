@@ -5,10 +5,10 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 
 class Category extends Component {
   render() {
-    let allTitles = []
-    this.props.data.allMarkdownRemark.edges.forEach( post => {
-      allTitles.push(post.node.frontmatter.title)
-    })
+    // let allTitles = []
+    // this.props.data.allMarkdownRemark.edges.forEach( post => {
+    //   allTitles.push(post.node.frontmatter.title)
+    // })
     return (
       <div style={{position: "absolute", width: "100%", height: "100%", overflow: "hidden", overflowY: "scroll"}}>
         <HeaderMeta subTitle={this.props.pageContext.category} itemGroup={this.props.data.allMarkdownRemark}/>

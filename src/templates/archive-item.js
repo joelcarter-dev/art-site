@@ -5,6 +5,9 @@ import S from './archive.module.sass'
 import Link from 'gatsby-link'
 import ArtImage from '../components/ArtImgae/ArtImage'
 
+import { arrowSvg } from '../img/svg-index'
+import InlineSVG from 'svg-inline-react'
+
 import 'typeface-lora'
 import 'typeface-cinzel-decorative'
 
@@ -46,12 +49,16 @@ class ArchiveItem extends Component {
             <div className={S.holder}>
               
               <section className={S.body}>
-                <Link to="/archive" id={S.indexLink}> index </Link>
                 
                 {headerImage !== null &&
                   <section className={S.imgHeader}>
                     {/* <div className="left"></div> */}
                     <div className="mid">
+
+                    <Link to = "/archive" className={S.storeLink} >
+                      <InlineSVG src={arrowSvg} />
+                    </Link>  
+
                       <ArtImage
                         fluid={headerImage}
                         imageData={frontmatter}
