@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 
-import S from '../components/GridTemplate/imageGrid.module.sass'
+import S from './imageGrid.module.sass'
 import ArtImage from '../components/ArtImgae/ArtImage.js'
 import Link from 'gatsby-link'
 import { arrowSvg } from '../img/svg-index.js'
