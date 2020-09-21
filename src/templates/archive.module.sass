@@ -8,39 +8,28 @@
   overflow-x: hidden
   .holder
     background-color: $main-black
-    margin-top: -100px
     .body
-      #indexLink
-        text-align: center
-        font-size: 25px
-        opacity: 0.8
-        margin: 0 auto
-        left: center
-        top: 90px
-        text-decoration: none
-        color: $red-white
-        z-index: 2
-        &:before 
-          content: ''
-          display: block
-          width: 30px
-          position: relative
-          margin: 0 auto
-          top: 35px
-          border: none
-          border-bottom: 3px solid $red-white
       .imgHeader
         margin: 0 auto
         position: relative
-        padding: 180px 100px 0 100px
+        padding: 0 100px 100px 100px
         max-width: 1000px
         @media screen and (max-width: $m)
-          padding: 180px 0 0 0
+          // padding: 180px 0 0 0
+          padding: 0
+        .top
+          position: relative
+          display: flex
+          align-items: center
+          @media screen and (max-width: $s)
+            display: block
         .storeItemLink
           position: relative
           margin: 0 auto
           width: 300px
           height: 100px
+          @media screen and (max-width: $m)
+            height: 140px
           bottom: 0
           left: 0
           h3, .storeItemLink
@@ -54,19 +43,7 @@
             padding: 20px
             text-decoration: none
             color: $red-white
-            @media screen and (max-width: $m)
-              left: center
-              top: 60px
         
-      #title
-        +resFontSize(20px, 25px)
-        font-family: 'cinzel decorative', serif
-        text-align: center
-        padding: 60px 15px
-        margin: 0 auto
-        max-width: max-content
-        letter-spacing: 2px
-        color: $red-white
       .bodyHolder
         size: 100%
         background-color: $red-white
@@ -86,3 +63,18 @@
             letter-spacing: 2px
             max-width: 500px
             margin: 0 auto
+
+  .achiveItemBackButton
+    // height: 95px
+    position: absolute
+    // top: 0
+
+  #title
+    +resFontSize(20px, 25px)
+    font-family: 'cinzel decorative', serif
+    text-align: center
+    padding: 40px 15px 60px 15px
+    margin: 0 auto
+    max-width: max-content
+    letter-spacing: 2px
+    color: $red-white

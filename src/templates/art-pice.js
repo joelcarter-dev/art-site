@@ -3,9 +3,10 @@ import HeaderMeta from '../components/Helmet/Helmet.js'
 
 import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
+import BackButton from '../components/BackButton/BackButton.js'
 
-import { arrowSvg } from '../img/svg-index.js'
-import InlineSVG from 'svg-inline-react'
+// import { arrowSvg } from '../img/svg-index.js'
+// import InlineSVG from 'svg-inline-react'
 
 import Order from '../components/Order/Order.js'
 import { kebabCase } from 'lodash'
@@ -19,45 +20,43 @@ import '../../node_modules/typeface-alegreya-sans-sc'
 import '../../node_modules/typeface-lora'
 import '../../node_modules/typeface-cinzel'
 
-const Info = (props) => {
-
-  function setPriceCondition() {
-    if(props.data.price === "sold" || props.data.price === "SOLD") {
-      return (
-        <div className={S.price}>
-          <h3 style={{textTransform: "uppercase", fontFamily: "cinzel"}}>{props.data.price}</h3> 
-        </div> 
-      )
-    } else if(props.data.tags.includes("Commission")) {
-      console.log("is comission")
-      return (
-        <div className={S.price}>
-          <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
-        </div> 
-      )
-    } else if(props.data.tags.includes("archive") || props.data.tags.includes("Archive")) {
-      console.log("is archive")
-      return (
-        <div className={S.price}>
-          <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Archived Piece</h3>  
-        </div> 
-      )
-    } else {
-      return (
-        <div className={S.price}>
-          <h3>${props.data.price}</h3>
-          <span>NZD</span>    
-        </div> 
-      )
-    }
+const Price = (props) => {
+  if(props.data.price === "sold" || props.data.price === "SOLD") {
+    return (
+      <div className={S.price}>
+        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel"}}>{props.data.price}</h3> 
+      </div> 
+    )
+  } else if(props.data.tags.includes("Commission")) {
+    return (
+      <div className={S.price}>
+        <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
+      </div> 
+    )
+  } else if(props.data.tags.includes("archive") || props.data.tags.includes("Archive")) {
+    return (
+      <div className={S.price}>
+        <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Archived Piece</h3>  
+      </div> 
+    )
+  } else {
+    return (
+      <div className={S.price}>
+        <h3>${props.data.price}</h3>
+        <span>NZD</span>    
+      </div> 
+    )
   }
+}
+
+const Info = (props) => {
 
   const showBuyButton = !props.data.price === "sold" || !props.data.price === "SOLD"
 
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
-        {setPriceCondition()}
+        <Price data={props.data}/>
       </div>
       <ul className={S.dataList}>
         <li>{props.data.original ? "original work" : "print"}</li>
@@ -138,15 +137,15 @@ class ArtPice extends Component {
     super(props)
     this.state = { 
       orderFormHidden: true,
-      pastUrlTrue: false,
+      // pastUrlTrue: false,
     }
   }
 
-  componentDidMount() {
-    if(this.props.location.state.pastUrl) {
-      this.setState({pastUrlTrue: true})
-    }
-  }
+  // componentDidMount() {
+  //   if(this.props.location.state.pastUrl) {
+  //     this.setState({pastUrlTrue: true})
+  //   }
+  // }
 
   toggleForm = () => {
     this.setState({orderFormHidden: !this.state.orderFormHidden})
@@ -155,10 +154,10 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-    let pastUrl = null
-    if(this.state.pastUrlTrue) {
-      pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
-    }
+    // let pastUrl = null
+    // if(this.state.pastUrlTrue) {
+    //   pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
+    // }
 
     return (
       <section className={S.artItemHolder}>
@@ -182,11 +181,13 @@ class ArtPice extends Component {
         
         {/* to given url prop if came from a cat / med page, or just back to store */}
         {/* <BackButton className=".storeLink" path={pastUrl} />  */}
-        {this.state.pastUrlTrue && pastUrl != null &&
+        {/* {this.state.pastUrlTrue && pastUrl != null &&
           <Link to={pastUrl} className={S.storeLink} >
             <InlineSVG src={arrowSvg} />
           </Link>  
-        }
+        } */}
+
+        <BackButton />
         
         <h1 id={S.title}>{itemData.title}</h1>
         

@@ -1,21 +1,26 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import { arrowSvg } from '../../img/svg-index.js'
 import InlineSVG from 'svg-inline-react'
 import S from './backButton.module.sass'
 import PropTypes from 'prop-types'
+import { navigate } from "@reach/router"
 
 /**
  * 
- * @param {*} className class name
+ * @param {*} pageClass custom class to give styles based on page
  * @param {*} path the path to the route that is a string
  */
 
-const BackButton = (className, path) => {
+const goBack = () => {
+    navigate(-1);
+}
+
+const BackButton = (pageClass) => {
+    console.log(pageClass.pageClass)
     return (
-        <Link to={toString(path)} className={`${S.backButton} ${className}`} >
+        <button onClick={goBack} className={`${S.backButton} ${pageClass.pageClass !== undefined ? pageClass.pageClass : null}`} >
             <InlineSVG src={arrowSvg} />
-        </Link>  
+        </button>  
     )
 }
 

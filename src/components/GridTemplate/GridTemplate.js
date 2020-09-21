@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import S from './imageGrid.module.sass'
 import ArtImage from '../ArtImgae/ArtImage.js'
 import Link from 'gatsby-link'
-import { arrowSvg } from '../../img/svg-index.js'
-import InlineSVG from 'svg-inline-react'
 import Header from '../Header/Header.js'
+import BackButton from '../BackButton/BackButton.js'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -52,10 +51,7 @@ class GridTemplate extends Component {
         </div>
       
         <div className={S.titleHolder}>
-          <Link to = "/store" className={S.storeLink} >
-            <InlineSVG src={arrowSvg} />
-          </Link>  
-          
+          <BackButton />
           <h1 id={S.mediumTitle}>{title}</h1>
         </div>
         <div className={S.imageGrid}>
