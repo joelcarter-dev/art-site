@@ -5,9 +5,6 @@ import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
 import BackButton from '../components/BackButton/BackButton.js'
 
-// import { arrowSvg } from '../img/svg-index.js'
-// import InlineSVG from 'svg-inline-react'
-
 import Order from '../components/Order/Order.js'
 import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
@@ -24,7 +21,7 @@ const Price = (props) => {
   if(props.data.price === "sold" || props.data.price === "SOLD") {
     return (
       <div className={S.price}>
-        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel"}}>{props.data.price}</h3> 
+        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",  fontSize: "0.7em"}}>{props.data.price}</h3> 
       </div> 
     )
   } else if(props.data.tags.includes("Commission")) {
@@ -51,8 +48,6 @@ const Price = (props) => {
 
 const Info = (props) => {
 
-  const showBuyButton = !props.data.price === "sold" || !props.data.price === "SOLD"
-
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
@@ -63,10 +58,14 @@ const Info = (props) => {
         <li>{props.data.type}</li>
         <li style={{textTransform: "none"}}>{props.data.info}</li>
       </ul>
-      
-   
+    
           <div className={S.buttonHolder}>
-            {showBuyButton &&
+            {props.data.is_store_item && 
+            props.data.price !== "SOLD" &&
+            props.data.price !== "sold" &&
+            !props.data.tags.includes("Archive") &&
+            !props.data.tags.includes("Commission") &&
+          
               <button 
                 onClick={props.toggleForm}
                 className={S.artItemButton}
@@ -137,15 +136,8 @@ class ArtPice extends Component {
     super(props)
     this.state = { 
       orderFormHidden: true,
-      // pastUrlTrue: false,
     }
   }
-
-  // componentDidMount() {
-  //   if(this.props.location.state.pastUrl) {
-  //     this.setState({pastUrlTrue: true})
-  //   }
-  // }
 
   toggleForm = () => {
     this.setState({orderFormHidden: !this.state.orderFormHidden})
@@ -154,10 +146,6 @@ class ArtPice extends Component {
   render() {
         
     const itemData = this.props.pageContext.node.frontmatter
-    // let pastUrl = null
-    // if(this.state.pastUrlTrue) {
-    //   pastUrl = this.props.location.state.pastUrl ? this.props.location.state.pastUrl : "/store"
-    // }
 
     return (
       <section className={S.artItemHolder}>
@@ -178,14 +166,6 @@ class ArtPice extends Component {
         <div className={S.artPiceHeader}>
           <Header to={["home", "index"]} white={true} />
         </div>
-        
-        {/* to given url prop if came from a cat / med page, or just back to store */}
-        {/* <BackButton className=".storeLink" path={pastUrl} />  */}
-        {/* {this.state.pastUrlTrue && pastUrl != null &&
-          <Link to={pastUrl} className={S.storeLink} >
-            <InlineSVG src={arrowSvg} />
-          </Link>  
-        } */}
 
         <BackButton />
         
