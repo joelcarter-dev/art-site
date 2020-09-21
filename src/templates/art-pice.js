@@ -47,7 +47,6 @@ const Price = (props) => {
 }
 
 const Info = (props) => {
-
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
@@ -83,8 +82,6 @@ const Info = (props) => {
             }
 
           </div>
-        
-      
     </div>
   )
 }
