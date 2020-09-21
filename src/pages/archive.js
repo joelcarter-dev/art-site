@@ -40,7 +40,6 @@ const BannerMeu = (props) => (
       <div className={S.holder}>
         {props.groups.map( i => {
           const totalExcerpts = props.excerpts.filter( (item) => {
-            //console.log(i)
             return item.group === i.topicName
           })
           return (

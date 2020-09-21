@@ -8,7 +8,6 @@ import OrderForm from './OrderForm.js'
 
 export class Overview extends Component {
   render() {
-    //console.log("item info in overview ", this.props.itemInfo)
     return (
       <section id={S.Overview}>
         <h3>Overview</h3>
@@ -62,9 +61,6 @@ export default class Order extends Component {
       itemInfo.push({title: i.frontmatter.title, price: i.frontmatter.price})
       return null
     })
-    //console.log("item info ", itemInfo)
-    //console.log("orderData ",this.props.orderData)
-    
     
     const onSuccess = (payment) => {
       console.log('Successful payment', payment)
