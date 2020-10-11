@@ -47,6 +47,7 @@ query TagPage($category: String) {
           title
           artistNotes
           type
+          date
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 500){

@@ -19,7 +19,8 @@ module.exports = {
       "And we breath in, then speak",
       "Two worlds, and a place in between",
       "Where Mountains and Sky join, the Bridge",
-      "Inbark on your Crossing"
+      "Inbark on your Crossing",
+      "The Fire Brings the Dawn",
     ],
   },
   plugins: [

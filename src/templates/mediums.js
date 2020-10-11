@@ -58,6 +58,7 @@ query mediumsPage($medium: String) {
           title
           artistNotes
           type
+          date
           featuredImage {
             childImageSharp {
               fluid(maxHeight: 600){
