@@ -75,24 +75,17 @@ $mainLogo: .03
       
   .mid
     width: 100%
-    //height: 100vh
-    left: center
     top: 0
     z-index: 2
-    //background-color: $red-white
     .sides
-      //size: 50% //vw
-      //width: 150vw 
-      //height: 500px
       left: center
       padding-top: 100vh
+      @media screen and (max-width: $xs)
+        padding-top: calc(100vh - 40px)
       z-index: 3
       .left, .right
-        // size: 150vw
-        //left: 50%
         width: 60vw
         height: 40vw
-        // size: 100vw
         position: absolute
         background-color: $main-black
       .left
@@ -105,26 +98,20 @@ $mainLogo: .03
         transform-origin: top right 
 
     .mainLogo
-      //placment height issues 
-      //happen when logo is not fixed size
       position: relative
-      // padding-top: calc(100vh - 6vw)
-      //padding-top: calc(100vh - 20%)
-
-      //put logo at very pottom of page but minus half the height of the logo so it shows above 100vh
       padding-top: calc(100vh - 100px)
-      //size: 20% 
       margin: 0 auto
-      //max-width: 200px
-      // min-width: 200px
       width: 200px
+      @media screen and (max-width: $xs)
+        width: 150px
       z-index: 3
 
     .midContent
       background-color: $red-white
       z-index: 5
       position: relative
-      //margin-top: -70px
+      @media screen and (max-width: $xs)
+          margin-top: -14px
       .midTitle
         padding-top: 60px
         text-align: center
@@ -152,17 +139,15 @@ $mainLogo: .03
     width: 100vw
     display: flex
 
-  .topSvgHolder
+  .topSvgHolder, .bottomSvgHolder
     top: 100vh
-  .bottomSvgHolder
-    top: 100vh
+    @media screen and (max-width: $xs)
+      top: calc(100vh - 45px)
     
   .topSvgHolder > .svgLeft, .topSvgHolder > .svgRight
-    // width: 40vw
-    //min-width: 170px
     width: 46% //40$
     position: absolute
-    bottom: -12px
+    bottom: -13.5px
     svg g path
       stroke: $red-white !important
     

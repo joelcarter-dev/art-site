@@ -20,11 +20,29 @@ import './main.sass'
 import S from './index.module.sass'
 import './mixins.module.scss'
 
+let scrollCounter = 0
+const handleScroll = () => {
+  scrollCounter++
+  console.log(scrollCounter)
+}
 export class IndexPage extends Component {
+
+  componentDidMount() {
+    if (typeof window !== 'undefined') {
+      console.log(window)
+      window.addEventListener('scroll', handleScroll)
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }
   render() {
     
     const metaData = this.props.data.site.siteMetadata
-    const heroImageOne = this.props.data.heroImageTwo.edges[0].node.fluid
+    const heroImageOne = this.props.data.heroImageOne.edges[0].node.fluid
     const heroImageTwo = this.props.data.heroImageTwo.edges[0].node.fluid
     
     return (
