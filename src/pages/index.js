@@ -106,7 +106,7 @@ export class IndexPage extends Component {
               </div>
             </div>
                   
-            {/* <div className={S.bottomSvgHolder}>
+            <div className={S.bottomSvgHolder}>
               <div className={S.svgLeft}>
                 <ReactVivus
                   id={S.svgBottomLeft}
@@ -138,7 +138,7 @@ export class IndexPage extends Component {
                   //callback={}
                 />
               </div>
-            </div> */}
+            </div>
 
           </div>
           
