@@ -150,7 +150,7 @@ export class IndexPage extends Component {
           <div className={S.midContent}>
 
             <div className={S.midTitle}>
-              <h2>Choose your path</h2>  
+              <h2>Words for second section</h2>  
             </div>  
             <div className={S.midContent}>
               <ul>
