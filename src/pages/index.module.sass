@@ -115,26 +115,51 @@ $mainLogo: .03
         fill: $red-white !important 
 
     .midContent
-      background-color: $red-white
       z-index: 5
+      background-color: $red-white
       position: relative
       margin-top: -27px
       @media screen and (max-width: $xs)
           margin-top: -14px
+      .constentSides
+        top: 100px
+        position: relative
+        .left, .right
+          width: 60vw
+          height: 20vw
+          //size: 60vw
+          position: absolute
+          background-color: $main-black
+        .left
+          left: -80px
+          transform: rotate(-10deg)
+          //transform: rotate(-45deg)  
+          transform-origin: top left
+        .right
+          right: -80px
+          transform: rotate(10deg)  
+          //transform: rotate(45deg)  
+          transform-origin: top right 
       .midTitle
         padding-top: 60px
         text-align: center
         font-family: 'cinzel decorative', 'cinzel', serif
+        position: relative
+        h2
+          color: $red-white
+          z-index: 5
       .holder
         height: 500px
         display: flex
         justify-content: center
       .midContent
+        background-color: $main-black
         display: flex
         justify-content: center
         ul
           list-style: none
           padding: 30px
+          color: $red-white
 
   .svgHolder
     position: relative

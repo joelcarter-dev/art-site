@@ -149,6 +149,11 @@ export class IndexPage extends Component {
 
           <div className={S.midContent}>
 
+            <div className={S.constentSides}>     
+              <div className={S.right}></div>
+              <div className={S.left}></div>            
+            </div>
+
             <div className={S.midTitle}>
               <h2>Words for second section</h2>  
             </div>  
@@ -165,8 +170,8 @@ export class IndexPage extends Component {
               </ul>
             </div>
           </div>   
-        </section>
-                  
+
+        </section>          
       </section>
     )
   }
