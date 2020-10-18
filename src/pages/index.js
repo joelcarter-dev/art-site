@@ -152,17 +152,7 @@ export class IndexPage extends Component {
             <div className={S.midTitle}>
               <h2>Choose your path</h2>  
             </div>  
-            <div className={S.midTitle}>
-              <ul>
-                <li>thing</li>
-                <li>thing</li>
-                <li>thing</li>
-              </ul>
-              <ul>
-                <li>thing</li>
-                <li>thing</li>
-                <li>thing</li>
-              </ul>
+            <div className={S.midContent}>
               <ul>
                 <li>thing</li>
                 <li>thing</li>

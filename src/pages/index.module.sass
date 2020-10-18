@@ -40,8 +40,8 @@ $mainLogo: .03
   .title
     left: 0
     right: 0
-    top: 20vh
-    +parallax(.15)
+    top: 27vh
+    +parallax(.20)
     text-align: center
     z-index: 2
     h1, h2
@@ -50,7 +50,7 @@ $mainLogo: .03
       color: $red-white
       padding: 0 20px 0 20px
     h1
-      +resFontSize(50px, 100px)
+      +resFontSize(40px, 100px)
       letter-spacing: 10px
       margin-bottom: 1rem
     h2 
@@ -65,7 +65,7 @@ $mainLogo: .03
     background-color: $red-white
     .heroTop
       width: 100%
-      height: 96.1vh //100vh
+      height: 100vh //98vh //96.1vh //100vh
       overflow: hidden
       position: relative
       div //image holder
@@ -79,22 +79,27 @@ $mainLogo: .03
     z-index: 2
     .sides
       left: center
-      padding-top: 100vh
+      //padding-top: 100vh
+      //padding-top: 102.5vh
+      padding-top: calc(100vh - 20px)
       @media screen and (max-width: $xs)
         padding-top: calc(100vh - 40px)
       z-index: 3
       .left, .right
-        width: 60vw
-        height: 40vw
+        // width: 60vw
+        // height: 40vw
+        size: 60vw
         position: absolute
         background-color: $main-black
       .left
-        left: 20%
+        left: 0
         transform: rotate(-20deg)
+        //transform: rotate(-45deg)  
         transform-origin: top left
       .right
-        right: 20%
+        right: 0
         transform: rotate(20deg)  
+        //transform: rotate(45deg)  
         transform-origin: top right 
 
     .mainLogo
@@ -110,6 +115,7 @@ $mainLogo: .03
       background-color: $red-white
       z-index: 5
       position: relative
+      margin-top: -8px
       @media screen and (max-width: $xs)
           margin-top: -14px
       .midTitle
@@ -120,6 +126,11 @@ $mainLogo: .03
         height: 500px
         display: flex
         justify-content: center
+      .midContent
+        display: flex
+        justify-content: center
+        ul
+          list-style: none
 
   .svgHolder
     position: relative
@@ -140,20 +151,22 @@ $mainLogo: .03
     display: flex
 
   .topSvgHolder, .bottomSvgHolder
-    top: 100vh
+    top: 98.5vh
     @media screen and (max-width: $xs)
       top: calc(100vh - 45px)
     
   .topSvgHolder > .svgLeft, .topSvgHolder > .svgRight
-    width: 46% //40$
+    width: calc(50% - 100px)//46% //40$
+    @media screen and (max-width: $xs)
+      width: 48%
     position: absolute
     bottom: -13.5px
     svg g path
       stroke: $red-white !important
     
-  .bottomSvgHolder > .svgLeft, .bottomSvgHolder > .svgRight
-    // width: 40vw
-    width: 40%
-    svg g path
-      // stroke: $red-black !important
-      stroke: red !important
+  // .bottomSvgHolder > .svgLeft, .bottomSvgHolder > .svgRight
+  //   // width: 40vw
+  //   width: 40%
+  //   svg g path
+  //     // stroke: $red-black !important
+  //     stroke: red !important
