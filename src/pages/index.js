@@ -192,7 +192,7 @@ export const indexQuery = graphql`
     }
     heroImageOne: allImageSharp(
       filter: {
-        fluid: {originalName: {regex: "/testHero.jpg/"}}
+        fluid: {originalName: {regex: "/mainOne.jpg/"}}
       }) {
       edges {   
         node {

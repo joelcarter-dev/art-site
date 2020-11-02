@@ -88,6 +88,7 @@ $mainLogo: .03
       .left, .right
         width: 60vw
         height: 20vw
+        min-height: 300px !important
         //size: 60vw
         position: absolute
         background-color: $red-white
@@ -118,36 +119,38 @@ $mainLogo: .03
       z-index: 5
       background-color: $red-white
       position: relative
-      margin-top: -27px
+      //margin-top: -1vw
       @media screen and (max-width: $xs)
-          margin-top: -14px
+          margin-top: -10 px
       .constentSides
-        top: 100px
+        //top: 30px
         position: relative
         .left, .right
           width: 60vw
-          height: 20vw
+          height: 15vw
           //size: 60vw
           position: absolute
           background-color: $main-black
         .left
-          left: -80px
+          right: 50%
           transform: rotate(-10deg)
           //transform: rotate(-45deg)  
-          transform-origin: top left
+          transform-origin: top right
         .right
-          right: -80px
+          left: 50%
           transform: rotate(10deg)  
           //transform: rotate(45deg)  
-          transform-origin: top right 
+          transform-origin: top left 
       .midTitle
-        padding-top: 60px
+        padding-top: 6vw
         text-align: center
         font-family: 'cinzel decorative', 'cinzel', serif
         position: relative
         h2
           color: $red-white
+          background-color: $main-black
           z-index: 5
+          margin-bottom: 0
       .holder
         height: 500px
         display: flex
