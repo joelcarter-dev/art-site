@@ -14,7 +14,7 @@ type:
 featuredImage: ../img/img_20190402_161819.jpg
 original: true
 storeHighlight: false
-is_store_item: true
+is_store_item: false
 is_archive_item: false
 ---
 

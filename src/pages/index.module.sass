@@ -74,43 +74,51 @@ $mainLogo: .03
         object-position: left bottom
       
   .mid
-    width: 100%
-    top: 0
+    top: -30px
     z-index: 2
+    +parallax(.20)
     .sides
       left: center
-      //padding-top: 100vh
-      //padding-top: 102.5vh
-      padding-top: calc(100vh + 28px)
+      padding-top: calc(100vh - -25px) //-15px
+      @media screen and (max-width: $m)
+        padding-top: calc(100vh - -20px)
+      @media screen and (max-width: $s)
+        padding-top: calc(100vh - -8px)
       @media screen and (max-width: $xs)
-        padding-top: calc(100vh - 40px)
+        padding-top: calc(100vh - 20px)
       z-index: 3
       .left, .right
         width: 60vw
         height: 20vw
-        min-height: 300px !important
-        //size: 60vw
+        max-height: 300px
+        min-height: 200px
         position: absolute
         background-color: $red-white
       .left
         left: -20px
         transform: rotate(-20deg)
-        //transform: rotate(-45deg)  
+        @media screen and (min-width: $l)
+          transform: rotate(-18deg) !important
+        @media screen and (min-width: 75em)
+          transform: rotate(-15deg) !important
         transform-origin: top left
       .right
         right: -20px
-        transform: rotate(20deg)  
-        //transform: rotate(45deg)  
+        transform: rotate(20deg)
+        @media screen and (min-width: $l)
+          transform: rotate(18deg) !important
+        @media screen and (min-width: 75em)
+          transform: rotate(15deg) !important
         transform-origin: top right 
 
     .mainLogo
       position: relative
-      padding-top: calc(100vh - 80px)
+      padding-top: calc(100vh - 70px) //80px
       margin: 0 auto
       width: 200px
       @media screen and (max-width: $xs)
         width: 150px
-        padding-top: calc(100vh - 100px)
+        //padding-top: calc(100vh - 100px)
       z-index: 2
       *
         fill: $red-white !important 
@@ -119,29 +127,24 @@ $mainLogo: .03
       z-index: 5
       background-color: $red-white
       position: relative
-      //margin-top: -1vw
-      // @media screen and (max-width: $xs)
-      //     margin-top: -10px
+      margin-top: 10px
       .constentSides
-        top: -30px
-        @media screen and (max-width: $xs)
-          top: -10px
+        // @media screen and (max-width: $xs)
+        //   top: -10px
         position: relative
         .left, .right
           width: 60vw
-          height: 15vw
-          //size: 60vw
+          height: 15vh
+          max-height: 300px
           position: absolute
           background-color: $main-black
         .left
           right: 50%
-          transform: rotate(-10deg)
-          //transform: rotate(-45deg)  
+          transform: rotate(-7deg) 
           transform-origin: top right
         .right
           left: 50%
-          transform: rotate(10deg)  
-          //transform: rotate(45deg)  
+          transform: rotate(7deg)  
           transform-origin: top left 
       .midTitle
         padding-top: 6vw
@@ -161,6 +164,7 @@ $mainLogo: .03
         background-color: $main-black
         display: flex
         justify-content: center
+        margin: 0 auto
         ul
           list-style: none
           padding: 30px
@@ -185,25 +189,22 @@ $mainLogo: .03
     display: flex
 
   .topSvgHolder, .bottomSvgHolder
-    top: 98.5vh
+    top: 99vh
     @media screen and (max-width: $xs)
-      top: calc(100vh - 45px)
+      top: calc(100vh - 30px)
     
   .topSvgHolder > .svgLeft, .topSvgHolder > .svgRight
-    width: 44% //40$
-    max-width: 400px
-    @media screen and (max-width: $xs)
-      // width: 4%
+    width: 37% //40$
+    max-width: 350px
     position: absolute
-    bottom: -14px
+    bottom: -12px
     svg g path
       stroke: $main-black !important
     
   .bottomSvgHolder > .svgLeft, .bottomSvgHolder > .svgRight
-    // width: 40vw
     top: 6px
-    width: 44%
-    max-width: 400px
+    width: 37%
+    max-width: 350px
     svg g path
       stroke: $red-black !important
 

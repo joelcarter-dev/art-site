@@ -44,7 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
           type
           featuredImage {
             childImageSharp {
-              fluid(maxHeight: 1500) {
+              fluid(maxHeight: 1000) {
                 src
                 sizes
                 srcSet

@@ -49,7 +49,7 @@ export class IndexPage extends Component {
       <section id={S.landing} className="Index">
       
         <HeaderMeta /> 
-        <Header to={['store', 'index']} white={false} />
+        <Header to={['store', 'index']} white={true} />
         
         <section className={S.title}>
           <h1>{metaData.title}</h1>
@@ -192,7 +192,7 @@ export const indexQuery = graphql`
     }
     heroImageOne: allImageSharp(
       filter: {
-        fluid: {originalName: {regex: "/mainOne.jpg/"}}
+        fluid: {originalName: {regex: "/mainTwo.jpg/"}}
       }) {
       edges {   
         node {
