@@ -5,7 +5,7 @@ backend:
 
 media_folder: src/pages/img
 
-display_url: https://elloron.art/store
+display_url: https://elloron-art.netlify.app/
 
 collections:
   - name: "item"
