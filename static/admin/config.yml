@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: github
   branch: master
   repo: https://github.com/Dwaxy/art-site
 
