@@ -7,13 +7,10 @@
   to 
     opacity: 1
     margin-left: 0px
-body
-  //background-color: $main-black
-  overflow: hidden
+
 .art-item-holder
   background-color: $main-black
   width: 100%
-  //min-height: 100vh
   
   display: grid
   grid-template-areas: "header header header" "title title title" "left-sidebar main sidebar" "footer footer footer"
@@ -21,8 +18,6 @@ body
   grid-template-columns: minmax(100px, 1fr) 3fr minmax(100px, 1fr)
   grid-template-rows: 160px 60px 0.7fr 60px
   max-height: 100vh
-  overflow: hidden
-  overflow-y: scroll
 
   .artPiceHeader
     grid-area: header
