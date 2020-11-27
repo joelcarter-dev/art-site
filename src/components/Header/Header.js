@@ -46,6 +46,7 @@ const Header = (props) => (
             duration: 400,
             forceRender: true,
             reverseStack: true, 
+            start: 'autostart'
           }}
           //callback={}
         />
@@ -66,6 +67,7 @@ const Header = (props) => (
             duration: 400,
             forceRender: true,
             reverseStack: true, 
+            start: 'autostart'
           }}
           //callback={}
         />

@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactSlider from 'react-slider'
 import Select from 'react-select'
+import { navigate } from "@reach/router"
 import S from './commissions.module.sass'
 
 const Slider = (props) => {
   return (
     <div id={S.Slider}>
       <ReactSlider 
-        defaultValue={0} 
+        defaultValue={60} 
         withBars 
         max={1000} 
+        min={60}
         className={S.budgetSlider} 
         barClassName={S.bar}
         onChange={props.onCahngeBudget}
@@ -31,7 +33,7 @@ const SelectType = (props) => {
   const types = [
     { value: 'watercolor', label: 'Watercolor' },
     { value: 'ink', label: 'Ink' },
-    { value: 'digital', label: 'Digital' },
+    // { value: 'digital', label: 'Digital' },
     { value: 'acrylic', label: 'Acrylic' },
     { value: 'pastel', label: 'Pastel' },
     { value: 'graphite', label: 'Graphite' },
@@ -59,7 +61,11 @@ const SelectType = (props) => {
   )
 }
 
-class CommissionForm extends Component {
+const goBack = () => {
+  navigate(-1);
+}
+
+export class CommissionForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -85,6 +91,8 @@ class CommissionForm extends Component {
 
   handleSubmit = (e) => {
 
+    const commissionsOpen = true
+
     if (this.state.medium === null && this.state.size === null) {
       this.setState({submitMsg: "Please select your Medium"})
       e.preventDefault()
@@ -93,7 +101,7 @@ class CommissionForm extends Component {
 
     e.preventDefault()
     const form = e.target;
-    
+  
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -103,7 +111,7 @@ class CommissionForm extends Component {
       })
     })
       .then(() => 
-				this.setState({formSent: true, submitMsg: this.props.commissionsOpen ? 
+				this.setState({formSent: true, submitMsg: commissionsOpen ? 
 					"Thank you. If your commission is a physical piece, I will be contacting you for shipping details." 
 					:
 					"Thank you for your interest. Though commissions are closed, I'll try to go back to you. If not, you're in queue."
@@ -115,14 +123,14 @@ class CommissionForm extends Component {
 
   render() {
     return (
-      <div id={this.props.formOpen ? S.CommissionForm : S.CommissionFormHidden}>
+      <div id={S.CommissionForm}>
         <div className={S.holder}>
 
           <div className={S.formHolder}>
 
             <h3>Commission Form</h3>
 
-            <div id={S.buttonHolder} className={S.close} onClick={this.props.toggleForm} onKeyDown={this.props.toggleForm} role="button"  tabIndex={0}>
+            <div id={S.buttonHolder} className={S.close} onClick={goBack} role="button"  tabIndex={0}>
               <button id={S.formButton}>Close</button>
             </div>
 
@@ -196,3 +204,8 @@ class CommissionForm extends Component {
 }
 
 export default CommissionForm
+
+// NOTE CAHNGE FOR COMMISION OPEN / CLOSED
+CommissionForm.defaultProps = {
+	open: true
+}

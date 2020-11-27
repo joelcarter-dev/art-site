@@ -12,7 +12,7 @@ info: 295 x 425mm
 date: 2019-02-28T04:39:27.716Z
 tags:
   - Abstract
-  - Archive
+  - Archived  
 type:
   - Watercolor
 featuredImage: ../img/dsc_0561.jpg

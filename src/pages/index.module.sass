@@ -40,7 +40,7 @@ $mainLogo: .03
   .title
     left: 0
     right: 0
-    top: 25vh
+    top: 28vh
     +parallax(.20)
     text-align: center
     z-index: 2
@@ -65,7 +65,7 @@ $mainLogo: .03
     background-color: $red-white
     .heroTop
       width: 100%
-      height: 100vh //96.5vh //100vh //98vh //96.1vh //100vh
+      height: 115vh //96.5vh //100vh //98vh //96.1vh //100vh
       overflow: hidden
       position: relative
       div //image holder
@@ -74,26 +74,26 @@ $mainLogo: .03
         object-position: left bottom
       
   .mid
-    top: -30px
+    top: 90vh  
     z-index: 2
-    +parallax(.20)
+    +parallax(.1)
     .sides
       left: center
-      padding-top: calc(100vh - -25px) //-15px
-      @media screen and (max-width: $m)
-        padding-top: calc(100vh - -20px)
-      @media screen and (max-width: $s)
-        padding-top: calc(100vh - -8px)
-      @media screen and (max-width: $xs)
-        padding-top: calc(100vh - 20px)
+      //padding-top: calc(100vh - -10px) //-15px //-10px
+      top: 0
+      @media screen and (min-width: $m)
+        top: -20px
       z-index: 3
       .left, .right
         width: 60vw
         height: 20vw
         max-height: 300px
         min-height: 200px
+        top: 150px
         position: absolute
         background-color: $red-white
+
+        //display: none
       .left
         left: -20px
         transform: rotate(-20deg)
@@ -113,9 +113,10 @@ $mainLogo: .03
 
     .mainLogo
       position: relative
-      padding-top: calc(100vh - 70px) //80px
+      //padding-top: calc(100vh - 85px) //80px
       margin: 0 auto
       width: 200px
+      top: 7px
       @media screen and (max-width: $xs)
         width: 150px
         //padding-top: calc(100vh - 100px)
@@ -127,10 +128,8 @@ $mainLogo: .03
       z-index: 5
       background-color: $red-white
       position: relative
-      margin-top: 10px
+      padding: 40px 0 40px 0
       .constentSides
-        // @media screen and (max-width: $xs)
-        //   top: -10px
         position: relative
         .left, .right
           width: 60vw
@@ -147,28 +146,38 @@ $mainLogo: .03
           transform: rotate(7deg)  
           transform-origin: top left 
       .midTitle
-        padding-top: 6vw
+        padding: 1vw 30px 0 30px
+        @media screen and (max-width: $m)
+          padding: 10vw 30px 0 30px
+        @media screen and (max-width: $s)
+          padding: 1vw 10px 0 10px
         text-align: center
         font-family: 'cinzel decorative', 'cinzel', serif
         position: relative
         h2
-          color: $red-white
-          background-color: $main-black
+          color: $main-black
+          // background-color: $main-black
           z-index: 5
           margin-bottom: 0
       .holder
         height: 500px
         display: flex
         justify-content: center
-      .midContent
-        background-color: $main-black
+      .topItems
         display: flex
         justify-content: center
         margin: 0 auto
-        ul
-          list-style: none
-          padding: 30px
-          color: $red-white
+        height: 100px
+      .about
+        width: 100%
+        p
+          max-width: 600px
+          margin: 0 auto
+          padding: 0 60px 0 60px
+          text-align: justify
+          margin-top: 20px
+          @media screen and (max-width: $xs)
+            padding: 0 30px 0 30px
 
   .svgHolder
     position: relative
@@ -189,28 +198,53 @@ $mainLogo: .03
     display: flex
 
   .topSvgHolder, .bottomSvgHolder
-    top: 99vh
-    @media screen and (max-width: $xs)
-      top: calc(100vh - 30px)
-    
+    top: 19vh
+    @media screen and (max-width: $s)
+      display: none
+    // @media screen and (max-width: $m)
+    //   top: calc(100vh - 80px)
+
   .topSvgHolder > .svgLeft, .topSvgHolder > .svgRight
     width: 37% //40$
     max-width: 350px
     position: absolute
-    bottom: -12px
+    bottom: -60px
     svg g path
       stroke: $main-black !important
     
-  .bottomSvgHolder > .svgLeft, .bottomSvgHolder > .svgRight
-    top: 6px
-    width: 37%
-    max-width: 350px
-    svg g path
-      stroke: $red-black !important
 
-  .bottomSvgHolder > .svgLeft
-    top: 7px
-    left: -8px
+#sketchOne
+  position: absolute
+  bottom: 0
+  left: 0
+  z-index: 9999999999
+  width: 100px
+  svg g path
+    fill: $main-black
+  @media screen and (max-width: $m)
+    width: 50px
 
-  .topSvgHolder > .svgLeft
-    bottom: -13px
+#sketchTwo
+  max-width: 540px
+  display: flex
+  justify-content: center
+  padding: 10px 60px 5inViewport0px 60px
+  margin: 0 auto
+  position: relative
+  .border
+    height: 2px
+    width: 100%
+    position: absolute
+    background-color: $main-black
+    margin-top: 16px
+    z-index: -1
+    padding: 0 60px 0 60px
+  svg
+    width: 96px
+    height: 30px
+    background-color: $red-white
+    padding: 0 15px 0 15px
+
+body
+  *
+    //border: 1px solid red 

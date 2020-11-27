@@ -81,17 +81,19 @@ export default class Store extends Component {
 						<InlineSVG src={sidesSvg} />
 					</div>
 					<div className={S.black}>
-						<Commissions>
-							{/* ! should display comission items */}
-							{commercialItems &&
-								<ItemList 
-									items={commercialItems} 
-									folder="category" 
-									title="Commissions & Specialties" 
-									showCommissions={true}
-								/>
-							}
-						</Commissions>
+						<div className={S.commissionsHolder}>		
+							<Commissions>
+								{/* ! should display comission items */}
+								{/* {commercialItems &&
+									<ItemList 
+										items={commercialItems} 
+										folder="category" 
+										title="Commissions & Specialties" 
+										showCommissions={true}
+									/>
+								} */}
+								</Commissions>
+							</div>
 
 						<Selected data={this.props.data.selected.edges} />
 					</div>

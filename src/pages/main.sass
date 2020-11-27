@@ -64,6 +64,17 @@ html, body, .root
   //   background-color: transparent
 
 
+// hide all scroll bars on every page (maybe will work)
+
+body
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+body::-webkit-scrollbar 
+  display: none
+
+
+
 //REMEMBER configer auto return with prod domain name in paypal
 
 //commishions!!! Have a component and link to cms with bool. If true display spechal request form

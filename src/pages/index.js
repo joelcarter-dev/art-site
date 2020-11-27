@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import { graphql } from 'gatsby'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
+import Commissions from '../components/Commissions/Commissions.js'
+import RandomLinks from '../components/RandomLinks/RandomLinks'
 import ReactVivus from 'react-vivus'
 import InlineSVG from 'svg-inline-react'
 import Img from 'gatsby-image'
-import Link from 'gatsby-link'
 import { mainLogoSvg } from '../img/svg-index.js'
+import { svgOne, svgThreeTravelers } from '../img/svgSketches/sketchOne.js'
 
 import SvgLeft from '../img/home-left.svg'
 import SvgRight from '../img/home-right.svg'
-import SvgBottomRight from '../img/home-bottom-right.svg'
-import SvgBottomLeft from '../img/home-bottom-left.svg'
 
 import 'typeface-alegreya-sans-sc'
 import 'typeface-cinzel-decorative'
@@ -25,6 +25,7 @@ const handleScroll = () => {
   scrollCounter++
   console.log(scrollCounter)
 }
+
 export class IndexPage extends Component {
 
   componentDidMount() {
@@ -80,7 +81,7 @@ export class IndexPage extends Component {
                     file: SvgLeft,
                     animTimingFunction: 'EASE_OUT',
                     type: 'delayed',
-                    duration: 1000,
+                    duration: 1500,
                     forceRender: true,
                     //reverseStack: true, 
                     start: "autostart",
@@ -96,7 +97,7 @@ export class IndexPage extends Component {
                     file: SvgRight,
                     animTimingFunction: 'EASE_OUT',
                     type: 'delayed',
-                    duration: 1000,
+                    duration: 3000,
                     forceRender: true,
                     //reverseStack: true, 
                     start: "autostart",
@@ -105,79 +106,55 @@ export class IndexPage extends Component {
                 />
               </div>
             </div>
-                  
-            <div className={S.bottomSvgHolder}>
-              <div className={S.svgLeft}>
-                <ReactVivus
-                  id={S.svgBottomLeft}
-                  option={{
-                    file: SvgBottomLeft,
-                    animTimingFunction: 'EASE_OUT',
-                    type: 'delayed',
-                    duration: 1000,
-                    start: "autostart",
-                    forceRender: true,
-                    // reverseStack: true, 
-                  }}
-                  //callback={}
-                />
-              </div>
-
-              <div className={S.svgRight}>
-                <ReactVivus
-                  id={S.svgBottomRight}
-                  option={{
-                    file: SvgBottomRight,
-                    animTimingFunction: 'EASE_OUT',
-                    type: 'delayed',
-                    duration: 1000,
-                    start: "autostart",
-                    forceRender: true,
-                    // reverseStack: true, 
-                  }}
-                  //callback={}
-                />
-              </div>
-            </div>
-
           </div>
-          
           
           <div className={S.mainLogo}>
             <InlineSVG src={mainLogoSvg} />
           </div>
 
-          <div className={S.midContent}>
-
-            <div className={S.constentSides}>     
+          <div className={S.midContentHolder}>
+            {/* <div className={S.constentSides}>     
               <div className={S.right}></div>
               <div className={S.left}></div>            
-            </div>
+            </div> */}
 
-            <div className={S.midTitle}>
-              <h2>Words for second section</h2>  
-            </div>  
             <div className={S.midContent}>
-              <ul>
-                <li>thing</li>
-                <li>thing</li>
-                <li>thing</li>
-              </ul>
-              <ul>
-                <li>thing</li>
-                <li>thing</li>
-                <li>thing</li>
-              </ul>
+
+              <div className={S.midTitle}>
+                <h2>For those who favor the Bold</h2>  
+              </div>  
+
+              <div className={S.topItems}>
+                <RandomLinks />
+              </div>
+
+              <div id={S.sketchTwo}>
+                <InlineSVG src={svgThreeTravelers} />
+                <span className={S.border}></span>
+              </div>
+
+              <div className={S.about}>
+                <p>
+                  All works are original. Much of the work here draws heavily from music, and is based on a setting with deep internal lore. It attempts to explore and symbolise ancient ideas of the human experience in a unique, mythical way.
+                </p>
+                <p>
+                  Made with Love.
+                </p>
+              </div>
+
+              <Commissions dark={true}/>
+
+              <div id={S.sketchOne}>
+                <InlineSVG src={svgOne} />
+              </div>
             </div>
-          </div>   
+          </div>
 
         </section>          
       </section>
     )
   }
 }
-
-
 
 export default IndexPage
 
