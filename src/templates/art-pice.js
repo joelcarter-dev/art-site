@@ -30,7 +30,7 @@ const Price = (props) => {
         <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
       </div> 
     )
-  } else if(props.data.tags.includes("archive") || props.data.tags.includes("Archive")) {
+  } else if(props.data.tags.includes("archived") || props.data.tags.includes("Archived")) {
     return (
       <div className={S.price}>
         <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Archived Piece</h3>  
