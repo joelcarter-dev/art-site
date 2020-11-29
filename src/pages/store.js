@@ -60,7 +60,7 @@ const Selected = (props) => (
 export default class Store extends Component {
 	render() {
 		const itemData = this.props.data.posts
-		const commercialItems = this.props.data.commercial ? this.props.data.commercial.items : null
+		//const commercialItems = this.props.data.commercial ? this.props.data.commercial.items : null
 
 		return (
 			<section id={S.store}>

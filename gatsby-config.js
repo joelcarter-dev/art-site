@@ -22,6 +22,7 @@ module.exports = {
       "Inbark on your Crossing",
       "The Fire Brings the Dawn",
     ],
+    commissionsOpen: true
   },
   plugins: [
   

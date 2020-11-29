@@ -3,6 +3,7 @@ import ReactSlider from 'react-slider'
 import Select from 'react-select'
 import { navigate } from "@reach/router"
 import S from './commissions.module.sass'
+import { useCommissionStatus } from '../hooks/commissionStatus.js'
 
 const Slider = (props) => {
   return (
@@ -91,7 +92,7 @@ export class CommissionForm extends Component {
 
   handleSubmit = (e) => {
 
-    const commissionsOpen = true
+    const {commissionsOpen} = useCommissionStatus()
 
     if (this.state.medium === null && this.state.size === null) {
       this.setState({submitMsg: "Please select your Medium"})
@@ -204,8 +205,3 @@ export class CommissionForm extends Component {
 }
 
 export default CommissionForm
-
-// NOTE CAHNGE FOR COMMISION OPEN / CLOSED
-CommissionForm.defaultProps = {
-	open: true
-}
