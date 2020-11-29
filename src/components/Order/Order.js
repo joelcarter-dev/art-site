@@ -3,7 +3,7 @@ import S from './order.module.sass'
 
 import PayPalCheckout from './PaypalButton.js'
 import OrderForm from './OrderForm.js'
-
+import Link from 'gatsby-link'
 
 
 export class Overview extends Component {
@@ -16,20 +16,29 @@ export class Overview extends Component {
           <span>Total: ${this.props.totalPrice} NZD</span>
         </div>
         
-        <ul>
+        <ul className={S.titemDetails}>
           {
             this.props.itemInfo.map(i => (
-              <li key={i.title}>
-                <span>{i.title}</span>
-                <span>{i.price}</span>
+              <li key={i.frontmatter.title}>
+                <span>{i.frontmatter.title}</span>
+                <span>${i.frontmatter.price}</span>
               </li>
             ))
           }
         </ul>
         
         <div className={S.myInfo}>
-          <p>General Support</p>
-          <span>jcicode@gmail.com</span>
+          <Link to="/support-form" state={{ itemInfo: this.props.itemInfo}}>
+            <button
+              id={S.Button}
+              style={{
+                color: this.props.dark ? "#00030D" : "#F0E3DE",
+                border: this.props.dark ? "1px solid #00030D" : "1px solid #F0E3DE",
+              }}
+            >
+              Contact Support
+            </button>
+          </Link>
         </div>
         
       </section>
@@ -91,7 +100,7 @@ export default class Order extends Component {
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
         <div className={S.orderHolder}>
           <div className={S.left}>
-            <Overview totalPrice={totalPrice.reduce((a, b) => a + b, 0)} itemInfo={itemInfo} />
+            <Overview totalPrice={totalPrice.reduce((a, b) => a + b, 0)} itemInfo={ this.props.orderData} />
           </div>
           <div className={S.right}>
             <button onClick={this.props.toggleForm} id={S.close}>Close</button>

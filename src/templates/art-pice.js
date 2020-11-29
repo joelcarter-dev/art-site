@@ -168,18 +168,17 @@ class ArtPice extends Component {
         
         <h1 id={S.title}>{itemData.title}</h1>
         
-        <div className={S.left}>
+
+        {this.state.orderFormHidden && <div className={S.left}>
           <Sidebar data={itemData} toggleForm={this.toggleForm}/>
         </div>
-      
-        <div className={S.imageHolder}>
-         
-          <ArtImage imageData={itemData} className={S.innerImage} critical={true} fluid={itemData.featuredImage.childImageSharp.fluid}/>
-         
-        </div>
-        
+        }
+
+        {this.state.orderFormHidden && <div className={S.imageHolder}>
+          <ArtImage imageData={itemData} className={S.innerImage} critical={true} fluid={itemData.featuredImage.childImageSharp.fluid}/>  
+          </div>
+        }
         <div className={S.right}></div>
-      
       </section>
     )
   }
