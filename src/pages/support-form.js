@@ -106,10 +106,10 @@ export class SupportForm extends Component {
               
               <textarea 
                 className={S.input}
-                name="description" 
-                form="commissionForm" 
+                name="message" 
+                form="contact" 
                 placeholder="Enter the Description of your issue, or question here..." 
-                value={this.state.description ? this.state.description : ""} 
+                value={this.state.message ? this.state.message : ""} 
                 onChange={this.handleChange} 
                 tabIndex="-2" 
                 required

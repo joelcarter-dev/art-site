@@ -97,7 +97,7 @@ export default class OrderForm extends Component {
             
             <input placeholder="State/Province/Region" type="state_region" tabIndex="-6" value={this.state.state_region ? this.state.state_region : ""} onChange={this.handleChange} name="state_region" required/> 
 
-            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{4}" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
+            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{5}" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
             
             
             
