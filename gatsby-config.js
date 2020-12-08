@@ -22,7 +22,34 @@ module.exports = {
       "Inbark on your Crossing",
       "The Fire Brings the Dawn",
     ],
-    commissionsOpen: true
+    commissionsOpen: true,
+    postingZones: [
+      {
+        postingCost: 0,
+        name: "New Zealand",
+      },
+      {
+        postingCost: 10,
+        name: "Australia",
+      },
+      {
+        postingCost: 20,
+        name: "South Pacific",
+      },
+      {
+        postingCost: 30,
+        name: "Asia",
+      },
+      {
+        postingCost: 40,
+        name: "Canada, UK, Europe or US",
+      },
+      {
+        postingCost: 50,
+        name: "The rest of the World",
+      },
+    ],
+    globalItemBuffer: 30,
   },
   plugins: [
   

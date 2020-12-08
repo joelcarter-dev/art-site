@@ -1,31 +1,48 @@
 import React, { Component } from 'react'
 import S from './order.module.sass'
 
+import { postingZones } from './ZoneInputs.js'
 import PayPalCheckout from './PaypalButton.js'
 import OrderForm from './OrderForm.js'
 import Link from 'gatsby-link'
 
-
 export class Overview extends Component {
   render() {
+  
     return (
       <section id={S.Overview}>
         <h3>Overview</h3>
         <div className={S.amounts}>
           <span>Items: {this.props.itemInfo.length}</span>
-          <span>Total: ${this.props.totalPrice} NZD</span>
-        </div>
-        
-        <ul className={S.titemDetails}>
           {
             this.props.itemInfo.map(i => (
-              <li key={i.frontmatter.title}>
-                <span>{i.frontmatter.title}</span>
-                <span>${i.frontmatter.price}</span>
-              </li>
+              <span key={i.frontmatter.title}>{i.frontmatter.title}</span>
             ))
           }
-        </ul>
+        </div>
+        
+
+        {/* {this.props.totalPrice != null && 
+          <p>Please select posting zone. Posting costs will apply</p>
+        } */}
+
+        {this.props.totalPrice != null && 
+        <>
+          {/* <ul className={S.titemDetails}>
+            {
+              this.props.itemInfo.map(i => (
+                <li key={i.frontmatter.title}>
+                  <span>{i.frontmatter.title}</span>
+                </li>
+              ))
+            }
+          </ul> */}
+          
+          <p>${this.props.postinZone.postingCost} for secure posting to {this.props.postinZone.name}</p>
+
+          <span>Total: ${this.props.totalPrice} NZD</span>
+          </>
+        }
         
         <div className={S.myInfo}>
           <Link to="/support-form" state={{ itemInfo: this.props.itemInfo}}>
@@ -52,25 +69,59 @@ export default class Order extends Component {
     this.state = { 
       msg: "",
       formData: null,
+      postinZone: {
+        name: null,
+        postingCost: null,
+      },
+      totalPrice: null
     }
   }
   
   sendData = (data) => {
     this.setState({formData: data })
   }
-  
+
+  sendPostZone = (data) => {
+    this.setState({postinZone: data }, this.calcTotalPrice)
+  }
+
+  calcTotalPrice = () => {
+
+    // NOTE this price is a buffer to cover shipping costs to make the price of shiping to other zones less jaring. Can also say free shipping to nz as this pays for it. Needs to cover packaging, post accross nz, and make shipping overseas not so bad
+    const postBuffer = 0
+    const postZoneCost = this.state.postinZone.postingCost
+
+    let basePrice
+    this.props.orderData.map((i) => {
+       basePrice = Number(i.frontmatter.price.replace(/[^0-9.-]+/g,""))
+    })
+
+      let priceWithBuffer = basePrice + postBuffer
+      let priceWithPostingCost = priceWithBuffer + postZoneCost
+      //priceWithPostingCost.reduce((a, b) => a + b, 0)
+      console.log(" =========== ")
+      console.log(" Price Breakdown ")
+
+      console.log("base price " + basePrice)
+      console.log( "buffer " + postBuffer)
+      console.log("post cost for zone " + postZoneCost)
+
+      console.log("total price with posting cost and buffer " + priceWithPostingCost);
+
+      this.setState({totalPrice: priceWithPostingCost})
+      return null
+
+  }
+
   
   render() {
     
-    let totalPrice = [] 
+    //let totalPrice = [] 
     let itemInfo = []
-    
     this.props.orderData.map((i) => {
-      totalPrice.push(Number(i.frontmatter.price.replace(/[^0-9.-]+/g,"")))
       itemInfo.push({title: i.frontmatter.title, price: i.frontmatter.price})
-      return null
     })
-    
+
     const onSuccess = (payment) => {
       console.log('Successful payment', payment)
       this.setState({msg: "Payment Successful. Your item(s) are on there way"})
@@ -100,12 +151,21 @@ export default class Order extends Component {
       <section id={this.props.hidden ? S.OrderHidden : S.OrderDisplay}>
         <div className={S.orderHolder}>
           <div className={S.left}>
-            <Overview totalPrice={totalPrice.reduce((a, b) => a + b, 0)} itemInfo={ this.props.orderData} />
+            <Overview 
+              postinZone={this.state.postinZone} 
+              totalPrice={this.state.totalPrice} 
+              itemInfo={this.props.orderData} 
+            />
           </div>
           <div className={S.right}>
             <button onClick={this.props.toggleForm} id={S.close}>Close</button>
             
-            <OrderForm orderData={this.props.orderData} sendData={this.sendData}/>
+            <OrderForm 
+              orderData={this.props.orderData} 
+              sendData={this.sendData} 
+              sendPostZone={this.sendPostZone} 
+              //postingZones={postingZones}
+            />
             
             <div id={S.paypalHolder}>
               {this.state.formData != null &&
@@ -114,7 +174,7 @@ export default class Order extends Component {
                   env={ENV}
                   commit={true}
                   currency={'NZD'}
-                  total={totalPrice.reduce((a, b) => a + b, 0)}
+                  total={this.state.totalPrice}
                   onSuccess={onSuccess}
                   onError={onError}
                   onCancel={onCancel}

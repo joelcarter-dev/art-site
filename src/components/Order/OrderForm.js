@@ -3,6 +3,8 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import S from './order.module.sass'
 
+import { postingZones } from './ZoneInputs.js'
+
 function encode(data) {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -18,6 +20,9 @@ export default class OrderForm extends Component {
         lable: "New Zealand", 
         value: "NZ",
       },
+    
+      // selectedZone: null,
+      // postingCost: null,
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
@@ -28,10 +33,32 @@ export default class OrderForm extends Component {
       url: this.props.orderData[0].fields.slug
     })
   }
-    
-    
+
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
+  }
+
+  // handleZoneChange = (event) => {
+  //   //this.setState({selectedZone: })
+  //   event.persist()
+       
+  //   const selectedZone = event.target.value
+  //   const postingCost = event.target.attributes.postingCost.nodeValue
+  //   // const isChecked = event.target
+  //   this.setState({selectedZone: selectedZone, postingCost: postingCost})
+  //   console.log(event);
+  //   console.log(postingCost);
+  // }
+
+  onSelectCountry = (country) => {
+    this.setState({country: country})
+    // this.props.sendCountry(country)
+  }
+
+  onSelectZone = (zone) => {
+    this.setState({zone: zone})
+    //this.setState({postingCost: zone.postingCost})
+    this.props.sendPostZone(zone)
   }
 
   //should display some feedback to the user on sbmit and make sure all feileds are vallidated
@@ -50,13 +77,9 @@ export default class OrderForm extends Component {
         ...this.state
       })
     })
-      .then(() => this.setState({submitMsg: "Thank you! Please fill out the shipping form to have the artwork shipped to you."}))
+      .then(() => this.setState({submitMsg: "Thank you for your shipping details. Please compleat payment below (PayPal account not required)"}))
       .catch(error => this.setState({submitMsg: `Something went wrong: ${error}`}));
 
-  }
-  
-  onSelectCountry = (country) => {
-    this.setState({country: country})
   }
     
   render() {
@@ -77,17 +100,32 @@ export default class OrderForm extends Component {
             
             <input placeholder="PH xxxx-xxx-xxxx" type="tel" value={this.state.ph ? this.state.ph : ""} onChange={this.handleChange} name="ph" tabIndex="-2"/>
             
-            
             <hr/>
             
             <input placeholder="Address" type="adress-line-one" tabIndex="-3" value={this.state.address_line_one ? this.state.address_line_one : ""} onChange={this.handleChange} name="address_line_one" required /> 
             
             <input placeholder="Address Line Two" type="adress-line-two" tabIndex="-4" value={this.state.address_line_two ? this.state.address_line_two : ""} onChange={this.handleChange} name="address_line_two" /> 
+
+            <p>Are you in:</p>
+            
+            {/* <ZoneInputs handleZoneChange={this.handleZoneChange}/> */}
+
+            <Select
+              options={postingZones}
+              getOptionLabel={option =>`${option.name}`}
+              //value={this.state.selectedZone}
+              //name={this.state.selectedZone}
+              onChange={this.onSelectZone}
+              placeholder="Select Posting Zone"
+              className={S.dropdown}
+            />
+
+            <p>Please make sure the above is Correct</p>
             
              <Select
               options={countryList().getData()}
-              value={this.state.country.value}
-              name={this.state.country.lable}
+              //value={this.state.country.lable}
+              //name={this.state.country.lable}
               onChange={this.onSelectCountry}
               placeholder="Search Country"
               className={S.dropdown}
@@ -97,7 +135,7 @@ export default class OrderForm extends Component {
             
             <input placeholder="State/Province/Region" type="state_region" tabIndex="-6" value={this.state.state_region ? this.state.state_region : ""} onChange={this.handleChange} name="state_region" required/> 
 
-            <input placeholder="ZIP / Postal Code" type="text" pattern="[0-9]{5}" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
+            <input placeholder="ZIP / Postal Code" type="text" pattern="[A-Za-z0-9]+" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
             
             
             

@@ -1,7 +1,7 @@
 ---
 title: Demon Lord of the Sky
 about: A Demon Lord, inspired by the Album Nija
-price: "120"
+price: "220"
 info: "Size: A3"
 date: 2020-11-10T04:04:46.921Z
 tags:
