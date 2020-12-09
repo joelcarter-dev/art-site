@@ -18,7 +18,7 @@ import 'typeface-cinzel-decorative'
 
 import './main.sass'
 import S from './index.module.sass'
-import './mixins.module.scss'
+import './mixins.module.sass'
 
 let scrollCounter = 0
 const handleScroll = () => {

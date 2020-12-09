@@ -66,7 +66,16 @@ const goBack = () => {
   navigate(-1);
 }
 
-export class CommissionForm extends Component {
+
+export function GetCommissionStatus(props) {
+  const {commissionsOpen} = useCommissionStatus()
+  console.log(commissionsOpen);
+  return (
+    <CommissionForm commissionsOpen={commissionsOpen}/>
+  )
+}
+
+class CommissionForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -91,16 +100,14 @@ export class CommissionForm extends Component {
   }
 
   handleSubmit = (e) => {
+    e.preventDefault()
 
-    const {commissionsOpen} = useCommissionStatus()
 
     if (this.state.medium === null && this.state.size === null) {
       this.setState({submitMsg: "Please select your Medium"})
       e.preventDefault()
       return
     }
-
-    e.preventDefault()
     const form = e.target;
   
     fetch("/", {
@@ -112,7 +119,7 @@ export class CommissionForm extends Component {
       })
     })
       .then(() => 
-				this.setState({formSent: true, submitMsg: commissionsOpen ? 
+				this.setState({formSent: true, submitMsg: this.props.commissionsOpen ? 
 					"Thank you. If your commission is a physical piece, I will be contacting you for shipping details." 
 					:
 					"Thank you for your interest. Though commissions are closed, I'll try to go back to you. If not, you're in queue."
@@ -189,9 +196,12 @@ export class CommissionForm extends Component {
               />
                     
               {!this.state.formSent && 
+                <>
                 <div id={S.buttonHolder}>
                   <button type="submit" id={S.formButton} >Submit</button>
                 </div>
+                              
+                </>
               }
         
               <p>{this.state.submitMsg}</p>
@@ -204,4 +214,4 @@ export class CommissionForm extends Component {
   }
 }
 
-export default CommissionForm
+export default GetCommissionStatus

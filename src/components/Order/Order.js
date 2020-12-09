@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import S from './order.module.sass'
 
-import { postingZones } from './ZoneInputs.js'
+import { useZoneAndBufferData } from '../../hooks/zoneAndBufferData.js'
 import PayPalCheckout from './PaypalButton.js'
 import OrderForm from './OrderForm.js'
 import Link from 'gatsby-link'
 
-export class Overview extends Component {
+class Overview extends Component {
   render() {
   
     return (
@@ -62,8 +62,20 @@ export class Overview extends Component {
     )
   }
 }
+
+export default function GetZoneAndBufferData(props) {
+  const zoneAndBufferData = useZoneAndBufferData()
+  return (
+    <Order 
+      zoneAndBufferData={zoneAndBufferData} 
+      orderData={props.orderData}
+      hidden={props.hidden}
+      toggleForm={props.toggleForm}
+    />
+  )
+}
   
-export default class Order extends Component {
+class Order extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -88,7 +100,7 @@ export default class Order extends Component {
   calcTotalPrice = () => {
 
     // NOTE this price is a buffer to cover shipping costs to make the price of shiping to other zones less jaring. Can also say free shipping to nz as this pays for it. Needs to cover packaging, post accross nz, and make shipping overseas not so bad
-    const postBuffer = 0
+    const postBuffer = this.props.zoneAndBufferData.globalItemBuffer
     const postZoneCost = this.state.postinZone.postingCost
 
     let basePrice
@@ -164,7 +176,7 @@ export default class Order extends Component {
               orderData={this.props.orderData} 
               sendData={this.sendData} 
               sendPostZone={this.sendPostZone} 
-              //postingZones={postingZones}
+              postingZones={this.props.zoneAndBufferData.postingZones}
             />
             
             <div id={S.paypalHolder}>

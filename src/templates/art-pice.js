@@ -47,6 +47,7 @@ const Price = (props) => {
 }
 
 const Info = (props) => {
+  const archiveSlug = `/archive/${kebabCase(props.data.title)}`
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
@@ -63,6 +64,7 @@ const Info = (props) => {
             props.data.price !== "SOLD" &&
             props.data.price !== "sold" &&
             !props.data.tags.includes("Archive") &&
+            !props.data.tags.includes("Archived") &&
             !props.data.tags.includes("Commission") &&
           
               <button 
@@ -75,7 +77,7 @@ const Info = (props) => {
             
             {props.data.is_archive_item &&
               <button className={S.artItemButton}>
-                <Link to = {`archive/${kebabCase(props.data.title)}`}  className={S.storeLink} >
+                <Link to = {archiveSlug}  className={S.storeLink} >
                   View In Archive
                 </Link>
               </button> 

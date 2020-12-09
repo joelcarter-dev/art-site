@@ -3,8 +3,6 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import S from './order.module.sass'
 
-import { postingZones } from './ZoneInputs.js'
-
 function encode(data) {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -16,13 +14,7 @@ export default class OrderForm extends Component {
     super(props)
         
     this.state = {
-      country: {
-        lable: "New Zealand", 
-        value: "NZ",
-      },
-    
-      // selectedZone: null,
-      // postingCost: null,
+      //country: "New Zealand", 
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
@@ -38,25 +30,13 @@ export default class OrderForm extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  // handleZoneChange = (event) => {
-  //   //this.setState({selectedZone: })
-  //   event.persist()
-       
-  //   const selectedZone = event.target.value
-  //   const postingCost = event.target.attributes.postingCost.nodeValue
-  //   // const isChecked = event.target
-  //   this.setState({selectedZone: selectedZone, postingCost: postingCost})
-  //   console.log(event);
-  //   console.log(postingCost);
-  // }
-
   onSelectCountry = (country) => {
-    this.setState({country: country})
+    this.setState({country: country.label})
     // this.props.sendCountry(country)
   }
 
   onSelectZone = (zone) => {
-    this.setState({zone: zone})
+    this.setState({zone: zone.name, zonePostingCost: zone.postingCost})
     //this.setState({postingCost: zone.postingCost})
     this.props.sendPostZone(zone)
   }
@@ -107,11 +87,9 @@ export default class OrderForm extends Component {
             <input placeholder="Address Line Two" type="adress-line-two" tabIndex="-4" value={this.state.address_line_two ? this.state.address_line_two : ""} onChange={this.handleChange} name="address_line_two" /> 
 
             <p>Are you in:</p>
-            
-            {/* <ZoneInputs handleZoneChange={this.handleZoneChange}/> */}
 
             <Select
-              options={postingZones}
+              options={this.props.postingZones}
               getOptionLabel={option =>`${option.name}`}
               //value={this.state.selectedZone}
               //name={this.state.selectedZone}
