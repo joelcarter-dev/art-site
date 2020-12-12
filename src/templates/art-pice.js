@@ -1,27 +1,38 @@
 import React, { Component } from 'react'
 import HeaderMeta from '../components/Helmet/Helmet.js'
-
 import Header from '../components/Header/Header.js'
 import Link from 'gatsby-link'
 import BackButton from '../components/BackButton/BackButton.js'
-
 import Order from '../components/Order/Order.js'
 import { kebabCase } from 'lodash'
 import ArtImage from '../components/ArtImgae/ArtImage'
 import S from './art-pice.module.sass'
-
+import { useZoneAndBufferData } from '../hooks/zoneAndBufferData.js'
 import showdown from 'showdown'
-
 
 import '../../node_modules/typeface-alegreya-sans-sc'
 import '../../node_modules/typeface-lora'
 import '../../node_modules/typeface-cinzel'
 
+function GetBufferData(props) {
+  const bufferData = useZoneAndBufferData().globalItemBuffer
+  return (
+    <Price bufferData={bufferData} data={props.data}/>
+  )
+}
+
 const Price = (props) => {
+  const price = Number(props.data.price.replace(/[^0-9.-]+/g,""))
+  console.log("buffer " + props.bufferData)
+  console.log("original price " + price)
+
+  const totalPrice = price + props.bufferData
+  console.log("total price " + totalPrice);
+
   if(props.data.price === "sold" || props.data.price === "SOLD") {
     return (
       <div className={S.price}>
-        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",  fontSize: "0.7em"}}>{props.data.price}</h3> 
+        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",  fontSize: "0.7em"}}>{totalPrice}</h3> 
       </div> 
     )
   } else if(props.data.tags.includes("Commission")) {
@@ -39,7 +50,8 @@ const Price = (props) => {
   } else {
     return (
       <div className={S.price}>
-        <h3>${props.data.price}</h3>
+        {/* // TODO convert to numbers and add the properly, almost there */}
+        <h3>${totalPrice}</h3>
         <span>NZD</span>    
       </div> 
     )
@@ -51,7 +63,8 @@ const Info = (props) => {
   return (
     <div className={S.infoHolder}>
       <div className={S.priceHolder}>
-        <Price data={props.data}/>
+        {/* <Price data={props.data}/> */}
+        <GetBufferData data={props.data} />
       </div>
       <ul className={S.dataList}>
         <li>{props.data.original ? "original work" : "print"}</li>

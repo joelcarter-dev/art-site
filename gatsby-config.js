@@ -29,27 +29,28 @@ module.exports = {
         name: "New Zealand",
       },
       {
-        postingCost: 10,
+        postingCost: 20,
         name: "Australia",
       },
       {
-        postingCost: 20,
+        postingCost: 40,
         name: "South Pacific",
       },
       {
-        postingCost: 30,
+        postingCost: 40,
         name: "Asia",
       },
       {
-        postingCost: 40,
+        postingCost: 35,
         name: "Canada, UK, Europe or US",
       },
       {
+        // TODO add note to contact about shipping cost, should be null or something?
         postingCost: 50,
         name: "The rest of the World",
       },
     ],
-    globalItemBuffer: 30,
+    globalItemBuffer: 15,
   },
   plugins: [
   

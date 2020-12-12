@@ -16,7 +16,7 @@ class Overview extends Component {
           <span>Items: {this.props.itemInfo.length}</span>
           {
             this.props.itemInfo.map(i => (
-              <span key={i.frontmatter.title}>{i.frontmatter.title}</span>
+            <span key={i.frontmatter.title}>{i.frontmatter.title} </span>
             ))
           }
         </div>
@@ -105,6 +105,7 @@ class Order extends Component {
 
     let basePrice
     this.props.orderData.map((i) => {
+        console.log(typeof(i.frontmatter.price));
        basePrice = Number(i.frontmatter.price.replace(/[^0-9.-]+/g,""))
     })
 
