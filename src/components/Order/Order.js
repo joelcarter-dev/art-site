@@ -38,7 +38,7 @@ class Overview extends Component {
             }
           </ul> */}
           
-          <p>${this.props.postinZone.postingCost} for secure posting to {this.props.postinZone.name}</p>
+          <p>${this.props.postinZone.postingCost} for tracked courier posting to {this.props.postinZone.name}</p>
 
           <span>Total: ${this.props.totalPrice} NZD</span>
           </>
