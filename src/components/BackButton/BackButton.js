@@ -18,7 +18,7 @@ const goBack = () => {
 const BackButton = (pageClass) => {
 
     return (
-        <button onClick={goBack} className={`${S.backButton} ${pageClass.pageClass !== undefined ? pageClass.pageClass : null}`} >
+        <button onClick={goBack} id="BackButton" className={`${S.backButton} ${pageClass.pageClass !== undefined ? pageClass.pageClass : null}`} >
             <InlineSVG src={arrowSvg} />
         </button>  
     )

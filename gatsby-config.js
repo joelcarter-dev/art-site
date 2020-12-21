@@ -95,10 +95,10 @@ module.exports = {
       options: {
         // Either `code` or `selfHostUrl` is required.
         // REQUIRED IF USING HOSTED GOATCOUNTER! https://[my_code].goatcounter.com
-        code: 'https://1234.goatcounter.com/count',
+        code: 'https://elloron.goatcounter.com/count',
 
         // REQUIRED IF USING SELFHOSTED GOATCOUNTER!
-        //selfHostUrl: `https://example.com`,
+        //selfHostUrl: `https://elloron-art.netlify.app/`,
 
         // ALL following settings are OPTIONAL
 

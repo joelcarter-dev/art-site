@@ -47,6 +47,7 @@
     font-size: responsive
     max-font-size: 30px
     min-font-size: 25px
+    z-index: 1
   .left, .right
     grid-row: 3
   .left
@@ -63,8 +64,8 @@
     padding: 0
     padding: 3vw 60px 60px 0
     background-color: $main-black
-    @media screen and ($s)
-      padding: 0
+    @media screen and (min-width: $s)
+      padding: 3vw
     width: 100%
     max-width: 800px
     height: auto
@@ -89,6 +90,7 @@
     grid-template-columns: minmax(200px, 300px) 3fr
     .imageHolder
       grid-column: 2 / span 3
+      margin-top: 140px
     
   @media screen and (max-width: $s)
     .imageHolder
@@ -99,15 +101,10 @@
     grid-template-areas: "top" "bottom"
     grid-template-columns: 100%
     grid-template-rows: auto auto
-    #title, .storeLink
-      margin-top: 120px
+    #title
+      margin-top: 160px
       grid-area: top
       line-height: 30px
-    // .artPiceHeader
-    //   padding-right: 13px
-    //   grid-area: top
-    // .artPiceHeader, 
-    #title
       grid-column: -2
       position: fixed
       left: center
@@ -118,7 +115,7 @@
       margin: 0 auto
       grid-area: top
       grid-column: -2
-      margin-top: 100px
+      margin-top: 140px
       .gatsby-image-outer-wrapper
         top: center
     .left
