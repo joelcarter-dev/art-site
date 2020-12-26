@@ -21,6 +21,7 @@ module.exports = {
       "Where Mountains and Sky join, the Bridge",
       "Inbark on your Crossing",
       "The Fire Brings the Dawn",
+      "They Walk The World"
     ],
     commissionsOpen: true,
     postingZones: [
@@ -48,6 +49,16 @@ module.exports = {
         // TODO add note to contact about shipping cost, should be null or something?
         postingCost: 50,
         name: "The rest of the World",
+      },
+    ],
+    discountCodes: [
+      {
+        name: "xgf",
+        discount: 20
+      },
+      {
+        name: "test2",
+        discount: 30
       },
     ],
     globalItemBuffer: 15,

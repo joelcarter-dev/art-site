@@ -10,6 +10,10 @@ export const useZoneAndBufferData = () => {
               postingCost
               name
             },
+            discountCodes {
+              name
+              discount
+            },
             globalItemBuffer
           }
         }
