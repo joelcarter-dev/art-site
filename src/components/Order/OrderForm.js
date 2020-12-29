@@ -30,6 +30,11 @@ export default class OrderForm extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  handleDiscountChange = (event) => {
+    this.setState({[event.target.name]: event.target.value})
+    //this.props.sendDiscountCode(event.target.value)
+  }
+
   onSelectCountry = (country) => {
     this.setState({country: country.label})
     // this.props.sendCountry(country)
@@ -115,7 +120,7 @@ export default class OrderForm extends Component {
 
             <input placeholder="ZIP / Postal Code" type="text" pattern="[A-Za-z0-9]+" tabIndex="-7" value={this.state.zip ? this.state.zip : ""} onChange={this.handleChange} name="zip" required/>
             
-            <input placeholder="Discount Code" type="text" pattern="[A-Za-z0-9]+" tabIndex="-8" value={this.state.discount ? this.state.discount : ""} onChange={this.handleChange} name="discount" />
+            <input placeholder="Discount Code" type="text" pattern="[A-Za-z0-9]+" tabIndex="-8" value={this.state.discount ? this.state.discount : ""} onChange={this.handleChange} name="discountCodeInput" />
             
             <div id={S.submitHolder}>
               <button type="submit" id={S.submit} >Submit</button>

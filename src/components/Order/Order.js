@@ -97,6 +97,13 @@ class Order extends Component {
     this.setState({postinZone: data }, this.calcTotalPrice)
   }
 
+  sendDiscountCode = (data) => {
+    console.log("test");
+    if(data === this.props.zoneAndBufferData.discountCodes) {
+      this.setState({discountCode: data}, this.calcTotalPrice)
+    } 
+  }
+
   calcTotalPrice = () => {
 
     // NOTE this price is a buffer to cover shipping costs to make the price of shiping to other zones less jaring. Can also say free shipping to nz as this pays for it. Needs to cover packaging, post accross nz, and make shipping overseas not so bad
@@ -126,7 +133,6 @@ class Order extends Component {
 
   }
 
-  
   render() {
     
     //let totalPrice = [] 
@@ -178,6 +184,7 @@ class Order extends Component {
               sendData={this.sendData} 
               sendPostZone={this.sendPostZone} 
               postingZones={this.props.zoneAndBufferData.postingZones}
+              sendDiscountCode={this.sendDiscountCode}
             />
             
             <div id={S.paypalHolder}>
