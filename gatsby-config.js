@@ -21,7 +21,8 @@ module.exports = {
       "Where Mountains and Sky join, the Bridge",
       "Inbark on your Crossing",
       "The Fire Brings the Dawn",
-      "They Walk The World"
+      "They Walk The World",
+      "The Monster Does Not Need The Hero",
     ],
     commissionsOpen: true,
     postingZones: [
@@ -121,10 +122,10 @@ module.exports = {
 
         // Defines where to place the tracking script
         // boolean `true` in the head and `false` in the body
-        head: true,
+        head: false,
 
         // Set to true to include a gif to count non-JS users
-        pixel: false,
+        pixel: true,
 
         // Allow requests from local addresses (localhost, 192.168.0.0, etc.)
         // for testing the integration locally.

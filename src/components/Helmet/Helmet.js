@@ -60,8 +60,8 @@ const SEO = ({ title, subTitle, description, image, pathName, article, itemGroup
       return (
         
         <Helmet title={toUpperCase(seo.title)} >
-          <script data-goatcounter="https://elloron.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+          {/* <script data-goatcounter="https://elloron.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script> */}
           <html lang="en" />
           <meta name="description" content={seo.description} />
           <meta name="image" content={seo.image} />
