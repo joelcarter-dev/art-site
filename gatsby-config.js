@@ -107,7 +107,7 @@ module.exports = {
       options: {
         // Either `code` or `selfHostUrl` is required.
         // REQUIRED IF USING HOSTED GOATCOUNTER! https://[my_code].goatcounter.com
-        code: 'https://elloron.goatcounter.com/count',
+        code: `elloron`,
 
         // REQUIRED IF USING SELFHOSTED GOATCOUNTER!
         //selfHostUrl: `https://elloron-art.netlify.app/`,
@@ -122,7 +122,7 @@ module.exports = {
 
         // Defines where to place the tracking script
         // boolean `true` in the head and `false` in the body
-        head: false,
+        head: true,
 
         // Set to true to include a gif to count non-JS users
         pixel: true,
