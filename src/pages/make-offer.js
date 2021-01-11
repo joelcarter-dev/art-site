@@ -82,7 +82,6 @@ export default class MakeOfferForm extends Component {
 
   render() {
 
-    console.log( this.props.location.state.itemInfo[0].title)
     let itemInfo
     if(typeof window !== `undefined`) {
       itemInfo = this.props.location.state.itemInfo[0]
