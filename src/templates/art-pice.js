@@ -73,6 +73,7 @@ const Info = (props) => {
       </ul>
     
           <div className={S.buttonHolder}>
+
             {props.data.is_store_item && 
             props.data.price !== "SOLD" &&
             props.data.price !== "sold" &&
@@ -92,6 +93,19 @@ const Info = (props) => {
               <button className={S.artItemButton}>
                 <Link to = {archiveSlug}  className={S.storeLink} >
                   View In Archive
+                </Link>
+              </button> 
+            }
+
+            {props.data.is_store_item &&
+              props.data.price === "SOLD" ||
+              props.data.price === "sold" ||
+              
+              props.data.tags.includes("Archive") ||
+              props.data.tags.includes("Archived") &&
+              <button className={S.artItemButton}>
+                <Link  to="/make-offer" state={{ itemInfo: [props.data]}}  className={S.storeLink} >
+                  Make An Offer
                 </Link>
               </button> 
             }
