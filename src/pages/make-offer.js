@@ -82,75 +82,79 @@ export default class MakeOfferForm extends Component {
 
   render() {
 
+
     let itemInfo
     if(typeof window !== `undefined`) {
       itemInfo = this.props.location.state.itemInfo[0]
+    } else {
+      return
+    }
+    return (
+
       
-      return (
-        <div id={S.CommissionForm}>
-          <div className={S.holder}>
+      <div id={S.CommissionForm}>
+        <div className={S.holder}>
 
-            <div className={S.formHolder}>
+          <div className={S.formHolder}>
 
-              <h3>Make an Offer for: {itemInfo.title}</h3>
+            <h3>Make an Offer for: {itemInfo.title}</h3>
 
-              <p>Offer: $ {this.state.budget}</p>
-              <Slider onCahngeBudget={this.onCahngeBudget}/>
+            <p>Offer: $ {this.state.budget}</p>
+            <Slider onCahngeBudget={this.onCahngeBudget}/>
 
-              <div id={S.buttonHolder} className={S.close} onClick={goBack} role="button"  tabIndex={0}>
-                <button id={S.formButton}>Close</button>
-              </div>
-    
-              <form id="makeOffer" name="make-offer" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-                <input type="hidden" name="contact" value="contact" />
-                <input type="hidden" name="bot-field" onChange={this.handleChange} />
-                <input className={S.hiddenInput} onChange={this.handleChange} name="slug" value={this.state.slug || ""} />
-                <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} />
-    
-                <input
-                  className={S.input}
-                  placeholder="Your Name" 
-                  type="text" 
-                  tabIndex="0" 
-                  value={this.state.name ? this.state.name : ""} 
-                  onChange={this.handleChange} name="name" 
-                  required 
-                  // autoFocus 
-                />
-
-                <input 
-                  className={S.input}
-                  placeholder="Email" 
-                  type="email" 
-                  tabIndex="-1" 
-                  value={this.state.email ? this.state.email : ""} 
-                  onChange={this.handleChange} name="email" 
-                  required 
-                /> 
-                
-                <textarea 
-                  className={S.input}
-                  name="message" 
-                  form="contact" 
-                  placeholder="Your Message" 
-                  value={this.state.message ? this.state.message : ""} 
-                  onChange={this.handleChange} 
-                  tabIndex="-2"
-                />
-                      
-                {!this.state.formSent && 
-                  <div id={S.buttonHolder}>
-                    <button type="submit" id={S.formButton} >Submit</button>
-                  </div>
-                }
-
-                <p>{this.state.submitMsg}</p>
-              </form>
-
+            <div id={S.buttonHolder} className={S.close} onClick={goBack} role="button"  tabIndex={0}>
+              <button id={S.formButton}>Close</button>
             </div>
+  
+            <form id="makeOffer" name="make-offer" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+              <input type="hidden" name="contact" value="contact" />
+              <input type="hidden" name="bot-field" onChange={this.handleChange} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="slug" value={this.state.slug || ""} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} />
+  
+              <input
+                className={S.input}
+                placeholder="Your Name" 
+                type="text" 
+                tabIndex="0" 
+                value={this.state.name ? this.state.name : ""} 
+                onChange={this.handleChange} name="name" 
+                required 
+                // autoFocus 
+              />
+
+              <input 
+                className={S.input}
+                placeholder="Email" 
+                type="email" 
+                tabIndex="-1" 
+                value={this.state.email ? this.state.email : ""} 
+                onChange={this.handleChange} name="email" 
+                required 
+              /> 
+              
+              <textarea 
+                className={S.input}
+                name="message" 
+                form="contact" 
+                placeholder="Your Message" 
+                value={this.state.message ? this.state.message : ""} 
+                onChange={this.handleChange} 
+                tabIndex="-2"
+              />
+                    
+              {!this.state.formSent && 
+                <div id={S.buttonHolder}>
+                  <button type="submit" id={S.formButton} >Submit</button>
+                </div>
+              }
+
+              <p>{this.state.submitMsg}</p>
+            </form>
+
           </div>
         </div>
-      )
-    }
+      </div>
+    )
   }
 }
