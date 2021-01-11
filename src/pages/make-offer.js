@@ -81,13 +81,11 @@ export default class MakeOfferForm extends Component {
   }
 
   render() {
-
-
     let itemInfo
     if(typeof window !== `undefined`) {
       itemInfo = this.props.location.state.itemInfo[0]
     } else {
-      return
+      return (<div></div>)
     }
     return (
 
