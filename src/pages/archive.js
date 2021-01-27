@@ -5,6 +5,8 @@ import Link from 'gatsby-link'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import { uniqBy, kebabCase } from 'lodash'
+import InlineSVG from 'svg-inline-react'
+import { angelMeeting } from '../img/svgSketches/sketchOne.js'
 
 import '../../node_modules/typeface-alegreya-sans-sc'
 import '../../node_modules/typeface-cinzel'
@@ -141,7 +143,11 @@ export default class ArchiveIndex extends Component {
             />
           )}
         
+        <div id={S.svgHolder}>
+          <InlineSVG src={angelMeeting} />
+        </div>
       </section>  
+      
     )
   }
 }

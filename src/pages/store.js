@@ -8,6 +8,7 @@ import Header from '../components/Header/Header.js'
 import S from './store.module.sass'
 import InlineSVG from 'svg-inline-react'
 import { sidesSvg } from '../img/svg-index.js'
+import { threeRunes } from '../img/svgSketches/sketchOne.js'
 import Commissions from '../components/Commissions/Commissions.js'
 //get all tags and display five items under that tag. Clicking on the tag shows all items
 
@@ -41,6 +42,9 @@ const ItemList = (props) => {
 const Selected = (props) => (
 	<div id={S.selectedHolder}>
 		<h2 id={S.selectedTitle}>Personally Selected</h2>
+		<div id={S.threeRunes}>
+			<InlineSVG src={threeRunes} />
+		</div>
 		<div className={S.items}>
 			{props.data.map(({ node: item }, i) => {
 				const frontmatter = item.frontmatter

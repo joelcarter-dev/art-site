@@ -121,7 +121,7 @@ export class IndexPage extends Component {
             <div className={S.midContent}>
 
               <div className={S.midTitle}>
-                <h2>For those who favor the Bold</h2>  
+                <h2>All PAths leAd to THe MountAin</h2>  
               </div>  
 
               <div className={S.topItems}>
@@ -138,7 +138,7 @@ export class IndexPage extends Component {
                   All works are original. Much of the work here draws heavily from music, and is based on a setting with deep internal lore. It attempts to explore and symbolise ancient ideas of the human experience in a unique, mythical way.
                 </p>
                 <p>
-                  Made with Love.
+                  The words of distant places
                 </p>
               </div>
 

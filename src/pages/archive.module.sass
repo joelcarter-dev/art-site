@@ -12,11 +12,17 @@
   background-color: $main-black
   *
     color: $red-white
+  #svgHolder
+    *
+      fill: $red-white !important
   
 .light
   background-color: $red-white
   *
     color: $main-black
+  #svgHolder
+    *
+      fill: $main-black !important
 
 #Archive
   size: 100%
@@ -100,3 +106,10 @@
           font-family: 'cinzel', serif
         p
           +smallText
+
+#svgHolder
+  width: 300px
+  margin: 0 auto
+  transform: rotate(-90deg)
+  margin-bottom: -300px
+  transform: rotate(-90deg)

@@ -86,12 +86,24 @@
           letter-spacing: 2px
           font-family: 'cinzel'
           //font-family: 'bellefair'
+        #threeRunes
+          width: 40px
+          margin: 0 auto
+          top: -100px
+          position: relative
+          //margin-top: -50px
+          *
+            fill: $red-white
+          svg
+            transform: rotate(-90deg)
+          
         .items
           display: flex
           flex-wrap: wrap
           justify-content: center
           width: 100%
           position: relative
+          top: -210px
           @media screen and (max-width: $s)
             display: block
           .selectedItem

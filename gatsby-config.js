@@ -6,9 +6,9 @@ const short = require(`postcss-short`)
 
 module.exports = {
   siteMetadata: {
-    title: 'Elloron Arts',
+    title: 'HeARt Of ArAh',
     siteUrl: `https://elloron.art`,
-    tagLine: 'All paths lead to the mountain',
+    tagLine: 'WHEre Mountains and Sky Join, THe Bridge',
     description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.',
     wordings: [
       "All paths lead to the Mountain",
@@ -23,6 +23,7 @@ module.exports = {
       "The Fire Brings the Dawn",
       "They Walk The World",
       "The Monster Does Not Need The Hero",
+      "The Time Comes"
     ],
     commissionsOpen: true,
     postingZones: [
