@@ -7,7 +7,8 @@ const short = require(`postcss-short`)
 module.exports = {
   siteMetadata: {
     title: 'HeARt Of ArAh',
-    siteUrl: `https://elloron.art`,
+    SEOTitle: 'Heart Of Arah',
+    siteUrl: `https://heartofarah.art/`,
     tagLine: 'WHEre Mountains and Sky Join, THe Bridge',
     description: 'Explore a world. An Archive of lore, illustrations, and short stories - a library of emerging lore.',
     wordings: [
