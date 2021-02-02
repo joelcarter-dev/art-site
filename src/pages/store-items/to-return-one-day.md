@@ -15,7 +15,7 @@ tags:
   - Mountains
 type:
   - Watercolor
-featuredImage: ../img/20210202_141544-01.jpeg
+featuredImage: ../img/20210202_141544-02.jpg
 original: true
 storeHighlight: false
 is_store_item: true
