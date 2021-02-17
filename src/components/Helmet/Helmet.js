@@ -62,6 +62,7 @@ const SEO = ({ title, subTitle, description, image, pathName, article, itemGroup
         <Helmet title={toUpperCase(seo.title)} >
           {/* <script data-goatcounter="https://elloron.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script> */}
+          <meta name="google-site-verification" content="EFUTPnBmGUfjFPbvHA7sGizFBV02DUBfA6nZtvtW1mI" />
           <html lang="en" />
           <meta name="description" content={seo.description} />
           <meta name="image" content={seo.image} />
