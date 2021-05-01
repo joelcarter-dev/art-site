@@ -1,16 +1,15 @@
 ---
 title: The Crossing
-about: >-
-  Three travellers cross the pass bordering the tribal territories to the west.
-  Here they spy one of the guard towns with its watchtower ablaze. This shows
-  good news; travelling should be safe and trade in the town is open. They will
-  need both in order to embark on their mission. 
-artistNotes: >-
-  This took all day, and that attempt failed. The second successful attempt also
-  took all day. Many lessons were learnt, and a new style discovered. While not
-  close to the vision I had in mind, it does Capture the atmosphere. That being
-  one of (hopefully) distance, height, and a feeling of openness.
-price: '560'
+about: "Three travellers cross the pass bordering the tribal territories to the
+  west. Here they spy one of the guard towns with its watchtower ablaze. This
+  shows good news; travelling should be safe and trade in the town is open. They
+  will need both in order to embark on their mission. "
+artistNotes: This took all day, and that attempt failed. The second successful
+  attempt also took all day. Many lessons were learnt, and a new style
+  discovered. While not close to the vision I had in mind, it does Capture the
+  atmosphere. That being one of (hopefully) distance, height, and a feeling of
+  openness.
+price: "560"
 info: 417 x 295mm
 date: 2019-03-07T00:06:05.127Z
 tags:
@@ -19,7 +18,7 @@ tags:
   - Skys
 type:
   - Watercolor
-featuredImage: ../img/dsc_0551.jpg
+featuredImage: ../img/20201029_154844-01.jpeg
 original: true
 storeHighlight: true
 is_store_item: true
