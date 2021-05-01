@@ -29,7 +29,7 @@ tags:
   - Fantasy
 type:
   - Watercolor
-featuredImage: ../img/img_20200331_154721.jpg
+featuredImage: ../img/20201106_162650-03-01.jpeg
 original: true
 storeHighlight: true
 is_store_item: false
