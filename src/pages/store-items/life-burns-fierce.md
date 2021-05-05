@@ -31,7 +31,7 @@ type:
   - Watercolor
 featuredImage: ../img/20201106_162650-03-01.jpeg
 original: true
-storeHighlight: true
+storeHighlight: false
 is_store_item: false
 is_archive_item: true
 archive_topic:
