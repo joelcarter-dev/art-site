@@ -9,7 +9,7 @@ artistNotes: This took all day, and that attempt failed. The second successful
   discovered. While not close to the vision I had in mind, it does Capture the
   atmosphere. That being one of (hopefully) distance, height, and a feeling of
   openness.
-price: "560"
+price: "360"
 info: 417 x 295mm
 date: 2019-03-07T00:06:05.127Z
 tags:
