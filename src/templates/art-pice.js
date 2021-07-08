@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Header from '../components/Header/Header.js'
+// import Footer from '../components/Footer/Footer'
 import Link from 'gatsby-link'
 import BackButton from '../components/BackButton/BackButton.js'
 import Order from '../components/Order/Order.js'
@@ -174,6 +175,7 @@ class ArtPice extends Component {
     const itemData = this.props.pageContext.node.frontmatter
 
     return (
+      <>
       <section className={S.artItemHolder}>
       
         <HeaderMeta 
@@ -208,7 +210,10 @@ class ArtPice extends Component {
           </div>
         }
         <div className={S.right}></div>
+        
       </section>
+      {/* <Footer backgroundWhite={false}/>   */}
+      </>
     )
   }
 }

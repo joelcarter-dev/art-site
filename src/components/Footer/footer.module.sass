@@ -1,0 +1,33 @@
+@import "../../pages/main.sass"
+
+.footer
+    width: 100%
+    height: 100px
+    background-color: white
+    .left
+        float: left
+        padding: 30px
+        display: flex
+        .svgLink
+            *
+                size: 25px
+                margin: 10px
+    .right
+        float: right
+        padding: 30px
+
+#footerWhite
+    background-color: $red-white
+    *
+        color: $red-black
+    .svgLink
+        *
+            fill: $red-black
+
+#footerBlack
+    background-color: $deep-blue
+    *, p
+        color: $red-white
+    .svgLink
+        *
+            fill: $red-white

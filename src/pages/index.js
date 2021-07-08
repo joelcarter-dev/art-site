@@ -4,6 +4,7 @@ import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Commissions from '../components/Commissions/Commissions.js'
 import RandomLinks from '../components/RandomLinks/RandomLinks'
+import Footer from '../components/Footer/Footer'
 import ReactVivus from 'react-vivus'
 import InlineSVG from 'svg-inline-react'
 import Img from 'gatsby-image'
@@ -147,11 +148,16 @@ export class IndexPage extends Component {
               <div id={S.sketchOne}>
                 <InlineSVG src={svgOne} />
               </div>
+
+              <Footer backgroundWhite={true}/>      
+              
             </div>
           </div>
 
-        </section>          
+        </section>    
+       
       </section>
+
     )
   }
 }

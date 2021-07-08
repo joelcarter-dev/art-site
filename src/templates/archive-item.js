@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../components/Header/Header.js'
 import HeaderMeta from '../components/Helmet/Helmet.js'
+import Footer from '../components/Footer/Footer'
 import S from './archive.module.sass'
 import Link from 'gatsby-link'
 import ArtImage from '../components/ArtImgae/ArtImage'
@@ -76,6 +77,8 @@ class ArchiveItem extends Component {
               </section>
             
             </div>
+
+            <Footer backgroundWhite={true}/>  
                       
           </section>
         );

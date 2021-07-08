@@ -5,6 +5,7 @@ import ArtImage from '../components/ArtImgae/ArtImage'
 import { kebabCase } from 'lodash'
 import HeaderMeta from '../components/Helmet/Helmet.js'
 import Header from '../components/Header/Header.js'
+import Footer from '../components/Footer/Footer'
 import S from './store.module.sass'
 import InlineSVG from 'svg-inline-react'
 import { sidesSvg } from '../img/svg-index.js'
@@ -102,6 +103,8 @@ export default class Store extends Component {
 						<Selected data={this.props.data.selected.edges} />
 					</div>
 				</section>
+
+				<Footer backgroundWhite={false}/>  
 			</section>
 		)
 	}
