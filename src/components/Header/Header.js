@@ -33,9 +33,9 @@ const logoSvg = `
 </svg>`
 
 const Header = (props) => (
-  <section id={S.Header} className={props.id}>
-    <div className={S.logoHolder} id={props.white ? S.white : S.black}>
-    
+  <section id={S.Header} className={props.id} className={props.white ? S.holderWhite : S.holderBlack}>
+    <div className={S.logoHolder} id={props.white ? S.white : S.black}>    
+
       <div className={S.left}>
         <ReactVivus
           id={S.svgLeft}
