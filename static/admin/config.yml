@@ -150,5 +150,6 @@ collections:
           - Lore
           - Events
           - Characters
+          - Myths
       ##the list of topics an archive item can have
       ## ! One day have tags for peoples, time periods, places, religion, ect 
