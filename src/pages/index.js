@@ -113,11 +113,7 @@ export class IndexPage extends Component {
             <InlineSVG src={mainLogoSvg} />
           </div>
 
-          <div className={S.midContentHolder}>
-            {/* <div className={S.constentSides}>     
-              <div className={S.right}></div>
-              <div className={S.left}></div>            
-            </div> */}
+          
 
             <div className={S.midContent}>
 
@@ -152,7 +148,7 @@ export class IndexPage extends Component {
               <Footer backgroundWhite={true}/>      
               
             </div>
-          </div>
+          
 
         </section>    
        
