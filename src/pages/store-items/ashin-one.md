@@ -4,10 +4,10 @@ price: "350"
 info: 'A3'
 date: 2021-08-21T04:27:00.470Z
 tags:
-    - Abstract
-    - Fantasy
-    - Concept Art
-    - Environment Concepts
+  - Abstract
+  - Fantasy
+  - Concept Art
+  - Environment Concepts
 type:
   - Watercolor
 featuredImage: ../img/20210427_143831-01.jpeg
