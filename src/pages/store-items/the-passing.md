@@ -9,7 +9,6 @@ tags:
   - Environment Concepts
   - Abstract
   - Archived
-  - Landscapes
 type:
   - Watercolor
   - Oil Pastel
