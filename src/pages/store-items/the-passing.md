@@ -2,6 +2,7 @@
 title: The Passing
 about: Ancient myths in Watercolor. Past onto the Other by the One, lest the
   Other be forsaken
+price: "0"
 info: A3
 date: 2021-08-21T04:27:00.470Z
 tags:
