@@ -68,9 +68,16 @@ const Info = (props) => {
         <GetBufferData data={props.data} />
       </div>
       <ul className={S.dataList}>
-        <li>{props.data.original ? "original work" : "print"}</li>
-        <li>{props.data.type}</li>
-        <li style={{textTransform: "none"}}>{props.data.info}</li>
+        <li><p>{props.data.original ? "original work" : "print"}</p></li>    
+
+        <li style={{textTransform: "none"}}> <p>{props.data.info} </p></li>
+      </ul>
+
+      <ul className={S.dataList}>
+        {
+          props.data.type.map(i => (
+          <li style={{padding: "none"}} key={i}> <i>{i}</i> </li>
+        ))}
       </ul>
     
           <div className={S.buttonHolder}>
