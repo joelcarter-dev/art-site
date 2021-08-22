@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
-import ReactSlider from 'react-slider'
-import Select from 'react-select'
 import { navigate } from "@reach/router"
+import ReactSlider from 'react-slider'
 import S from './commissions.module.sass'
-import { useCommissionStatus } from '../hooks/commissionStatus.js'
 
 const Slider = (props) => {
   return (
@@ -29,85 +27,39 @@ function encode(data) {
     .join("&");
 }
 
-const SelectType = (props) => {
-
-  const types = [
-    { value: 'watercolor', label: 'Watercolor' },
-    { value: 'ink', label: 'Ink' },
-    // { value: 'digital', label: 'Digital' },
-    { value: 'acrylic', label: 'Acrylic' },
-    { value: 'pastel', label: 'Pastel' },
-    { value: 'graphite', label: 'Graphite' },
-    { value: 'AnyMixed', label: 'Any / Mixed' },
-  ]
-
-  const sizes = [
-    { value: '149 x 210mm', label: '149 x 210mm' },
-    { value: '299 x 210mm', label: '299 x 210mm' },
-    { value: '210 x 295mm', label: '210 x 295mm' },
-    { value: '420 x 295mm', label: '420 x 295mm' },
-    { value: 'any', label: 'Any' },
-    { value: 'Custom', label: 'Custom (specify)' },
-  ]
-  
-  return (
-    <Select
-      options={props.types ? types : sizes}
-      // value={this.state.medium.value}
-      // name={this.state.medium.lable}
-      onChange={props.onSelect}
-      placeholder={props.types ? "Select Medium" : "Select Size"}
-      className={S.dropdown}
-    />
-  )
-}
-
 const goBack = () => {
   navigate(-1);
 }
 
-
-export function GetCommissionStatus(props) {
-  const {commissionsOpen} = useCommissionStatus()
-  console.log(commissionsOpen);
-  return (
-    <CommissionForm commissionsOpen={commissionsOpen}/>
-  )
-}
-
-class CommissionForm extends Component {
+export default class MakeOfferForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      medium: null,
+      title: null,
     }
   }
 
-  onSelectMedium = (medium) => {
-    this.setState({medium: medium.label})
-  }
-
-  onSelectSize = (size) => {
-    this.setState({size: size.label})
-  }
-
-  onCahngeBudget = (budget) => {
-    this.setState({budget: budget})
+  componentDidMount() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    this.setState(() => ({ 
+      title: this.props.location.state.itemInfo[0].title,
+      //slug: this.props.location.state.itemInfo[0].fields.slug
+    }))
   }
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  onCahngeBudget = (budget) => {
+    this.setState({budget: budget})
+  }
+
   handleSubmit = (e) => {
+
     e.preventDefault()
-
-
-    if (this.state.medium === null && this.state.size === null) {
-      this.setState({submitMsg: "Please select your Medium"})
-      e.preventDefault()
-      return
-    }
     const form = e.target;
   
     fetch("/", {
@@ -119,10 +71,8 @@ class CommissionForm extends Component {
       })
     })
       .then(() => 
-				this.setState({formSent: true, submitMsg: this.props.commissionsOpen ? 
-					"Thank you. If your commission is a physical piece, I will be contacting you for shipping details." 
-					:
-					"Thank you for your interest. Though commissions are closed, I'll try to go back to you. If not, you're in queue."
+				this.setState({formSent: true, submitMsg:
+					"Thank you. We will be in contact with you as soon as we can" 
         }))
       
       .catch(error => this.setState({submitMsg: `Something went wrong: ${error}`}))
@@ -130,38 +80,34 @@ class CommissionForm extends Component {
   }
 
   render() {
+    let itemInfo
+    if(typeof window !== `undefined`) {
+      itemInfo = this.props.location.state.itemInfo[0]
+    } else {
+      return (<div></div>)
+    }
     return (
+
+      
       <div id={S.CommissionForm}>
         <div className={S.holder}>
 
           <div className={S.formHolder}>
 
-            <h3>Commission Form</h3>
+            <h3>Make an Offer for: {itemInfo.title}</h3>
+
+            <p>Offer: $ {this.state.budget}</p>
+            <Slider onCahngeBudget={this.onCahngeBudget}/>
 
             <div id={S.buttonHolder} className={S.close} onClick={goBack} role="button"  tabIndex={0}>
               <button id={S.formButton}>Close</button>
             </div>
-
-            <span className={S.sliderNumber}>Your Budget <h4> ${this.state.budget || 0} </h4></span>
-            <Slider onCahngeBudget={this.onCahngeBudget}/>
   
-            <form id="commissionFormTwo" name="commissionstwo" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-              <input type="hidden" name="commissionstwo" value="commissionstwo" />
+            <form id="makeOffer" name="makeOffer" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+              <input type="hidden" name="makeOffer" value="makeOffer" />
               <input type="hidden" name="bot-field" onChange={this.handleChange} />
-              <input className={S.hiddenInput} onChange={this.handleChange} name="budget" value={this.state.budget || ""} />
-              <input className={S.hiddenInput} onChange={this.handleChange} name="size" value={this.state.size || ""} />
-              <input className={S.hiddenInput} onChange={this.handleChange} name="medium" value={this.state.medium || ""} />
-
-              <SelectType 
-                onSelect={this.onSelectMedium} 
-                className={S.dropdown}
-                types={true}  
-              />
-
-              <SelectType 
-                onSelect={this.onSelectSize} 
-                className={S.dropdown}
-              />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="slug" value={this.state.slug || ""} />
+              <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} />
   
               <input
                 className={S.input}
@@ -186,24 +132,20 @@ class CommissionForm extends Component {
               
               <textarea 
                 className={S.input}
-                name="description" 
-                form="commissionForm" 
-                placeholder="Enter the Description of your commission here..." 
-                value={this.state.description ? this.state.description : ""} 
+                name="message" 
+                form="makeOffer" 
+                placeholder="Your Message" 
+                value={this.state.message ? this.state.message : ""} 
                 onChange={this.handleChange} 
-                tabIndex="-2" 
-                required
+                tabIndex="-2"
               />
                     
               {!this.state.formSent && 
-                <>
                 <div id={S.buttonHolder}>
                   <button type="submit" id={S.formButton} >Submit</button>
                 </div>
-                              
-                </>
               }
-        
+
               <p>{this.state.submitMsg}</p>
             </form>
 
@@ -213,5 +155,3 @@ class CommissionForm extends Component {
     )
   }
 }
-
-export default GetCommissionStatus
