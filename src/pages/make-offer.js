@@ -103,8 +103,8 @@ export default class MakeOfferForm extends Component {
               <button id={S.formButton}>Close</button>
             </div>
   
-            <form id="makeOffer" name="make-offer" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
-              <input type="hidden" name="make-offer" value="make-offer" />
+            <form id="makeOffer" name="makeoffer" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+              <input type="hidden" name="makeoffer" value="makeoffer" />
               <input type="hidden" name="bot-field" onChange={this.handleChange} />
               <input className={S.hiddenInput} onChange={this.handleChange} name="slug" value={this.state.slug || ""} />
               <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} />
