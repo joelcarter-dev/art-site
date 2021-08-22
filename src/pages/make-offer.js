@@ -133,7 +133,7 @@ export default class MakeOfferForm extends Component {
               <textarea 
                 className={S.input}
                 name="message" 
-                form="contact" 
+                form="makeOffer" 
                 placeholder="Your Message" 
                 value={this.state.message ? this.state.message : ""} 
                 onChange={this.handleChange} 
