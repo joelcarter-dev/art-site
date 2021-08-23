@@ -1,10 +1,8 @@
 ---
 title: Ashin One
-about: >-
-  Watercolour skeleton in a land for smoke and flame. Ashin One. They walk the
-  land of Brimstone. Left there, they walk the wastes. 
-
-  *One day, they will come to Us.*
+about: Watercolour skeleton in a land for smoke and flame. Ashin One. They walk
+  the land of Brimstone. Left there, they walk the wastes. One day, they will
+  come to Us.
 price: "350"
 info: A3
 date: 2021-08-21T04:27:00.470Z
