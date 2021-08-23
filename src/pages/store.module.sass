@@ -58,10 +58,19 @@
             text-decoration: none
 
   #bottomHolder
-    .angleSvgHolder
-      margin-bottom: -5px
-      svg
-        margin-bottom: -6px
+    .svgs
+      position: relative
+      .angleSvgHolder
+        margin-bottom: -5px
+        svg
+          margin-bottom: -6px
+      #tinyArmy
+        width: 100px
+        margin: 0 auto
+        position: absolute
+        right: 0
+        top: -41px 
+        transform: rotate(-16deg)
     .black
       background-color: $main-black
       .commissionsHolder
@@ -69,8 +78,6 @@
         margin: 0 auto
       #selectedHolder
         width: 100%
-        
-        padding-bottom: 60px
         position: relative
         #selectedTitle
           color: $red-white
@@ -143,3 +150,12 @@
                 border-bottom: 2px solid $red-white
                 animation: grow 1s forwards
                 transition: all 1s linear 
+    #theTraide
+      max-width: 700px
+      margin: 0 auto
+      top: -100px
+      position: relative
+      //margin-top: 50px
+      *
+        fill: $red-white
+      svg

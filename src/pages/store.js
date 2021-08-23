@@ -10,6 +10,8 @@ import S from './store.module.sass'
 import InlineSVG from 'svg-inline-react'
 import { sidesSvg } from '../img/svg-index.js'
 import { threeRunes } from '../img/svgSketches/sketchOne.js'
+import { theTraide } from '../img/svgSketches/theTraide.js'
+import { tinyArmy } from '../img/svgSketches/tinyArmy.js'
 import Commissions from '../components/Commissions/Commissions.js'
 
 import '../../node_modules/typeface-alegreya-sans-sc'
@@ -45,7 +47,7 @@ const Selected = (props) => (
 			<InlineSVG src={threeRunes} />
 		</div>
 		<div className={S.items}>
-			{props.data.map(({ node: item }, i) => {
+			{props.data.reverse().map(({ node: item }, i) => {
 				const frontmatter = item.frontmatter
 				return (
 					<div className={S.selectedItem} key={i}>
@@ -79,16 +81,30 @@ export default class Store extends Component {
 				</div>
 
 				<section id={S.bottomHolder}>
-					<div className={S.angleSvgHolder}>
-						<InlineSVG src={sidesSvg} />
+
+					<div className={S.svgs}>
+						<div className={S.angleSvgHolder}>
+							<InlineSVG src={sidesSvg} />
+						</div>
+
+						<div id={S.tinyArmy}>
+							<InlineSVG src={tinyArmy} />
+						</div>
 					</div>
+
 					<div className={S.black}>
 						<div className={S.commissionsHolder}>		
 							<Commissions/>								
 						</div>
 
 						<Selected data={this.props.data.selected.edges} />
+
+						<div id={S.theTraide}>
+							<InlineSVG src={theTraide} />
+						</div>
+
 					</div>
+
 				</section>
 
 				<Footer backgroundWhite={false}/>  
