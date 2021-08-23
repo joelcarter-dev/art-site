@@ -15,7 +15,7 @@ type:
   - Oil Pastel
   - Watercolor Pencil
   - Ink
-featuredImage: ../img/the-passing-a4.jpg
+featuredImage: ../img/joel-innes-a4-01.jpeg
 original: true
 storeHighlight: true
 is_store_item: true
