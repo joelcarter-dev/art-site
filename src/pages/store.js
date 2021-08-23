@@ -11,9 +11,7 @@ import InlineSVG from 'svg-inline-react'
 import { sidesSvg } from '../img/svg-index.js'
 import { threeRunes } from '../img/svgSketches/sketchOne.js'
 import Commissions from '../components/Commissions/Commissions.js'
-//get all tags and display five items under that tag. Clicking on the tag shows all items
 
-//group all links under their tag and type
 import '../../node_modules/typeface-alegreya-sans-sc'
 import '../../node_modules/typeface-cinzel'
 
@@ -65,20 +63,19 @@ const Selected = (props) => (
 export default class Store extends Component {
 	render() {
 		const itemData = this.props.data.posts
-		//const commercialItems = this.props.data.commercial ? this.props.data.commercial.items : null
+		const commercialItems = this.props.data.commercial ? this.props.data.commercial.items : null
 
 		return (
 			<section id={S.store}>
 				<HeaderMeta subTitle="Store" pathName={this.props.location.pathname} />
-
+				<Header to={[ 'home', 'index' ]} white={false} />
 				
-					<Header to={[ 'home', 'index' ]} white={false} />
-				
-
 				<div className={S.listHolder}>
 					<ItemList items={itemData.tags} folder="category" title="Categories" />
-
 					<ItemList items={itemData.types} folder="mediums" title="Mediums" />
+					
+					{/* ! should display comission items */}
+					<ItemList items={commercialItems} folder="category" title="Commissions & Comercial" showCommissions={true} />
 				</div>
 
 				<section id={S.bottomHolder}>
@@ -87,18 +84,8 @@ export default class Store extends Component {
 					</div>
 					<div className={S.black}>
 						<div className={S.commissionsHolder}>		
-							<Commissions>
-								{/* ! should display comission items */}
-								{/* {commercialItems &&
-									<ItemList 
-										items={commercialItems} 
-										folder="category" 
-										title="Commissions & Specialties" 
-										showCommissions={true}
-									/>
-								} */}
-								</Commissions>
-							</div>
+							<Commissions/>								
+						</div>
 
 						<Selected data={this.props.data.selected.edges} />
 					</div>

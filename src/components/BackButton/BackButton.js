@@ -12,7 +12,7 @@ import { navigate } from "@reach/router"
  */
 
 const goBack = () => {
-    navigate(-1);
+    console.log(navigate(-1));
 }
 
 const BackButton = (pageClass) => {
