@@ -82,12 +82,12 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="orderForm" />
  
-          <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.title || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} />
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
 
-          <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.country || ""} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.zone || ""} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.zonePostingCost || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="posting zone" value={this.state.zone || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="posting zone cost" value={this.state.zonePostingCost || ""} />
 
           <p>Order Form</p>
         
