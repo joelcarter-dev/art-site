@@ -83,14 +83,6 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="orderForm" />
  
-          <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""}/>
-          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
-
-          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || null} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZone" value={this.state.zone || null} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost || "null"} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="total price" value={this.props.totalPrice || "null"} />
-
           <p>Order Form</p>
         
             <input placeholder="Your name" type="text" tabIndex="0" value={this.state.name ? this.state.name : ""} onChange={this.handleChange} name="name" required />
@@ -136,6 +128,15 @@ export default class OrderForm extends Component {
             
             <input placeholder="Discount Code" type="text" pattern="[A-Za-z0-9]+" tabIndex="-8" value={this.state.discount ? this.state.discount : ""} onChange={this.handleChange} name="discountCodeInput" />
             
+
+            <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""}/>
+            <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
+
+            <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || null} />
+            <input className={S.hiddenInput} onChange={this.handleChange} name="postingZone" value={this.state.zone || null} />
+            <input className={S.hiddenInput} onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost || "null"} />
+            <input className={S.hiddenInput} onChange={this.handleChange} name="total price" value={this.props.totalPrice || "null"} />
+
             <div id={S.submitHolder}>
               <button type="submit" id={S.submit} >Submit</button>
             </div>
