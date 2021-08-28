@@ -14,6 +14,9 @@ export default class OrderForm extends Component {
     super(props)
         
     this.state = {
+      country: null,
+      zone: null,
+      zonePostingCost: null,
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
@@ -22,9 +25,6 @@ export default class OrderForm extends Component {
     this.setState({
       title: this.props.orderData[0].frontmatter.title,
       url: this.props.orderData[0].fields.slug,
-      country: null,
-      zone: null,
-      zonePostingCost: null,
     })
   }
 
@@ -86,8 +86,8 @@ export default class OrderForm extends Component {
           <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""}/>
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
 
-          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || null} />
-          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZone" value={this.state.zone || null} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || "null"} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZone" value={this.state.zone || "null"} />
           <input className={S.hiddenInput} onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost || "null"} />
           <input className={S.hiddenInput} onChange={this.handleChange} name="total price" value={this.props.totalPrice || "null"} />
 

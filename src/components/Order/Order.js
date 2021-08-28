@@ -35,8 +35,8 @@ class Overview extends Component {
           </ul> */}
 
 						<p>
-							${this.props.postingZone.postingCost} for tracked courier posting
-							to {this.props.postingZone.name}
+							${this.props.zonePostingCost} for tracked courier posting
+							to {this.props.zone}
 						</p>
 
 						<span>Total: ${this.props.totalPrice} NZD</span>
@@ -81,10 +81,8 @@ class Order extends Component {
 		this.state = {
 			msg: "",
 			formData: null,
-			postingZone: {
-				name: null,
-				postingCost: null,
-			},
+			zone: null,
+      zonePostingCost: null,
 			totalPrice: null,
 			showPayPal: false,
 		}
@@ -95,7 +93,7 @@ class Order extends Component {
 	}
 
 	sendPostZone = (data) => {
-		this.setState({ postingZone: data }, this.calcTotalPrice)
+    this.setState({zone: data.name, zonePostingCost: data.postingCost}, this.calcTotalPrice)
 	}
 
 	sendDiscountCode = (data) => {
@@ -108,7 +106,7 @@ class Order extends Component {
 	calcTotalPrice = () => {
 		// NOTE this price is a buffer to cover shipping costs to make the price of shiping to other zones less jaring. Can also say free shipping to nz as this pays for it. Needs to cover packaging, post accross nz, and make shipping overseas not so bad
 		const postBuffer = this.props.zoneAndBufferData.globalItemBuffer
-		const postZoneCost = this.state.postingZone.postingCost
+		const postZoneCost = this.state.zonePostingCost
 
 		let basePrice
 		this.props.orderData.map((i) => {
@@ -190,7 +188,7 @@ class Order extends Component {
 				<div className={S.orderHolder}>
 					<div className={S.left}>
 						<Overview
-							postingZone={this.state.postingZone}
+							postingZone={this.state.zone}
 							totalPrice={this.state.totalPrice}
 							itemInfo={this.props.orderData}
 						/>
