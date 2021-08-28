@@ -185,6 +185,9 @@ class Order extends Component {
               sendPostZone={this.sendPostZone} 
               postingZones={this.props.zoneAndBufferData.postingZones}
               sendDiscountCode={this.sendDiscountCode}
+
+              totalPrice = {this.state.totalPrice}
+              postinZone = {this.state.postinZone}
             />
             
             <div id={S.paypalHolder}>

@@ -17,7 +17,7 @@ module.exports = {
       "The words of distant places",
       "Sights of such wonder",
       "To meet what comes",
-      "And we breath in, then speak",
+      "We breath in, then speak",
       "Two worlds, and a place in between",
       "Where Mountains and Sky join, the Bridge",
       "Inbark on your Crossing",

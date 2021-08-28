@@ -14,7 +14,9 @@ export default class OrderForm extends Component {
     super(props)
         
     this.state = {
-      //country: "New Zealand", 
+      country: null,
+      zone: null,
+      zonePostingCost: null,
       submitMsg: "Details will be used to ship the items to you.",
     }
   }
@@ -49,10 +51,16 @@ export default class OrderForm extends Component {
   //should display some feedback to the user on sbmit and make sure all feileds are vallidated
 
   handleSubmit = (e) => {
+
     this.props.sendData(this.state)
 
     e.preventDefault();
     const form = e.target;
+
+    if (this.state.country === null || this.state.zone === null || this.state.zonePostingCost === null) {
+      this.setState({submitMsg: "Please select your posting zone and country."})
+      return
+    }
     
     fetch("/", {
       method: "POST",
