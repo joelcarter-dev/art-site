@@ -86,10 +86,10 @@ export default class OrderForm extends Component {
           <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""}/>
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
 
-          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || ""} />
-          <input type="hidden" onChange={this.handleChange} name="postingZone" value={this.state.zone ? this.state.zone : "null"} />
-          <input type="hidden" onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost ? this.state.zonePostingCost : "null"} />
-          <input type="hidden" name="total price" value={this.props.totalPrice || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || null} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZone" value={this.state.zone || null} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost || "null"} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="total price" value={this.props.totalPrice || "null"} />
 
           <p>Order Form</p>
         
