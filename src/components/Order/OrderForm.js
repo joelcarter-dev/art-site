@@ -83,13 +83,13 @@ export default class OrderForm extends Component {
         <form id="orderForm" name="orderForm" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
           <input type="hidden" name="bot-field" value="orderForm" />
  
-          <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""} required/>
-          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} required/>
+          <input className={S.hiddenInput} onChange={this.handleChange} name="title" value={this.state.title || ""}/>
+          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
 
-          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || ""} required/>
-          <input type="hidden" onChange={this.handleChange} name="postingZone" value={this.state.zone ? this.state.zone : "null"} required/>
-          <input type="hidden" onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost ? this.state.zonePostingCost : "null"} required/>
-          <input type="hidden" name="total price" value={this.props.totalPrice || ""} required/>
+          <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || ""} />
+          <input type="hidden" onChange={this.handleChange} name="postingZone" value={this.state.zone ? this.state.zone : "null"} />
+          <input type="hidden" onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost ? this.state.zonePostingCost : "null"} />
+          <input type="hidden" name="total price" value={this.props.totalPrice || ""} />
 
           <p>Order Form</p>
         
