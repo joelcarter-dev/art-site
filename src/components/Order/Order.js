@@ -85,12 +85,13 @@ class Order extends Component {
         name: null,
         postingCost: null,
       },
-      totalPrice: null
+      totalPrice: null,
+      showPayPal: false
     }
   }
   
   sendData = (data) => {
-    this.setState({formData: data })
+    this.setState({formData: data }, this.cheekFormsAndSelectFields)
   }
 
   sendPostZone = (data) => {
@@ -130,6 +131,21 @@ class Order extends Component {
 
       this.setState({totalPrice: priceWithPostingCost})
       return null
+
+  }
+
+  cheekFormsAndSelectFields = () => {
+    //! Both contry and posting zone must be filled, 
+    //! as well as all form fields for showPayPal state to be true, rendering the paypal buttons
+
+    if (
+      this.state.postinZone.name != null &&
+      this.state.formData.country != null 
+    ) {
+      this.setState({showPayPal: true})
+    } else {
+      console.log("something is null so not showing paypal buttons")
+    }
 
   }
 
@@ -191,7 +207,7 @@ class Order extends Component {
             />
             
             <div id={S.paypalHolder}>
-              {this.state.formData != null && this.state.postinZone != null &&
+              {this.state.showPayPal && 
                 <PayPalCheckout 
                   client={CLIENT}
                   env={ENV}
