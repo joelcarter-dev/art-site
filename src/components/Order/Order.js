@@ -191,7 +191,7 @@ class Order extends Component {
             />
             
             <div id={S.paypalHolder}>
-              {this.state.formData != null &&
+              {this.state.formData != null && this.state.postinZone != null &&
                 <PayPalCheckout 
                   client={CLIENT}
                   env={ENV}
