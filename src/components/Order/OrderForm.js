@@ -61,13 +61,13 @@ export default class OrderForm extends Component {
       this.setState({submitMsg: "Please select your posting zone and country."})
       return
     }
-    
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
         ...this.state
+        
       })
     })
       .then(() => this.setState({submitMsg: "Thank you for your shipping details. Please compleat payment below (PayPal account not required)"}))
@@ -84,6 +84,10 @@ export default class OrderForm extends Component {
  
           <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.title || ""} />
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} />
+
+          <input className={S.hiddenInput} onChange={this.handleChange} value={this.state.country || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.zone || ""} />
+          <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.zonePostingCost || ""} />
 
           <p>Order Form</p>
         
