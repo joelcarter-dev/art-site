@@ -87,8 +87,9 @@ export default class OrderForm extends Component {
           <input className={S.hiddenInput} onChange={this.handleChange} name="url" value={this.state.url || ""} required/>
 
           <input className={S.hiddenInput} onChange={this.handleChange} name="country" value={this.state.country || ""} required/>
-          <input className={S.hiddenInput} onChange={this.handleChange} name="posting zone" value={this.state.zone ? this.state.zone : "null"} required/>
-          <input className={S.hiddenInput} onChange={this.handleChange} name="posting zone cost" value={this.state.zonePostingCost ? this.state.zonePostingCost : "null"} required/>
+          <input type="hidden" onChange={this.handleChange} name="postingZone" value={this.state.zone ? this.state.zone : "null"} required/>
+          <input type="hidden" onChange={this.handleChange} name="postingZoneCost" value={this.state.zonePostingCost ? this.state.zonePostingCost : "null"} required/>
+          <input type="hidden" name="total price" value={this.props.totalPrice || ""} required/>
 
           <p>Order Form</p>
         
