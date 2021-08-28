@@ -55,12 +55,13 @@ export default class OrderForm extends Component {
     this.props.sendData(this.state)
 
     e.preventDefault();
-    const form = e.target;
 
     if (this.state.country === null || this.state.zone === null || this.state.zonePostingCost === null) {
       this.setState({submitMsg: "Please select your posting zone and country."})
       return
     }
+
+    const form = e.target;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
