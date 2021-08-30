@@ -35,8 +35,8 @@ class Overview extends Component {
           </ul> */}
 
 						<p>
-							${this.props.zonePostingCost} for tracked courier posting
-							to {this.props.zone}
+							${this.props.postingZone.postingCost} for tracked courier posting
+							to {this.props.postingZone.name}
 						</p>
 
 						<span>Total: ${this.props.totalPrice} NZD</span>
@@ -81,8 +81,10 @@ class Order extends Component {
 		this.state = {
 			msg: "",
 			formData: null,
-			zone: null,
-      zonePostingCost: null,
+			postingZone: {
+				name: null,
+				postingCost: null,
+			},
 			totalPrice: null,
 			showPayPal: false,
 		}
@@ -93,7 +95,7 @@ class Order extends Component {
 	}
 
 	sendPostZone = (data) => {
-    this.setState({zone: data.name, zonePostingCost: data.postingCost}, this.calcTotalPrice)
+		this.setState({ postingZone: data }, this.calcTotalPrice)
 	}
 
 	sendDiscountCode = (data) => {
@@ -106,7 +108,7 @@ class Order extends Component {
 	calcTotalPrice = () => {
 		// NOTE this price is a buffer to cover shipping costs to make the price of shiping to other zones less jaring. Can also say free shipping to nz as this pays for it. Needs to cover packaging, post accross nz, and make shipping overseas not so bad
 		const postBuffer = this.props.zoneAndBufferData.globalItemBuffer
-		const postZoneCost = this.state.zonePostingCost
+		const postZoneCost = this.state.postingZone.postingCost
 
 		let basePrice
 		this.props.orderData.map((i) => {
@@ -173,7 +175,7 @@ class Order extends Component {
 		const CLIENT = {
 			//sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2OzrCRwGnR8CFAUvfP9RZE31h_',
 			production:
-				"AT2N80Uan4dARyrWcKyBvj44TNxp2mfrCRlAFPjvpA9-J6TMpMeOgPGK_fb0GkQa9jziuv8Y_uiVzKc3",
+				"AU0yqwM2Jedt0rB6_hvXYbGmjp2Cvl8KtzMeYT0cr4Fvtvt7eHVPC_Dmcbk1kfTaOjk1JuNsrcv0fu_h",
 		}
 
 		// const ENV = process.env.NODE_ENV === 'production'
@@ -188,7 +190,7 @@ class Order extends Component {
 				<div className={S.orderHolder}>
 					<div className={S.left}>
 						<Overview
-							postingZone={this.state.zone}
+							postingZone={this.state.postinZone}
 							totalPrice={this.state.totalPrice}
 							itemInfo={this.props.orderData}
 						/>
@@ -205,7 +207,7 @@ class Order extends Component {
 							postingZones={this.props.zoneAndBufferData.postingZones}
 							sendDiscountCode={this.sendDiscountCode}
 							totalPrice={this.state.totalPrice}
-							postingZone={this.state.postingZone}
+							postinZone={this.state.postinZone}
 						/>
 
 						<div id={S.paypalHolder}>
