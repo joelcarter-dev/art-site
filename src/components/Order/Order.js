@@ -190,7 +190,7 @@ class Order extends Component {
 				<div className={S.orderHolder}>
 					<div className={S.left}>
 						<Overview
-							postingZone={this.state.postinZone}
+							postingZone={this.state.postingZone}
 							totalPrice={this.state.totalPrice}
 							itemInfo={this.props.orderData}
 						/>
@@ -207,7 +207,7 @@ class Order extends Component {
 							postingZones={this.props.zoneAndBufferData.postingZones}
 							sendDiscountCode={this.sendDiscountCode}
 							totalPrice={this.state.totalPrice}
-							postinZone={this.state.postinZone}
+							postingZone={this.state.postingZone}
 						/>
 
 						<div id={S.paypalHolder}>
