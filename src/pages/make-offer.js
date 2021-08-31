@@ -84,7 +84,7 @@ export class MakeOfferForm extends Component {
 
   render() {
 
-    let itemInfo
+    let itemInfo = null
     if(typeof window !== `undefined`) {
       itemInfo = this.props.location.state.itemInfo[0]
     }
@@ -95,7 +95,7 @@ export class MakeOfferForm extends Component {
 
           <div className={S.formHolder}>
 
-            <h3>Make an Offer for: {itemInfo.title}</h3>
+            <h3>Make an Offer for: {itemInfo != null ? itemInfo.title : "No item in question"}</h3>
 
             <p>Offer: $ {this.state.budget}</p>
             <Slider onCahngeBudget={this.onCahngeBudget}/>
