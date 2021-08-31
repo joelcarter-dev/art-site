@@ -175,7 +175,7 @@ class Order extends Component {
 		const CLIENT = {
 			//sandbox: 'AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2OzrCRwGnR8CFAUvfP9RZE31h_',
 			production:
-				"AXKvD9ZhyEGv_CUtXqJef6uRPEC4Ms818BUoxVkkZG5284CBBahiFM2OzrCRwGnR8CFAUvfP9RZE31h_",
+				"AR5tSrE0hmKNkHCiyaPTItKLXGei9Ocdql56CkC9eRmJ7vhizeoFYvt4u0_qpri9PJX5NQwOAwQHbXgv",
 		}
 
 		// const ENV = process.env.NODE_ENV === 'production'
