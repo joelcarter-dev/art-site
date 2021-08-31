@@ -31,14 +31,16 @@ const goBack = () => {
   navigate(-1);
 }
 
-export default class MakeOfferForm extends Component {
+export class MakeOfferForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
       title: null,
+      slug: null
     }
   }
 
+  //! cheek props pasing thru the link to this page
   componentDidMount() {
     if (typeof window === 'undefined') {
       return;
@@ -79,15 +81,14 @@ export default class MakeOfferForm extends Component {
 
   }
 
+
   render() {
+
     let itemInfo
     if(typeof window !== `undefined`) {
       itemInfo = this.props.location.state.itemInfo[0]
-    } else {
-      return (<div></div>)
     }
     return (
-
       
       <div id={S.CommissionForm}>
         <div className={S.holder}>
@@ -115,7 +116,8 @@ export default class MakeOfferForm extends Component {
                 type="text" 
                 tabIndex="0" 
                 value={this.state.name ? this.state.name : ""} 
-                onChange={this.handleChange} name="name" 
+                onChange={this.handleChange} 
+                name="name" 
                 required 
                 // autoFocus 
               />
@@ -126,7 +128,8 @@ export default class MakeOfferForm extends Component {
                 type="email" 
                 tabIndex="-1" 
                 value={this.state.email ? this.state.email : ""} 
-                onChange={this.handleChange} name="email" 
+                onChange={this.handleChange} 
+                name="email" 
                 required 
               /> 
               
@@ -155,3 +158,5 @@ export default class MakeOfferForm extends Component {
     )
   }
 }
+
+export default MakeOfferForm
