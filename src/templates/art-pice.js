@@ -33,10 +33,10 @@ const Price = (props) => {
   if(props.data.price === "sold" || props.data.price === "SOLD") {
     return (
       <div className={S.price}>
-        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",  fontSize: "0.7em"}}>{totalPrice}</h3> 
+        <h3 style={{textTransform: "uppercase", fontFamily: "cinzel",  fontSize: "0.7em"}}>Sold</h3> 
       </div> 
     )
-  } else if(props.data.tags.includes("Commission")) {
+  } else if(props.data.tags.includes("Commission") || props.data.tags.includes("commission")) {
     return (
       <div className={S.price}>
         <h3 style={{textTransform: "capitalize", fontFamily: "cinzel", fontSize: "0.7em"}}>Commissioned Piece</h3>  
