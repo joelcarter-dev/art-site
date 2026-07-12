@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { getCollection, render } from 'astro:content';
+import { siteConfig } from '../../config.js';
+
+export async function getStaticPaths() {
+  const items = await getCollection('artwork', ({ data }) => data.is_archive_item);
+  return items.map(entry => ({
+    params: { slug: entry.slug },
+    props:  { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+---
+
+<BaseLayout
+  title={`${data.title} — Archive — ${siteConfig.seoTitle}`}
+  description={data.about}
+  image={data.featuredImage}
+>
+  <div class="archive-item-page">
+    <Header leftLink="home" rightLink="store" white={true} />
+
+    <a href="/archive" class="back-link" aria-label="Back to archive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Archive
+    </a>
+
+    <article class="archive-article">
+      {data.featuredImage && (
+        <figure class="archive-figure">
+          <img src={data.featuredImage} alt={data.title} loading="eager" />
+          <figcaption>
+            {(data.type ?? []).join(', ')}
+            {data.info && ` · ${data.info}`}
+          </figcaption>
+        </figure>
+      )}
+
+      <div class="archive-text">
+        <header class="archive-item-header">
+          <div class="topics">
+            {(data.archive_topic ?? []).map(t => (
+              <span class="topic-tag">{t}</span>
+            ))}
+          </div>
+          <h1>{data.title}</h1>
+          {data.about && <p class="about">{data.about}</p>}
+        </header>
+
+        <div class="archive-content">
+          <Content />
+        </div>
+
+        {data.is_store_item && (
+          <div class="store-link-row">
+            <a href={`/store-items/${entry.slug}`} class="store-link">
+              View in store
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../../styles/variables' as *;
+
+  .archive-item-page {
+    background: $main-black;
+    min-height: 100vh;
+    color: $red-white;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    top: 110px;
+    left: 24px;
+    color: rgba($red-white, 0.4);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    z-index: 10;
+
+    &:hover { color: $red-white; }
+    svg { width: 14px; height: 14px; }
+  }
+
+  .archive-article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 90px;
+
+    @media (max-width: #{$m}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .archive-figure {
+    position: sticky;
+    top: 90px;
+    height: calc(100vh - 90px);
+    margin: 0;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      opacity: 0.4;
+      color: $red-white;
+      background: rgba($main-black, 0.6);
+      padding: 4px 8px;
+    }
+
+    @media (max-width: #{$m}) {
+      position: relative;
+      height: 50vw;
+      top: 0;
+    }
+  }
+
+  .archive-text {
+    padding: 60px 50px 80px;
+    max-width: 640px;
+
+    @media (max-width: #{$m}) {
+      padding: 40px 20px 60px;
+    }
+  }
+
+  .archive-item-header {
+    margin-bottom: 40px;
+
+    h1 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: 6px;
+      color: $red-white;
+      margin: 12px 0 16px;
+      text-transform: capitalize;
+    }
+
+    .about {
+      font-family: $font-prose;
+      font-size: 16px;
+      line-height: 1.7;
+      opacity: 0.6;
+      font-style: italic;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      margin: 0;
+    }
+  }
+
+  .topics {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .topic-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid rgba($red-white, 0.25);
+    padding: 3px 8px;
+    opacity: 0.6;
+  }
+
+  .archive-content {
+    font-family: $font-prose;
+    font-size: 16px;
+    line-height: 1.9;
+    color: $red-white;
+    text-transform: none;
+    letter-spacing: 0.5px;
+
+    :global(p)          { margin: 0 0 20px; }
+    :global(blockquote) {
+      margin: 24px 0;
+      padding-left: 20px;
+      border-left: 2px solid rgba($red-white, 0.3);
+      font-style: italic;
+      opacity: 0.75;
+    }
+    :global(em)    { font-style: italic; }
+    :global(strong){ font-weight: 600; }
+    :global(h2)    { font-family: $font-sub; letter-spacing: 4px; margin: 32px 0 12px; font-weight: 400; }
+  }
+
+  .store-link-row {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba($red-white, 0.1);
+  }
+
+  .store-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $red-white;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 1; }
+    svg { width: 14px; height: 14px; }
+  }
+</style>

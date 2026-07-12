@@ -1,0 +1,339 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CommissionSection from '../components/CommissionSection.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config.js';
+
+const highlighted = await getCollection('artwork', ({ data }) =>
+  data.is_store_item && data.storeHighlight
+);
+---
+
+<BaseLayout>
+  <div id="landing">
+
+    <Header leftLink="store" rightLink="archive" white={true} />
+
+    <!-- Hero -->
+    <section class="hero">
+      <img
+        src="/img/mainTwo.jpg"
+        alt="Heart of Arah hero image"
+        class="hero-image"
+        loading="eager"
+      />
+      <div class="hero-title">
+        <h1>{siteConfig.title}</h1>
+        <h2>{siteConfig.tagLine}</h2>
+      </div>
+    </section>
+
+    <!-- Mid section (cream) -->
+    <section class="mid">
+      <!-- Diagonal transitions -->
+      <div class="mid-wedge mid-wedge--left"></div>
+      <div class="mid-wedge mid-wedge--right"></div>
+
+      <!-- Animated SVG decorations (hidden on small screens) -->
+      <div class="svg-row">
+        <div class="svg-left" id="vivus-left"></div>
+        <div class="svg-right" id="vivus-right"></div>
+      </div>
+
+      <!-- Logo mark -->
+      <div class="logo-mark">
+        <svg viewBox="0 0 147 73" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M79.838 41.831 L79.847 41.821 L73.130 35.104 L66.412 41.821 L66.450 41.859 L54.154 54.154 L0 0 L146.617 0 L92.312 54.305 L79.838 41.831 Z M78.338 43.331 L90.432 55.425 L73.158 72.698 L55.884 55.425 L67.950 43.359 L73.130 48.539 L78.338 43.331 Z" fill="currentColor"/>
+        </svg>
+      </div>
+
+      <div class="mid-content">
+        <h2 class="mid-title">All Paths lead to The Mountain</h2>
+
+        <!-- Featured works -->
+        {highlighted.length > 0 && (
+          <div class="featured">
+            {highlighted.slice(0, 3).map(item => (
+              <a href={`/store-items/${item.slug}`} class="featured-item">
+                <img
+                  src={item.data.featuredImage}
+                  alt={item.data.title}
+                  loading="lazy"
+                />
+                <span>{item.data.title}</span>
+              </a>
+            ))}
+          </div>
+        )}
+
+        <!-- Divider rune -->
+        <div class="rune-divider" aria-hidden="true">
+          <span class="rune-line"></span>
+          <svg viewBox="0 0 96 30" xmlns="http://www.w3.org/2000/svg" width="96" height="30">
+            <line x1="20" y1="15" x2="76" y2="15" stroke="currentColor" stroke-width="0.5"/>
+            <circle cx="48" cy="15" r="6" fill="none" stroke="currentColor" stroke-width="0.5"/>
+            <circle cx="28" cy="15" r="2" fill="currentColor"/>
+            <circle cx="68" cy="15" r="2" fill="currentColor"/>
+          </svg>
+          <span class="rune-line"></span>
+        </div>
+
+        <!-- About -->
+        <div class="about">
+          <p>
+            All works are original. Much of the work here draws heavily from music, and is based
+            on a setting with deep internal lore. It attempts to explore and symbolise ancient
+            ideas of the human experience in a unique, mythical way.
+          </p>
+          <p class="about-tagline">The words of distant places</p>
+        </div>
+
+        <CommissionSection dark={false} />
+
+        <Footer white={true} />
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<script>
+  // Vivus SVG path-draw animations (loaded from CDN)
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.6/vivus.min.js';
+  script.onload = () => {
+    if (document.getElementById('vivus-left')) {
+      new (window as any).Vivus('vivus-left', {
+        file: '/home-left.svg',
+        type: 'delayed',
+        animTimingFunction: 'EASE_OUT',
+        duration: 1500,
+        start: 'autostart',
+      });
+    }
+    if (document.getElementById('vivus-right')) {
+      new (window as any).Vivus('vivus-right', {
+        file: '/home-right.svg',
+        type: 'delayed',
+        animTimingFunction: 'EASE_OUT',
+        duration: 3000,
+        start: 'autostart',
+      });
+    }
+  };
+  document.head.appendChild(script);
+</script>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  #landing {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  // ── Hero ───────────────────────────────────────────────────────────────────
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 115vh;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-title {
+    position: absolute;
+    top: 28vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+
+    h1 {
+      font-family: $font-heading;
+      font-weight: 100;
+      color: $red-white;
+      letter-spacing: 10px;
+      font-size: clamp(36px, 8vw, 90px);
+      margin: 0 0 1rem;
+    }
+
+    h2 {
+      font-family: $font-heading;
+      font-weight: 100;
+      color: $red-white;
+      letter-spacing: 5px;
+      font-size: clamp(16px, 3vw, 28px);
+      margin: 0;
+    }
+  }
+
+  // ── Mid section ────────────────────────────────────────────────────────────
+  .mid {
+    position: relative;
+    width: 100%;
+    background-color: $red-white;
+    color: $main-black;
+  }
+
+  .mid-wedge {
+    position: absolute;
+    top: -100px;
+    width: 65vw;
+    height: 180px;
+    background: $red-white;
+
+    &--left {
+      left: -20px;
+      transform: rotate(-20deg);
+      transform-origin: top left;
+    }
+    &--right {
+      right: -20px;
+      transform: rotate(20deg);
+      transform-origin: top right;
+    }
+  }
+
+  // Vivus SVG animation holders
+  .svg-row {
+    position: absolute;
+    top: -60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 1;
+
+    @media (max-width: #{$s}) { display: none; }
+  }
+
+  .svg-left, .svg-right {
+    width: 37%;
+    max-width: 320px;
+
+    svg g path { stroke: $main-black !important; }
+  }
+
+  .logo-mark {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+
+    svg {
+      width: 160px;
+      color: $main-black;
+    }
+  }
+
+  .mid-content {
+    position: relative;
+    z-index: 5;
+    padding-top: 20px;
+  }
+
+  .mid-title {
+    font-family: $font-heading;
+    font-weight: 100;
+    color: $main-black;
+    text-align: center;
+    letter-spacing: 6px;
+    font-size: clamp(14px, 2.5vw, 22px);
+    padding: 0 20px;
+    margin: 0 0 40px;
+  }
+
+  // ── Featured works ─────────────────────────────────────────────────────────
+  .featured {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 20px 40px;
+    flex-wrap: wrap;
+  }
+
+  .featured-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+
+    img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    span {
+      font-family: $font-sub;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: $main-black;
+      text-transform: uppercase;
+    }
+
+    &:hover img { opacity: 0.85; }
+  }
+
+  // ── Rune divider ───────────────────────────────────────────────────────────
+  .rune-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 60px;
+    max-width: 540px;
+    margin: 0 auto 40px;
+    color: $main-black;
+  }
+
+  .rune-line {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+
+  // ── About ─────────────────────────────────────────────────────────────────
+  .about {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    text-align: justify;
+
+    p {
+      font-size: 14px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      color: $main-black;
+      margin: 0 0 16px;
+    }
+
+    .about-tagline {
+      font-family: $font-sub;
+      font-style: italic;
+      opacity: 0.6;
+      font-size: 13px;
+    }
+  }
+</style>

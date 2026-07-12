@@ -1,0 +1,431 @@
+---
+import { siteConfig } from '../config.js';
+// Rendered once per artwork page; JS below handles all interactivity
+---
+
+<!-- Order overlay — hidden until "Place Order" is clicked -->
+<div id="order-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Place Order">
+  <div class="order-inner">
+
+    <!-- Left: order summary -->
+    <div class="order-summary">
+      <h3>Overview</h3>
+      <div id="order-item-name" class="order-item-name"></div>
+      <div id="order-price-breakdown" class="price-breakdown" hidden>
+        <p id="order-zone-cost"></p>
+        <p class="order-total">Total: <strong id="order-total-price"></strong> NZD</p>
+      </div>
+      <a href="/support-form" class="support-link">Contact support</a>
+    </div>
+
+    <!-- Right: form + PayPal -->
+    <div class="order-form-side">
+      <button id="order-close" class="order-close" aria-label="Close order form">✕ Close</button>
+
+      <form
+        id="order-form"
+        name="order"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        novalidate
+      >
+        <input type="hidden" name="form-name" value="order" />
+        <input type="hidden" name="bot-field" />
+        <input type="hidden" name="artwork-title" id="form-title" />
+        <input type="hidden" name="total-price" id="form-total" />
+        <input type="hidden" name="posting-zone" id="form-zone" />
+        <input type="hidden" name="posting-cost" id="form-zone-cost" />
+        <input type="hidden" name="country" id="form-country" />
+
+        <p class="form-label">Order Form</p>
+
+        <input type="text"  name="name"             placeholder="Your name"            required />
+        <input type="email" name="email"             placeholder="Your email"           required />
+        <input type="tel"   name="phone"             placeholder="Phone (optional)" />
+        <hr />
+        <input type="text"  name="address-line-1"   placeholder="Address line 1"       required />
+        <input type="text"  name="address-line-2"   placeholder="Address line 2 (optional)" />
+
+        <label for="zone-select" class="select-label">Are you in:</label>
+        <select id="zone-select" name="zone-select" required>
+          <option value="" disabled selected>Select posting zone</option>
+          {siteConfig.postingZones.map(z => (
+            <option value={z.name} data-cost={z.postingCost}>{z.name}</option>
+          ))}
+        </select>
+
+        <input type="text"  name="country"   id="country-input" placeholder="Country" required />
+        <input type="text"  name="city"               placeholder="City"              required />
+        <input type="text"  name="state"              placeholder="State / Region"    required />
+        <input type="text"  name="zip"                placeholder="ZIP / Postal code" required />
+        <input type="text"  name="discount-code"      placeholder="Discount code (optional)" />
+
+        <div class="submit-row">
+          <button type="submit" class="btn-submit">Submit shipping details</button>
+        </div>
+        <p id="form-msg" class="form-msg"></p>
+      </form>
+
+      <!-- PayPal renders here after form is submitted -->
+      <div id="paypal-container" hidden>
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script define:vars={{ paypalClientId: siteConfig.paypalClientId, postingZones: siteConfig.postingZones, globalItemBuffer: siteConfig.globalItemBuffer, discountCodes: siteConfig.discountCodes }}>
+  // ── State ──────────────────────────────────────────────────────────────────
+  let currentPrice  = 0;
+  let currentTitle  = '';
+  let postingCost   = 0;
+  let appliedDiscount = 0;
+  let paypalLoaded  = false;
+
+  // ── Open / Close ───────────────────────────────────────────────────────────
+  const overlay = document.getElementById('order-overlay');
+  const closeBtn = document.getElementById('order-close');
+
+  window.openOrderModal = function(title, price) {
+    currentTitle = title;
+    currentPrice = Number(String(price).replace(/[^0-9.-]+/g, '')) || 0;
+    document.getElementById('order-item-name').textContent = title;
+    document.getElementById('form-title').value = title;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    // Reset form state
+    document.getElementById('order-form').reset();
+    document.getElementById('order-price-breakdown').hidden = true;
+    document.getElementById('paypal-container').hidden = true;
+    document.getElementById('form-msg').textContent = '';
+    document.getElementById('paypal-button-container').innerHTML = '';
+    postingCost = 0;
+    appliedDiscount = 0;
+  };
+
+  function closeModal() {
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // ── Zone selection → price calculation ────────────────────────────────────
+  document.getElementById('zone-select').addEventListener('change', function() {
+    const opt = this.options[this.selectedIndex];
+    postingCost = Number(opt.dataset.cost) || 0;
+    document.getElementById('form-zone').value = opt.value;
+    document.getElementById('form-zone-cost').value = postingCost;
+    updateTotal();
+  });
+
+  function updateTotal() {
+    const base = currentPrice + globalItemBuffer;
+    const discountedBase = base - (base * appliedDiscount / 100);
+    const total = Math.round(discountedBase + postingCost);
+    document.getElementById('order-zone-cost').textContent =
+      `$${postingCost} tracked courier to ${document.getElementById('zone-select').value}`;
+    document.getElementById('order-total-price').textContent = `$${total}`;
+    document.getElementById('form-total').value = total;
+    document.getElementById('order-price-breakdown').hidden = false;
+    return total;
+  }
+
+  // ── Discount code check ────────────────────────────────────────────────────
+  document.querySelector('[name="discount-code"]').addEventListener('blur', function() {
+    const code = discountCodes.find(d => d.name === this.value.trim().toLowerCase());
+    if (code) {
+      appliedDiscount = code.discount;
+      document.getElementById('form-msg').textContent = `✓ Discount applied: ${code.discount}% off`;
+    } else if (this.value.trim()) {
+      appliedDiscount = 0;
+      document.getElementById('form-msg').textContent = 'Code not recognised.';
+    }
+    if (postingCost !== 0 || document.getElementById('zone-select').value) updateTotal();
+  });
+
+  // ── Form submission → show PayPal ──────────────────────────────────────────
+  document.getElementById('order-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const zone = document.getElementById('zone-select').value;
+    const country = document.getElementById('country-input').value.trim();
+    if (!zone || !country) {
+      document.getElementById('form-msg').textContent = 'Please select your posting zone and enter your country.';
+      return;
+    }
+
+    document.getElementById('form-country').value = country;
+    const total = updateTotal();
+
+    // Submit shipping details to Netlify Forms
+    const body = new FormData(this);
+    try {
+      await fetch('/', { method: 'POST', body });
+      document.getElementById('form-msg').textContent = 'Shipping details saved. Complete payment below.';
+    } catch {
+      document.getElementById('form-msg').textContent = 'Could not save details — but you can still pay below.';
+    }
+
+    // Show PayPal
+    document.getElementById('paypal-container').hidden = false;
+    initPayPal(total);
+  });
+
+  // ── PayPal SDK ─────────────────────────────────────────────────────────────
+  function initPayPal(total) {
+    if (!window.paypal) return; // SDK not yet loaded
+
+    document.getElementById('paypal-button-container').innerHTML = '';
+    window.paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        color:  'gold',
+        shape:  'rect',
+        label:  'paypal',
+      },
+      createOrder: (_data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            description: `${currentTitle} — Heart of Arah`,
+            amount: {
+              value: String(total),
+              currency_code: 'NZD',
+            },
+          }],
+        });
+      },
+      onApprove: (_data, actions) => {
+        return actions.order.capture().then(details => {
+          document.getElementById('paypal-container').hidden = true;
+          document.getElementById('form-msg').textContent =
+            `✓ Payment successful! Thank you, ${details.payer.name.given_name}. Your piece is on its way.`;
+        });
+      },
+      onError: (err) => {
+        console.error('PayPal error:', err);
+        document.getElementById('form-msg').textContent =
+          'Payment error — please try again or contact support.';
+      },
+      onCancel: () => {
+        document.getElementById('form-msg').textContent = 'Payment cancelled.';
+      },
+    }).render('#paypal-button-container');
+  }
+
+  // Load PayPal SDK once
+  if (!paypalLoaded) {
+    paypalLoaded = true;
+    const script = document.createElement('script');
+    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=NZD&components=buttons`;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+</script>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  #order-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba($main-black, 0.96);
+    display: none;
+    align-items: stretch;
+    animation: fadein 0.25s ease-out;
+
+    &.is-open {
+      display: flex;
+    }
+  }
+
+  .order-inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    width: 100%;
+    max-width: 860px;
+    margin: auto;
+    background: $main-black;
+    border: 1px solid rgba($red-white, 0.15);
+
+    @media (max-width: #{$m}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .order-summary {
+    padding: 40px 30px;
+    border-right: 1px solid rgba($red-white, 0.1);
+    color: $red-white;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+      font-family: $font-sub;
+      font-weight: 400;
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    @media (max-width: #{$m}) {
+      border-right: none;
+      border-bottom: 1px solid rgba($red-white, 0.1);
+      padding: 24px 20px;
+    }
+  }
+
+  .order-item-name {
+    font-family: $font-sub;
+    font-size: 18px;
+    font-weight: 400;
+    color: $red-white;
+  }
+
+  .price-breakdown {
+    font-size: 13px;
+    opacity: 0.8;
+    p { margin: 4px 0; }
+  }
+
+  .order-total {
+    margin-top: 12px !important;
+    font-size: 15px;
+    opacity: 1 !important;
+    strong { color: $red-gold; }
+  }
+
+  .support-link {
+    margin-top: auto;
+    font-size: 12px;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    color: $red-white;
+    text-decoration: underline;
+    &:hover { opacity: 0.9; }
+  }
+
+  .order-form-side {
+    padding: 30px;
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+
+    @media (max-width: #{$m}) {
+      max-height: 60vh;
+    }
+  }
+
+  .order-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: 1px solid rgba($red-white, 0.2);
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    cursor: pointer;
+    opacity: 0.7;
+    &:hover { opacity: 1; }
+  }
+
+  .form-label {
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin: 0 0 16px;
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .select-label {
+    display: block;
+    color: $red-white;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 16px 0 6px;
+    opacity: 0.7;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input, select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba($red-white, 0.25);
+      color: $red-white;
+      font-family: $font-body;
+      font-size: 14px;
+      letter-spacing: 1px;
+      padding: 8px 4px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s ease;
+
+      &::placeholder { opacity: 0.4; color: $red-white; }
+      &:focus { border-color: $red-white; }
+
+      option {
+        background: $main-black;
+        color: $red-white;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba($red-white, 0.1);
+      margin: 4px 0;
+    }
+  }
+
+  .submit-row {
+    margin-top: 16px;
+  }
+
+  .btn-submit {
+    background: transparent;
+    border: 1px solid $red-white;
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 14px;
+    letter-spacing: 3px;
+    padding: 14px 24px;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    transition: background 0.2s ease, color 0.2s ease;
+    &:hover {
+      background: $red-white;
+      color: $main-black;
+    }
+  }
+
+  .form-msg {
+    color: $red-gold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    min-height: 1.4em;
+    margin: 4px 0 0;
+  }
+
+  #paypal-container {
+    margin-top: 24px;
+  }
+</style>

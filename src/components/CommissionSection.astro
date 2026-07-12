@@ -1,0 +1,102 @@
+---
+import { siteConfig } from '../config.js';
+interface Props { dark?: boolean; }
+const { dark = false } = Astro.props;
+---
+
+<section class={`commissions ${dark ? 'commissions--dark' : 'commissions--light'}`}>
+  <div class="commissions-inner">
+    <h2 class="commissions-heading">Commissions</h2>
+    {siteConfig.commissionsOpen ? (
+      <p class="commissions-status commissions-status--open">Open</p>
+    ) : (
+      <p class="commissions-status commissions-status--closed">Closed</p>
+    )}
+    <p class="commissions-desc">
+      Original works created to your brief — contact for details on mediums, sizing, and timelines.
+    </p>
+    <a href="/commission-form" class="commissions-btn">
+      {siteConfig.commissionsOpen ? 'Request a commission' : 'Join the waitlist'}
+    </a>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  .commissions {
+    padding: 60px 40px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .commissions--dark {
+    background: $main-black;
+    color: $red-white;
+    .commissions-btn {
+      border-color: $red-white;
+      color: $red-white;
+      &:hover { background: $red-white; color: $main-black; }
+    }
+  }
+
+  .commissions--light {
+    background: $red-white;
+    color: $main-black;
+    .commissions-btn {
+      border-color: $main-black;
+      color: $main-black;
+      &:hover { background: $main-black; color: $red-white; }
+    }
+  }
+
+  .commissions-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .commissions-heading {
+    font-family: $font-sub;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .commissions-status {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 4px 12px;
+    border-radius: 2px;
+
+    &--open   { background: rgba(0, 200, 100, 0.15); color: #00c864; }
+    &--closed { background: rgba(200, 0, 0, 0.1);   color: #c84040; }
+  }
+
+  .commissions-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .commissions-btn {
+    display: inline-block;
+    border: 1px solid;
+    padding: 14px 28px;
+    font-family: $font-body;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+</style>

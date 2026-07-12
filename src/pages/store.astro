@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CommissionSection from '../components/CommissionSection.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config.js';
+
+const allArtwork = await getCollection('artwork', ({ data }) => data.is_store_item);
+const highlighted = allArtwork.filter(a => a.data.storeHighlight);
+
+// Build tag and type lists
+const allTags  = [...new Set(allArtwork.flatMap(a => a.data.tags ?? []))].filter(t =>
+  !['Commercial','Commission','Archived','Logos','Graphics','Maps'].includes(t)
+).sort();
+const allTypes = [...new Set(allArtwork.flatMap(a => a.data.type ?? []))].sort();
+---
+
+<BaseLayout title={`Store — ${siteConfig.seoTitle}`} description="Browse and purchase original artworks from the Heart of Arah.">
+  <div id="store-page">
+    <Header leftLink="home" rightLink="archive" white={false} />
+
+    <main class="store-main">
+
+      <!-- Filter bar -->
+      <nav class="filter-bar" aria-label="Filter artworks">
+        <div class="filter-group">
+          <span class="filter-heading">Categories</span>
+          <button class="filter-btn active" data-filter="tag" data-value="">All</button>
+          {allTags.map(tag => (
+            <button class="filter-btn" data-filter="tag" data-value={tag}>{tag}</button>
+          ))}
+        </div>
+        <div class="filter-group">
+          <span class="filter-heading">Medium</span>
+          <button class="filter-btn active" data-filter="type" data-value="">All</button>
+          {allTypes.map(t => (
+            <button class="filter-btn" data-filter="type" data-value={t}>{t}</button>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Personally selected -->
+      {highlighted.length > 0 && (
+        <section class="selected-section">
+          <h2 class="section-heading">Personally Selected</h2>
+          <div class="artwork-grid" id="selected-grid">
+            {highlighted.reverse().map(item => (
+              <a
+                href={`/store-items/${item.slug}`}
+                class="artwork-card"
+                data-tags={JSON.stringify(item.data.tags ?? [])}
+                data-types={JSON.stringify(item.data.type ?? [])}
+              >
+                <div class="card-image">
+                  <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
+                </div>
+                <div class="card-info">
+                  <h3>{item.data.title}</h3>
+                  <span class="card-type">{(item.data.type ?? []).join(', ')}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- All store items -->
+      <section class="all-section">
+        <h2 class="section-heading">All Works</h2>
+        <div class="artwork-grid" id="all-grid">
+          {allArtwork.sort((a, b) =>
+            new Date(b.data.date ?? 0).getTime() - new Date(a.data.date ?? 0).getTime()
+          ).map(item => (
+            <a
+              href={`/store-items/${item.slug}`}
+              class="artwork-card"
+              data-tags={JSON.stringify(item.data.tags ?? [])}
+              data-types={JSON.stringify(item.data.type ?? [])}
+            >
+              <div class="card-image">
+                <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
+              </div>
+              <div class="card-info">
+                <h3>{item.data.title}</h3>
+                <span class="card-type">{(item.data.type ?? []).join(', ')}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <CommissionSection dark={true} />
+      <Footer white={false} />
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Filter logic ─────────────────────────────────────────────────────────
+  let activeTag  = '';
+  let activeType = '';
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(this: HTMLButtonElement) {
+      const filter = this.dataset.filter!;
+      const value  = this.dataset.value!;
+
+      // Update active state within this filter group
+      this.closest('.filter-group')!
+          .querySelectorAll('.filter-btn')
+          .forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      if (filter === 'tag')  activeTag  = value;
+      if (filter === 'type') activeType = value;
+
+      applyFilters();
+    });
+  });
+
+  function applyFilters() {
+    document.querySelectorAll<HTMLElement>('.artwork-card').forEach(card => {
+      const tags  = JSON.parse(card.dataset.tags  ?? '[]') as string[];
+      const types = JSON.parse(card.dataset.types ?? '[]') as string[];
+
+      const tagMatch  = !activeTag  || tags.includes(activeTag);
+      const typeMatch = !activeType || types.includes(activeType);
+
+      card.style.display = (tagMatch && typeMatch) ? '' : 'none';
+    });
+  }
+</script>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  #store-page {
+    min-height: 100vh;
+    background: $main-black;
+    color: $red-white;
+  }
+
+  .store-main {
+    padding-top: 90px;
+  }
+
+  // ── Filter bar ─────────────────────────────────────────────────────────────
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 30px 40px;
+    border-bottom: 1px solid rgba($red-white, 0.1);
+
+    @media (max-width: #{$s}) { padding: 20px; }
+  }
+
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-heading {
+    font-family: $font-body;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba($red-white, 0.2);
+    color: rgba($red-white, 0.5);
+    font-family: $font-body;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover, &.active {
+      border-color: $red-white;
+      color: $red-white;
+    }
+
+    &.active {
+      background: rgba($red-white, 0.08);
+    }
+  }
+
+  // ── Sections ───────────────────────────────────────────────────────────────
+  .selected-section, .all-section {
+    padding: 50px 40px;
+    @media (max-width: #{$s}) { padding: 30px 20px; }
+  }
+
+  .section-heading {
+    font-family: $font-sub;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin: 0 0 30px;
+  }
+
+  // ── Artwork grid ───────────────────────────────────────────────────────────
+  .artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 32px;
+  }
+
+  .artwork-card {
+    display: block;
+    color: $red-white;
+    text-decoration: none;
+
+    &:hover .card-image img {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+  }
+
+  .card-image {
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: $red-black;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease, transform 0.4s ease;
+    }
+  }
+
+  .card-info {
+    padding: 12px 0 0;
+
+    h3 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 3px;
+      margin: 0 0 4px;
+    }
+  }
+
+  .card-type {
+    font-size: 11px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+</style>

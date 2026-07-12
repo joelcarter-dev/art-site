@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout title="Not Found — Heart of Arah">
+  <div class="not-found">
+    <Header leftLink="home" rightLink="store" white={true} />
+    <div class="not-found-content">
+      <h1>404</h1>
+      <p>This path leads nowhere</p>
+      <a href="/" class="home-link">Return home</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  .not-found {
+    background: $main-black;
+    min-height: 100vh;
+    color: $red-white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .not-found-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    padding: 20px;
+
+    h1 {
+      font-family: $font-heading;
+      font-size: clamp(60px, 15vw, 160px);
+      font-weight: 100;
+      letter-spacing: 20px;
+      color: $red-white;
+      opacity: 0.2;
+      margin: 0;
+    }
+
+    p {
+      font-family: $font-sub;
+      font-size: 14px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin: 0;
+    }
+  }
+
+  .home-link {
+    display: inline-block;
+    border: 1px solid rgba($red-white, 0.3);
+    color: $red-white;
+    padding: 12px 28px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 16px;
+    transition: border-color 0.2s, opacity 0.2s;
+    opacity: 0.5;
+
+    &:hover { opacity: 1; border-color: $red-white; }
+  }
+</style>

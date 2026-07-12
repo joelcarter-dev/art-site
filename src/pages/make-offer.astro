@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config.js';
+---
+
+<BaseLayout title={`Make an Offer — ${siteConfig.seoTitle}`}>
+  <div class="offer-page">
+    <Header leftLink="home" rightLink="store" white={false} />
+    <main class="offer-main">
+      <h1>Make an Offer</h1>
+      <p class="offer-desc">
+        This piece is archived or sold, but you're welcome to make an offer.
+        Fill in below and I'll be in touch.
+      </p>
+
+      <form
+        name="make-offer"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="form-card"
+      >
+        <input type="hidden" name="form-name" value="make-offer" />
+        <input type="hidden" name="bot-field" />
+        <input type="hidden" name="item" id="item-field" />
+
+        <label>
+          <span>Your name</span>
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          <span>Piece you're interested in</span>
+          <input type="text" name="piece" id="piece-field" required />
+        </label>
+        <label>
+          <span>Your offer (NZD)</span>
+          <input type="number" name="offer" min="0" step="5" required />
+        </label>
+        <label class="full">
+          <span>Anything else</span>
+          <textarea name="message" rows={4}></textarea>
+        </label>
+        <button type="submit" class="btn-submit">Send Offer</button>
+      </form>
+    </main>
+    <Footer white={false} />
+  </div>
+</BaseLayout>
+
+<script>
+  // Pre-fill item from URL ?item= param
+  const params = new URLSearchParams(window.location.search);
+  const item = params.get('item');
+  if (item) {
+    const f1 = document.getElementById('item-field') as HTMLInputElement;
+    const f2 = document.getElementById('piece-field') as HTMLInputElement;
+    if (f1) f1.value = item;
+    if (f2) f2.value = item;
+  }
+</script>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  .offer-page { background: $main-black; min-height: 100vh; color: $red-white; }
+
+  .offer-main {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 130px 40px 80px;
+
+    @media (max-width: #{$s}) { padding: 130px 20px 60px; }
+
+    h1 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 36px);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+  }
+
+  .offer-desc {
+    font-family: $font-prose;
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.6;
+    margin: 0 0 36px;
+    text-transform: none;
+    letter-spacing: 0.5px;
+  }
+
+  .form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; }
+
+      input, textarea {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba($red-white, 0.2);
+        color: $red-white;
+        font-family: $font-body;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 8px 4px;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.2s;
+
+        &::placeholder { opacity: 0.3; color: $red-white; }
+        &:focus { border-color: $red-white; }
+      }
+    }
+  }
+
+  .btn-submit {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid $red-white;
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    &:hover { background: $red-white; color: $main-black; }
+  }
+</style>

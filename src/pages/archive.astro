@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config.js';
+
+const allItems = await getCollection('artwork', ({ data }) => data.is_archive_item);
+
+// Group by archive_topic
+const grouped: Record<string, typeof allItems> = {};
+allItems.forEach(item => {
+  for (const topic of (item.data.archive_topic ?? [])) {
+    if (!grouped[topic]) grouped[topic] = [];
+    grouped[topic].push(item);
+  }
+});
+const topics = Object.keys(grouped).sort();
+---
+
+<BaseLayout
+  title={`Archive — ${siteConfig.seoTitle}`}
+  description="A library of lore, illustrations, and short stories from the world of Heart of Arah."
+>
+  <div id="archive-page">
+    <Header leftLink="home" rightLink="store" white={true} />
+
+    {topics.length === 0 ? (
+      <div class="archive-empty">
+        <p>The Archive has not yet Opened</p>
+      </div>
+    ) : (
+      <main class="archive-main">
+        <h1 class="archive-heading">The Archive</h1>
+
+        <div class="topics-grid">
+          {topics.map(topic => (
+            <details class="topic-block" name="archive-topic">
+              <summary class="topic-summary">
+                <h2>{topic}</h2>
+                <p class="topic-preview">
+                  {grouped[topic][0]?.body?.slice(0, 120) ?? grouped[topic][0]?.data.about?.slice(0, 120) ?? ''}…
+                </p>
+                <span class="topic-count">{grouped[topic].length} {grouped[topic].length === 1 ? 'entry' : 'entries'}</span>
+                <span class="topic-chevron" aria-hidden="true">↓</span>
+              </summary>
+
+              <ul class="topic-items">
+                {grouped[topic].map(item => (
+                  <li>
+                    <a href={`/archive/${item.slug}`} class="archive-item-link">
+                      <span class="item-title">{item.data.title}</span>
+                      <span class="item-excerpt">{item.data.about?.slice(0, 100)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
+        </div>
+      </main>
+    )}
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  #archive-page {
+    background: $main-black;
+    min-height: 100vh;
+    color: $red-white;
+  }
+
+  .archive-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: $font-sub;
+    font-size: 20px;
+    letter-spacing: 4px;
+    opacity: 0.4;
+    color: $red-white;
+  }
+
+  .archive-heading {
+    font-family: $font-heading;
+    font-weight: 100;
+    font-size: clamp(28px, 5vw, 60px);
+    letter-spacing: 12px;
+    color: $red-white;
+    text-align: center;
+    margin: 0;
+    padding: 120px 20px 60px;
+    opacity: 0.9;
+  }
+
+  .archive-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+
+    @media (max-width: #{$s}) { padding: 0 20px 60px; }
+  }
+
+  // ── Topic blocks (native <details>) ────────────────────────────────────────
+  .topics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .topic-block {
+    border: 1px solid rgba($red-white, 0.1);
+    transition: border-color 0.2s;
+
+    &[open] {
+      border-color: rgba($red-white, 0.25);
+      .topic-chevron { transform: rotate(180deg); }
+    }
+  }
+
+  .topic-summary {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 30px;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease;
+
+    &:hover { background: rgba($red-white, 0.03); }
+    &::-webkit-details-marker { display: none; }
+
+    @media (max-width: #{$s}) {
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    h2 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 6px;
+      color: $red-white;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .topic-preview {
+      font-family: $font-prose;
+      font-size: 13px;
+      opacity: 0.45;
+      margin: 0;
+      font-style: italic;
+      line-height: 1.5;
+      text-transform: none;
+      letter-spacing: 0.5px;
+
+      @media (max-width: #{$s}) {
+        display: none;
+      }
+    }
+
+    .topic-count {
+      font-size: 11px;
+      letter-spacing: 2px;
+      opacity: 0.35;
+      white-space: nowrap;
+    }
+
+    .topic-chevron {
+      color: $red-white;
+      opacity: 0.4;
+      font-size: 14px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  // ── Items inside topic ─────────────────────────────────────────────────────
+  .topic-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba($red-white, 0.08);
+    animation: fadein 0.25s ease;
+  }
+
+  .archive-item-link {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    padding: 18px 30px;
+    border-bottom: 1px solid rgba($red-white, 0.05);
+    text-decoration: none;
+    transition: background 0.15s ease;
+
+    &:hover { background: rgba($red-white, 0.04); }
+
+    @media (max-width: #{$s}) { grid-template-columns: 1fr; }
+  }
+
+  .item-title {
+    font-family: $font-sub;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: $red-white;
+    white-space: nowrap;
+    min-width: 180px;
+
+    @media (max-width: #{$s}) { white-space: normal; }
+  }
+
+  .item-excerpt {
+    font-family: $font-prose;
+    font-size: 13px;
+    opacity: 0.4;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: $red-white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: #{$s}) {
+      white-space: normal;
+      display: none;
+    }
+  }
+</style>

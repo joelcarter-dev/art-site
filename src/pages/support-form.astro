@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config.js';
+---
+
+<BaseLayout title={`Support — ${siteConfig.seoTitle}`}>
+  <div class="support-page">
+    <Header leftLink="home" rightLink="store" white={false} />
+    <main class="support-main">
+      <h1>Contact Support</h1>
+      <p class="support-desc">
+        Questions about an order, a piece, or anything else — send a message below.
+      </p>
+      <form
+        name="support"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="form-card"
+      >
+        <input type="hidden" name="form-name" value="support" />
+        <input type="hidden" name="bot-field" />
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required />
+        </label>
+        <label class="full">
+          <span>Message</span>
+          <textarea name="message" rows={6} required></textarea>
+        </label>
+        <button type="submit" class="btn-submit">Send</button>
+      </form>
+    </main>
+    <Footer white={false} />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  .support-page { background: $main-black; min-height: 100vh; color: $red-white; }
+
+  .support-main {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 130px 40px 80px;
+
+    @media (max-width: #{$s}) { padding: 130px 20px 60px; }
+
+    h1 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 36px);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+  }
+
+  .support-desc {
+    font-family: $font-prose;
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.6;
+    margin: 0 0 36px;
+    text-transform: none;
+    letter-spacing: 0.5px;
+  }
+
+  .form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; }
+
+      input, textarea {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba($red-white, 0.2);
+        color: $red-white;
+        font-family: $font-body;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 8px 4px;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.2s;
+        &::placeholder { opacity: 0.3; color: $red-white; }
+        &:focus { border-color: $red-white; }
+      }
+    }
+  }
+
+  .btn-submit {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid $red-white;
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    &:hover { background: $red-white; color: $main-black; }
+  }
+</style>

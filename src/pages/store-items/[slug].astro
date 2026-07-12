@@ -1,0 +1,479 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import OrderModal from '../../components/OrderModal.astro';
+import { getCollection, render } from 'astro:content';
+import { siteConfig } from '../../config.js';
+
+export async function getStaticPaths() {
+  const artworks = await getCollection('artwork', ({ data }) => data.is_store_item);
+  return artworks.map(entry => ({
+    params: { slug: entry.slug },
+    props:  { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+// ── Price state ────────────────────────────────────────────────────────────
+const isSold       = data.price?.toLowerCase() === 'sold';
+const isCommission = (data.tags ?? []).some(t => t.toLowerCase() === 'commission');
+const isArchived   = (data.tags ?? []).some(t => t.toLowerCase() === 'archived');
+const hasPrice     = data.price && data.price !== '' && data.price !== '0' && !isSold && !isCommission && !isArchived;
+
+const numericPrice = Number(String(data.price ?? '').replace(/[^0-9.-]+/g, '')) || 0;
+const displayPrice = hasPrice ? numericPrice + siteConfig.globalItemBuffer : null;
+
+const archiveSlug = `/archive/${entry.slug}`;
+const pageTitle   = `${data.title} — ${siteConfig.seoTitle}`;
+const pageDesc    = data.about ?? data.title;
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} image={data.featuredImage}>
+
+  <div class="art-page">
+    <Header leftLink="home" rightLink="archive" white={true} />
+
+    <a href="/store" class="back-link" aria-label="Back to store">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      <span>Store</span>
+    </a>
+
+    <h1 class="art-title">{data.title}</h1>
+
+    <!-- Sidebar -->
+    <aside class="art-sidebar" id="art-sidebar">
+      <nav class="sidebar-tabs" role="tablist">
+        <button class="tab active" id="tab-info"  role="tab" aria-selected="true"  aria-controls="panel-info">Info</button>
+        <button class="tab"        id="tab-notes" role="tab" aria-selected="false" aria-controls="panel-notes">Notes</button>
+      </nav>
+
+      <!-- Info panel -->
+      <div id="panel-info" class="tab-panel" role="tabpanel" aria-labelledby="tab-info">
+
+        <!-- Price display -->
+        <div class="price-display">
+          {isSold && <span class="price-state">Sold</span>}
+          {isCommission && <span class="price-state">Commissioned Piece</span>}
+          {isArchived && !isSold && !isCommission && <span class="price-state">Archived</span>}
+          {displayPrice && (
+            <div class="price-value">
+              <span class="price-amount">${displayPrice}</span>
+              <span class="price-currency">NZD</span>
+            </div>
+          )}
+          {!hasPrice && !isSold && !isCommission && !isArchived && (
+            <span class="price-state">Enquire</span>
+          )}
+        </div>
+
+        <ul class="data-list">
+          <li>{data.original ? 'Original work' : 'Print'}</li>
+          {data.info && <li>{data.info}</li>}
+        </ul>
+
+        <ul class="data-list medium-list">
+          {(data.type ?? []).map(t => <li><em>{t}</em></li>)}
+        </ul>
+
+        <div class="button-group">
+          {hasPrice && (
+            <button
+              class="art-btn"
+              id="order-btn"
+              data-title={data.title}
+              data-price={numericPrice}
+            >
+              Place Order
+            </button>
+          )}
+
+          {data.is_archive_item && (
+            <a href={archiveSlug} class="art-btn art-btn--outline">
+              View in Archive
+            </a>
+          )}
+
+          {(isArchived || isSold) && (
+            <a href={`/make-offer?item=${encodeURIComponent(data.title)}`} class="art-btn art-btn--outline">
+              Make an Offer
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- Notes panel -->
+      <div id="panel-notes" class="tab-panel" role="tabpanel" aria-labelledby="tab-notes" hidden>
+        <div class="notes-content">
+          <h3>Artist's Notes</h3>
+          {data.artistNotes
+            ? <p set:html={data.artistNotes.replace(/\n/g, '<br>')} />
+            : <p class="notes-empty">Notes are yet to come.</p>
+          }
+        </div>
+        {data.body && (
+          <div class="archive-body">
+            <Content />
+          </div>
+        )}
+      </div>
+    </aside>
+
+    <!-- Artwork image -->
+    <figure class="art-figure">
+      <img
+        src={data.featuredImage}
+        alt={data.about || data.title}
+        loading="eager"
+        class="art-image"
+      />
+    </figure>
+
+    <!-- Order modal (PayPal) -->
+    <OrderModal />
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Tab switching ─────────────────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>('.tab').forEach(btn => {
+    btn.addEventListener('click', function(this: HTMLButtonElement) {
+      const panelId = this.getAttribute('aria-controls')!;
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll<HTMLElement>('.tab-panel').forEach(p => {
+        p.hidden = p.id !== panelId;
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+    });
+  });
+
+  // ── Order button ──────────────────────────────────────────────────────────
+  const orderBtn = document.getElementById('order-btn');
+  if (orderBtn) {
+    orderBtn.addEventListener('click', () => {
+      const title = orderBtn.dataset.title!;
+      const price = Number(orderBtn.dataset.price!);
+      (window as any).openOrderModal(title, price);
+    });
+  }
+</script>
+
+<style lang="scss">
+  @use '../../styles/variables' as *;
+
+  .art-page {
+    background: $main-black;
+    min-height: 100vh;
+    color: $red-white;
+    display: grid;
+    grid-template-areas:
+      "header  header  header"
+      "back    title   ."
+      "sidebar image   .";
+    grid-template-columns: minmax(220px, 300px) 1fr minmax(60px, 120px);
+    grid-template-rows: 90px 60px 1fr;
+    min-height: 100vh;
+
+    @media (max-width: #{$m}) {
+      grid-template-areas:
+        "header"
+        "title"
+        "image"
+        "sidebar";
+      grid-template-columns: 1fr;
+      grid-template-rows: 90px auto auto auto;
+    }
+  }
+
+  // header, back, title handled by children
+
+  .back-link {
+    grid-area: back;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 20px;
+    color: rgba($red-white, 0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    align-self: center;
+
+    &:hover { color: $red-white; }
+
+    svg { width: 16px; height: 16px; }
+
+    @media (max-width: #{$m}) { display: none; }
+  }
+
+  .art-title {
+    grid-area: title;
+    font-family: $font-sub;
+    font-weight: 400;
+    font-size: clamp(18px, 2.5vw, 26px);
+    letter-spacing: 4px;
+    text-transform: capitalize;
+    color: $red-white;
+    margin: 0;
+    align-self: center;
+    text-align: center;
+
+    @media (max-width: #{$m}) {
+      padding: 120px 20px 20px;
+      text-align: center;
+    }
+  }
+
+  // ── Sidebar ────────────────────────────────────────────────────────────────
+  .art-sidebar {
+    grid-area: sidebar;
+    padding: 20px 0 40px 20px;
+    animation: fadeSlideIn 0.5s ease;
+
+    @media (max-width: #{$m}) {
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  .sidebar-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    width: 250px;
+
+    @media (max-width: #{$m}) { width: 100%; }
+  }
+
+  .tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba($red-white, 0.5);
+    font-family: $font-body;
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+
+    &.active {
+      color: $red-white;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $red-white;
+        animation: grow 0.4s forwards;
+      }
+    }
+
+    &:hover { color: rgba($red-white, 0.85); }
+  }
+
+  // ── Price display ──────────────────────────────────────────────────────────
+  .price-display {
+    background: $red-white;
+    color: $main-black;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 250px;
+
+    @media (max-width: #{$m}) { width: 100%; }
+  }
+
+  .price-state {
+    font-family: $font-sub;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .price-value {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .price-amount {
+    font-family: $font-sub;
+    font-size: 26px;
+    font-weight: 400;
+  }
+
+  .price-currency {
+    font-size: 13px;
+    opacity: 0.6;
+    letter-spacing: 2px;
+  }
+
+  // ── Data lists ─────────────────────────────────────────────────────────────
+  .data-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+    width: 250px;
+
+    @media (max-width: #{$m}) { width: 100%; text-align: center; }
+
+    li {
+      color: $red-white;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: capitalize;
+      padding: 4px 0;
+      opacity: 0.85;
+    }
+  }
+
+  .medium-list li em {
+    font-family: $font-prose;
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  // ── Buttons ────────────────────────────────────────────────────────────────
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 250px;
+    margin-top: 16px;
+
+    @media (max-width: #{$m}) {
+      width: 100%;
+      max-width: 280px;
+      align-items: center;
+      margin: 16px auto 0;
+    }
+  }
+
+  .art-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border: 1px solid $red-white;
+    background: transparent;
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: $red-white;
+      color: $main-black;
+    }
+
+    &--outline {
+      opacity: 0.7;
+      &:hover { opacity: 1; }
+    }
+  }
+
+  // ── Notes panel ────────────────────────────────────────────────────────────
+  .notes-content {
+    color: $red-white;
+    padding-right: 20px;
+
+    h3 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: 18px;
+      margin: 0 0 24px;
+      opacity: 0.85;
+
+      &::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 1px;
+        background: $red-white;
+        margin-bottom: 12px;
+        opacity: 0.3;
+      }
+    }
+
+    p {
+      font-family: $font-prose;
+      font-size: 15px;
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+      text-transform: none;
+    }
+
+    .notes-empty { opacity: 0.4; font-style: italic; }
+  }
+
+  .archive-body {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba($red-white, 0.15);
+    font-family: $font-prose;
+    font-size: 14px;
+    line-height: 1.8;
+    color: $red-white;
+    text-transform: none;
+    letter-spacing: 0.5px;
+
+    p { margin: 0 0 16px; }
+    blockquote {
+      margin: 0 0 16px 0;
+      padding-left: 16px;
+      border-left: 2px solid rgba($red-white, 0.3);
+      font-style: italic;
+      opacity: 0.8;
+    }
+    em { font-style: italic; }
+  }
+
+  // ── Artwork image ──────────────────────────────────────────────────────────
+  .art-figure {
+    grid-area: image;
+    margin: 0;
+    padding: 20px 60px 60px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: $main-black;
+
+    @media (max-width: #{$m}) {
+      padding: 0;
+      margin-top: 140px;
+    }
+  }
+
+  .art-image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+
+    @media (max-width: #{$m}) {
+      max-height: 60vw;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+</style>

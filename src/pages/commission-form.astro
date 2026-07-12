@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config.js';
+
+const mediums = ['Watercolor', 'Digital', 'Oil', 'Oil Pastel', 'Watercolor Pencil', 'Acrylic', 'Pastel', 'Ink', 'Graphite'];
+const sizes   = ['A6 (postcard)', 'A5', 'A4', 'A3', 'A2', 'Custom size'];
+---
+
+<BaseLayout title={`Commissions — ${siteConfig.seoTitle}`} description="Request an original commissioned artwork from Heart of Arah.">
+  <div class="commission-page">
+    <Header leftLink="home" rightLink="store" white={false} />
+
+    <main class="commission-main">
+      <h1>Commission a Work</h1>
+      <p class="commission-status">
+        Commissions are currently
+        <strong class={siteConfig.commissionsOpen ? 'open' : 'closed'}>
+          {siteConfig.commissionsOpen ? 'Open' : 'Closed'}
+        </strong>
+      </p>
+      <p class="commission-desc">
+        Fill in the form below and I'll get back to you with details, timeline, and a quote.
+      </p>
+
+      <form
+        name="commission"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="form-card"
+      >
+        <input type="hidden" name="form-name" value="commission" />
+        <input type="hidden" name="bot-field" />
+
+        <label>
+          <span>Your name</span>
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required />
+        </label>
+
+        <label>
+          <span>Medium</span>
+          <select name="medium" required>
+            <option value="" disabled selected>Select a medium</option>
+            {mediums.map(m => <option value={m}>{m}</option>)}
+          </select>
+        </label>
+
+        <label>
+          <span>Size</span>
+          <select name="size" required>
+            <option value="" disabled selected>Select a size</option>
+            {sizes.map(s => <option value={s}>{s}</option>)}
+          </select>
+        </label>
+
+        <label>
+          <span>Budget (NZD)</span>
+          <input type="number" name="budget" min="0" step="10" placeholder="e.g. 200" />
+        </label>
+
+        <label class="full">
+          <span>Description of what you'd like</span>
+          <textarea name="description" rows={5} required></textarea>
+        </label>
+
+        <label class="full">
+          <span>Reference images / links (optional)</span>
+          <textarea name="references" rows={3}></textarea>
+        </label>
+
+        <button type="submit" class="btn-submit">Send Request</button>
+      </form>
+    </main>
+
+    <Footer white={false} />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+
+  .commission-page {
+    background: $main-black;
+    min-height: 100vh;
+    color: $red-white;
+  }
+
+  .commission-main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 130px 40px 80px;
+
+    @media (max-width: #{$s}) { padding: 130px 20px 60px; }
+
+    h1 {
+      font-family: $font-sub;
+      font-weight: 400;
+      font-size: clamp(24px, 4vw, 40px);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+  }
+
+  .commission-status {
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin: 0 0 12px;
+
+    .open   { color: #00c864; }
+    .closed { color: #c84040; }
+  }
+
+  .commission-desc {
+    font-family: $font-prose;
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: 0.6;
+    margin: 0 0 40px;
+    text-transform: none;
+    letter-spacing: 0.5px;
+  }
+
+  .form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.5;
+      }
+
+      input, select, textarea {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba($red-white, 0.2);
+        color: $red-white;
+        font-family: $font-body;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 8px 4px;
+        outline: none;
+        transition: border-color 0.2s;
+        resize: vertical;
+
+        &::placeholder { opacity: 0.3; color: $red-white; }
+        &:focus { border-color: $red-white; }
+
+        option { background: $main-black; }
+      }
+    }
+
+    .full { grid-column: 1 / -1; }
+  }
+
+  .btn-submit {
+    margin-top: 8px;
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid $red-white;
+    color: $red-white;
+    font-family: $font-body;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: $red-white;
+      color: $main-black;
+    }
+  }
+</style>
