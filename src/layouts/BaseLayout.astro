@@ -1,4 +1,16 @@
 ---
+// Self-hosted fonts (same families the original site shipped as typeface-* packages)
+import '@fontsource/alegreya-sans-sc/300.css';
+import '@fontsource/alegreya-sans-sc/400.css';
+import '@fontsource/alegreya-sans-sc/500.css';
+import '@fontsource/alegreya-sans-sc/700.css';
+import '@fontsource/alegreya-sans-sc/300-italic.css';
+import '@fontsource/cinzel/400.css';
+import '@fontsource/cinzel/700.css';
+import '@fontsource/cinzel-decorative/400.css';
+import '@fontsource/cinzel-decorative/700.css';
+import '@fontsource/lora/400.css';
+import '@fontsource/lora/400-italic.css';
 import '../styles/global.scss';
 import { siteConfig } from '../config.js';
 
@@ -44,14 +56,6 @@ const ogImage = image ?? `${siteConfig.siteUrl}/img/mainTwo.jpg`;
     <meta property="og:image"       content={ogImage} />
     <meta name="twitter:card"       content="summary_large_image" />
     <meta name="twitter:image"      content={ogImage} />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400&family=Alegreya+Sans+SC:ital,wght@0,300;0,400;1,300&family=Lora:ital,wght@0,400;1,400&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- GoatCounter analytics -->
     <script

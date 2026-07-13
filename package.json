@@ -8,6 +8,10 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@fontsource/alegreya-sans-sc": "^5.2.7",
+    "@fontsource/cinzel": "^5.2.8",
+    "@fontsource/cinzel-decorative": "^5.2.8",
+    "@fontsource/lora": "^5.2.8",
     "astro": "^4.15.0",
     "sass": "^1.79.0"
   }

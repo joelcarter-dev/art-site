@@ -1,10 +1,12 @@
 ---
-// Faithful port of the original Gatsby Header:
-// - position: relative (sits at top of page flow, ~130px tall)
-// - white={true}  → solid dark bar (#0B101B) with cream logo/links/arches
-// - white={false} → cream bar with dark logo/links/arches
-// - Vivus-animated arch SVG (logo-side-left.svg) behind each link,
-//   right side mirrored, bleeding ±30px over the centre logo
+// Exact port of the original Header (header.module.sass):
+// - relative solid bar; white={true} → #0B101B bg with cream elements,
+//   white={false} → cream bg with dark elements
+// - logoHolder flex, max-width 588px; mainLogo 50% (min 100px), svg 60px tall
+// - Vivus-animated arch (logo-side-left.svg) absolutely positioned at
+//   top 10px, max-width 268px, bleeding 30px over the centre logo;
+//   right side mirrored with rotateY(180deg)
+// - links: 25px, line-height 130px, opacity .8, animated 3px underline
 interface Props {
   leftLink?: 'home' | 'store' | 'archive';
   rightLink?: 'home' | 'store' | 'archive';
@@ -22,14 +24,14 @@ const links: Record<string, { href: string; label: string }> = {
 const left  = links[leftLink]  ?? links.home;
 const right = links[rightLink] ?? links.store;
 
-// unique ids in case two headers ever render
+// unique ids in case two headers render on one page (archive does this)
 const uid = Math.random().toString(36).slice(2, 7);
 ---
 
-<header class={`site-header ${white ? 'scheme-white' : 'scheme-black'}`}>
-  <div class="logo-holder">
+<header class={`site-header ${white ? 'holder-white' : 'holder-black'}`}>
+  <div class={`logo-holder ${white ? 'scheme-white' : 'scheme-black'}`}>
 
-    <div class="side side--left">
+    <div class="side left">
       <div class="arch" id={`arch-left-${uid}`} data-arch></div>
       <a href={left.href} class="link">{left.label}</a>
     </div>
@@ -40,8 +42,8 @@ const uid = Math.random().toString(36).slice(2, 7);
       </svg>
     </a>
 
-    <div class="side side--right">
-      <div class="arch arch--mirror" id={`arch-right-${uid}`} data-arch></div>
+    <div class="side right">
+      <div class="arch" id={`arch-right-${uid}`} data-arch></div>
       <a href={right.href} class="link">{right.label}</a>
     </div>
 
@@ -49,11 +51,12 @@ const uid = Math.random().toString(36).slice(2, 7);
 </header>
 
 <script>
-  function initArches() {
-    const arches = document.querySelectorAll('[data-arch]');
+  function initHeaderArches() {
+    const arches = document.querySelectorAll('[data-arch]:not([data-arch-done])');
     if (!arches.length) return;
     const run = () => {
       arches.forEach((el) => {
+        el.setAttribute('data-arch-done', '1');
         new (window as any).Vivus(el.id, {
           file: '/logo-side-left.svg',
           animTimingFunction: (window as any).Vivus.EASE_OUT,
@@ -70,15 +73,15 @@ const uid = Math.random().toString(36).slice(2, 7);
     s.onload = run;
     document.head.appendChild(s);
   }
-  initArches();
+  initHeaderArches();
 </script>
 
 <style lang="scss">
   @use '../styles/variables' as *;
 
-  // Header-local colours (as in the original header.module.sass)
-  $header-black: #0B101B;
+  // Header-local colours, exactly as the original header.module.sass
   $header-white: #F0E3DE;
+  $header-black: #0B101B;
 
   .site-header {
     position: relative;
@@ -86,18 +89,20 @@ const uid = Math.random().toString(36).slice(2, 7);
     z-index: 900;
   }
 
+  .holder-white { background-color: $header-black; }
+  .holder-black { background-color: $header-white; }
+
+  // colour schemes (original #white / #black ids)
   .scheme-white {
-    background-color: $header-black;
-    .link { color: $red-white; &::before { border-bottom-color: $red-white; } }
-    .main-logo svg path { fill: $header-white; }
-    .arch :global(svg g path) { stroke: $header-white !important; }
+    .side :global(svg g path) { stroke: $header-white !important; }
+    .side .link { color: $red-white; &::before { border-bottom: 3px solid $red-white; } }
+    .main-logo svg path { fill: $header-white !important; }
   }
 
   .scheme-black {
-    background-color: $header-white;
-    .link { color: $red-black; &::before { border-bottom-color: $red-black; } }
-    .main-logo svg path { fill: $red-black; }
-    .arch :global(svg g path) { stroke: $red-black !important; }
+    .side :global(svg g path) { stroke: $red-black !important; }
+    .side .link { color: $red-black; &::before { border-bottom: 3px solid $red-black; } }
+    .main-logo svg path { fill: $red-black !important; }
   }
 
   .logo-holder {
@@ -127,78 +132,67 @@ const uid = Math.random().toString(36).slice(2, 7);
   .side {
     position: relative;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  // ── Animated arch SVGs ────────────────────────────────────────────
-  .arch {
-    position: absolute;
-    top: 10px;
-    max-width: 268px;
-    width: 100%;
-    pointer-events: none;
-
-    :global(svg) {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    @media screen and (max-width: #{$s}) {
-      top: 15px;
-    }
-  }
-
-  .side--left .arch { right: -30px; }
-  .side--right .arch { left: -30px; transform: rotateY(180deg); }
-
-  // ── Links ─────────────────────────────────────────────────────────
-  .link {
-    display: block;
-    position: relative;
-    opacity: 0.8;
-    z-index: 10;
-    width: 100%;
-    margin: 0 auto;
-    font-size: 25px;
-    text-decoration: none;
-    line-height: 130px;
-    font-family: $font-body;
-    letter-spacing: 2px;
-
-    &::before {
-      content: '';
-      display: block;
+    .arch {
       position: absolute;
-      top: 85px;
-      border: none;
-      border-bottom: 3px solid;
-      animation: header-underline-grow 1s forwards;
-      transition: all 1s linear;
+      top: 10px;
+      width: 268px;
+      max-width: 268px;
+      pointer-events: none;
+
+      :global(svg) {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      @media screen and (max-width: #{$s}) {
+        top: 15px;
+      }
     }
 
-    &:hover::before { width: 90%; }
+    .link {
+      display: block;
+      position: relative;
+      opacity: 0.8;
+      z-index: 10;
+      width: 100%;
+      margin: 0 auto;
+      font-size: 25px;
+      text-decoration: none;
+      line-height: 130px;
+      font-family: $font-body;
+      letter-spacing: 2px;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 85px;
+        border: none;
+        animation: header-underline-grow 1s forwards;
+        transition: all 1s linear;
+      }
+
+      &:hover::before { width: 90%; }
+    }
   }
 
-  .side--left .link {
-    text-align: right;
-    &::before { right: 0; }
+  .side.left {
+    .arch { right: -30px; }
+    .link {
+      text-align: right;
+      &::before { right: 0; float: right; }
+    }
   }
 
-  .side--right .link {
-    text-align: left;
-    &::before { left: 0; }
+  .side.right {
+    .arch { left: -30px; transform: rotateY(180deg); }
+    .link { text-align: left; }
   }
 
   @keyframes header-underline-grow {
-    from { width: 0; }
+    from { width: 0%; }
     to   { width: 100px; }
-  }
-
-  @media screen and (max-width: #{$s}) {
-    .link { font-size: 18px; line-height: 100px; &::before { top: 70px; } }
-    .main-logo svg { height: 50px; }
   }
 </style>
