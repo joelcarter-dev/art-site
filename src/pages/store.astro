@@ -1,262 +1,338 @@
 ---
+// Faithful port of the original store page:
+// cream page with three text-list columns (Categories / Mediums /
+// Commissions & Comercial) linking to category & medium index pages,
+// then the angled SVG transition into the black "Personally Selected"
+// section with the rune ornament, selected works and the-traide sketch.
+import { readFileSync } from 'node:fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CommissionSection from '../components/CommissionSection.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config.js';
+import { kebabCase } from '../utils.js';
 
-const allArtwork = await getCollection('artwork', ({ data }) => data.is_store_item);
-const highlighted = allArtwork.filter(a => a.data.storeHighlight);
+const COMMERCIAL_TAGS = ['Commercial', 'Maps', 'Logos', 'Commission'];
 
-// Build tag and type lists
-const allTags  = [...new Set(allArtwork.flatMap(a => a.data.tags ?? []))].filter(t =>
-  !['Commercial','Commission','Archived','Logos','Graphics','Maps'].includes(t)
-).sort();
-const allTypes = [...new Set(allArtwork.flatMap(a => a.data.type ?? []))].sort();
+const allStore = await getCollection('artwork', ({ data }) => data.is_store_item);
+
+// posts: store items that do NOT carry a commercial tag
+const posts = allStore.filter(i => !(i.data.tags ?? []).some(t => COMMERCIAL_TAGS.includes(t)));
+
+// group helpers (Gatsby-style group: item counted once per value)
+function group(items: typeof allStore, field: 'tags' | 'type') {
+  const counts: Record<string, number> = {};
+  items.forEach(i => (i.data[field] ?? []).forEach((v: string) => {
+    counts[v] = (counts[v] ?? 0) + 1;
+  }));
+  return Object.keys(counts).sort().map(fieldValue => ({ fieldValue, totalCount: counts[fieldValue] }));
+}
+
+const tagGroups  = group(posts, 'tags');
+const typeGroups = group(posts, 'type');
+
+// commercial: any artwork carrying one of the commercial tags
+const allArtwork = await getCollection('artwork');
+const commercialItems = allArtwork.filter(i => (i.data.tags ?? []).some(t => COMMERCIAL_TAGS.includes(t)));
+const commercialGroups = group(commercialItems, 'tags');
+
+const selected = allStore.filter(i => i.data.storeHighlight).reverse();
+
+const sidesSvg  = readFileSync(new URL('../../public/sides-transition.svg', import.meta.url), 'utf8');
+const runesSvg  = readFileSync(new URL('../../public/three-runes.svg', import.meta.url), 'utf8');
+const traideSvg = readFileSync(new URL('../../public/the-traide.svg', import.meta.url), 'utf8');
+const armySvg   = readFileSync(new URL('../../public/tiny-army.svg', import.meta.url), 'utf8');
 ---
 
 <BaseLayout title={`Store — ${siteConfig.seoTitle}`} description="Browse and purchase original artworks from the Heart of Arah.">
-  <div id="store-page">
+  <section id="store">
     <Header leftLink="home" rightLink="archive" white={false} />
 
-    <main class="store-main">
+    <div class="list-holder">
 
-      <!-- Filter bar -->
-      <nav class="filter-bar" aria-label="Filter artworks">
-        <div class="filter-group">
-          <span class="filter-heading">Categories</span>
-          <button class="filter-btn active" data-filter="tag" data-value="">All</button>
-          {allTags.map(tag => (
-            <button class="filter-btn" data-filter="tag" data-value={tag}>{tag}</button>
+      <div class="item-list">
+        <span>Sort By</span>
+        <h3>Categories</h3>
+        <ul>
+          {tagGroups.map(g => (
+            <li><a href={`/category/${kebabCase(g.fieldValue)}/`}>{g.totalCount} {g.fieldValue}</a></li>
           ))}
-        </div>
-        <div class="filter-group">
-          <span class="filter-heading">Medium</span>
-          <button class="filter-btn active" data-filter="type" data-value="">All</button>
-          {allTypes.map(t => (
-            <button class="filter-btn" data-filter="type" data-value={t}>{t}</button>
-          ))}
-        </div>
-      </nav>
+        </ul>
+      </div>
 
-      <!-- Personally selected -->
-      {highlighted.length > 0 && (
-        <section class="selected-section">
-          <h2 class="section-heading">Personally Selected</h2>
-          <div class="artwork-grid" id="selected-grid">
-            {highlighted.reverse().map(item => (
-              <a
-                href={`/store-items/${item.slug}`}
-                class="artwork-card"
-                data-tags={JSON.stringify(item.data.tags ?? [])}
-                data-types={JSON.stringify(item.data.type ?? [])}
-              >
-                <div class="card-image">
-                  <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
-                </div>
-                <div class="card-info">
+      <div class="item-list">
+        <span>Sort By</span>
+        <h3>Mediums</h3>
+        <ul>
+          {typeGroups.map(g => (
+            <li><a href={`/mediums/${kebabCase(g.fieldValue)}/`}>{g.totalCount} {g.fieldValue}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="item-list">
+        <span>Sort By</span>
+        <h3>Commissions &amp; Comercial</h3>
+        <ul>
+          {commercialGroups.map(g => (
+            <li><a href={`/category/${kebabCase(g.fieldValue)}/`}>{g.totalCount} {g.fieldValue}</a></li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <section id="bottom-holder">
+
+      <div class="svgs">
+        <div class="angle-svg-holder">
+          <Fragment set:html={sidesSvg} />
+        </div>
+        <div id="tiny-army" aria-hidden="true">
+          <Fragment set:html={armySvg} />
+        </div>
+      </div>
+
+      <div class="black">
+        <div class="commissions-holder">
+          <CommissionSection dark={false} />
+        </div>
+
+        <div id="selected-holder">
+          <h2 id="selected-title">Personally Selected</h2>
+          <div id="three-runes" aria-hidden="true">
+            <Fragment set:html={runesSvg} />
+          </div>
+          <div class="items">
+            {selected.map(item => (
+              <div class="selected-item">
+                <a href={`/store-items/${item.slug}`}>
                   <h3>{item.data.title}</h3>
-                  <span class="card-type">{(item.data.type ?? []).join(', ')}</span>
-                </div>
-              </a>
+                  <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
+                </a>
+              </div>
             ))}
           </div>
-        </section>
-      )}
 
-      <!-- All store items -->
-      <section class="all-section">
-        <h2 class="section-heading">All Works</h2>
-        <div class="artwork-grid" id="all-grid">
-          {allArtwork.sort((a, b) =>
-            new Date(b.data.date ?? 0).getTime() - new Date(a.data.date ?? 0).getTime()
-          ).map(item => (
-            <a
-              href={`/store-items/${item.slug}`}
-              class="artwork-card"
-              data-tags={JSON.stringify(item.data.tags ?? [])}
-              data-types={JSON.stringify(item.data.type ?? [])}
-            >
-              <div class="card-image">
-                <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
-              </div>
-              <div class="card-info">
-                <h3>{item.data.title}</h3>
-                <span class="card-type">{(item.data.type ?? []).join(', ')}</span>
-              </div>
-            </a>
-          ))}
+          <div id="the-traide" aria-hidden="true">
+            <Fragment set:html={traideSvg} />
+          </div>
         </div>
-      </section>
+      </div>
 
-      <CommissionSection dark={true} />
-      <Footer white={false} />
-    </main>
-  </div>
+    </section>
+
+    <Footer white={false} />
+  </section>
 </BaseLayout>
-
-<script>
-  // ── Filter logic ─────────────────────────────────────────────────────────
-  let activeTag  = '';
-  let activeType = '';
-
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', function(this: HTMLButtonElement) {
-      const filter = this.dataset.filter!;
-      const value  = this.dataset.value!;
-
-      // Update active state within this filter group
-      this.closest('.filter-group')!
-          .querySelectorAll('.filter-btn')
-          .forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-
-      if (filter === 'tag')  activeTag  = value;
-      if (filter === 'type') activeType = value;
-
-      applyFilters();
-    });
-  });
-
-  function applyFilters() {
-    document.querySelectorAll<HTMLElement>('.artwork-card').forEach(card => {
-      const tags  = JSON.parse(card.dataset.tags  ?? '[]') as string[];
-      const types = JSON.parse(card.dataset.types ?? '[]') as string[];
-
-      const tagMatch  = !activeTag  || tags.includes(activeTag);
-      const typeMatch = !activeType || types.includes(activeType);
-
-      card.style.display = (tagMatch && typeMatch) ? '' : 'none';
-    });
-  }
-</script>
 
 <style lang="scss">
   @use '../styles/variables' as *;
 
-  #store-page {
-    min-height: 100vh;
-    background: $main-black;
-    color: $red-white;
+  #store {
+    background-color: $red-white;
+    min-height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+
+    :global(*) { color: $red-black; }
   }
 
-  .store-main {
-    padding-top: 130px;
-  }
-
-  // ── Filter bar ─────────────────────────────────────────────────────────────
-  .filter-bar {
+  // ── Text lists ──────────────────────────────────────────────────────────
+  .list-holder {
+    width: 100%;
+    min-height: max-content;
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
-    padding: 30px 40px;
-    border-bottom: 1px solid rgba($red-white, 0.1);
+    justify-content: center;
+    margin-bottom: -150px;
 
-    @media (max-width: #{$s}) { padding: 20px; }
-  }
+    @media screen and (max-width: #{$m}) { margin-bottom: -50px; }
 
-  .filter-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-  }
+    .item-list {
+      min-width: 320px;
+      max-width: 340px;
+      min-height: 200px;
+      position: relative;
+      padding: 30px;
+      padding-bottom: 100px;
+      z-index: 9;
+      margin-top: 30px;
 
-  .filter-heading {
-    font-family: $font-body;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-right: 4px;
-  }
+      @media screen and (max-width: #{$m}) { padding-bottom: 30px; }
 
-  .filter-btn {
-    background: transparent;
-    border: 1px solid rgba($red-white, 0.2);
-    color: rgba($red-white, 0.5);
-    font-family: $font-body;
-    font-size: 11px;
-    letter-spacing: 2px;
-    padding: 5px 12px;
-    cursor: pointer;
-    transition: all 0.15s ease;
+      span {
+        float: left;
+        font-weight: 300;
+        opacity: 0.8;
+      }
 
-    &:hover, &.active {
-      border-color: $red-white;
-      color: $red-white;
-    }
+      h3 {
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+        font-weight: 400;
+        margin-bottom: 0;
+      }
 
-    &.active {
-      background: rgba($red-white, 0.08);
-    }
-  }
+      ul {
+        list-style: none;
+        border-left: 2px solid $red-black;
+        padding-left: 20px;
+        margin: 20px 0 0 40px;
+        float: left;
+        width: 200px;
+        height: auto;
 
-  // ── Sections ───────────────────────────────────────────────────────────────
-  .selected-section, .all-section {
-    padding: 50px 40px;
-    @media (max-width: #{$s}) { padding: 30px 20px; }
-  }
-
-  .section-heading {
-    font-family: $font-sub;
-    font-weight: 400;
-    font-size: 13px;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin: 0 0 30px;
-  }
-
-  // ── Artwork grid ───────────────────────────────────────────────────────────
-  .artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 32px;
-  }
-
-  .artwork-card {
-    display: block;
-    color: $red-white;
-    text-decoration: none;
-
-    &:hover .card-image img {
-      opacity: 0.85;
-      transform: scale(1.02);
+        li {
+          padding: 5px;
+          a { text-decoration: none; }
+        }
+      }
     }
   }
 
-  .card-image {
-    overflow: hidden;
-    aspect-ratio: 1;
-    background: $red-black;
+  // ── Transition + black section ─────────────────────────────────────────
+  #bottom-holder {
+    .svgs {
+      position: relative;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.3s ease, transform 0.4s ease;
+      .angle-svg-holder {
+        margin-bottom: -5px;
+        :global(svg) {
+          display: block;
+          width: 100%;
+          height: auto;
+          margin-bottom: -6px;
+        }
+      }
+
+      #tiny-army {
+        width: 100px;
+        margin: 0 auto;
+        position: absolute;
+        right: 0;
+        top: -41px;
+        transform: rotate(-16deg);
+        :global(svg) { display: block; width: 100%; height: auto; }
+      }
+    }
+
+    .black {
+      background-color: $main-black;
+
+      :global(*) { color: $red-white; }
+
+      .commissions-holder {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      #selected-holder {
+        width: 100%;
+        position: relative;
+
+        #selected-title {
+          color: $red-white;
+          width: 100%;
+          font-weight: 300;
+          font-size: clamp(30px, 4vw, 50px);
+          text-align: center;
+          padding: 60px;
+          padding-bottom: 0;
+          margin: 0 auto;
+          letter-spacing: 2px;
+          font-family: $font-sub;
+        }
+
+        #three-runes {
+          width: 40px;
+          margin: 0 auto;
+          top: -100px;
+          position: relative;
+
+          :global(*) { fill: $red-white; }
+          :global(svg) {
+            transform: rotate(-90deg);
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .items {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          width: 100%;
+          position: relative;
+          top: -210px;
+
+          @media screen and (max-width: #{$s}) { display: block; }
+
+          .selected-item {
+            margin: 60px;
+            padding-top: 0;
+            width: 320px;
+            position: relative;
+
+            @media screen and (max-width: #{$s}) {
+              margin: 0 auto;
+              margin-bottom: 60px;
+              h3 { text-align: center; }
+            }
+
+            img {
+              width: 320px;
+              height: 320px;
+              object-fit: cover;
+              display: block;
+              @media screen and (max-width: #{$s}) { margin: 0 auto; }
+            }
+
+            h3 {
+              color: $red-white;
+              font-weight: 300;
+              position: relative;
+              padding-bottom: 20px;
+              font-family: $font-sub;
+              text-transform: uppercase;
+              max-width: max-content;
+              margin-left: 2em;
+
+              &::before {
+                content: '';
+                display: block;
+                max-width: 200px;
+                position: absolute;
+                bottom: 4px;
+                border: none;
+                border-bottom: 2px solid $red-white;
+                animation: selected-grow 1s forwards;
+                transition: all 1s linear;
+              }
+            }
+          }
+        }
+
+        #the-traide {
+          max-width: 400px;
+          margin: 0 auto;
+          top: -100px;
+          position: relative;
+
+          :global(*) { fill: $red-white; stroke: $red-white; }
+          :global(svg) { display: block; width: 100%; height: auto; }
+        }
+      }
     }
   }
 
-  .card-info {
-    padding: 12px 0 0;
-
-    h3 {
-      font-family: $font-sub;
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 3px;
-      margin: 0 0 4px;
-    }
-  }
-
-  .card-type {
-    font-size: 11px;
-    opacity: 0.5;
-    letter-spacing: 1px;
-    font-style: italic;
+  @keyframes selected-grow {
+    from { width: 10%; }
+    to   { width: 40%; }
   }
 </style>

@@ -1,4 +1,11 @@
 ---
+// Faithful port of the original Gatsby homepage:
+// #landing is the scroll container; title/photo/mid are absolutely
+// positioned sections (title 28vh, photo 115vh pane, mid at 90vh).
+// Cream wedges + vivus drawings + cream 200px logo mark the transition,
+// then the cream mid-content: title, 3 random item links, the tiny
+// three-travelers divider, about text, commissions, sketch, footer.
+import { readFileSync } from 'node:fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -6,9 +13,11 @@ import CommissionSection from '../components/CommissionSection.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config.js';
 
-const highlighted = await getCollection('artwork', ({ data }) =>
-  data.is_store_item && data.storeHighlight
-);
+const storeItems = await getCollection('artwork', ({ data }) => data.is_store_item);
+const linkCandidates = storeItems.map(i => ({ title: i.data.title, slug: `/store-items/${i.slug}` }));
+
+const travelersSvg = readFileSync(new URL('../../public/sketch-travelers.svg', import.meta.url), 'utf8');
+const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.meta.url), 'utf8');
 ---
 
 <BaseLayout>
@@ -16,78 +25,79 @@ const highlighted = await getCollection('artwork', ({ data }) =>
 
     <Header leftLink="store" rightLink="archive" white={true} />
 
-    <!-- Hero -->
-    <section class="hero">
-      <img
-        src="/img/mainTwo.jpg"
-        alt="Heart of Arah hero image"
-        class="hero-image"
-        loading="eager"
-      />
-      <div class="hero-title">
-        <h1>{siteConfig.title}</h1>
-        <h2>{siteConfig.tagLine}</h2>
+    <!-- Title over the hero photo -->
+    <section class="title">
+      <h1>{siteConfig.title}</h1>
+      <h2>{siteConfig.tagLine}</h2>
+    </section>
+
+    <!-- Hero photo pane -->
+    <section class="image-holder">
+      <div class="hero-top">
+        <img src="/img/mainTwo.jpg" alt="Heart of Arah hero image" loading="eager" />
       </div>
     </section>
 
-    <!-- Mid section (cream) -->
+    <!-- Mid section, overlapping the photo from 90vh -->
     <section class="mid">
-      <!-- Diagonal transitions -->
-      <div class="mid-wedge mid-wedge--left"></div>
-      <div class="mid-wedge mid-wedge--right"></div>
 
-      <!-- Animated SVG decorations (hidden on small screens) -->
-      <div class="svg-row">
-        <div class="svg-left" id="vivus-left"></div>
-        <div class="svg-right" id="vivus-right"></div>
+      <!-- Cream wedges rising toward the centre -->
+      <div class="sides">
+        <div class="right"></div>
+        <div class="left"></div>
       </div>
 
-      <!-- Logo mark -->
-      <div class="logo-mark">
-        <svg viewBox="0 0 147 73" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M79.838 41.831 L79.847 41.821 L73.130 35.104 L66.412 41.821 L66.450 41.859 L54.154 54.154 L0 0 L146.617 0 L92.312 54.305 L79.838 41.831 Z M78.338 43.331 L90.432 55.425 L73.158 72.698 L55.884 55.425 L67.950 43.359 L73.130 48.539 L78.338 43.331 Z" fill="currentColor"/>
+      <!-- Vivus line drawings flanking the transition -->
+      <div class="svg-holder">
+        <div class="top-svg-holder">
+          <div class="svg-left" id="vivus-left"></div>
+          <div class="svg-right" id="vivus-right"></div>
+        </div>
+      </div>
+
+      <!-- Cream logo mark on the photo seam -->
+      <div class="main-logo" aria-hidden="true">
+        <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
+          <g fill-rule="nonzero">
+            <path d="M239.549004,120 L239.64109,119.907914 L238.720553,118.987378 L238.954003,118.987378 L191.666941,71.9337656 L152.74299,33.0098147 L120.155863,65.5969419 L87.5539623,32.9950415 L0.641089603,119.907914 L0.733175603,120 L239.549004,120 Z"></path>
+            <polygon points="90.0926935 30.6263153 89.8553375 30.6263153 89.8510974 30.6220752 120.473173 0 151.099488 30.6263153 151.086256 30.6263153 151.148903 30.6889624 135.837865 46 120.589475 30.7516095 105.341084 46 90.0300464 30.6889624"></polygon>
+          </g>
         </svg>
       </div>
 
+      <!-- Cream content -->
       <div class="mid-content">
-        <h2 class="mid-title">All Paths lead to The Mountain</h2>
 
-        <!-- Featured works -->
-        {highlighted.length > 0 && (
-          <div class="featured">
-            {highlighted.slice(0, 3).map(item => (
-              <a href={`/store-items/${item.slug}`} class="featured-item">
-                <img
-                  src={item.data.featuredImage}
-                  alt={item.data.title}
-                  loading="lazy"
-                />
-                <span>{item.data.title}</span>
-              </a>
-            ))}
-          </div>
-        )}
-
-        <!-- Sketch SVG: Three Travelers -->
-        <div class="sketch-divider">
-          <img src="/sketch-travelers.svg" alt="" aria-hidden="true" class="sketch-img" />
+        <div class="mid-title">
+          <h2>All PAths leAd to THe MountAin</h2>
         </div>
 
-        <!-- About -->
+        <!-- Three random item links -->
+        <div class="top-items">
+          <div class="random-holder">
+            <h2 id="random-links"></h2>
+          </div>
+        </div>
+
+        <!-- Tiny three-travelers ornament on a rule -->
+        <div id="sketch-two">
+          <span class="border"></span>
+          <Fragment set:html={travelersSvg} />
+        </div>
+
         <div class="about">
           <p>
-            All works are original. Much of the work here draws heavily from music, and is based
-            on a setting with deep internal lore. It attempts to explore and symbolise ancient
-            ideas of the human experience in a unique, mythical way.
+            All works are original. Much of the work here draws heavily from music, and is based on a setting with deep internal lore. It attempts to explore and symbolise ancient ideas of the human experience in a unique, mythical way.
           </p>
-          <p class="about-tagline">The words of distant places</p>
+          <p>
+            The words of distant places
+          </p>
         </div>
 
-        <CommissionSection dark={false} />
+        <CommissionSection dark={true} />
 
-        <!-- Sketch SVG: Figure study -->
-        <div class="sketch-bottom">
-          <img src="/sketch-one.svg" alt="" aria-hidden="true" class="sketch-img sketch-img--small" />
+        <div id="sketch-one" aria-hidden="true">
+          <Fragment set:html={sketchOneSvg} />
         </div>
 
         <Footer white={true} />
@@ -97,26 +107,40 @@ const highlighted = await getCollection('artwork', ({ data }) =>
   </div>
 </BaseLayout>
 
-<script>
-  // Vivus SVG path-draw animations (loaded from CDN)
+<script define:vars={{ linkCandidates }}>
+  // Random item links — shuffled per page load like the original
+  const shuffled = linkCandidates.sort(() => 0.5 - Math.random()).slice(0, 3);
+  const holder = document.getElementById('random-links');
+  if (holder) {
+    shuffled.forEach(({ title, slug }) => {
+      const a = document.createElement('a');
+      a.href = slug;
+      a.textContent = title;
+      holder.appendChild(a);
+    });
+  }
+
+  // Vivus SVG path-draw animations
   const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.6/vivus.min.js';
+  script.src = '/vivus.min.js';
   script.onload = () => {
     if (document.getElementById('vivus-left')) {
-      new (window as any).Vivus('vivus-left', {
+      new window.Vivus('vivus-left', {
         file: '/home-left.svg',
         type: 'delayed',
-        animTimingFunction: 'EASE_OUT',
+        animTimingFunction: window.Vivus.EASE_OUT,
         duration: 1500,
+        forceRender: true,
         start: 'autostart',
       });
     }
     if (document.getElementById('vivus-right')) {
-      new (window as any).Vivus('vivus-right', {
+      new window.Vivus('vivus-right', {
         file: '/home-right.svg',
         type: 'delayed',
-        animTimingFunction: 'EASE_OUT',
+        animTimingFunction: window.Vivus.EASE_OUT,
         duration: 3000,
+        forceRender: true,
         start: 'autostart',
       });
     }
@@ -129,239 +153,267 @@ const highlighted = await getCollection('artwork', ({ data }) =>
 
   #landing {
     width: 100%;
+    height: 100vh;
+    padding: 0;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 100vh;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar { display: none; }
+
+    > section { position: absolute; }
   }
 
-  // ── Hero ───────────────────────────────────────────────────────────────────
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .hero-image {
-    width: 100%;
-    height: 115vh;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-  }
-
-  .hero-title {
-    position: absolute;
-    top: 28vh;
+  // ── Title ──────────────────────────────────────────────────────────────────
+  .title {
     left: 0;
     right: 0;
+    top: 28vh;
     text-align: center;
     z-index: 2;
-    padding: 0 20px;
 
-    h1 {
+    h1, h2 {
       font-family: $font-heading;
       font-weight: 100;
       color: $red-white;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(40px, 7vw, 100px);
       letter-spacing: 10px;
-      font-size: clamp(36px, 8vw, 90px);
-      margin: 0 0 1rem;
+      margin-bottom: 1rem;
     }
 
     h2 {
-      font-family: $font-heading;
-      font-weight: 100;
-      color: $red-white;
+      font-size: clamp(20px, 2.5vw, 35px);
       letter-spacing: 5px;
-      font-size: clamp(16px, 3vw, 28px);
-      margin: 0;
     }
   }
 
-  // ── Mid section ────────────────────────────────────────────────────────────
-  .mid {
-    position: relative;
+  // ── Hero photo ─────────────────────────────────────────────────────────────
+  .image-holder {
     width: 100%;
+    height: 100%;
+    top: 0;
     background-color: $red-white;
-    color: $main-black;
-  }
 
-  .mid-wedge {
-    position: absolute;
-    top: -100px;
-    width: 65vw;
-    height: 180px;
-    background: $red-white;
+    .hero-top {
+      width: 100%;
+      height: 115vh;
+      overflow: hidden;
+      position: relative;
 
-    &--left {
-      left: -20px;
-      transform: rotate(-20deg);
-      transform-origin: top left;
-    }
-    &--right {
-      right: -20px;
-      transform: rotate(20deg);
-      transform-origin: top right;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left bottom;
+        display: block;
+      }
     }
   }
 
-  // Vivus SVG animation holders
-  .svg-row {
-    position: absolute;
-    top: -60px;
+  // ── Mid ────────────────────────────────────────────────────────────────────
+  .mid {
+    top: 90vh;
+    z-index: 2;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    z-index: 1;
 
-    @media (max-width: #{$s}) { display: none; }
+    .sides {
+      top: 0;
+      z-index: 3;
+      position: absolute;
+      width: 100%;
+
+      @media screen and (min-width: #{$m}) { top: -20px; }
+
+      .left, .right {
+        width: 60vw;
+        height: 20vw;
+        max-height: 300px;
+        min-height: 200px;
+        top: 150px;
+        position: absolute;
+        background-color: $red-white;
+      }
+
+      .left {
+        left: -20px;
+        transform: rotate(-20deg);
+        transform-origin: top left;
+        @media screen and (min-width: #{$l}) { transform: rotate(-18deg); }
+        @media screen and (min-width: 75em)  { transform: rotate(-15deg); }
+      }
+
+      .right {
+        right: -20px;
+        transform: rotate(20deg);
+        transform-origin: top right;
+        @media screen and (min-width: #{$l}) { transform: rotate(18deg); }
+        @media screen and (min-width: 75em)  { transform: rotate(15deg); }
+      }
+    }
+
+    .main-logo {
+      position: relative;
+      margin: 0 auto;
+      width: 200px;
+      top: 7px;
+      z-index: 2;
+
+      @media screen and (max-width: #{$xs}) { width: 150px; }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        path, polygon { fill: $red-white !important; }
+      }
+    }
+
+    .mid-content {
+      z-index: 5;
+      background-color: $red-white;
+      position: relative;
+      padding: 40px 0;
+
+      .mid-title {
+        padding: 1vw 30px 0;
+        text-align: center;
+        font-family: $font-heading;
+        position: relative;
+
+        @media screen and (max-width: #{$m}) { padding: 10vw 30px 0; }
+        @media screen and (max-width: #{$s}) { padding: 1vw 10px 0; }
+
+        h2 {
+          color: $main-black;
+          font-family: $font-heading;
+          font-weight: 400;
+          z-index: 5;
+          margin-bottom: 0;
+        }
+      }
+
+      .top-items {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        height: 100px;
+      }
+
+      .about {
+        width: 100%;
+
+        p {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 0 60px;
+          text-align: justify;
+          margin-top: 20px;
+          color: $main-black;
+
+          @media screen and (max-width: #{$xs}) { padding: 0 30px; }
+        }
+      }
+    }
+  }
+
+  // ── Random links ───────────────────────────────────────────────────────────
+  .random-holder {
+    :global(h2) {
+      text-align: center;
+      max-width: 600px;
+      padding: 0 30px;
+      margin-bottom: 100px;
+
+      @media screen and (max-width: #{$s}) { padding: 0 10px; }
+    }
+
+    :global(a) {
+      padding: 0 10px;
+      color: $main-black;
+      text-transform: capitalize;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  // ── Vivus drawings ─────────────────────────────────────────────────────────
+  .svg-holder {
+    position: relative;
+    width: 100vw;
+    z-index: 6;
+  }
+
+  .top-svg-holder {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    top: 19vh;
+
+    @media screen and (max-width: #{$s}) { display: none; }
   }
 
   .svg-left, .svg-right {
     width: 37%;
-    max-width: 320px;
-    min-height: 200px;   /* give Vivus room to inject the SVG */
+    max-width: 350px;
+    position: absolute;
+    bottom: -60px;
 
-    :global(svg) { width: 100%; height: auto; display: block; }
+    :global(svg) { display: block; width: 100%; height: auto; }
     :global(svg g path) { stroke: $main-black !important; }
   }
 
-  .logo-mark {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
+  .svg-left { left: 0; }
 
-    svg {
-      width: 160px;
-      color: $main-black;
-    }
+  .svg-right {
+    right: 14px;
+    @media screen and (max-width: #{$s}) { right: 0; }
   }
 
-  .mid-content {
-    position: relative;
-    z-index: 5;
-    padding-top: 20px;
+  // ── Sketches ───────────────────────────────────────────────────────────────
+  #sketch-one {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100px;
+
+    :global(svg) { display: block; width: 100%; height: auto; }
+    :global(svg g path) { fill: $main-black; }
+
+    @media screen and (max-width: #{$m}) { width: 50px; }
   }
 
-  .mid-title {
-    font-family: $font-heading;
-    font-weight: 100;
-    color: $main-black;
-    text-align: center;
-    letter-spacing: 6px;
-    font-size: clamp(14px, 2.5vw, 22px);
-    padding: 0 20px;
-    margin: 0 0 40px;
-  }
-
-  // ── Featured works ─────────────────────────────────────────────────────────
-  .featured {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    padding: 0 20px 40px;
-    flex-wrap: wrap;
-  }
-
-  .featured-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-
-    img {
-      width: 220px;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.3s ease;
-    }
-
-    span {
-      font-family: $font-sub;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: $main-black;
-      text-transform: uppercase;
-    }
-
-    &:hover img { opacity: 0.85; }
-  }
-
-  // ── Rune divider ───────────────────────────────────────────────────────────
-  .rune-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 0 60px;
+  #sketch-two {
     max-width: 540px;
-    margin: 0 auto 40px;
-    color: $main-black;
-  }
-
-  .rune-line {
-    flex: 1;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.3;
-  }
-
-  // ── Sketch SVGs ───────────────────────────────────────────────────────────
-  .sketch-divider {
-    width: 100%;
-    max-width: 680px;
-    margin: 0 auto 20px;
-    padding: 0 20px;
     display: flex;
     justify-content: center;
-  }
-
-  .sketch-bottom {
-    display: flex;
-    justify-content: center;
-    padding: 20px 40px 0;
-  }
-
-  .sketch-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.85;
-  }
-
-  .sketch-img--small {
-    max-width: 140px;
-    opacity: 0.6;
-  }
-
-  // ── About ─────────────────────────────────────────────────────────────────
-  .about {
-    max-width: 600px;
+    padding: 10px 60px 50px;
     margin: 0 auto;
-    padding: 0 40px 40px;
-    text-align: justify;
+    position: relative;
 
-    p {
-      font-size: 14px;
-      line-height: 1.8;
-      letter-spacing: 1px;
-      color: $main-black;
-      margin: 0 0 16px;
+    .border {
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      background-color: $main-black;
+      margin-top: 16px;
+      z-index: 0;
+      padding: 0 60px;
     }
 
-    .about-tagline {
-      font-family: $font-sub;
-      font-style: italic;
-      opacity: 0.6;
-      font-size: 13px;
+    :global(svg) {
+      width: 96px;
+      height: 30px;
+      background-color: $red-white;
+      padding: 0 15px;
+      position: relative;
+      z-index: 1;
     }
   }
 </style>

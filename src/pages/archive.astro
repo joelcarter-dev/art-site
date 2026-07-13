@@ -1,12 +1,18 @@
 ---
+// Faithful port of the original archive page:
+// starts as a dark banner-menu of topics (300px cards with excerpt text),
+// clicking a topic switches to the light browse view with that topic's
+// items expanded. The angel-meeting sketch sits at the bottom.
+import { readFileSync } from 'node:fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config.js';
+import { kebabCase } from '../utils.js';
 
 const allItems = await getCollection('artwork', ({ data }) => data.is_archive_item);
 
-// Group by archive_topic
+// Group items by archive_topic (an item may appear in several topics)
 const grouped: Record<string, typeof allItems> = {};
 allItems.forEach(item => {
   for (const topic of (item.data.archive_topic ?? [])) {
@@ -14,220 +20,249 @@ allItems.forEach(item => {
     grouped[topic].push(item);
   }
 });
-const topics = Object.keys(grouped).sort();
+const topics = Object.keys(grouped);
+
+// excerpt helper (Gatsby's excerpt ~ first N chars of body text)
+function excerpt(item: (typeof allItems)[0], len: number) {
+  const text = (item.body ?? '').replace(/[#>*_\[\]!\n]/g, ' ').replace(/\s+/g, ' ').trim();
+  return text.slice(0, len) + (text.length > len ? '…' : '');
+}
+
+const angelSvg = readFileSync(new URL('../../public/angel-meeting.svg', import.meta.url), 'utf8');
 ---
 
 <BaseLayout
   title={`Archive — ${siteConfig.seoTitle}`}
   description="A library of lore, illustrations, and short stories from the world of Heart of Arah."
 >
-  <div id="archive-page">
-    <Header leftLink="home" rightLink="store" white={true} />
+  <section id="archive" class="dark">
+
+    <div class="header-dark"><Header leftLink="home" rightLink="store" white={true} /></div>
+    <div class="header-light"><Header leftLink="home" rightLink="store" white={false} /></div>
 
     {topics.length === 0 ? (
-      <div class="archive-empty">
-        <p>The Archive has not yet Opened</p>
-      </div>
-    ) : (
-      <main class="archive-main">
-        <h1 class="archive-heading">The Archive</h1>
-
-        <div class="topics-grid">
-          {topics.map(topic => (
-            <details class="topic-block" name="archive-topic">
-              <summary class="topic-summary">
-                <h2>{topic}</h2>
-                <p class="topic-preview">
-                  {grouped[topic][0]?.body?.slice(0, 120) ?? grouped[topic][0]?.data.about?.slice(0, 120) ?? ''}…
-                </p>
-                <span class="topic-count">{grouped[topic].length} {grouped[topic].length === 1 ? 'entry' : 'entries'}</span>
-                <span class="topic-chevron" aria-hidden="true">↓</span>
-              </summary>
-
-              <ul class="topic-items">
-                {grouped[topic].map(item => (
-                  <li>
-                    <a href={`/archive/${item.slug}`} class="archive-item-link">
-                      <span class="item-title">{item.data.title}</span>
-                      <span class="item-excerpt">{item.data.about?.slice(0, 100)}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
+      <section class="banner-menu">
+        <div class="holder">
+          <div class="banner">
+            <h3>The Archive has not yet Opend</h3>
+          </div>
         </div>
-      </main>
+      </section>
+    ) : (
+      <>
+        <!-- Dark banner menu (initial view) -->
+        <section class="banner-menu">
+          <div class="holder">
+            {topics.map(topic => (
+              <div class="banner" role="button" tabindex="0" data-topic={topic}>
+                <h2>{topic}</h2>
+                <p>{grouped[topic].map(i => excerpt(i, 200)).join(' ')}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Light topics browse view -->
+        <section class="topics">
+          {topics.map(topic => (
+            <div class="topic-holder" data-topic-holder={topic}>
+              <button type="button" data-topic={topic}>
+                <h2>{topic}</h2>
+              </button>
+              <div class="topic-items" data-topic-items={topic}>
+                {grouped[topic].map(item => (
+                  <div class="item-holder">
+                    <a href={`/archive/${item.slug}`} class="link">
+                      <h3>{item.data.title}</h3>
+                      <p>{excerpt(item, 100)}</p>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      </>
     )}
-  </div>
+
+    <div id="svg-holder" aria-hidden="true">
+      <Fragment set:html={angelSvg} />
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  const archive = document.getElementById('archive');
+
+  function setTopic(topic: string) {
+    if (!archive) return;
+    archive.classList.remove('dark');
+    archive.classList.add('light');
+    document.querySelectorAll<HTMLElement>('[data-topic-items]').forEach(el => {
+      el.style.display = el.dataset.topicItems === topic ? '' : 'none';
+    });
+    window.scrollTo({ top: 0 });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-topic]').forEach(el => {
+    el.addEventListener('click', () => setTopic(el.dataset.topic!));
+    el.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Enter') setTopic(el.dataset.topic!);
+    });
+  });
+
+  // hide all topic item lists initially (dark mode shows banners)
+  document.querySelectorAll<HTMLElement>('[data-topic-items]').forEach(el => {
+    el.style.display = 'none';
+  });
+</script>
 
 <style lang="scss">
   @use '../styles/variables' as *;
 
-  #archive-page {
-    background: $main-black;
+  #archive {
     min-height: 100vh;
-    color: $red-white;
+    overflow-x: hidden;
+    transition: all 0.3s ease-in-out !important;
+
+    &.dark {
+      background-color: $main-black;
+      :global(*) { color: $red-white; }
+      .topics { display: none; }
+      .header-light { display: none; }
+      #svg-holder :global(*) { fill: $red-white !important; }
+    }
+
+    &.light {
+      background-color: $red-white;
+      :global(*) { color: $main-black; }
+      .banner-menu { display: none; }
+      .header-dark { display: none; }
+      #svg-holder :global(*) { fill: $main-black !important; }
+    }
   }
 
-  .archive-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: $font-sub;
-    font-size: 20px;
-    letter-spacing: 4px;
-    opacity: 0.4;
-    color: $red-white;
-  }
-
-  .archive-heading {
-    font-family: $font-heading;
-    font-weight: 100;
-    font-size: clamp(28px, 5vw, 60px);
-    letter-spacing: 12px;
-    color: $red-white;
-    text-align: center;
-    margin: 0;
-    padding: 150px 20px 60px;
-    opacity: 0.9;
-  }
-
-  .archive-main {
-    max-width: 900px;
+  // ── Banner menu (dark) ──────────────────────────────────────────────
+  .banner-menu {
+    max-width: 1300px;
+    padding-top: 60px;
     margin: 0 auto;
-    padding: 0 40px 80px;
 
-    @media (max-width: #{$s}) { padding: 0 20px 60px; }
-  }
-
-  // ── Topic blocks (native <details>) ────────────────────────────────────────
-  .topics-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .topic-block {
-    border: 1px solid rgba($red-white, 0.1);
-    transition: border-color 0.2s;
-
-    &[open] {
-      border-color: rgba($red-white, 0.25);
-      .topic-chevron { transform: rotate(180deg); }
-    }
-  }
-
-  .topic-summary {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    align-items: center;
-    gap: 20px;
-    padding: 28px 30px;
-    cursor: pointer;
-    list-style: none;
-    transition: background 0.15s ease;
-
-    &:hover { background: rgba($red-white, 0.03); }
-    &::-webkit-details-marker { display: none; }
-
-    @media (max-width: #{$s}) {
-      grid-template-columns: 1fr auto;
-      gap: 8px;
+    .holder {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
     }
 
-    h2 {
-      font-family: $font-sub;
-      font-weight: 400;
-      font-size: 20px;
-      letter-spacing: 6px;
-      color: $red-white;
-      margin: 0;
-      text-transform: uppercase;
-    }
+    .banner {
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+      max-height: 400px;
+      height: max-content;
+      overflow: hidden;
+      padding: 20px;
+      padding-bottom: 30px;
+      flex: 1;
+      cursor: pointer;
 
-    .topic-preview {
-      font-family: $font-prose;
-      font-size: 13px;
-      opacity: 0.45;
-      margin: 0;
-      font-style: italic;
-      line-height: 1.5;
-      text-transform: none;
-      letter-spacing: 0.5px;
+      h2 {
+        text-align: center;
+        font-size: clamp(22px, 2.5vw, 28px);
+        font-family: $font-sub;
+        font-weight: 400;
+      }
 
-      @media (max-width: #{$s}) {
-        display: none;
+      h3 {
+        text-align: center;
+        font-size: clamp(17px, 2vw, 20px);
+        font-family: $font-sub;
+      }
+
+      p {
+        font-size: 11px;
+        margin: 0 auto;
+        width: 170px;
+        opacity: 0.9;
+        word-break: break-all;
+        text-shadow: 0 0 2px $red-white;
       }
     }
+  }
 
-    .topic-count {
-      font-size: 11px;
-      letter-spacing: 2px;
-      opacity: 0.35;
-      white-space: nowrap;
+  // ── Topics browse (light) ───────────────────────────────────────────
+  .topics {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px;
+
+    @media screen and (max-width: #{$s}) { padding: 30px; }
+
+    .topic-holder {
+      button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
+
+        h2 {
+          font-size: clamp(20px, 2.2vw, 25px);
+          font-family: $font-sub;
+          cursor: pointer;
+          font-weight: 400;
+        }
+      }
+
+      .topic-items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-width: 1000px;
+
+        .item-holder {
+          flex: 1;
+          width: 200px;
+          padding: 30px;
+          height: max-content;
+
+          .link {
+            text-decoration: none;
+            color: inherit;
+
+            h3 {
+              font-weight: 600;
+              text-transform: lowercase;
+              width: max-content;
+              text-align: center;
+              margin: 0 auto;
+              opacity: 0.9;
+              font-family: $font-sub;
+            }
+
+            p {
+              font-size: 11px;
+              margin: 0 auto;
+              width: 170px;
+              opacity: 0.9;
+              word-break: break-all;
+              text-shadow: 0 0 2px $red-white;
+              padding: 10px;
+            }
+          }
+        }
+      }
     }
-
-    .topic-chevron {
-      color: $red-white;
-      opacity: 0.4;
-      font-size: 14px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
   }
 
-  // ── Items inside topic ─────────────────────────────────────────────────────
-  .topic-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid rgba($red-white, 0.08);
-    animation: fadein 0.25s ease;
-  }
+  // ── Angel meeting sketch ────────────────────────────────────────────
+  #svg-holder {
+    width: 300px;
+    margin: 0 auto;
+    transform: rotate(-90deg);
+    margin-bottom: -300px;
 
-  .archive-item-link {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
-    padding: 18px 30px;
-    border-bottom: 1px solid rgba($red-white, 0.05);
-    text-decoration: none;
-    transition: background 0.15s ease;
-
-    &:hover { background: rgba($red-white, 0.04); }
-
-    @media (max-width: #{$s}) { grid-template-columns: 1fr; }
-  }
-
-  .item-title {
-    font-family: $font-sub;
-    font-size: 15px;
-    letter-spacing: 3px;
-    color: $red-white;
-    white-space: nowrap;
-    min-width: 180px;
-
-    @media (max-width: #{$s}) { white-space: normal; }
-  }
-
-  .item-excerpt {
-    font-family: $font-prose;
-    font-size: 13px;
-    opacity: 0.4;
-    font-style: italic;
-    letter-spacing: 0.5px;
-    text-transform: none;
-    color: $red-white;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    @media (max-width: #{$s}) {
-      white-space: normal;
-      display: none;
-    }
+    :global(svg) { display: block; width: 100%; height: auto; }
   }
 </style>

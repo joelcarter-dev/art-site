@@ -1,0 +1,142 @@
+---
+// Faithful port of the original mediums template (dark image-grid page)
+import { readFileSync } from 'node:fs';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../../config.js';
+
+export async function getStaticPaths() {
+  const { getCollection } = await import('astro:content');
+  const { kebabCase } = await import('../../utils.js');
+  const allStore = await getCollection('artwork', ({ data }: any) => data.is_store_item);
+
+  const types = new Set<string>();
+  allStore.forEach((i: any) => (i.data.type ?? []).forEach((t: string) => types.add(t)));
+
+  return [...types].map(type => ({
+    params: { type: kebabCase(type) },
+    props: { type },
+  }));
+}
+
+const { type } = Astro.props;
+
+const items = (await getCollection('artwork', ({ data }) =>
+  data.is_store_item && (data.type ?? []).includes(type)
+)).sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
+
+const arrowSvg = readFileSync(new URL('../../../public/arrow-back.svg', import.meta.url), 'utf8');
+---
+
+<BaseLayout title={`${type} — ${siteConfig.seoTitle}`}>
+  <div id="grid-template">
+    <Header leftLink="home" rightLink="archive" white={true} />
+
+    <div class="title-holder">
+      <button type="button" class="back-button" onclick="history.back()" aria-label="Go back">
+        <Fragment set:html={arrowSvg} />
+      </button>
+      <h1 id="medium-title">{type}</h1>
+    </div>
+
+    <div class="image-grid">
+      {items.map(item => (
+        <div class="image-item">
+          <a href={`/store-items/${item.slug}`}>
+            <h2>{item.data.title}</h2>
+            <img src={item.data.featuredImage} alt={item.data.title} loading="lazy" />
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  @use '../../styles/variables' as *;
+
+  #grid-template {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: $deep-blue;
+  }
+
+  .title-holder {
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
+
+    .back-button {
+      margin-left: 2vw;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+
+      :global(svg) {
+        width: 30px;
+        height: 30px;
+        display: block;
+        :global(polyline), :global(path) { stroke: $red-white; }
+      }
+      &:hover :global(polyline) { stroke-width: 3; }
+    }
+
+    #medium-title {
+      font-size: clamp(30px, 4vw, 50px);
+      color: $red-white;
+      font-family: $font-heading;
+      text-transform: capitalize;
+      font-weight: 100;
+      letter-spacing: 3px;
+      margin-left: 5vw;
+    }
+  }
+
+  .image-grid {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    column-gap: 65px;
+    line-height: 0;
+    padding: 60px;
+
+    @media screen and (max-width: #{$s}) { display: block; padding: 30px; }
+
+    .image-item {
+      width: 100%;
+      min-width: 200px;
+      margin: 0;
+      padding-top: 10px;
+      margin-bottom: 25px;
+      transition: all 0.5s ease-in-out;
+      break-inside: avoid;
+      position: relative;
+
+      &:hover { transform: scale(1.02); }
+
+      a {
+        text-decoration: none;
+        color: $red-white;
+        text-transform: capitalize;
+      }
+
+      h2 {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 30px;
+        line-height: normal;
+        color: $red-white;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+  }
+</style>

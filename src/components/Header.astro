@@ -1,4 +1,10 @@
 ---
+// Faithful port of the original Gatsby Header:
+// - position: relative (sits at top of page flow, ~130px tall)
+// - white={true}  → solid dark bar (#0B101B) with cream logo/links/arches
+// - white={false} → cream bar with dark logo/links/arches
+// - Vivus-animated arch SVG (logo-side-left.svg) behind each link,
+//   right side mirrored, bleeding ±30px over the centre logo
 interface Props {
   leftLink?: 'home' | 'store' | 'archive';
   rightLink?: 'home' | 'store' | 'archive';
@@ -16,206 +22,183 @@ const links: Record<string, { href: string; label: string }> = {
 const left  = links[leftLink]  ?? links.home;
 const right = links[rightLink] ?? links.store;
 
-const colorClass = white ? 'header--white' : 'header--black';
+// unique ids in case two headers ever render
+const uid = Math.random().toString(36).slice(2, 7);
 ---
 
-<header class={`site-header ${colorClass}`}>
-  <div class="header-inner">
+<header class={`site-header ${white ? 'scheme-white' : 'scheme-black'}`}>
+  <div class="logo-holder">
 
-    <!-- Left: arch SVG + nav link -->
-    <div class="header-side header-side--left">
-      <div class="arch-container arch-left" id="header-arch-left"></div>
-      <a href={left.href} class="header-link">{left.label}</a>
+    <div class="side side--left">
+      <div class="arch" id={`arch-left-${uid}`} data-arch></div>
+      <a href={left.href} class="link">{left.label}</a>
     </div>
 
-    <!-- Center: logo -->
-    <a href="/" class="header-logo" aria-label="Heart of Arah — home">
+    <a href="/" class="main-logo" aria-label="Heart of Arah — home">
       <svg viewBox="0 0 147 73" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M79.838 41.831 L79.847 41.821 L73.130 35.104 L66.412 41.821 L66.450 41.859 L54.154 54.154 L0 0 L146.617 0 L92.312 54.305 L79.838 41.831 Z M78.338 43.331 L90.432 55.425 L73.158 72.698 L55.884 55.425 L67.950 43.359 L73.130 48.539 L78.338 43.331 Z"/>
       </svg>
     </a>
 
-    <!-- Right: arch SVG (flipped) + nav link -->
-    <div class="header-side header-side--right">
-      <div class="arch-container arch-right" id="header-arch-right"></div>
-      <a href={right.href} class="header-link">{right.label}</a>
+    <div class="side side--right">
+      <div class="arch arch--mirror" id={`arch-right-${uid}`} data-arch></div>
+      <a href={right.href} class="link">{right.label}</a>
     </div>
 
   </div>
 </header>
 
 <script>
-  (function initHeaderArches() {
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.6/vivus.min.js';
-    script.onload = () => {
-      const W = window as any;
-      if (document.getElementById('header-arch-left')) {
-        new W.Vivus('header-arch-left', {
+  function initArches() {
+    const arches = document.querySelectorAll('[data-arch]');
+    if (!arches.length) return;
+    const run = () => {
+      arches.forEach((el) => {
+        new (window as any).Vivus(el.id, {
           file: '/logo-side-left.svg',
-          animTimingFunction: 'EASE_OUT',
+          animTimingFunction: (window as any).Vivus.EASE_OUT,
           type: 'delayed',
           duration: 400,
           reverseStack: true,
           start: 'autostart',
         });
-      }
-      if (document.getElementById('header-arch-right')) {
-        new W.Vivus('header-arch-right', {
-          file: '/logo-side-left.svg',
-          animTimingFunction: 'EASE_OUT',
-          type: 'delayed',
-          duration: 400,
-          reverseStack: true,
-          start: 'autostart',
-        });
-      }
+      });
     };
-    document.head.appendChild(script);
-  })();
+    if ((window as any).Vivus) { run(); return; }
+    const s = document.createElement('script');
+    s.src = '/vivus.min.js';
+    s.onload = run;
+    document.head.appendChild(s);
+  }
+  initArches();
 </script>
 
 <style lang="scss">
   @use '../styles/variables' as *;
 
+  // Header-local colours (as in the original header.module.sass)
+  $header-black: #0B101B;
+  $header-white: #F0E3DE;
+
   .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9000;
-    height: 130px;
-    display: flex;
-    align-items: center;
-  }
-
-  .header--white {
-    background: transparent;
-    .header-link  { color: $red-white; &::before { border-bottom-color: $red-white; } }
-    .header-logo svg path { fill: $red-white; }
-    /* arch SVG stroke colour overridden via JS/Vivus after render */
-    .arch-container :global(svg g path) { stroke: rgba($red-white, 0.7) !important; }
-  }
-
-  .header--black {
-    background-color: $main-black;
-    .header-link  { color: $red-white; &::before { border-bottom-color: $red-white; } }
-    .header-logo svg path { fill: $red-white; }
-    .arch-container :global(svg g path) { stroke: rgba($red-white, 0.7) !important; }
-  }
-
-  .header-inner {
+    position: relative;
     width: 100%;
-    max-width: 620px;
+    z-index: 900;
+  }
+
+  .scheme-white {
+    background-color: $header-black;
+    .link { color: $red-white; &::before { border-bottom-color: $red-white; } }
+    .main-logo svg path { fill: $header-white; }
+    .arch :global(svg g path) { stroke: $header-white !important; }
+  }
+
+  .scheme-black {
+    background-color: $header-white;
+    .link { color: $red-black; &::before { border-bottom-color: $red-black; } }
+    .main-logo svg path { fill: $red-black; }
+    .arch :global(svg g path) { stroke: $red-black !important; }
+  }
+
+  .logo-holder {
+    display: flex;
+    justify-content: center;
+    max-width: 588px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    height: 100%;
-    position: relative;
   }
 
-  /* ── Side columns ─────────────────────────────────────────────────── */
-  .header-side {
+  .main-logo {
+    width: 50%;
+    min-width: 100px;
+    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-    position: relative;
-  }
 
-  /* ── Arch SVG containers ─────────────────────────────────────────── */
-  .arch-container {
-    position: absolute;
-    top: 10px;
-    width: 100%;
-    max-width: 268px;
-    height: 70px;
-    pointer-events: none;
-
-    /* Override Vivus-injected SVG size */
-    :global(svg) {
-      width: 100% !important;
-      height: 100% !important;
+    svg {
       display: block;
+      width: 100%;
+      max-width: 147px;
+      max-height: 90px;
+      height: 60px;
     }
   }
 
-  .arch-left {
-    right: -30px;   /* bleeds over the centre logo from the left */
-  }
-
-  .arch-right {
-    left: -30px;
-    transform: scaleX(-1);   /* mirror the same SVG */
-  }
-
-  /* ── Nav links ───────────────────────────────────────────────────── */
-  .header-link {
+  .side {
     position: relative;
-    z-index: 10;
-    font-family: $font-body;
-    font-size: clamp(14px, 2vw, 22px);
-    letter-spacing: 4px;
-    text-transform: lowercase;
-    opacity: 0.8;
-    text-decoration: none;
-    line-height: 130px;        /* vertically centres within the 130px header */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // ── Animated arch SVGs ────────────────────────────────────────────
+  .arch {
+    position: absolute;
+    top: 10px;
+    max-width: 268px;
+    width: 100%;
+    pointer-events: none;
+
+    :global(svg) {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media screen and (max-width: #{$s}) {
+      top: 15px;
+    }
+  }
+
+  .side--left .arch { right: -30px; }
+  .side--right .arch { left: -30px; transform: rotateY(180deg); }
+
+  // ── Links ─────────────────────────────────────────────────────────
+  .link {
     display: block;
-    transition: opacity 0.2s ease;
+    position: relative;
+    opacity: 0.8;
+    z-index: 10;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 25px;
+    text-decoration: none;
+    line-height: 130px;
+    font-family: $font-body;
+    letter-spacing: 2px;
 
-    &:hover { opacity: 1; }
-
-    /* animated underline */
     &::before {
       content: '';
       display: block;
       position: absolute;
-      bottom: 20px;
-      left: 0;
+      top: 85px;
       border: none;
-      border-bottom: 2px solid;
-      width: 0;
-      animation: link-grow 0.8s 0.3s forwards;
+      border-bottom: 3px solid;
+      animation: header-underline-grow 1s forwards;
+      transition: all 1s linear;
     }
+
+    &:hover::before { width: 90%; }
   }
 
-  .header-side--left .header-link {
+  .side--left .link {
     text-align: right;
-    width: 100%;
-    &::before { right: 0; left: auto; }
+    &::before { right: 0; }
   }
 
-  .header-side--right .header-link {
+  .side--right .link {
     text-align: left;
-    width: 100%;
+    &::before { left: 0; }
   }
 
-  @keyframes link-grow {
+  @keyframes header-underline-grow {
     from { width: 0; }
-    to   { width: 80px; }
+    to   { width: 100px; }
   }
 
-  /* ── Centre logo ─────────────────────────────────────────────────── */
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-
-    svg {
-      width: 110px;
-      height: auto;
-    }
-  }
-
-  /* ── Mobile: smaller header ──────────────────────────────────────── */
-  @media (max-width: #{$s}) {
-    .site-header { height: 90px; }
-    .arch-container { display: none; }
-    .header-link { line-height: 90px; font-size: 13px; }
-    .header-inner { max-width: 100%; }
+  @media screen and (max-width: #{$s}) {
+    .link { font-size: 18px; line-height: 100px; &::before { top: 70px; } }
+    .main-logo svg { height: 50px; }
   }
 </style>

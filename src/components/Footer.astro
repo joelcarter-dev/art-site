@@ -1,75 +1,71 @@
 ---
+// Faithful port of the original Footer: 100px bar, the original site's own
+// icon SVGs on the left, copyright on the right.
+// white={true} → cream footer with dark icons; white={false} → deep-blue with cream.
+import { readFileSync } from 'node:fs';
 import { siteConfig } from '../config.js';
+
 interface Props { white?: boolean; }
 const { white = false } = Astro.props;
+
+const instagram = readFileSync(new URL('../../public/icon-instagram.svg', import.meta.url), 'utf8');
+const facebook  = readFileSync(new URL('../../public/icon-facebook.svg',  import.meta.url), 'utf8');
+const tiktok    = readFileSync(new URL('../../public/icon-tiktok.svg',    import.meta.url), 'utf8');
 ---
 
-<footer class={`site-footer ${white ? 'site-footer--white' : 'site-footer--black'}`}>
-  <div class="footer-social">
-    <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <circle cx="12" cy="12" r="4.5"/>
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-      </svg>
-    </a>
-    <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-      </svg>
-    </a>
-    <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.73a8.24 8.24 0 004.83 1.56V6.82a4.85 4.85 0 01-1.06-.13z"/>
-      </svg>
-    </a>
+<section class={`footer ${white ? 'footer--white' : 'footer--black'}`}>
+  <div class="left">
+    <a class="svg-link" href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" set:html={instagram} />
+    <a class="svg-link" href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" set:html={facebook} />
+    <a class="svg-link" href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" set:html={tiktok} />
   </div>
-  <p class="footer-copy">© Heart of Arah</p>
-</footer>
+  <div class="right">
+    <p>Copyright © {new Date().getFullYear()}</p>
+  </div>
+</section>
 
 <style lang="scss">
   @use '../styles/variables' as *;
 
-  .site-footer {
+  .footer {
     width: 100%;
-    padding: 30px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    height: 100px;
 
-  .site-footer--white {
-    background-color: $red-white;
-    color: $main-black;
-    a { color: $main-black; }
-  }
-
-  .site-footer--black {
-    background-color: $main-black;
-    color: $red-white;
-    a { color: $red-white; }
-  }
-
-  .footer-social {
-    display: flex;
-    gap: 20px;
-    a {
-      opacity: 0.7;
-      transition: opacity 0.2s ease;
+    .left {
+      float: left;
+      padding: 30px;
       display: flex;
-      &:hover { opacity: 1; }
     }
-    svg {
-      width: 24px;
-      height: 24px;
+
+    .svg-link {
+      display: block;
+      margin: 10px;
+
+      :global(svg) {
+        width: 25px;
+        height: 25px;
+        display: block;
+      }
     }
+
+    .right {
+      float: right;
+      padding: 30px;
+      p { margin: 10px 0; }
+    }
+
+    &::after { content: ''; display: block; clear: both; }
   }
 
-  .footer-copy {
-    font-family: $font-body;
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin: 0;
-    opacity: 0.5;
+  .footer--white {
+    background-color: $red-white;
+    p { color: $red-black; }
+    .svg-link :global(*) { fill: $red-black; }
+  }
+
+  .footer--black {
+    background-color: $deep-blue;
+    p { color: $red-white; }
+    .svg-link :global(*) { fill: $red-white; }
   }
 </style>

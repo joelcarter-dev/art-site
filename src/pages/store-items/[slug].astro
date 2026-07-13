@@ -1,4 +1,9 @@
 ---
+// Faithful port of the original art-pice template:
+// black viewport-fit grid — fixed header bar, back arrow, centred cinzel
+// title, 250px left sidebar (Info/Notes toggle, cream price bar, data
+// lists, 200px bordered buttons), centred artwork image (max 800px).
+import { readFileSync } from 'node:fs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import OrderModal from '../../components/OrderModal.astro';
@@ -17,7 +22,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const data = entry.data;
 
-// ── Price state ────────────────────────────────────────────────────────────
+// ── Price state (original logic preserved) ─────────────────────────────────
 const isSold       = data.price?.toLowerCase() === 'sold';
 const isCommission = (data.tags ?? []).some(t => t.toLowerCase() === 'commission');
 const isArchived   = (data.tags ?? []).some(t => t.toLowerCase() === 'archived');
@@ -29,133 +34,131 @@ const displayPrice = hasPrice ? numericPrice + siteConfig.globalItemBuffer : nul
 const archiveSlug = `/archive/${entry.slug}`;
 const pageTitle   = `${data.title} — ${siteConfig.seoTitle}`;
 const pageDesc    = data.about ?? data.title;
+
+const arrowSvg = readFileSync(new URL('../../../public/arrow-back.svg', import.meta.url), 'utf8');
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} image={data.featuredImage}>
 
-  <div class="art-page">
-    <Header leftLink="home" rightLink="archive" white={true} />
+  <section class="art-item-holder">
 
-    <a href="/store" class="back-link" aria-label="Back to store">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
-      <span>Store</span>
-    </a>
+    <div class="art-pice-header">
+      <Header leftLink="home" rightLink="archive" white={true} />
+    </div>
 
-    <h1 class="art-title">{data.title}</h1>
+    <button type="button" class="back-button" onclick="history.back()" aria-label="Go back">
+      <Fragment set:html={arrowSvg} />
+    </button>
 
-    <!-- Sidebar -->
-    <aside class="art-sidebar" id="art-sidebar">
-      <nav class="sidebar-tabs" role="tablist">
-        <button class="tab active" id="tab-info"  role="tab" aria-selected="true"  aria-controls="panel-info">Info</button>
-        <button class="tab"        id="tab-notes" role="tab" aria-selected="false" aria-controls="panel-notes">Notes</button>
-      </nav>
+    <h1 id="title">{data.title}</h1>
 
-      <!-- Info panel -->
-      <div id="panel-info" class="tab-panel" role="tabpanel" aria-labelledby="tab-info">
+    <div class="left">
+      <div id="sidebar">
+        <div id="info-menu">
+          <span role="button" tabindex="0" class="selected" data-view="info">Info</span>
+          <span role="button" tabindex="0" data-view="notes">Notes</span>
+        </div>
 
-        <!-- Price display -->
-        <div class="price-display">
-          {isSold && <span class="price-state">Sold</span>}
-          {isCommission && <span class="price-state">Commissioned Piece</span>}
-          {isArchived && !isSold && !isCommission && <span class="price-state">Archived</span>}
-          {displayPrice && (
-            <div class="price-value">
-              <span class="price-amount">${displayPrice}</span>
-              <span class="price-currency">NZD</span>
+        <!-- Info view -->
+        <div class="info-holder" data-panel="info">
+          <div class="price-holder">
+            <div class="price">
+              {isSold && <h3 class="price-state">Sold</h3>}
+              {isCommission && <h3 class="price-state price-state--cap">Commissioned Piece</h3>}
+              {isArchived && !isSold && !isCommission && <h3 class="price-state price-state--cap">Archived Piece</h3>}
+              {displayPrice && (
+                <>
+                  <h3>${displayPrice}</h3>
+                  <span>NZD</span>
+                </>
+              )}
+              {!hasPrice && !isSold && !isCommission && !isArchived && (
+                <h3 class="price-state price-state--cap">Enquire</h3>
+              )}
             </div>
-          )}
-          {!hasPrice && !isSold && !isCommission && !isArchived && (
-            <span class="price-state">Enquire</span>
-          )}
-        </div>
-
-        <ul class="data-list">
-          <li>{data.original ? 'Original work' : 'Print'}</li>
-          {data.info && <li>{data.info}</li>}
-        </ul>
-
-        <ul class="data-list medium-list">
-          {(data.type ?? []).map(t => <li><em>{t}</em></li>)}
-        </ul>
-
-        <div class="button-group">
-          {hasPrice && (
-            <button
-              class="art-btn"
-              id="order-btn"
-              data-title={data.title}
-              data-price={numericPrice}
-            >
-              Place Order
-            </button>
-          )}
-
-          {data.is_archive_item && (
-            <a href={archiveSlug} class="art-btn art-btn--outline">
-              View in Archive
-            </a>
-          )}
-
-          {(isArchived || isSold) && (
-            <a href={`/make-offer?item=${encodeURIComponent(data.title)}`} class="art-btn art-btn--outline">
-              Make an Offer
-            </a>
-          )}
-        </div>
-      </div>
-
-      <!-- Notes panel -->
-      <div id="panel-notes" class="tab-panel" role="tabpanel" aria-labelledby="tab-notes" hidden>
-        <div class="notes-content">
-          <h3>Artist's Notes</h3>
-          {data.artistNotes
-            ? <p set:html={data.artistNotes.replace(/\n/g, '<br>')} />
-            : <p class="notes-empty">Notes are yet to come.</p>
-          }
-        </div>
-        {data.body && (
-          <div class="archive-body">
-            <Content />
           </div>
-        )}
+
+          <ul class="data-list">
+            <li><p>{data.original ? 'original work' : 'print'}</p></li>
+            {data.info && <li class="no-transform"><p>{data.info}</p></li>}
+          </ul>
+
+          <ul class="data-list">
+            {(data.type ?? []).map(t => <li><i>{t}</i></li>)}
+          </ul>
+
+          <div class="button-holder">
+            {hasPrice && (
+              <button
+                class="art-item-button"
+                id="order-btn"
+                data-title={data.title}
+                data-price={numericPrice}
+              >
+                <span>Place Order</span>
+              </button>
+            )}
+
+            {data.is_archive_item && (
+              <button class="art-item-button">
+                <a href={archiveSlug} class="store-link">View In Archive</a>
+              </button>
+            )}
+
+            {(isArchived || isSold) && (
+              <button class="art-item-button">
+                <a href={`/make-offer?item=${encodeURIComponent(data.title)}`} class="store-link">Make An Offer</a>
+              </button>
+            )}
+          </div>
+        </div>
+
+        <!-- Notes view -->
+        <div class="notes-holder" data-panel="notes" hidden>
+          <h3>Artists Notes</h3>
+          <div class="notes">
+            {data.artistNotes
+              ? <p set:html={data.artistNotes.replace(/\n/g, '<br>')} />
+              : <p>Notes are yet to come</p>
+            }
+            {entry.body && <Content />}
+          </div>
+        </div>
       </div>
-    </aside>
+    </div>
 
-    <!-- Artwork image -->
-    <figure class="art-figure">
-      <img
-        src={data.featuredImage}
-        alt={data.about || data.title}
-        loading="eager"
-        class="art-image"
-      />
-    </figure>
+    <div class="image-holder">
+      <div class="inner-image">
+        <img
+          src={data.featuredImage}
+          alt={data.about || data.title}
+          loading="eager"
+        />
+      </div>
+    </div>
 
-    <!-- Order modal (PayPal) -->
+    <div class="right"></div>
+
     <OrderModal />
-  </div>
+  </section>
 </BaseLayout>
 
 <script>
-  // ── Tab switching ─────────────────────────────────────────────────────────
-  document.querySelectorAll<HTMLButtonElement>('.tab').forEach(btn => {
-    btn.addEventListener('click', function(this: HTMLButtonElement) {
-      const panelId = this.getAttribute('aria-controls')!;
-      document.querySelectorAll('.tab').forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
+  // ── Info / Notes toggle ─────────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('#info-menu span').forEach(span => {
+    const activate = () => {
+      document.querySelectorAll('#info-menu span').forEach(s => s.classList.remove('selected'));
+      span.classList.add('selected');
+      const view = span.dataset.view;
+      document.querySelectorAll<HTMLElement>('[data-panel]').forEach(p => {
+        p.hidden = p.dataset.panel !== view;
       });
-      document.querySelectorAll<HTMLElement>('.tab-panel').forEach(p => {
-        p.hidden = p.id !== panelId;
-      });
-      this.classList.add('active');
-      this.setAttribute('aria-selected', 'true');
-    });
+    };
+    span.addEventListener('click', activate);
+    span.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') activate(); });
   });
 
-  // ── Order button ──────────────────────────────────────────────────────────
+  // ── Order button ────────────────────────────────────────────────────
   const orderBtn = document.getElementById('order-btn');
   if (orderBtn) {
     orderBtn.addEventListener('click', () => {
@@ -169,311 +172,344 @@ const pageDesc    = data.about ?? data.title;
 <style lang="scss">
   @use '../../styles/variables' as *;
 
-  .art-page {
-    background: $main-black;
-    min-height: 100vh;
-    color: $red-white;
+  @keyframes sidebar-fadein {
+    from { opacity: 0; margin-left: -20px; }
+    to   { opacity: 1; margin-left: 0; }
+  }
+
+  @keyframes underline-grow {
+    from { width: 20px; }
+    to   { width: 50px; }
+  }
+
+  .art-item-holder {
+    background-color: $main-black;
+    width: 100%;
     display: grid;
     grid-template-areas:
-      "header  header  header"
-      "back    title   ."
-      "sidebar image   .";
-    grid-template-columns: minmax(220px, 300px) 1fr minmax(60px, 120px);
-    grid-template-rows: 90px 60px 1fr;
-    min-height: 100vh;
+      "header header header"
+      "title title title"
+      "left-sidebar main sidebar"
+      "footer footer footer";
+    grid-template-columns: minmax(100px, 1fr) 3fr minmax(100px, 1fr);
+    grid-template-rows: 160px 60px 0.7fr 60px;
+    max-height: 100vh;
 
-    @media (max-width: #{$m}) {
-      grid-template-areas:
-        "header"
-        "title"
-        "image"
-        "sidebar";
-      grid-template-columns: 1fr;
-      grid-template-rows: 90px auto auto auto;
+    @media screen and (max-width: 100em) {
+      grid-template-columns: minmax(200px, 300px) 3fr;
+      .image-holder { grid-column: 2 / span 3; }
+    }
+
+    @media screen and (max-width: #{$m}) {
+      grid-template-areas: "top" "bottom";
+      grid-template-columns: 100%;
+      grid-template-rows: auto auto;
+      max-height: none;
+
+      #title {
+        margin-top: 40px;
+        grid-area: top;
+        line-height: 30px;
+      }
+
+      .image-holder {
+        padding: 65px 0 0;
+        margin: 0 auto;
+        grid-area: top;
+        margin-top: 60px;
+        grid-column: auto;
+      }
+
+      .left {
+        z-index: 2;
+        background-color: $main-black;
+        grid-area: bottom;
+      }
     }
   }
 
-  // header, back, title handled by children
-
-  .back-link {
-    grid-area: back;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 20px;
-    color: rgba($red-white, 0.5);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    align-self: center;
-
-    &:hover { color: $red-white; }
-
-    svg { width: 16px; height: 16px; }
-
-    @media (max-width: #{$m}) { display: none; }
+  .art-pice-header {
+    grid-area: header;
+    width: 100%;
+    height: 100px;
+    background-color: $main-black;
   }
 
-  .art-title {
-    grid-area: title;
-    font-family: $font-sub;
-    font-weight: 400;
-    font-size: clamp(18px, 2.5vw, 26px);
-    letter-spacing: 4px;
-    text-transform: capitalize;
-    color: $red-white;
-    margin: 0;
-    align-self: center;
-    text-align: center;
-
-    @media (max-width: #{$m}) {
-      padding: 140px 20px 20px;
-      text-align: center;
-    }
-  }
-
-  // ── Sidebar ────────────────────────────────────────────────────────────────
-  .art-sidebar {
-    grid-area: sidebar;
-    padding: 20px 0 40px 20px;
-    animation: fadeSlideIn 0.5s ease;
-
-    @media (max-width: #{$m}) {
-      padding: 20px;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-  }
-
-  .sidebar-tabs {
-    display: flex;
-    gap: 0;
-    margin-bottom: 28px;
-    width: 250px;
-
-    @media (max-width: #{$m}) { width: 100%; }
-  }
-
-  .tab {
-    flex: 1;
+  .back-button {
+    grid-area: title-start;
+    z-index: 2;
+    width: 100px;
+    height: 30px;
+    margin-left: 5vw;
     background: transparent;
     border: none;
-    color: rgba($red-white, 0.5);
-    font-family: $font-body;
-    font-size: 16px;
-    letter-spacing: 2px;
-    padding: 10px 0;
     cursor: pointer;
-    position: relative;
-    transition: color 0.2s;
-
-    &.active {
-      color: $red-white;
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: $red-white;
-        animation: grow 0.4s forwards;
-      }
-    }
-
-    &:hover { color: rgba($red-white, 0.85); }
-  }
-
-  // ── Price display ──────────────────────────────────────────────────────────
-  .price-display {
-    background: $red-white;
-    color: $main-black;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 250px;
-
-    @media (max-width: #{$m}) { width: 100%; }
-  }
-
-  .price-state {
-    font-family: $font-sub;
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
-
-  .price-value {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-  }
-
-  .price-amount {
-    font-family: $font-sub;
-    font-size: 26px;
-    font-weight: 400;
-  }
-
-  .price-currency {
-    font-size: 13px;
-    opacity: 0.6;
-    letter-spacing: 2px;
-  }
-
-  // ── Data lists ─────────────────────────────────────────────────────────────
-  .data-list {
-    list-style: none;
     padding: 0;
-    margin: 0 0 16px 0;
-    width: 250px;
+    text-align: left;
 
-    @media (max-width: #{$m}) { width: 100%; text-align: center; }
-
-    li {
-      color: $red-white;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-transform: capitalize;
-      padding: 4px 0;
-      opacity: 0.85;
+    :global(svg) {
+      width: 24px;
+      height: 24px;
+      :global(polyline) { stroke: $red-white; }
     }
+    &:hover :global(polyline) { stroke-width: 3; }
   }
 
-  .medium-list li em {
-    font-family: $font-prose;
-    font-style: italic;
-    opacity: 0.7;
-  }
-
-  // ── Buttons ────────────────────────────────────────────────────────────────
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 250px;
-    margin-top: 16px;
-
-    @media (max-width: #{$m}) {
-      width: 100%;
-      max-width: 280px;
-      align-items: center;
-      margin: 16px auto 0;
-    }
-  }
-
-  .art-btn {
-    display: block;
-    width: 100%;
-    padding: 16px 0;
-    border: 1px solid $red-white;
-    background: transparent;
+  #title {
     color: $red-white;
-    font-family: $font-body;
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
     text-align: center;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    font-weight: 100;
+    line-height: 0;
+    font-family: $font-sub;
+    grid-area: title;
+    text-transform: capitalize;
+    font-size: clamp(25px, 3vw, 30px);
+    z-index: 1;
+    margin: 0;
+  }
 
-    &:hover {
-      background: $red-white;
-      color: $main-black;
-    }
+  .left, .right { grid-row: 3; }
 
-    &--outline {
-      opacity: 0.7;
-      &:hover { opacity: 1; }
+  .left {
+    grid-area: left-sidebar;
+    :global(*) {
+      animation: sidebar-fadein 0.5s;
     }
   }
 
-  // ── Notes panel ────────────────────────────────────────────────────────────
-  .notes-content {
-    color: $red-white;
-    padding-right: 20px;
+  .right { grid-area: sidebar; }
 
-    h3 {
-      font-family: $font-sub;
-      font-weight: 400;
-      font-size: 18px;
-      margin: 0 0 24px;
-      opacity: 0.85;
+  .image-holder {
+    grid-area: main;
+    position: relative;
+    padding: 3vw 60px 60px 0;
+    background-color: $main-black;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 0 auto;
 
-      &::before {
-        content: '';
+    @media screen and (min-width: #{$s}) { padding: 3vw; }
+    @media screen and (max-width: #{$s}) { width: 100%; padding: 0; }
+
+    .inner-image {
+      display: grid;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-height: calc(100vh - 280px);
+        object-fit: contain;
         display: block;
-        width: 40px;
-        height: 1px;
-        background: $red-white;
-        margin-bottom: 12px;
-        opacity: 0.3;
+      }
+
+      @media screen and (max-width: 40em) {
+        padding-top: 10vw;
+        max-width: 100vw !important;
+        img { max-height: none; }
+      }
+    }
+  }
+
+  // ── Sidebar ─────────────────────────────────────────────────────────
+  #sidebar {
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 3vw;
+    position: relative;
+    font-family: $font-body;
+    font-weight: 300;
+    text-transform: uppercase;
+    background-color: $main-black;
+
+    @media screen and (max-width: #{$m}) {
+      float: none;
+      padding-top: 60px;
+      max-width: 400px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+
+    #info-menu {
+      width: 250px;
+      height: 60px;
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 30px;
+
+      @media screen and (max-width: #{$m}) { width: 100%; }
+
+      span {
+        width: 50%;
+        max-width: 150px;
+        height: 43px;
+        color: $red-white;
+        font-size: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        opacity: 0.5;
+        transition: all 0.5s ease-in-out;
+        outline: none;
+
+        &:hover { opacity: 1; }
+      }
+
+      .selected {
+        opacity: 1;
+
+        &::before {
+          content: '';
+          display: block;
+          width: auto;
+          position: relative;
+          top: 40px;
+          border: none;
+          border-bottom: 3px solid $red-white;
+          animation: underline-grow 1s forwards;
+          transition: all 1s linear;
+        }
       }
     }
 
-    p {
-      font-family: $font-prose;
-      font-size: 15px;
-      line-height: 1.8;
-      letter-spacing: 0.5px;
-      text-transform: none;
+    .info-holder {
+      width: 250px;
+      @media screen and (max-width: #{$m}) { width: 100%; }
+
+      .price-holder {
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        .price {
+          color: $main-black;
+          background-color: $red-white;
+          font-size: 25px;
+          padding: 8px;
+          margin: 0 auto;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: baseline;
+
+          h3 {
+            margin: 0;
+            font-weight: 300;
+            color: $main-black;
+          }
+
+          span {
+            font-size: 16px;
+            color: $main-black;
+            margin-left: 6px;
+          }
+
+          .price-state {
+            text-transform: uppercase;
+            font-family: $font-sub;
+            font-size: 0.7em;
+          }
+
+          .price-state--cap { text-transform: capitalize; }
+        }
+      }
+
+      .data-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+        width: 100%;
+        padding-left: 20px;
+
+        @media screen and (max-width: #{$m}) { padding-left: 0; }
+
+        li {
+          width: 240px;
+          color: $red-white;
+          font-size: clamp(16px, 1.5vw, 18px);
+          text-transform: capitalize;
+          letter-spacing: 1px;
+
+          &.no-transform { text-transform: none; }
+
+          p { margin: 8px 0; }
+          i { padding: 15px; }
+
+          @media screen and (max-width: #{$m}) {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+
+      .button-holder {
+        position: relative;
+        padding-left: 24px;
+        display: inline-grid;
+        transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+
+        @media screen and (max-width: #{$m}) {
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .art-item-button {
+          width: 200px;
+          margin: 0 auto;
+          padding: 20px 0;
+          border: 1px solid $red-white;
+          color: $red-white;
+          background-color: transparent;
+          margin-bottom: 30px;
+          cursor: pointer;
+          font-size: 18px;
+          letter-spacing: 2px;
+          font-family: $font-body;
+          text-transform: uppercase;
+
+          a, span {
+            width: 100%;
+            text-decoration: none;
+            margin: 0 auto;
+            color: $red-white;
+            font-size: 16px;
+          }
+        }
+      }
     }
 
-    .notes-empty { opacity: 0.4; font-style: italic; }
-  }
+    .notes-holder {
+      color: $red-white;
+      text-align: left;
+      padding: 0 30px;
+      max-width: 400px;
 
-  .archive-body {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid rgba($red-white, 0.15);
-    font-family: $font-prose;
-    font-size: 14px;
-    line-height: 1.8;
-    color: $red-white;
-    text-transform: none;
-    letter-spacing: 0.5px;
+      h3 {
+        font-weight: 100;
+        font-size: 20px;
+        margin-bottom: 40px;
 
-    p { margin: 0 0 16px; }
-    blockquote {
-      margin: 0 0 16px 0;
-      padding-left: 16px;
-      border-left: 2px solid rgba($red-white, 0.3);
-      font-style: italic;
-      opacity: 0.8;
-    }
-    em { font-style: italic; }
-  }
+        &::before {
+          content: '';
+          display: block;
+          width: 30%;
+          position: relative;
+          top: 40px;
+          border: none;
+          border-bottom: 2px solid $red-white;
+          animation: underline-grow 1s forwards;
+          transition: all 1s linear;
+        }
+      }
 
-  // ── Artwork image ──────────────────────────────────────────────────────────
-  .art-figure {
-    grid-area: image;
-    margin: 0;
-    padding: 20px 60px 60px 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    background: $main-black;
-
-    @media (max-width: #{$m}) {
-      padding: 0;
-      margin-top: 140px;
-    }
-  }
-
-  .art-image {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    display: block;
-
-    @media (max-width: #{$m}) {
-      max-height: 60vw;
-      width: 100%;
-      object-fit: cover;
+      .notes :global(p) {
+        font-family: $font-prose;
+        text-transform: none;
+      }
     }
   }
 </style>
