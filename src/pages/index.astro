@@ -41,11 +41,8 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
     <!-- Mid section, overlapping the photo from 90vh -->
     <section class="mid">
 
-      <!-- Cream wedges rising toward the centre -->
-      <div class="sides">
-        <div class="right"></div>
-        <div class="left"></div>
-      </div>
+      <!-- Cream wedge silhouette: two peaks with a dark notch between them -->
+      <div class="wedge-shape" aria-hidden="true"></div>
 
       <!-- Vivus line drawings flanking the transition -->
       <div class="svg-holder">
@@ -220,49 +217,39 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
     z-index: 2;
     width: 100%;
 
-    .sides {
-      top: 0;
-      z-index: 3;
+    // Twin-peak silhouette with a real notch (dark photo) dipping between
+    // the peaks, deep enough that the cream logo mark reads against it —
+    // replaces two overlapping rotated rectangles, whose gap would close
+    // up (and hide the logo) at wide viewports.
+    .wedge-shape {
       position: absolute;
+      bottom: 100%;
+      left: 0;
       width: 100%;
-
-      @media screen and (min-width: #{$m}) { top: -20px; }
-
-      .left, .right {
-        width: 60vw;
-        height: 20vw;
-        max-height: 300px;
-        min-height: 200px;
-        top: 150px;
-        position: absolute;
-        background-color: $red-white;
-      }
-
-      .left {
-        left: -20px;
-        transform: rotate(-20deg);
-        transform-origin: top left;
-        @media screen and (min-width: #{$l}) { transform: rotate(-18deg); }
-        @media screen and (min-width: 75em)  { transform: rotate(-15deg); }
-      }
-
-      .right {
-        right: -20px;
-        transform: rotate(20deg);
-        transform-origin: top right;
-        @media screen and (min-width: #{$l}) { transform: rotate(18deg); }
-        @media screen and (min-width: 75em)  { transform: rotate(15deg); }
-      }
+      height: clamp(160px, 20vw, 260px);
+      z-index: 3;
+      background-color: $red-white;
+      clip-path: polygon(
+        0% 100%,
+        0% 55%,
+        32% 8%,
+        50% 62%,
+        68% 8%,
+        100% 55%,
+        100% 100%
+      );
     }
 
+    // Sits right at the notch tip in .wedge-shape, against the dark photo
     .main-logo {
-      position: relative;
-      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: clamp(-140px, -11vw, -85px);
       width: 200px;
-      top: 7px;
-      z-index: 2;
+      z-index: 4;
 
-      @media screen and (max-width: #{$xs}) { width: 150px; }
+      @media screen and (max-width: #{$xs}) { width: 130px; }
 
       svg {
         display: block;
