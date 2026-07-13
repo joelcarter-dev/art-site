@@ -1,6 +1,12 @@
 ---
+// Faithful port of the original archive-item template:
+// dark top — back arrow + centred Cinzel Decorative title + centred
+// artwork image + "view in store" link — then the cream reading body
+// (Lora, justified, 500px measure), cream footer.
+import { readFileSync } from 'node:fs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
 import { siteConfig } from '../../config.js';
 
@@ -15,6 +21,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const data = entry.data;
+
+const storeSlug = `/store-items/${entry.slug}`;
+const arrowSvg = readFileSync(new URL('../../../public/arrow-back.svg', import.meta.url), 'utf8');
 ---
 
 <BaseLayout
@@ -22,217 +31,181 @@ const data = entry.data;
   description={data.about}
   image={data.featuredImage}
 >
-  <div class="archive-item-page">
+  <section id="archive-item">
     <Header leftLink="home" rightLink="store" white={true} />
 
-    <a href="/archive" class="back-link" aria-label="Back to archive">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
-      Archive
-    </a>
+    <div class="holder">
+      <section class="body">
 
-    <article class="archive-article">
-      {data.featuredImage && (
-        <figure class="archive-figure">
-          <img src={data.featuredImage} alt={data.title} loading="eager" />
-          <figcaption>
-            {(data.type ?? []).join(', ')}
-            {data.info && ` · ${data.info}`}
-          </figcaption>
-        </figure>
-      )}
+        {data.featuredImage && (
+          <section class="img-header">
+            <div class="top">
+              <button type="button" class="back-button" onclick="history.back()" aria-label="Go back">
+                <Fragment set:html={arrowSvg} />
+              </button>
+              <h1 id="title">{data.title}</h1>
+            </div>
 
-      <div class="archive-text">
-        <header class="archive-item-header">
-          <div class="topics">
-            {(data.archive_topic ?? []).map(t => (
-              <span class="topic-tag">{t}</span>
-            ))}
+            <img class="inner-image" src={data.featuredImage} alt={data.title} loading="eager" />
+
+            {data.is_store_item && (
+              <div class="store-item-link">
+                <h3>This piece is a store item</h3>
+                <a href={storeSlug} class="store-link">view in store</a>
+              </div>
+            )}
+          </section>
+        )}
+
+        <div class="body-holder">
+          <div class="body-content">
+            <Content />
           </div>
-          <h1>{data.title}</h1>
-          {data.about && <p class="about">{data.about}</p>}
-        </header>
-
-        <div class="archive-content">
-          <Content />
         </div>
 
-        {data.is_store_item && (
-          <div class="store-link-row">
-            <a href={`/store-items/${entry.slug}`} class="store-link">
-              View in store
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
-            </a>
-          </div>
-        )}
-      </div>
-    </article>
-  </div>
+      </section>
+    </div>
+
+    <Footer white={true} />
+  </section>
 </BaseLayout>
 
 <style lang="scss">
   @use '../../styles/variables' as *;
 
-  .archive-item-page {
-    background: $main-black;
-    min-height: 100vh;
-    color: $red-white;
+  #archive-item {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: $main-black;
   }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    position: fixed;
-    top: 110px;
-    left: 24px;
-    color: rgba($red-white, 0.4);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    z-index: 10;
-
-    &:hover { color: $red-white; }
-    svg { width: 14px; height: 14px; }
+  .holder {
+    background-color: $main-black;
   }
 
-  .archive-article {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-    padding-top: 20px;
+  .img-header {
+    margin: 0 auto;
+    position: relative;
+    padding: 0 100px 100px;
+    max-width: 1000px;
 
-    @media (max-width: #{$m}) {
-      grid-template-columns: 1fr;
+    @media screen and (max-width: #{$m}) { padding: 0 0 60px; }
+
+    .top {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media screen and (max-width: #{$s}) { display: block; }
     }
-  }
 
-  .archive-figure {
-    position: sticky;
-    top: 90px;
-    height: calc(100vh - 90px);
-    margin: 0;
-    overflow: hidden;
+    .back-button {
+      position: absolute;
+      left: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
 
-    img {
+      :global(svg) {
+        width: 24px;
+        height: 24px;
+        display: block;
+        :global(polyline) { stroke: $red-white; }
+      }
+      &:hover :global(polyline) { stroke-width: 3; }
+
+      @media screen and (max-width: #{$s}) { position: relative; }
+    }
+
+    .inner-image {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
 
-    figcaption {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      opacity: 0.4;
-      color: $red-white;
-      background: rgba($main-black, 0.6);
-      padding: 4px 8px;
-    }
-
-    @media (max-width: #{$m}) {
+    .store-item-link {
       position: relative;
-      height: 50vw;
-      top: 0;
+      margin: 0 auto;
+      width: 300px;
+      height: 100px;
+      padding-top: 20px;
+      text-align: center;
+
+      @media screen and (max-width: #{$m}) { height: 140px; }
+
+      h3 {
+        color: $red-white;
+        font-weight: 400;
+        text-align: center;
+        font-family: $font-body;
+        letter-spacing: 2px;
+      }
+
+      .store-link {
+        border: 1px solid $red-white;
+        padding: 20px;
+        text-decoration: none;
+        color: $red-white;
+        display: inline-block;
+        font-family: $font-body;
+        letter-spacing: 2px;
+      }
     }
   }
 
-  .archive-text {
-    padding: 60px 50px 80px;
-    max-width: 640px;
-
-    @media (max-width: #{$m}) {
-      padding: 40px 20px 60px;
-    }
+  #title {
+    font-size: clamp(20px, 2.2vw, 25px);
+    font-family: $font-heading;
+    text-align: center;
+    padding: 40px 15px 60px;
+    margin: 0 auto;
+    max-width: max-content;
+    letter-spacing: 2px;
+    color: $red-white;
+    font-weight: 400;
   }
 
-  .archive-item-header {
-    margin-bottom: 40px;
+  .body-holder {
+    width: 100%;
+    background-color: $red-white;
+    position: relative;
+  }
 
-    h1 {
-      font-family: $font-sub;
-      font-weight: 400;
-      font-size: clamp(28px, 4vw, 48px);
-      letter-spacing: 6px;
-      color: $red-white;
-      margin: 12px 0 16px;
-      text-transform: capitalize;
+  .body-content {
+    margin: 0 auto;
+    padding-bottom: 100px;
+    padding-top: 5rem;
+    text-align: justify;
+    background-color: $red-white;
+
+    @media screen and (max-width: #{$m}) {
+      width: 100%;
+      padding: 30px;
     }
 
-    .about {
+    :global(*) {
+      line-height: 30px;
       font-family: $font-prose;
-      font-size: 16px;
-      line-height: 1.7;
-      opacity: 0.6;
-      font-style: italic;
-      letter-spacing: 0.5px;
-      text-transform: none;
-      margin: 0;
+      letter-spacing: 2px;
+      max-width: 500px;
+      margin: 0 auto;
+      color: $main-black;
     }
-  }
 
-  .topics {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
+    :global(p) { margin-bottom: 10px; }
 
-  .topic-tag {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid rgba($red-white, 0.25);
-    padding: 3px 8px;
-    opacity: 0.6;
-  }
-
-  .archive-content {
-    font-family: $font-prose;
-    font-size: 16px;
-    line-height: 1.9;
-    color: $red-white;
-    text-transform: none;
-    letter-spacing: 0.5px;
-
-    :global(p)          { margin: 0 0 20px; }
-    :global(blockquote) {
-      margin: 24px 0;
-      padding-left: 20px;
-      border-left: 2px solid rgba($red-white, 0.3);
-      font-style: italic;
-      opacity: 0.75;
+    :global(h1), :global(h2), :global(h3) {
+      font-family: $font-sub;
+      line-height: 1.4;
     }
-    :global(em)    { font-style: italic; }
-    :global(strong){ font-weight: 600; }
-    :global(h2)    { font-family: $font-sub; letter-spacing: 4px; margin: 32px 0 12px; font-weight: 400; }
-  }
 
-  .store-link-row {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid rgba($red-white, 0.1);
-  }
-
-  .store-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: $red-white;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-
-    &:hover { opacity: 1; }
-    svg { width: 14px; height: 14px; }
+    :global(img) {
+      width: 100%;
+      height: auto;
+      display: block;
+      padding: 20px 0;
+    }
   }
 </style>
