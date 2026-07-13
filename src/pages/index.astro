@@ -213,43 +213,42 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
   // ── Mid ────────────────────────────────────────────────────────────────────
   .mid {
     position: relative;
-    margin-top: -10vh;      /* mid begins at 90vh, overlapping the photo */
     z-index: 2;
     width: 100%;
 
-    // Twin-peak silhouette with a real notch (dark photo) dipping between
-    // the peaks, deep enough that the cream logo mark reads against it —
-    // replaces two overlapping rotated rectangles, whose gap would close
-    // up (and hide the logo) at wide viewports.
+    // The big transition: the photo plunges as a giant V between two cream
+    // slopes that run from the screen edges (~60vh) down to a point at the
+    // fold, where the small upright logo-mountain caps the tip — the
+    // inverted painting-mountain meeting the logo-mountain.
     .wedge-shape {
       position: absolute;
       bottom: 100%;
       left: 0;
       width: 100%;
-      height: clamp(160px, 20vw, 260px);
+      height: min(42vh, 55vw);
       z-index: 3;
       background-color: $red-white;
       clip-path: polygon(
-        0% 100%,
-        0% 55%,
-        32% 8%,
-        50% 62%,
-        68% 8%,
-        100% 55%,
-        100% 100%
+        0% 0%,
+        50% 100%,
+        100% 0%,
+        100% 100%,
+        0% 100%
       );
     }
 
-    // Sits right at the notch tip in .wedge-shape, against the dark photo
+    // The small upright logo-mountain capping the V's tip: its upper
+    // portion (peak + diamond) reads against the dark photo, the rest
+    // merges into the cream below the seam.
     .main-logo {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: clamp(-140px, -11vw, -85px);
+      top: -62px;
       width: 200px;
       z-index: 4;
 
-      @media screen and (max-width: #{$xs}) { width: 130px; }
+      @media screen and (max-width: #{$xs}) { width: 130px; top: -40px; }
 
       svg {
         display: block;
@@ -263,7 +262,7 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
       z-index: 5;
       background-color: $red-white;
       position: relative;
-      padding: 40px 0;
+      padding: 100px 0 40px;
 
       .mid-title {
         padding: 1vw 30px 0;
