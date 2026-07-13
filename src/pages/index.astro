@@ -68,16 +68,9 @@ const highlighted = await getCollection('artwork', ({ data }) =>
           </div>
         )}
 
-        <!-- Divider rune -->
-        <div class="rune-divider" aria-hidden="true">
-          <span class="rune-line"></span>
-          <svg viewBox="0 0 96 30" xmlns="http://www.w3.org/2000/svg" width="96" height="30">
-            <line x1="20" y1="15" x2="76" y2="15" stroke="currentColor" stroke-width="0.5"/>
-            <circle cx="48" cy="15" r="6" fill="none" stroke="currentColor" stroke-width="0.5"/>
-            <circle cx="28" cy="15" r="2" fill="currentColor"/>
-            <circle cx="68" cy="15" r="2" fill="currentColor"/>
-          </svg>
-          <span class="rune-line"></span>
+        <!-- Sketch SVG: Three Travelers -->
+        <div class="sketch-divider">
+          <img src="/sketch-travelers.svg" alt="" aria-hidden="true" class="sketch-img" />
         </div>
 
         <!-- About -->
@@ -91,6 +84,11 @@ const highlighted = await getCollection('artwork', ({ data }) =>
         </div>
 
         <CommissionSection dark={false} />
+
+        <!-- Sketch SVG: Figure study -->
+        <div class="sketch-bottom">
+          <img src="/sketch-one.svg" alt="" aria-hidden="true" class="sketch-img sketch-img--small" />
+        </div>
 
         <Footer white={true} />
       </div>
@@ -226,8 +224,10 @@ const highlighted = await getCollection('artwork', ({ data }) =>
   .svg-left, .svg-right {
     width: 37%;
     max-width: 320px;
+    min-height: 200px;   /* give Vivus room to inject the SVG */
 
-    svg g path { stroke: $main-black !important; }
+    :global(svg) { width: 100%; height: auto; display: block; }
+    :global(svg g path) { stroke: $main-black !important; }
   }
 
   .logo-mark {
@@ -312,6 +312,34 @@ const highlighted = await getCollection('artwork', ({ data }) =>
     height: 1px;
     background: currentColor;
     opacity: 0.3;
+  }
+
+  // ── Sketch SVGs ───────────────────────────────────────────────────────────
+  .sketch-divider {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sketch-bottom {
+    display: flex;
+    justify-content: center;
+    padding: 20px 40px 0;
+  }
+
+  .sketch-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.85;
+  }
+
+  .sketch-img--small {
+    max-width: 140px;
+    opacity: 0.6;
   }
 
   // ── About ─────────────────────────────────────────────────────────────────
