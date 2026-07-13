@@ -213,6 +213,10 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
   // ── Mid ────────────────────────────────────────────────────────────────────
   .mid {
     position: relative;
+    margin-top: 5vh;  /* hero's flow box ends exactly at 100vh, so this puts
+                         the content top (V tip) at ~105vh — just below the
+                         first fold: only the logo diamond peeks into the
+                         first screen, like the original */
     z-index: 2;
     width: 100%;
 
@@ -220,17 +224,27 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
     // slopes that run from the screen edges (~60vh) down to a point at the
     // fold, where the small upright logo-mountain caps the tip — the
     // inverted painting-mountain meeting the logo-mountain.
+    // Measured from the original screenshots at scroll 0:
+    // cream first appears at the screen edges at ~59vh; at the fold (100vh)
+    // the photo still spans the central ~46% of the width; the tip is just
+    // below the fold. Sides are steep (~42°), then a nearly-flat inner V
+    // runs to the tip — the compound silhouette of the original's two
+    // overlapping rotated bars.
     .wedge-shape {
       position: absolute;
       bottom: 100%;
       left: 0;
       width: 100%;
-      height: min(42vh, 55vw);
+      height: min(46vh, 60vw);
       z-index: 3;
       background-color: $red-white;
       clip-path: polygon(
         0% 0%,
+        27% 89%,
+        46% 97%,
         50% 100%,
+        54% 97%,
+        73% 89%,
         100% 0%,
         100% 100%,
         0% 100%
@@ -244,11 +258,11 @@ const sketchOneSvg = readFileSync(new URL('../../public/sketch-one.svg', import.
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: -62px;
+      top: -88px;
       width: 200px;
       z-index: 4;
 
-      @media screen and (max-width: #{$xs}) { width: 130px; top: -40px; }
+      @media screen and (max-width: #{$xs}) { width: 130px; top: -58px; }
 
       svg {
         display: block;
